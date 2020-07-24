@@ -1,0 +1,265 @@
+app-container.expanded .content-container .side-menu .navbar-header .navbar-brand .title {
+    display: none;
+}
+.app-container .content-container .side-menu .navbar-header .navbar-brand .logo-icon-container {
+    width: 100%;
+    height: 90px;
+}
+.voyager .side-menu .navbar-header {
+    background: #ffffff;
+    border-color: #ffffff;
+}
+.side-menu .panel.widget {
+    display: none;
+}
+.voyager .side-menu.sidebar-inverse .navbar {
+    background: #ffffff;
+    font-weight: 400;
+}
+.voyager .side-menu.sidebar-inverse .navbar {
+    background: #ffffff;
+}
+.voyager .side-menu .navbar-nav {
+    width: 100%;
+    padding: 40px 10px;
+}
+.voyager .side-menu.sidebar-inverse .navbar li.active>a {
+    color: #373d42;
+}
+.voyager .side-menu.sidebar-inverse .navbar li>a:hover {
+    color: #373d42;
+    background: #ffffff;
+}
+.voyager .side-menu.sidebar-inverse {
+    background: #ffffff;
+    background: linear-gradient(45deg,#ffffff,#ffffff);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#ffffff",GradientType=1);
+    overflow-x: hidden;
+    -webkit-transition: width .5s cubic-bezier(.19,1,.22,1);
+    transition: width .5s cubic-bezier(.19,1,.22,1);
+}
+.app-container .content-container .side-body.padding-top{
+    background-image: linear-gradient(to bottom, #f39c12, #f2ac03, #efbc00, #eacb00, #e3db0e);
+    background-size: 100% 378px;
+    background-repeat: no-repeat;
+}
+.page-title {
+    display: inline-block;
+    height: auto;
+    font-size: 16px;
+    height: 100px;
+    line-height: 43px;
+    margin-top: 3px;
+    padding-top: 28px;
+    color: #fff;
+    position: relative;
+    padding-left: 58px;
+    margin-bottom: 0;
+    font-weight: 700;
+    margin-right: 20px;
+}
+.page-title>i {
+    font-size: 24px;
+}
+.voyager .panel {
+    margin: 0px 25px 22px 25px;
+}
+.voyager .navbar, .voyager .navbar.navbar-default {
+    border-bottom: 0;
+    box-shadow: 0 0 0;
+    background: transparent;
+}
+.hamburger-inner {
+    background: #ffffff;
+}
+.hamburger-inner:after, .hamburger-inner:before {
+    background: #ffffff;
+}
+.voyager {
+    background-color: #f8f9fe;
+}
+.voyager .app-footer {
+    display: none;
+}
+.btn-group-sm>.btn, .btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.375rem;
+}
+.no-margin{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.panel-header{
+    padding: 17px 0px 0px 0px;
+}
+.panel-body{
+    background: #f7fafc;
+}
+.app-container .content-container .side-body.padding-top {
+    padding-top: 160px;
+}
+.text-pink {
+    color: #f3a4b5!important;
+}
+.text-orange {
+    color: #fb6340 !important;
+}
+.text-primary {
+    color: #5e72e4 !important;
+}
+.text-yellow {
+    color: #ffd600 !important;
+}
+.text-red {
+    color: #f5365c !important;
+}
+.dropdown-menu>.active>a, .dropdown-menu>.active>a:focus, .dropdown-menu>.active>a:hover {
+    color: #fff;
+    text-decoration: none;
+    background-color: #fbd74a;
+    outline: 0;
+}
+.app-container .content-container .side-menu .navbar-nav li a .title {
+    font-size: 0.9rem;
+}
+#search-input {
+    /* padding: 1px; */
+    border: 1px solid #eaeaf1;
+    border-radius: 6px;
+    /* background-color: #fff; */
+    margin-bottom: 30px;
+    display: -webkit-box;
+    display: flex;
+}
+.app-container .side-body {
+    margin-right: 0px;
+}
+.container-fluid{
+    padding-right: 0px;
+}
+.voyager .navbar .navbar-nav>li.profile {
+    border-left: 0;
+    margin-right: 20px;
+}
+.panel-collapse .nav.navbar-nav {
+    padding: 0px!important;
+}
+.select2-container--default .select2-selection--single {
+    height: 41px;
+    padding: 3px;
+}
+.form-control{
+    max-width: 500px;
+    box-shadow: 0 1px 3px rgba(50, 50, 93, 0.15), 0 1px 0 rgba(0, 0, 0, 0.02);
+    border: 0;
+    transition: box-shadow .15s ease;
+    display: block;
+    width: 100%;
+    height: calc(2.75rem + 2px);
+    padding: 0.625rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #8898aa;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #cad1d7;
+    border-radius: 0.375rem;
+    box-shadow: none;
+    transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.header {
+    position: relative;
+}
+.pb-8, .py-8 {
+    padding-bottom: 8rem !important;
+}
+@media (min-width: 768px){
+    .pt-md-8, .py-md-8 {
+        padding: 0rem 2rem !important;
+    }
+    .main-content .container-fluid {
+        padding-left: 39px !important;
+        padding-right: 39px !important;
+    }
+}
+@media (min-width: 1200px)
+{
+    .mb-xl-0, .my-xl-0 {
+        margin-bottom: 0 !important;
+    }
+}
+
+.card-stats {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 0.375rem;
+}
+.card-stats .card-body {
+    padding: 1rem 1.5rem;
+}
+.text-muted {
+    color: #8898aa !important;
+    font-size: 11px;
+}
+.text-uppercase {
+    text-transform: uppercase !important;
+}
+.mb-0, .my-0 {
+    margin-bottom: 0 !important;
+}
+.font-weight-bold {
+    font-weight: 600 !important;
+}
+.icon-shape {
+    padding: 12px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+.icon {
+    width: 3rem;
+    height: 3rem;
+}
+.h2{
+    font-size: 1.25rem;
+}
+
+.bg-danger {
+    background-color: #f5365c !important;
+}
+.bg-warning {
+    background-color: #fb6340 !important;
+}
+.bg-yellow {
+    background-color: #ffd600 !important;
+}
+.bg-info {
+    background-color: #11cdef !important;
+}
+.text-white {
+    color: #fff !important;
+}
+.cotizaciones .panel-body{
+    background: #fff!important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
