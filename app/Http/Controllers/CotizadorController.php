@@ -28,22 +28,17 @@ class CotizadorController extends Controller
         $cotizacion = Cotizacione::where('id', $id)->first();
         $cliente = Client::where('id', $cotizacion->client_id)->first();
 
-        //dd($cotizacion);
         return view('admin/cotizador.edit', compact('user_avatar', 'cotizacion', 'cliente'));
     }
 
     public function busca(Request $request)
     {
-        //$result = Product::where('nombre', 'LIKE', "%{$request->input('query')}%")->get();
         $result = DB::select("select id, nombre AS name, precio, imagen, sku from products where nombre LIKE '%{$request->input('query')}%'");
         return response()->json($result);
     }
 
     public function guarda(Request $request) 
     {
-        //dd($request);
-        //return;
-
         $producto = $request->producto;
         foreach ($producto as $key => $value) {
             $can = array();
@@ -70,10 +65,6 @@ class CotizadorController extends Controller
                 'suma' => $sum
             ];
         }
-
-        //dd($detalle);
-        //return;
-
 
         $client = Client::where('rut', $request->rut)->first();
 
@@ -133,12 +124,9 @@ class CotizadorController extends Controller
             'tipo' => $request->tipo
         ]);
 
-        //$view = \View::make('admin/cotizador.pdf',compact('nombre', 'email', 'validez', 'empresa', 'forma_pago', 'entrega', 'descuento', 'neto', 'iva', 'total', 'detalle'));
-        
         $view = \View::make('admin/cotizador.pdfinterno',compact('data'));
         $html = $view->render();
 
-        //$pdf = new TCPDF();
         PDF::SetTitle('cotizacion');
         PDF::AddPage();
         PDF::writeHTML($html, true, false, true, false, '');
@@ -152,9 +140,6 @@ class CotizadorController extends Controller
     }
     public function guardaNueva(Request $request) 
     {
-        //dd($request);
-        //return;
-
         $producto = $request->producto;
         foreach ($producto as $key => $value) {
             $can = array();
@@ -181,10 +166,6 @@ class CotizadorController extends Controller
                 'suma' => $sum
             ];
         }
-
-        //dd($detalle);
-        //return;
-
 
         $client = Client::where('rut', $request->rut)->first();
 
@@ -227,7 +208,6 @@ class CotizadorController extends Controller
             'activa_total' => $ac_total,
             'activa_descuento' => $ac_descuento
         ];
-        $marcaTiempo = time();
 
         $cotizacion = Cotizacione::create([
             'validez' => $request->validez,
@@ -240,17 +220,13 @@ class CotizadorController extends Controller
             'total' => $request->total,
             'client_id' => $client->id,
             'user_id' => Auth::user()->id,
-            //'pdf' => '/cotizacion/cotizacion'.$request->empresa.$marcaTiempo.'.pdf',
             'pdf' => '/cotizacion/Pro-Gift_'.urlencode($request->nombre_cliente).date("Y-m-d").'.pdf',
             'tipo' => $request->tipo
         ]);
 
-        //$view = \View::make('admin/cotizador.pdf',compact('nombre', 'email', 'validez', 'empresa', 'forma_pago', 'entrega', 'descuento', 'neto', 'iva', 'total', 'detalle'));
-        
         $view = \View::make('admin/cotizador.pdfinterno',compact('data'));
         $html = $view->render();
 
-        //$pdf = new TCPDF();
         PDF::SetTitle('cotizacion');
         PDF::AddPage();
         PDF::writeHTML($html, true, false, true, false, '');
@@ -265,8 +241,6 @@ class CotizadorController extends Controller
 
     public function guardaEnvia(Request $request) 
     {
-        //dd($request);
-        //return;
 
         $producto = $request->producto;
         foreach ($producto as $key => $value) {
@@ -294,10 +268,6 @@ class CotizadorController extends Controller
                 'suma' => $sum
             ];
         }
-
-        //dd($detalle);
-        //return;
-
 
         $client = Client::where('rut', $request->rut)->first();
 
@@ -340,7 +310,7 @@ class CotizadorController extends Controller
             'activa_total' => $ac_total,
             'activa_descuento' => $ac_descuento
         ];
-        $marcaTiempo = time();
+
         $cotizacion = Cotizacione::where('id', $request->id)->update([
             'validez' => $request->validez,
             'forma_pago' => $request->forma_pago,
@@ -352,14 +322,11 @@ class CotizadorController extends Controller
             'total' => $request->total,
             'client_id' => $client->id,
             'user_id' => Auth::user()->id,
-            //'pdf' => '/cotizacion/cotizacion'.$request->empresa.$marcaTiempo.'.pdf',
             'pdf' => '/cotizacion/Pro-Gift_'.urlencode($request->nombre_cliente).date("Y-m-d").'.pdf',
             'tipo' => $request->tipo,
             'estado' => 1
         ]);
 
-        //$view = \View::make('admin/cotizador.pdf',compact('nombre', 'email', 'validez', 'empresa', 'forma_pago', 'entrega', 'descuento', 'neto', 'iva', 'total', 'detalle'));
-        
         $view = \View::make('admin/cotizador.pdfinterno',compact('data'));
         $html = $view->render();
 
@@ -382,8 +349,6 @@ class CotizadorController extends Controller
 
     public function store(Request $request) 
     {
-        //dd($request->producto);
-
         $producto = $request->producto;
         foreach ($producto as $key => $value) {
             $can = array();
@@ -410,10 +375,6 @@ class CotizadorController extends Controller
                 'suma' => $sum
             ];
         }
-
-        //dd($detalle);
-        //return;
-
 
         $client = Client::where('rut', $request->rut)->first();
 
@@ -456,7 +417,6 @@ class CotizadorController extends Controller
             'activa_total' => $ac_total,
             'activa_descuento' => $ac_descuento
         ];
-        $marcaTiempo = time();
         $cotizacion = Cotizacione::create([
             'validez' => $request->validez,
             'forma_pago' => $request->forma_pago,
@@ -468,25 +428,19 @@ class CotizadorController extends Controller
             'total' => $request->total,
             'client_id' => $client->id,
             'user_id' => Auth::user()->id,
-            //'pdf' => '/cotizacion/cotizacion'.$request->empresa.$marcaTiempo.'.pdf',
             'pdf' => '/cotizacion/Pro-Gift_'.urlencode($request->nombre_cliente).date("Y-m-d").'.pdf',
             'tipo' => $request->tipo,
             'estado' => 1
         ]);
 
-        //$view = \View::make('admin/cotizador.pdf',compact('nombre', 'email', 'validez', 'empresa', 'forma_pago', 'entrega', 'descuento', 'neto', 'iva', 'total', 'detalle'));
-        
         $view = \View::make('admin/cotizador.pdfinterno',compact('data'));
         $html = $view->render();
 
-        //$pdf = new TCPDF();
         PDF::SetTitle('cotizacion');
         PDF::AddPage();
         PDF::writeHTML($html, true, false, true, false, '');
         PDF::Output(public_path('storage').'/cotizacion/Pro-Gift_'.urlencode($request->nombre_cliente).date("Y-m-d").'.pdf', 'F');
-        
-        //Mail::to($request->email)->send(new EnviaCotizacion($data));
-        
+
         $message = new EnviaCotizacion($data);
         $message->attachData(PDF::Output('Pro-Gift_'.urlencode($request->nombre_cliente).date("Y-m-d").'.pdf', 'S'), 'Pro-Gift_'.urlencode($request->nombre_cliente).date("Y-m-d").'.pdf');
         Mail::to($request->email)->send($message);
@@ -500,8 +454,6 @@ class CotizadorController extends Controller
 
     public function soloStore(Request $request) 
     {
-        //dd($request->producto);
-
         $producto = $request->producto;
         foreach ($producto as $key => $value) {
             $can = array();
@@ -528,10 +480,6 @@ class CotizadorController extends Controller
                 'suma' => $sum
             ];
         }
-
-        //dd($detalle);
-        //return;
-
 
         $client = Client::where('rut', $request->rut)->first();
 
@@ -574,7 +522,6 @@ class CotizadorController extends Controller
             'activa_total' => $ac_total,
             'activa_descuento' => $ac_descuento
         ];
-        $marcaTiempo = time();
         $cotizacion = Cotizacione::create([
             'validez' => $request->validez,
             'forma_pago' => $request->forma_pago,
@@ -586,13 +533,10 @@ class CotizadorController extends Controller
             'total' => $request->total,
             'client_id' => $client->id,
             'user_id' => Auth::user()->id,
-            //'pdf' => '/cotizacion/cotizacion'.$request->empresa.$marcaTiempo.'.pdf',
             'pdf' => '/cotizacion/Pro-Gift_'.urlencode($request->nombre_cliente).date("Y-m-d").'.pdf',
             'tipo' => $request->tipo
         ]);
 
-        //$view = \View::make('admin/cotizador.pdf',compact('nombre', 'email', 'validez', 'empresa', 'forma_pago', 'entrega', 'descuento', 'neto', 'iva', 'total', 'detalle'));
-        
         $view = \View::make('admin/cotizador.pdfinterno',compact('data'));
         $html = $view->render();
 
@@ -612,16 +556,9 @@ class CotizadorController extends Controller
             'message'    => 'Cotización guardada correctamente.',
             'alert-type' => 'success',
         ]);
-        /*
-        return back()->with([
-            'message'    => 'Cotización creada correctamente.',
-            'alert-type' => 'success',
-        ]);
-        */
     }
 
     public function genera(Request $request){
-        //dd($request);
 
         $producto = $request->producto;
         foreach ($producto as $key => $value) {
@@ -649,10 +586,6 @@ class CotizadorController extends Controller
                 'suma' => $sum
             ];
         }
-
-        //dd($detalle);
-        //return;
-
 
         $client = Client::where('rut', $request->rut)->first();
 
@@ -695,27 +628,10 @@ class CotizadorController extends Controller
             'activa_total' => $ac_total,
             'activa_descuento' => $ac_descuento
         ];
-        /*
-        $cotizacion = Cotizacione::create([
-            'validez' => $request->validez,
-            'forma_pago' => $request->forma_pago,
-            'entrega' => $request->plazo,
-            'detalle' => json_encode($detalle),
-            'descuento' => $request->descuento,
-            'neto' => $request->neto,
-            'iva' => $request->iva,
-            'total' => $request->total,
-            'client_id' => $client->id,
-            'user_id' => Auth::user()->id
-        ]);
-        */
 
-        //$view = \View::make('admin/cotizador.pdf',compact('nombre', 'email', 'validez', 'empresa', 'forma_pago', 'entrega', 'descuento', 'neto', 'iva', 'total', 'detalle'));
-        
         $view = \View::make('admin/cotizador.pdfinterno',compact('data'));
         $html = $view->render();
 
-        //$pdf = new TCPDF();
         PDF::SetTitle('cotizacion');
         PDF::AddPage();
         PDF::writeHTML($html, true, false, true, false, '');

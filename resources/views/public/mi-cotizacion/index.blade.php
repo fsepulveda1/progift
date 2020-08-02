@@ -10,7 +10,7 @@
                 <nav aria-label="breadcrumb" class="breadcrumb-nav">
 
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i class="icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="/"><i class="icon-home"></i></a></li>
                             <li class="breadcrumb-item"><a href="#">Mi Cotización</a></li>
                         </ol>
 
@@ -62,17 +62,19 @@
                             </tr>
                         </thead>
                         <tbody>
+
                         @foreach($cartCollection as $item)
+
                             <tr class="product-row">
                                 <td class="product-col">
                                     <h2 class="product-title">
-                                    <a href="detalle-producto.html">{{$item->name}}</a>
+                                    <a href="/products/{{$item->model->id}}">{{$item->name}}</a>
                                     </h2>
                                 </td>
                                 <td>
                                     <div class="product-col">
                                         <figure class="product-image-container">
-                                            <a href="product.html" class="product-image">
+                                            <a href="/products/{{$item->model->id}}" class="product-image">
                                                 <img src="/storage/{{$item->attributes->image}}" alt="product">
                                             </a>
                                         </figure>

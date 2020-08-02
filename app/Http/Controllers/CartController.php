@@ -37,11 +37,13 @@ class CartController extends Controller
     }
 
     public function add(Request $request){
+
         \Cart::add(array(
             'id' => $request->id,
             'name' => $request->name,
             'price' => $request->price,
             'quantity' => $request->quantity,
+            'associatedModel' => 'App\Product',
             'attributes' => array(
                 'image' => $request->image,
                 'color' => $request->color,

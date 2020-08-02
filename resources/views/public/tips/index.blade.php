@@ -34,7 +34,7 @@
                         <p>
                             {!! strip_tags(substr($post->contenido, 0, 410)) . '...' !!}
                         </p>
-                        <a href="/tips/{{$post['id']}}" class="read-more">Leer Más <i class="icon-angle-double-right"></i></a>
+                        <a href="/tips/{{$post->slug}}" class="read-more">Leer Más <i class="icon-angle-double-right"></i></a>
                     </div><!-- End .entry-content -->
                 </div><!-- End .entry-body -->
             </article><!-- End .entry -->

@@ -65,7 +65,7 @@ app-container.expanded .content-container .side-menu .navbar-header .navbar-bran
     margin: 0px 25px 22px 25px;
 }
 .voyager .navbar, .voyager .navbar.navbar-default {
-    border-bottom: 0;
+    border-bottom: 1px solid #fff;
     box-shadow: 0 0 0;
     background: transparent;
 }
@@ -75,6 +75,11 @@ app-container.expanded .content-container .side-menu .navbar-header .navbar-bran
 .hamburger-inner:after, .hamburger-inner:before {
     background: #ffffff;
 }
+
+.hamburger:focus {
+    outline: none !important;
+}
+
 .voyager {
     background-color: #f8f9fe;
 }
@@ -262,4 +267,36 @@ input::-webkit-inner-spin-button {
 
 input[type=number] {
     -moz-appearance:textfield; /* Firefox */
+}
+
+/* FIX ADMIN STYLES*/
+select[name=dataTable_length] {
+    min-height: 40px;
+}
+
+
+.custom-toggle-slider::before {
+    height: 15px !important;
+    width: 15px !important;
+}
+
+.custom-toggle input:checked+.custom-toggle-slider {
+    border-color: #44d180 !important;
+}
+.custom-toggle input:checked+.custom-toggle-slider:before {
+    transform: translateX(28px) !important;
+    background-color: #44d180 !important;
+}
+
+.voyager .navbar.navbar-default>.container-fluid:after,
+.voyager .navbar>.container-fluid {
+    border-bottom: none !important;
+}
+.breadcrumb {
+    border: 1px solid #ddd;
+}
+
+.custom-file label{
+    white-space: nowrap;
+    overflow: hidden;
 }
