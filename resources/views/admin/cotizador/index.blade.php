@@ -36,7 +36,7 @@
 							</div>
 						</div>
 						<div class="card-body">
-							<form action="{{ route('admin.cotiza') }}" method="POST">
+							<form action="{{ route('admin.cotiza') }}" method="POST" enctype="multipart/form-data">
 								{{ csrf_field() }}
 								<h6 class="heading-small text-muted mb-4">Información cliente</h6>
 								<div class="pl-lg-4">

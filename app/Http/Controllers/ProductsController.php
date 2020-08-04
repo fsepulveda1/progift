@@ -44,9 +44,6 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request);
-
-        //Validar campos
         $data = request()->validate([
             'name' => 'required|max:50',
             'slug' => 'required|max:20',
@@ -69,7 +66,6 @@ class ProductsController extends Controller
 
         $path = request('image')->storeAs('public/images/products_images', $newFileName);
 
-        // dd($extension);
 
         $user = auth()->user();
         $product = new Product();
@@ -98,18 +94,7 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        //Find the product with the id = $id
-        //$product = Product::find($id);
         $categories = Category::orderBy('orden', 'ASC')->get();
-
-        /*
-        $product = DB::select('select m.*, a.nombre AS nombre_categoria
-        from Products m
-        inner join product_category am on m.id = am.product_id
-        inner join Categories a on am.category_id = a.id
-        where m.id = ?', [$id]);
-        */
-
         $product = Product::with('colors', 'impresions', 'categories')->find($id);
         $products = Product::find($id)->get();
 
@@ -119,7 +104,6 @@ class ProductsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit(Product $product)
@@ -133,12 +117,10 @@ class ProductsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Product $product)
     {
-        //validar campos
         $data = request()->validate([
             'name' => 'required|max:50',
             'slug' => 'required|max:20',
@@ -161,8 +143,6 @@ class ProductsController extends Controller
 
         $path = request('image')->storeAs('public/images/products_images', $newFileName);
 
-        // dd($extension);
-
         $product = Product::findOrFail($product->id);
 
         $product->name = request('name');
@@ -183,7 +163,6 @@ class ProductsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request)
@@ -193,7 +172,6 @@ class ProductsController extends Controller
         $oldImage = public_path() . '/storage/images/products_images/'. $product->image_path;
 
         if(file_exists($oldImage)){
-            //Elimina imagen
             unlink($oldImage);
         }
 
