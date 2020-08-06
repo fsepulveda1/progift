@@ -160,27 +160,6 @@
                                         <span class="product-price">{{ $pro->sku }}</span>
                                     </div><!-- End .price-box -->
                                     <div class="product-action">
-                                        <!-- <button class="btn-icon btn-add-cart" data-toggle="modal" data-target="#addCartModal"><i class="icon-bag"></i>COTIZAR</button> -->
-                                        <!--
-                                        <form action="{{ route('cart.store') }}" method="POST">
-                                            {{ csrf_field() }}
-                                            <input type="hidden" value="{{ $pro->id }}" id="id" name="id">
-                                            <input type="hidden" value="{{ $pro->nombre }}" id="name" name="name">
-                                            <input type="hidden" value="{{ $pro->precio }}" id="price" name="price">
-                                            <input type="hidden" value="{{ $imageFirst }}" id="image" name="image">
-                                            <input type="hidden" value="{{ $pro->sku }}" id="slug" name="slug">
-                                            <input type="hidden" value="{{$pro->colors[0]->nombre}}" id="color" name="color">
-                                            <input type="hidden" value="{{$pro->impresions[0]->nombre}}" id="impresion" name="impresion">
-                                            <input type="hidden" value="1" id="quantity" name="quantity">
-                                            <div class="" style="background-color: white;">
-                                                <div class="row">
-                                                    <button class="btn-icon btn-add-cart add-cart" class="tooltip-test" title="add to cart">
-                                                        &nbsp;&nbsp;Cotizar
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                        -->
                                         <a class="btn-icon btn-add-cart add-cart" href="/products/{{$pro->id}}" class="tooltip-test" style="color: #fff;" title="add to cart">
                                             &nbsp;&nbsp; Cotizar
                                         </a>

@@ -139,7 +139,7 @@
 											</div>
 										</div>
 										<div class="col-lg-2">
-											<div class="form-group" style="text-align: center;">
+											<div class="form-group">
 												<label class="form-control-label" for="input-country">Imágen</label>
 												<div class="custom-file">
 													<div class="file-widget">
