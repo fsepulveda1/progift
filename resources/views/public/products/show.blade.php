@@ -7,7 +7,7 @@
                 <div class="product-single-container product-single-default">
                     <nav aria-label="breadcrumb" class="breadcrumb-nav">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i class="icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="/"><i class="icon-home"></i></a></li>
                             <li class="breadcrumb-item"><a href="#">{{ $product->nombre_categoria }}</a></li>
                             <li class="breadcrumb-item active" aria-current="page">{{ $product->nombre }}</li>
                         </ol>
@@ -96,9 +96,6 @@
                                 <!-- End .product-filters-container -->
 
                                 <div class="product-action">
-
-                                    
-
                                         <div class="product-single-qty">
                                             <input class="horizontal-quantity form-control" value="100" type="number" id="quantity" name="quantity">
                                         </div>

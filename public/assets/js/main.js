@@ -634,6 +634,9 @@
           url: '?page=' + page,
           success: function (result) {
             var $newItems = $(result.html);
+            if(result.lastPage == page) {
+              $loadButton.hide();
+            }
             setTimeout(function () {
               $newItems.appendTo('.product-ajax-grid').fadeIn();
               $loadButton.text('Load More');

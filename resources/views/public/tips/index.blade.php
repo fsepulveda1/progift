@@ -41,12 +41,11 @@
                             </article><!-- End .entry -->
                         @endforeach
                     </div>
-                    <div class="ajax-load text-center" style="display:none">
-                        <p><img src="http://demo.itsolutionstuff.com/plugin/loader.gif">Loading More post</p>
-                    </div>
-                    <div class="col-12 text-center loadmore">
-                        <a href="#" class="btn btn-block btn-outline">Cargar Más ...</a>
-                    </div>
+                    @if($lastPage > 1)
+                        <div class="col-12 text-center loadmore">
+                            <a href="#" class="btn btn-block btn-outline">Cargar Más ...</a>
+                        </div>
+                    @endif
                 </div><!-- End .col-lg-9 -->
                 @include('partials.cat-menu')
 

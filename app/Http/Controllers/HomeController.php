@@ -32,14 +32,15 @@ class HomeController extends Controller
     {
         $posts = Tip::orderBy('id', 'desc')->paginate(3);
         $categories = Category::orderBy('orden', 'ASC')->get();
+        $lastPage = $posts->lastPage();
 
         if ($request->ajax()) {
             $view = view('public.tips.data',compact('posts'))->render();
-            return response()->json(['html'=>$view]);
+            return response()->json(['html'=>$view,'lastPage'=>$lastPage]);
         }
 
 
-        return view('public.tips.index', compact('posts', 'categories'));
+        return view('public.tips.index', compact('posts', 'categories','lastPage'));
     }
 
     public function show($slug)
