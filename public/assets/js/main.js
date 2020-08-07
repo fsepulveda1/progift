@@ -625,21 +625,18 @@
       $('body').append("<div class='ajax-overlay'><i class='porto-loading-icon'></i></div>");
     },
     ajaxLoadProduct: function () {
-      var loadCount = 0;
+      var page = 1;
       $loadButton.click(function (e) {
+        page ++;
         e.preventDefault();
         $(this).text('Loading ...');
         $.ajax({
-          url: "ajax/category-ajax-products.html",
+          url: '?page=' + page,
           success: function (result) {
-            var $newItems = $(result);
+            var $newItems = $(result.html);
             setTimeout(function () {
-              $newItems.hide().appendTo('.product-ajax-grid').fadeIn();
+              $newItems.appendTo('.product-ajax-grid').fadeIn();
               $loadButton.text('Load More');
-              loadCount++;
-              if (loadCount >= 2) {
-                $loadButton.hide();
-              }
             }, 350);
           },
           failure: function () {

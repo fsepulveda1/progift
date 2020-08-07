@@ -24,13 +24,20 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
+     * @param Request $request
      * @return \Illuminate\Contracts\Support\Renderable
+     * @throws \Throwable
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Tip::orderBy('id', 'desc')
-                    ->get();
+        $posts = Tip::orderBy('id', 'desc')->paginate(3);
         $categories = Category::orderBy('orden', 'ASC')->get();
+
+        if ($request->ajax()) {
+            $view = view('public.tips.data',compact('posts'))->render();
+            return response()->json(['html'=>$view]);
+        }
+
 
         return view('public.tips.index', compact('posts', 'categories'));
     }

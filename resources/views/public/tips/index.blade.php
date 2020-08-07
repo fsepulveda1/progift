@@ -16,30 +16,34 @@
                         </div><!-- End .container -->
                     </nav>
                     <br>
-                    @foreach ($posts as $post)
-                        <article class="entry">
-                            <div class="entry-media">
-                                <a href="/tips/{{$post->slug}}">
-                                    <img width="100%" src="{{ asset('/storage/'.$post->portada) }}" alt="Post">
-                                </a>
-                            </div><!-- End .entry-media -->
+                    <div class="product-ajax-grid">
+                        @foreach ($posts as $post)
+                            <article class="entry">
+                                <div class="entry-media">
+                                    <a href="/tips/{{$post->slug}}">
+                                        <img width="100%" src="{{ asset('/storage/'.$post->portada) }}" alt="Post">
+                                    </a>
+                                </div><!-- End .entry-media -->
 
-                            <div class="entry-body">
+                                <div class="entry-body">
 
-                                <h2 class="entry-title">
-                                    <a href="/tips/{{$post->slug}}">{{$post->titulo}}</a>
-                                </h2>
+                                    <h2 class="entry-title">
+                                        <a href="/tips/{{$post->slug}}">{{$post->titulo}}</a>
+                                    </h2>
 
-                                <div class="entry-content">
-                                    <p>
-                                        {!! strip_tags(substr($post->contenido, 0, 410)) . '...' !!}
-                                    </p>
-                                    <a href="/tips/{{$post->slug}}" class="read-more">Leer Más <i class="icon-angle-double-right"></i></a>
-                                </div><!-- End .entry-content -->
-                            </div><!-- End .entry-body -->
-                        </article><!-- End .entry -->
-                    @endforeach
-
+                                    <div class="entry-content">
+                                        <p>
+                                            {!! strip_tags(substr($post->contenido, 0, 410)) . '...' !!}
+                                        </p>
+                                        <a href="/tips/{{$post->slug}}" class="read-more">Leer Más <i class="icon-angle-double-right"></i></a>
+                                    </div><!-- End .entry-content -->
+                                </div><!-- End .entry-body -->
+                            </article><!-- End .entry -->
+                        @endforeach
+                    </div>
+                    <div class="ajax-load text-center" style="display:none">
+                        <p><img src="http://demo.itsolutionstuff.com/plugin/loader.gif">Loading More post</p>
+                    </div>
                     <div class="col-12 text-center loadmore">
                         <a href="#" class="btn btn-block btn-outline">Cargar Más ...</a>
                     </div>
@@ -49,7 +53,6 @@
             </div>
         </div>
     </main>
-
 @endsection
             
                 

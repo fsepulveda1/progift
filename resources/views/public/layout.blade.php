@@ -347,7 +347,7 @@
     <script src="/assets/js/plugins.min.js"></script>
 
     <!-- Main JS File -->
-    <script src="/assets/js/main.min.js"></script>
+    <script src="/assets/js/main.js"></script>
 
     <!-- www.addthis.com share plugin -->
     <script src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b927288a03dbde6"></script>
