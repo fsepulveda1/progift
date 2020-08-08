@@ -94,11 +94,10 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        $categories = Category::orderBy('orden', 'ASC')->get();
         $product = Product::with('colors', 'impresions', 'categories')->find($id);
         $products = Product::find($id)->get();
 
-        return view('public.products.show', compact('product', 'categories', 'products'));
+        return view('public.products.show', compact('product', 'products'));
     }
 
     /**
@@ -178,5 +177,9 @@ class ProductsController extends Controller
         $product->delete();
 
         return redirect('/products');
+    }
+
+    public function moreCotizedProducts() {
+
     }
 }

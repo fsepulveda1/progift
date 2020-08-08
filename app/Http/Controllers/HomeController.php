@@ -31,7 +31,6 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $posts = Tip::orderBy('id', 'desc')->paginate(3);
-        $categories = Category::orderBy('orden', 'ASC')->get();
         $lastPage = $posts->lastPage();
 
         if ($request->ajax()) {
@@ -40,18 +39,17 @@ class HomeController extends Controller
         }
 
 
-        return view('public.tips.index', compact('posts', 'categories','lastPage'));
+        return view('public.tips.index', compact('posts','lastPage'));
     }
 
     public function show($slug)
     {
         $post = Tip::where('slug', $slug)->first();
-        $categories = Category::orderBy('orden', 'ASC')->get();
 
         if($post == "null"){
             $this->index();
         }
-        return view('public.tips.show', compact('post', 'categories'));
+        return view('public.tips.show', compact('post'));
     }
 
     public function buscar(Request $request){
@@ -59,20 +57,18 @@ class HomeController extends Controller
 
         $products = Product::with('colors', 'impresions', 'categories')->where('nombre', 'LIKE', "%{$q}%")->get();
 
-        $categories = Category::orderBy('orden', 'ASC')->get();
-
-        return view('public.products.buscar', compact('categories', 'products'));
+        return view('public.products.buscar', compact('products'));
     }
     
 
     public function contacto(Request $request){
-        $categories = Category::orderBy('orden', 'ASC')->get();
+
         if($request->isMethod('post')){
             Contacto::create($request->all());
 
-            return view('public.contacto.index', compact('categories'))->with('success_msg', 'Hemos recibido su información, pronto nos contactaremos con usted.');
+            return view('public.contacto.index')->with('success_msg', 'Hemos recibido su información, pronto nos contactaremos con usted.');
         }else{
-            return view('public.contacto.index', compact('categories'));
+            return view('public.contacto.index');
         }
         
     }
@@ -87,13 +83,11 @@ class HomeController extends Controller
 
 
     public function faq(){
-        $categories = Category::orderBy('orden', 'ASC')->get();
-        return view('public.preguntas-frecuentes.index', compact('categories'));
+        return view('public.preguntas-frecuentes.index');
     }
 
     public function empresa(){
-        $categories = Category::orderBy('orden', 'ASC')->get();
-        return view('public.nuestra-empresa.index', compact('categories'));
+        return view('public.nuestra-empresa.index');
     }
 
 

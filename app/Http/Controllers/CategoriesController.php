@@ -91,28 +91,30 @@ class CategoriesController extends Controller
     public function show($id)
     {
         $category = Category::find($id);
-        $categories = Category::orderBy('orden', 'ASC')->get();
 
-        /*
-        $products = DB::select('select m.*
-        from Products m
-        inner join product_category am on m.id = am.product_id
-        inner join Categories a on am.category_id = a.id
-        where a.id = ?', [$id]);
-        */
-
-        //$products = Product::with('colors', 'impresions', 'categories')->get();
         $products = Product::whereHas('categories', function ($query) use ($id) {
             $query->where('id', '=', $id);
         })->get();
 
-        return view('public.categories.show', compact('category', 'categories', 'products'));
+        return view('public.categories.show', compact('category', 'products'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showDestacados()
+    {
+        $products = Product::where('destacado',1)->orderBy('nombre','ASC')->get();
+
+        return view('public.categories.showDestacados', compact('products'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Category $category
      * @return \Illuminate\Http\Response
      */
     public function edit(Category $category)

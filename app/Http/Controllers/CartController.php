@@ -7,9 +7,9 @@ use App\Cotizacione;
 use App\Client;
 use App\User;
 use App\MatchRut;
+use Illuminate\Support\Facades\DB;
 use PDF;
 use Mail;
-use DB;
 use App\Mail\EnviaCotizacion;
 use App\Mail\EnviaCotizacionCliente;
 use Illuminate\Http\Request;
@@ -18,9 +18,8 @@ class CartController extends Controller
 {
     public function shop()
     {
-        $products = Product::all()->where('destacado', 1);
-        $categories = Category::orderBy('orden', 'ASC')->get();
-        return view('public.index')->withTitle('E-COMMERCE STORE | SHOP')->with(['products' => $products])->with(['categories' => $categories]);
+        $products = DB::table('products')->take(8)->where('destacado', 1)->get();
+        return view('public.index')->withTitle('E-COMMERCE STORE | SHOP')->with(['products' => $products]);
     }
 
     public function catList()
@@ -31,9 +30,7 @@ class CartController extends Controller
 
     public function cart()  {
         $cartCollection = \Cart::getContent();
-        $categories = Category::orderBy('orden', 'ASC')->get();
-        //dd($cartCollection);
-        return view('public.mi-cotizacion.index')->withTitle('E-COMMERCE STORE | CART')->with(['cartCollection' => $cartCollection, 'categories' => $categories]);;
+        return view('public.mi-cotizacion.index')->withTitle('E-COMMERCE STORE | CART')->with(['cartCollection' => $cartCollection]);
     }
 
     public function add(Request $request){

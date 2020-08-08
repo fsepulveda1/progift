@@ -4,9 +4,13 @@
 
         <div class="side-menu-body">
             <ul>
-            @foreach($categories as $cat)
-                <li><a href="/categories/{{$cat['id']}}">{{ $cat->nombre }}</a></li>
-            @endforeach
+                <li><a href="/destacados">Destacados</a></li>
+                @php
+                    $categories = App\Category::orderBy('orden', 'ASC')->get();
+                @endphp
+                @foreach($categories as $cat)
+                    <li><a href="/categories/{{$cat['id']}}">{{ $cat->nombre }}</a></li>
+                @endforeach
             </ul>
         </div><!-- End .side-menu-body -->
     </div><!-- End .side-custom-menu -->
