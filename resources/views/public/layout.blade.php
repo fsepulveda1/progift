@@ -56,7 +56,6 @@
                     </div><!-- End .header-right -->
                 </div><!-- End .container -->
             </div><!-- End .header-top -->
-
             <div class="header-middle">
                 <div class="container">
                     <div class="header-left">

@@ -30,6 +30,7 @@ Route::get('/detalle-categoria', function () {
     return view('public.detalle-categoria.index');
 });
 Route::get('/categories/{id}', 'CategoriesController@show');
+Route::get('/destacados', 'CategoriesController@showDestacados');
 Route::get('/products/{id}', 'ProductsController@show');
 Route::get('/tips', 'HomeController@index')->name('tips');
 Route::get('/tips/{slug}', 'HomeController@show');

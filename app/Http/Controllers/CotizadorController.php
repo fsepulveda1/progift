@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Color;
+use App\Impresion;
+use Barryvdh\DomPDF\PDF;
 use DB;
 use Illuminate\Http\UploadedFile;
-use PDF;
 use Mail;
 use App\Category;
 use App\Product;
@@ -15,15 +17,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
-//$new_file = $value['file_imagen'];
-//dd($new_file);
-
 class CotizadorController extends Controller
 {
     public function index()
     {
         $user_avatar = false;
-        return view('admin/cotizador.index', compact('user_avatar'));
+        $colors = json_encode(Color::all('nombre')->toArray());
+        $impresions = json_encode(Impresion::all('nombre')->toArray());
+        return view('admin/cotizador.index', compact('user_avatar','colors','impresions'));
     }
 
     public function edit($id)
@@ -32,13 +33,20 @@ class CotizadorController extends Controller
 
         $cotizacion = Cotizacione::where('id', $id)->first();
         $cliente = Client::where('id', $cotizacion->client_id)->first();
+        $colors = json_encode(Color::all('nombre')->toArray());
+        $impresions = json_encode(Impresion::all('nombre')->toArray());
 
-        return view('admin/cotizador.edit', compact('user_avatar', 'cotizacion', 'cliente'));
+        return view('admin/cotizador.edit', compact('user_avatar', 'cotizacion', 'cliente','colors','impresions'));
     }
 
     public function busca(Request $request)
     {
         $result = DB::select("select id, nombre AS name, precio, imagen, sku from products where nombre LIKE '%{$request->input('query')}%'");
+        foreach ($result as $key => $rs) {
+            $colors = DB::select("select c.nombre from product_color pc inner join colors c on pc.color_id = c.id where pc.product_id = ".$rs->id);
+            $colors = array_map(function($item){ return $item->nombre; },$colors);
+            $result[$key]->colors = $colors;
+        }
         return response()->json($result);
     }
 
@@ -55,10 +63,8 @@ class CotizadorController extends Controller
         $view = \View::make('admin/cotizador.pdfinterno',compact('data'));
         $html = $view->render();
 
-        PDF::SetTitle('cotizacion');
-        PDF::AddPage();
-        PDF::writeHTML($html, true, false, true, false, '');
-        PDF::Output(public_path('storage').'/cotizacion/Pro-Gift_'.urlencode($request->nombre_cliente).date("Y-m-d").'.pdf', 'F');
+        //TODO GENERAR PDF??
+
 
         return back()->with([
             'message'    => 'Cotización editada correctamente, Fue guardada con el mismo ID y puede verificar los datos en la sección Cotizaciones',
@@ -134,10 +140,7 @@ class CotizadorController extends Controller
         $view = \View::make('admin/cotizador.pdfinterno',compact('data'));
         $html = $view->render();
 
-        PDF::SetTitle('cotizacion');
-        PDF::AddPage();
-        PDF::writeHTML($html, true, false, true, false, '');
-        PDF::Output(public_path('storage').'/cotizacion/Pro-Gift_'.urlencode($request->nombre_cliente).date("Y-m-d").'.pdf', 'F');
+        //TODO GENERAR PDF??
 
         $message = new EnviaCotizacion($data);
         $message->attachData(PDF::Output('Pro-Gift_'.urlencode($request->nombre_cliente).date("Y-m-d").'.pdf', 'S'), 'Pro-Gift_'.urlencode($request->nombre_cliente).date("Y-m-d").'.pdf');
@@ -161,15 +164,8 @@ class CotizadorController extends Controller
         $this->savingPDF($request,$detalle);
 
         $id = $cotizacion->id;
-        $user_avatar = false;
 
-        $cotizacion = Cotizacione::where('id', $id)->first();
-        $cliente = Client::where('id', $cotizacion->client_id)->first();
-
-        return view('admin/cotizador.edit', compact('user_avatar', 'cotizacion', 'cliente'))->with([
-            'message'    => 'Cotización guardada correctamente.',
-            'alert-type' => 'success',
-        ]);
+        return redirect('/admin/cotizador/editar/'.$id);
     }
 
     public function genera(Request $request){
@@ -178,8 +174,7 @@ class CotizadorController extends Controller
 
         $this->createClientIfNotExist($request);
 
-        $this->savingPDF($request, $detalle);
-        PDF::Output(public_path('storage').'/cotizacion/Pro-Gift_'.urlencode($request->nombre_cliente).date("Y-m-d").'.pdf', 'I');
+        return $this->savingPDF($request, $detalle);
     }
 
     public function pdf(){
@@ -290,14 +285,10 @@ class CotizadorController extends Controller
     private function savingPDF(Request $request, $detalle)
     {
         $data = $this->getEmailData($request, $detalle);
-
-        $view = \View::make('admin/cotizador.pdfinterno', compact('data'));
-        $html = $view->render();
-
-        PDF::SetTitle('cotizacion');
-        PDF::AddPage();
-        PDF::writeHTML($html, true, false, true, false, '');
-        PDF::Output(public_path('storage') . '/cotizacion/Pro-Gift_' . urlencode($request->nombre_cliente) . date("Y-m-d") . '.pdf', 'F');
+        /** @var PDF $pdf */
+        $pdf = app('dompdf.wrapper');
+        $pdf = $pdf->loadView('admin/cotizador.pdfinterno', ['data'=>$data]);
+        return $pdf->stream('archivo.pdf');
     }
 
     /**

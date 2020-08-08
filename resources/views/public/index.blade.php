@@ -41,7 +41,7 @@
                         <div class="product-default">
                             <div class="product-details">
                             <figure>
-                                <a href="/products/{{$pro['id']}}">
+                                <a href="/products/{{$pro->id}}">
                                     <?php $images = json_decode($pro->imagen); ?>
                                     <?php $count = 1; ?>
                                     @foreach($images as $image)
@@ -57,32 +57,13 @@
                                 </a>
                             </figure>
                                 <h2 class="product-title">
-                                    <a href="/products/{{$pro['id']}}">{{ $pro->nombre }}</a>
+                                    <a href="/products/{{$pro->id}}">{{ $pro->nombre }}</a>
                                 </h2>
                                 <div class="price-box">
                                     <span class="product-price">{{ $pro->sku }}</span>
                                     <!--<span class="product-price">${{ number_format($pro->precio, 0, ',', '.') }}</span>-->
                                 </div><!-- End .price-box -->
                                 <div class="product-action">
-                                    <!-- <button class="btn-icon btn-add-cart" data-toggle="modal" data-target="#addCartModal"><i class="icon-bag"></i>COTIZAR</button> -->
-                                    <!--
-                                    <form action="{{ route('cart.store') }}" method="POST">
-                                        {{ csrf_field() }}
-                                        <input type="hidden" value="{{ $pro->id }}" id="id" name="id">
-                                        <input type="hidden" value="{{ $pro->nombre }}" id="name" name="name">
-                                        <input type="hidden" value="{{ $pro->precio }}" id="price" name="price">
-                                        <input type="hidden" value="{{ $pro->imagen }}" id="img" name="img">
-                                        <input type="hidden" value="{{ $pro->slug }}" id="slug" name="slug">
-                                        <input type="hidden" value="1" id="quantity" name="quantity">
-                                        <div class="" style="background-color: white;">
-                                              <div class="row">
-                                                <button class="btn-icon btn-add-cart add-cart" class="tooltip-test" title="add to cart">
-                                                    &nbsp;&nbsp;Cotizar
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    -->
                                     <a class="btn-icon btn-add-cart add-cart" href="/products/{{$pro->id}}" class="tooltip-test" style="color: #fff;" title="add to cart">
                                         &nbsp;&nbsp; Cotizar
                                     </a>
