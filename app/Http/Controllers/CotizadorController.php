@@ -41,7 +41,7 @@ class CotizadorController extends Controller
 
     public function busca(Request $request)
     {
-        $result = DB::select("select id, nombre AS name, precio, imagen, sku from products where nombre LIKE '%{$request->input('query')}%'");
+        $result = DB::select("select id, nombre AS name, descripcion_larga as descripcion, precio, imagen, sku from products where nombre LIKE '%{$request->input('query')}%'");
         foreach ($result as $key => $rs) {
             $colors = DB::select("select c.nombre from product_color pc inner join colors c on pc.color_id = c.id where pc.product_id = ".$rs->id);
             $colors = array_map(function($item){ return $item->nombre; },$colors);
@@ -219,17 +219,75 @@ class CotizadorController extends Controller
 
             $detalle[] = [
                 'nombre' => $value['nombre'],
+                'descripcion' => $value['descripcion'],
                 'imagen' => $imagen,
                 'sku' => $value['sku'],
                 'color' => $value['color'],
                 'imprenta' => $value['impresion'],
                 'cantidad' => $can,
                 'precio' => $pre,
-                'suma' => $sum
+                'suma' => $sum,
+                'descuento' => $request->descuento ?? 0,
+                'neto' => $request->neto ?? 0,
+                'iva' => $request->iva ?? 0,
+                'total' => $request->total,
+                'activa_total' => isset($request->activar_totales),
+                'activa_descuento' => isset($request->activar_descuento),
             ];
         }
+
         return $detalle;
     }
+
+//    /**
+//     * @param Cotizacione $cotizacion
+//     * @return array
+//     * @internal param Request $request
+//     */
+//    private function getFormattedData(Cotizacione $cotizacion)
+//    {
+//        $detalle = [];
+//        $productos = $cotizacion->detalle;
+//        foreach ($productos as $key => $value) {
+//
+//            foreach ($value['cantidad'] as $key => $cantidad) {
+//                $can[] = $cantidad;
+//            }
+//            foreach ($value['precio'] as $key => $precio) {
+//                $pre[] = $precio;
+//            }
+//            foreach ($value['suma'] as $key => $suma) {
+//                $sum[] = $suma;
+//            }
+//
+//            /** @var UploadedFile $new_file */
+//
+//            if(isset($request->producto[$key]['file_imagen'])) {
+//                $new_file = $request->producto[$key]['file_imagen'];
+//                $fileNameWithTheExtension = $new_file->getClientOriginalName();
+//                $fileName = pathinfo($fileNameWithTheExtension, PATHINFO_FILENAME);
+//                $extension = $new_file->getClientOriginalExtension();
+//                $newFileName = $fileName . '_' . time() . '.' . $extension;
+//                $new_file->storeAs('public/images/custom_products_images', $newFileName);
+//                $imagen = "/storage/images/custom_products_images/".$newFileName;
+//            }
+//            else {
+//                $imagen = $value['imagen'];
+//            }
+//
+//            $detalle[] = [
+//                'nombre' => $value['nombre'],
+//                'imagen' => $imagen,
+//                'sku' => $value['sku'],
+//                'color' => $value['color'],
+//                'imprenta' => $value['impresion'],
+//                'cantidad' => $can,
+//                'precio' => $pre,
+//                'suma' => $sum
+//            ];
+//        }
+//        return $detalle;
+//    }
 
     /**
      * @param Request $request
@@ -273,7 +331,7 @@ class CotizadorController extends Controller
             'client_id' => $client->id,
             'user_id' => Auth::user()->id,
             'pdf' => '/cotizacion/Pro-Gift_' . urlencode($request->nombre_cliente) . date("Y-m-d") . '.pdf',
-            'tipo' => $request->tipo
+            'tipo' => 'normal'
         ]);
         return $cotizacion;
     }

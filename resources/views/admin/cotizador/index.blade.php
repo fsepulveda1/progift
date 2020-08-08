@@ -34,9 +34,9 @@
 						</div>
 						<div class="card-body">
 							<form action="{{ route('admin.cotiza') }}"
-								  id="cotization_form"
 								  method="POST"
 								  enctype="multipart/form-data"
+								  id="cotization_form"
 								  data-colors="{{$colors}}"
 								  data-impresions="{{$impresions}}">
 
@@ -82,17 +82,7 @@
 										<div class="col-lg-3">
 											<div class="form-group">
 												<label class="form-control-label" for="input-validez">Validez de la cotización</label>
-												<input type="text" name="validez" class="form-control form-control-alternative" placeholder="10 días" value="10" required>
-												<input type="hidden" name="tipo" id="tipo" value="Normal">
-											</div>
-										</div>
-										<div class="col-lg-3" style="display: none;">
-											<div class="form-group">
-												<label class="form-control-label" for="input-term">Tipo de cotización</label>
-												<select class="form-control form-control-alternative" name="tipo" id="tipo" required>
-													<option value="Normal">Normal</option>
-													<option value="Descuento">Descuento</option>
-												</select>
+												<input type="text" name="validez" class="form-control form-control-alternative" placeholder="10 días" value="" required>
 											</div>
 										</div>
 									</div>
@@ -103,92 +93,114 @@
 
 								<div class="pl-lg-4 pduct">
 									<div class="row">
-										<div class="col-lg-2">
-											<div class="form-group">
-												<label for="example-search-input" class="form-control-label">Producto</label>
-												<input type="hidden" name="producto[0][id]" id="id"/>
-												<input class="form-control form-control-alternative search" autocomplete="off" type="search" placeholder="Busca por sku/nombre..." id="nombre" name="producto[0][nombre]" required>
-											</div>
-										</div>
-										<div class="col-lg-1">
-											<div class="form-group">
-												<label for="example-search-input" class="form-control-label">SKU</label>
-												<input class="form-control form-control-alternative sku" autocomplete="off" type="text" placeholder="SKU" id="sku" name="producto[0][sku]" required>
-											</div>
-										</div>
-										<div class="col-lg-1">
-											<div class="form-group">
-												<label class="form-control-label" for="input-country">Color</label>
-												@php $colors = App\Color::all(); @endphp
-												<select name="producto[0][color]" id="color" required class="form-control form-control-alternative color">
-													<option value=""></option>
-													@foreach($colors as $color)
-														<option value="{{ $color->nombre }}">
-															{{$color->nombre}}
-														</option>
-													@endforeach
-												</select>
-											</div>
-										</div>
-										<div class="col-lg-1">
-											<div class="form-group">
-												<label class="form-control-label" for="exampleFormControlSelect1">Impresión</label>
-												@php $impresions = App\Impresion::all(); @endphp
-												<select name="producto[0][impresion]" id="impresion" class="form-control form-control-alternative">
-													<option value=""></option>
-													@foreach($impresions as $impresion)
-														<option value="{{$impresion->nombre}}">
-															{{$impresion->nombre}}
-														</option>
-													@endforeach
-												</select>
-											</div>
-										</div>
-										<div class="col-lg-2">
-											<div class="form-group text-center">
-												<label class="form-control-label" for="input-country">Imágen</label>
-												<div class="custom-file">
-													<div class="file-widget">
-														<input type="file" class="custom-file-input" name="producto[0][file_imagen]" lang="es">
-														<label class="custom-file-label text-left">Foto</label>
+										<div class="col-lg-6">
+											<fieldset>
+												<h6 class="heading-small text-muted mb-4">Detalle</h6>
+												<div class="row">
+													<div class="col-lg-4 mb-0">
+														<div class="form-group mb-lg-0">
+															<label for="example-search-input" class="form-control-label">Producto</label>
+															<input type="hidden" name="producto[0][id]" id="id"/>
+															<input class="form-control form-control-alternative search" autocomplete="off" type="search" placeholder="Busca por sku/nombre..." id="nombre" name="producto[0][nombre]" required>
+														</div>
 													</div>
-													<input type="hidden" name="producto[0][imagen]" id="imagen" class="himagen"/>
-													<img src="" class="imagen" style="width: 65px;"/>
+													<div class="col-lg-2 mb-0">
+														<div class="form-group mb-lg-0">
+															<label for="example-search-input" class="form-control-label">SKU</label>
+															<input class="form-control form-control-alternative sku" autocomplete="off" type="text" placeholder="SKU" id="sku" name="producto[0][sku]" required>
+														</div>
+													</div>
+													<div class="col-lg-3 mb-0">
+														<div class="form-group mb-lg-0">
+															<label class="form-control-label" for="input-country">Color</label>
+															@php $colors = App\Color::all(); @endphp
+															<select name="producto[0][color]" id="color" required class="form-control form-control-alternative color">
+																<option value=""></option>
+																@foreach($colors as $color)
+																	<option value="{{ $color->nombre }}">
+																		{{$color->nombre}}
+																	</option>
+																@endforeach
+															</select>
+														</div>
+													</div>
+													<div class="col-lg-3">
+														<div class="form-group mb-lg-0">
+															<label class="form-control-label" for="exampleFormControlSelect1">Impresión</label>
+															@php $impresions = App\Impresion::all(); @endphp
+															<select name="producto[0][impresion]" id="impresion" class="form-control form-control-alternative">
+																<option value=""></option>
+																@foreach($impresions as $impresion)
+																	<option value="{{$impresion->nombre}}">
+																		{{$impresion->nombre}}
+																	</option>
+																@endforeach
+															</select>
+														</div>
+													</div>
 												</div>
-											</div>
+												<div class="row">
+													<div class="col-lg-3">
+														<div class="form-group">
+															<label class="form-control-label" for="input-country">Imágen</label>
+															<div class="custom-file">
+																<div class="file-widget">
+																	<input type="file" class="custom-file-input" name="producto[0][file_imagen]" lang="es">
+																	<label class="custom-file-label text-left">Foto</label>
+																</div>
+																<input type="hidden" name="producto[0][imagen]" id="imagen" class="himagen"/>
+																<img src="" class="imagen" style="width: 65px;"/>
+															</div>
+														</div>
+													</div>
+													<div class="col-lg-9">
+														<div class="form-group">
+															<label class="form-control-label" for="descripcion">Descripción</label>
+															<textarea name="producto[0][descripcion]" id="descripcion" class="form-control form-control-alternative descripcion" rows="2"></textarea>
+														</div>
+													</div>
+												</div>
+											</fieldset>
 										</div>
-										<div class="col-lg-1">
-											<div class="form-group">
-												<label for="example-search-input" class="form-control-label">Cantidad</label>
-												<input type="number" name="producto[0][cantidad][]" id="cantidad" class="form-control form-control-alternative cantidad" placeholder="0" required>
-											</div>
-										</div>
-										<div class="col-lg-2">
-											<div class="form-group">
-												<input type="hidden" id="precio_unitario" class="precio_unitario"/>
-												<label for="example-search-input" class="form-control-label">Valor Unitario</label>
-												<input type="number" name="producto[0][precio][]" id="precio" class="form-control form-control-alternative money precio" placeholder="0" required>
-											</div>
-										</div>
-										<div class="col-lg-1">
-											<div class="form-group">
-												<label for="example-search-input" class="form-control-label">Total</label>
-												<input type="number" name="producto[0][suma][]" id="precio_suma" class="form-control form-control-alternative money precio_suma" placeholder="0" readonly required>
-											</div>
-										</div>
-										<div class="col-lg-1">
-											<div class="form-group">
-												<input type="hidden" class="orden" value="0"/>
-												<input type="hidden" id="p_u" class="p_u"/>
-												<label for="example-search-input" class="form-control-label">Agregar</label>
-												<button type="button" class="btn btn-success btn-agrega_cant">
-													<span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
-												</button>
-											</div>
-										</div>
-									</div>
-									<div class="cant-add">
+										<div class="col-lg-6">
+											<fieldset>
+												<h6 class="heading-small text-muted mb-4">Cantidades</h6>
+												<div class="row">
+													<div class="col-lg-2 mb-lg-0">
+														<div class="form-group">
+															<label for="example-search-input" class="form-control-label">Cantidad</label>
+															<input type="number" name="producto[0][cantidad][]" id="cantidad" class="form-control form-control-alternative cantidad" placeholder="0" required>
+														</div>
+													</div>
+													<div class="col-lg-4 mb-lg-0">
+														<div class="form-group">
+															<input type="hidden" id="precio_unitario" class="precio_unitario"/>
+															<label for="example-search-input" class="form-control-label">Valor Unitario</label>
+															<input type="number" name="producto[0][precio][]" id="precio" class="form-control form-control-alternative money precio" placeholder="0" required>
+														</div>
+													</div>
+													<div class="col-lg-4 mb-lg-0">
+														<div class="form-group">
+															<label for="example-search-input" class="form-control-label">Total</label>
+															<input type="number" name="producto[0][suma][]" id="precio_suma" class="form-control form-control-alternative money precio_suma" placeholder="0" readonly required>
+														</div>
+													</div>
+													<div class="col-lg-2 mb-lg-0">
+														<div class="form-group">
+															<input type="hidden" class="orden" value="0"/>
+															<input type="hidden" id="p_u" class="p_u"/>
+															<label for="example-search-input" class="form-control-label">Agregar</label>
+															<button type="button" class="btn btn-success btn-agrega_cant">
+																<span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
+															</button>
+														</div>
+													</div>
+												</div>
+												<div class="cant-add">
 
+												</div>
+											</fieldset>
+										</div>
 									</div>
 								</div>
 

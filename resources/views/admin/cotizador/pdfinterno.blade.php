@@ -40,9 +40,11 @@
         </tr>
         @foreach ($data['detalle'] as $det)
             <tr>
-                <td>{{$det['nombre']}}</td>
+                <td>
+                    {{$det['nombre']}}<br>
+                    {{$det['descripcion']}}
+                </td>
                 <td><img src="{{ asset($det['imagen'])}}" width="100px"></td>
-                <!-- TODO MEJORAR EL FORMATEO DE DATOS PARA EVITAR ESTO -->
                 <td>{{$det['cantidad'][0]}}</td>
                 <td>{{$det['precio'][0]}}</td>
                 <td>{{$det['suma'][0]}}</td>

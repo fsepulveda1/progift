@@ -16,6 +16,7 @@
                 this.$element.closest('.pduct').find('.imagen').attr('src', '/storage/' + imagen);
                 this.$element.closest('.pduct').find('.himagen').val('/storage/' + imagen);
                 this.$element.closest('.pduct').find('.precio').val(args.precio);
+                this.$element.closest('.pduct').find('.descripcion').val(args.descripcion);
                 this.$element.closest('.pduct').find('.sku').val(args.sku);
                 this.$element.closest('.pduct').find('.precio').val(args.precio);
                 this.$element.closest('.pduct').find('.cantidad').val(1);
@@ -123,36 +124,33 @@
 
         var a = $(this).parent().find('.orden').val();
         var pr = $(this).parent().find('.p_u').val();
-        $(this).parent().parent().parent().parent().find('.cant-add').append('<div class="pl-lg-4">'+
+        $(this).closest('.pduct').find('.cant-add').append(
             '<div class="row row-qty" id="'+i+'">'+
-            '<div class="col-lg-6">'+
-            '</div>'+
-            '<div class="col-lg-1">'+
+            '<div class="col-lg-2 mb-lg-0">'+
             '<div class="form-group">'+
             '<label for="example-search-input" class="form-control-label">Cantidad</label>'+
             '<input type="number" name="producto['+a+'][cantidad][]" id="cantidad" class="form-control form-control-alternative cantidad" value="1" placeholder="0" required>'+
             '</div>'+
             '</div>'+
-            '<div class="col-lg-2">'+
+            '<div class="col-lg-4 mb-lg-0">'+
             '<div class="form-group">'+
             '<input type="hidden" id="precio_unitario" class="precio_unitario"/>'+
             '<label for="example-search-input" class="form-control-label">Valor Unitario</label>'+
             '<input type="number" name="producto['+a+'][precio][]" id="precio" class="form-control form-control-alternative money precio p_'+i+'" value="'+pr+'" placeholder="0" required autocomplete="off">'+
             '</div>'+
             '</div>'+
-            '<div class="col-lg-2">'+
+            '<div class="col-lg-4 mb-lg-0">'+
             '<div class="form-group">'+
             '<label for="example-search-input" class="form-control-label">Valor total</label>'+
             '<input type="number" name="producto['+a+'][suma][]" id="precio_suma" class="form-control form-control-alternative money precio_suma" value="'+pr+'" placeholder="0" readonly required>'+
             '</div>'+
             '</div>'+
-            '<div class="col-lg-1">'+
+            '<div class="col-lg-2 mb-lg-0">'+
             '<div class="form-group">'+
             '<label for="example-search-input" class="form-control-label">Eliminar</label>'+
             '<button type="button" class="btn btn-danger btn-elimina_cant" data-id='+i+'>'+
             '<span class="btn-inner--icon"><i class="fas fa-trash-alt"></i></span>'+
             '</button>'+
-            '</div>'+
             '</div>'+
             '</div>'+
             '</div>');
@@ -180,35 +178,40 @@
 
 
         var appendProduct = $('<div id="'+i+'" class="pduct"><div class="row">'+
-            '<div class="col-lg-2">'+
+            '<div class="col-lg-6">'+
+            '<fieldset>'+
+            '<div class="row">'+
+            '<div class="col-lg-4 mb-0">'+
             '<div class="form-group">'+
             '<label for="example-search-input" class="form-control-label">Producto</label>'+
             '<input type="hidden" name="producto['+c+'][id]" id="id"/>'+
             '<input class="form-control form-control-alternative search" autocomplete="off" type="search" placeholder="Busca por sku/nombre..." id="nombre" name="producto['+c+'][nombre]">'+
             '</div>'+
             '</div>'+
-            '<div class="col-lg-1">'+
+            '<div class="col-lg-2 mb-0">'+
             '<div class="form-group">'+
             '<label for="example-search-input" class="form-control-label">SKU</label>'+
             '<input class="form-control form-control-alternative sku" autocomplete="off" type="text" placeholder="SKU" id="sku" name="producto['+c+'][sku]" required>'+
             '</div>'+
             '</div>'+
-            '<div class="col-lg-1">'+
+            '<div class="col-lg-3 mb-0">'+
             '<div class="form-group">'+
             '<label class="form-control-label" for="input-country">Color</label>'+
             '<select class="form-control form-control-alternative color" name="producto['+c+'][color]" id="color" required>'+
             '</select>'+
             '</div>'+
             '</div>'+
-            '<div class="col-lg-1">'+
+            '<div class="col-lg-3 mb-0">'+
             '<div class="form-group">'+
             '<label class="form-control-label" for="exampleFormControlSelect1">Impresión</label>'+
             '<select class="form-control form-control-alternative impresions" name="producto['+c+'][impresion]" id="impresion" required>'+
             '</select>'+
             '</div>'+
             '</div>'+
-            '<div class="col-lg-2">'+
-            '<div class="form-group" style="text-align: center;">'+
+            '</div>' +
+            '<div class="row">' +
+            '<div class="col-lg-3">'+
+            '<div class="form-group">'+
             '<label class="form-control-label" for="input-country">Imágen</label>'+
             '<div class="custom-file">'+
             '<div class="file-widget">'+
@@ -220,26 +223,38 @@
             '</div>'+
             '</div>'+
             '</div>'+
-            '<div class="col-lg-1">'+
+            '<div class="col-lg-9">'+
+            '<div class="form-group">'+
+            '<label class="form-control-label" for="descripcion">Descripción</label>'+
+            '<textarea name="producto[0][descripcion]" id="descripcion" class="form-control form-control-alternative descripcion" rows="2"></textarea>'+
+            '</div>'+
+            '</div>'+
+            '</div>'+
+            '</fieldset>'+
+            '</div>'+
+            '<div class="col-lg-6">'+
+            '<fieldset>'+
+            '<div class="row">'+
+            '<div class="col-lg-2 mb-lg-0">'+
             '<div class="form-group">'+
             '<label for="example-search-input" class="form-control-label">Cantidad</label>'+
             '<input type="number" name="producto['+c+'][cantidad][]" id="cantidad" class="form-control form-control-alternative cantidad" placeholder="0">'+
             '</div>'+
             '</div>'+
-            '<div class="col-lg-2">'+
+            '<div class="col-lg-4 mb-lg-0">'+
             '<div class="form-group">'+
             '<input type="hidden" id="precio_unitario" class="precio_unitario"/>'+
             '<label for="example-search-input" class="form-control-label">Valor Unitario</label>'+
             '<input type="number" name="producto['+c+'][precio][]" id="precio" class="form-control form-control-alternative money precio" placeholder="0">'+
             '</div>'+
             '</div>'+
-            '<div class="col-lg-1">'+
+            '<div class="col-lg-4 mb-lg-0">'+
             '<div class="form-group">'+
             '<label for="example-search-input" class="form-control-label">Total</label>'+
             '<input type="number" name="producto['+c+'][suma][]" id="precio_suma" class="form-control form-control-alternative money precio_suma" readonly placeholder="0">'+
             '</div>'+
             '</div>'+
-            '<div class="col-lg-1">'+
+            '<div class="col-lg-2 mb-lg-0">'+
             '<div class="form-group">'+
             '<input type="hidden" class="orden" value="'+c+'"/>'+
             '<label for="example-search-input" class="form-control-label">Acciones</label>'+
@@ -253,7 +268,7 @@
             '</div>'+
             '<hr class="my-4"/>'+
             '</div>'+
-            '<div class="cant-add '+i+'"></div></div>');
+            '<div class="cant-add '+i+'"></div></div></fieldset></div>');
 
         var colorSelect = appendProduct.find('.color');
         var impresionsSelect = appendProduct.find('.impresions');
