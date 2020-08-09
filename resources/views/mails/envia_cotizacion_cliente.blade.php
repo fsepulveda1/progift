@@ -1,51 +1,45 @@
-<h3>Los datos del cotizante son:</h3>
-<br/><br/>
-<p>
+@extends('mails.layout')
+
+@section('content')
+    <p style="font-size: 13pt; margin-bottom: 2rem">
         <strong>Empresa:</strong> {{$cotizacion['cliente']['nombre']}}<br/>
         <strong>Rut Empresa:</strong> {{$cotizacion['cliente']['rut']}}<br/>
         <strong>Contacto:</strong> {{$cotizacion['cliente']['contacto']}}<br/>
         <strong>E-Mail:</strong> {{$cotizacion['cliente']['email']}}<br/>
         <strong>Teléfono:</strong> {{$cotizacion['cliente']['telefono']}}<br/>
         <strong>Comentarios:</strong> {{$cotizacion['cliente']['comentarios']}}<br/>
-</p>
+    </p>
 
-<table width="100%" style="width: 100%;border-spacing: 0px;">
-    <tr>
-        <td width="20%" style="border: 1px solid #ffd600;" align="center">PRODUCTO</td>
-        <td width="20%" style="border: 1px solid #ffd600;" align="center">IMAGEN</td>
-        <td width="20%" style="border: 1px solid #ffd600;" align="center">COLOR</td>
-        <td width="20%" style="border: 1px solid #ffd600;" align="center">CANTIDAD</td>
-        <td width="20%" style="border: 1px solid #ffd600;" align="center">IMPRESION</td>
-    </tr>
-    <?php
-    $contador = 0;
-    ?>
-    @foreach ($cotizacion['detalle'] as $det)
-        <?php
-        $contador++;
-        ?>
+    <table width="100%" class="table" style="margin-bottom: 1rem" border="1" cellpadding="0" cellspacing="0">
         <tr>
-            <td width="20%" style="border: 1px solid #ffd600;" align="left">
-                &nbsp;{{ $det['nombre'] }}<br/>
-                &nbsp;{{ $det['sku'] }}
-            </td>
-            <td width="20%" style="border: 1px solid #ffd600;" align="center">
-                <img src="{{ $det['imagen'] }}" style="height: 50px;"/>
-            </td>
-            <td width="20%" style="border: 1px solid #ffd600;" align="center">
-                {{ $det['color'] }}
-            </td>
-            <td width="20%" style="border: 1px solid #ffd600;" align="center">
-               
-            </td>
-            <td width="20%" style="border: 1px solid #ffd600;" align="center">
-                {{ $det['imprenta'] }}
-            </td>
+            <th width="20%" align="center">PRODUCTO</th>
+            <th width="20%" align="center">IMAGEN</th>
+            <th width="20%" align="center">COLOR</th>
+            <th width="20%" align="center">CANTIDAD</th>
+            <th width="20%" align="center">IMPRESION</th>
         </tr>
-    @endforeach
-    <tr>
-        <td width="100%" colspan="5" style="border: 1px solid #ffd600;" align="left">
-            &nbsp;Total de articulos: {{$contador}} (* Valores no incluyen IVA)
-        </td>
-    </tr>
-</table>
+        @foreach ($cotizacion['detalle'] as $det)
+
+            <tr>
+                <td width="20%" align="left">
+                    {{ $det['nombre'] }}<br/>
+                    {{ $det['sku'] }}
+                </td>
+                <td width="20%" align="center">
+                    <img src="{{ asset($det['imagen']) }}" style="height: 50px;"/>
+                </td>
+                <td width="20%" align="center">
+                    {{ $det['color'] }}
+                </td>
+                <td width="20%" align="center">
+                    {{ $det['cantidad'] }}
+                </td>
+                <td width="20%" align="center">
+                    {{ $det['imprenta'] }}
+                </td>
+            </tr>
+        @endforeach
+    </table>
+
+    <p style="font-size: 12pt;">Este e-mail es sólo un aviso, la solicitud ya se encuentra disponible en el Cotizador para ser completada y enviada al Cliente. </p>
+@endsection

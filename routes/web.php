@@ -44,12 +44,12 @@ Route::get('/', function () {
 Route::get('/', 'CartController@shop')->name('public.index');
 Route::get('/shop', 'CartController@shop')->name('shop');
 Route::get('/mi-cotizacion', 'CartController@cart')->name('public.mi-cotizacion.index');
+Route::get('/success', 'CartController@success')->name('cart.success');
 Route::post('/add', 'CartController@add')->name('cart.store');
 Route::post('/update', 'CartController@update')->name('cart.update');
 Route::post('/remove', 'CartController@remove')->name('cart.remove');
 Route::post('/clear', 'CartController@clear')->name('cart.clear');
 Route::post('/cotiza', 'CartController@cotiza')->name('cart.cotiza');
-
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();

@@ -161,7 +161,7 @@
 														<div class="col-lg-9">
 															<div class="form-group">
 																<label class="form-control-label" for="descripcion">Descripción</label>
-																<textarea name="producto[0][descripcion]" id="descripcion" class="form-control form-control-alternative desciprion" rows="2">{{$d['descripcion']}}</textarea>
+																<textarea name="producto[0][descripcion]" id="descripcion" class="form-control form-control-alternative desciprion" rows="2">@if(isset($d['descripcion'])){{$d['descripcion']}}@endif</textarea>
 															</div>
 														</div>
 													</div>

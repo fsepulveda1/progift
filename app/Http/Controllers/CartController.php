@@ -7,12 +7,12 @@ use App\Cotizacione;
 use App\Client;
 use App\User;
 use App\MatchRut;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Support\Facades\DB;
-use PDF;
-use Mail;
 use App\Mail\EnviaCotizacion;
 use App\Mail\EnviaCotizacionCliente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CartController extends Controller
 {
@@ -31,6 +31,10 @@ class CartController extends Controller
     public function cart()  {
         $cartCollection = \Cart::getContent();
         return view('public.mi-cotizacion.index')->withTitle('E-COMMERCE STORE | CART')->with(['cartCollection' => $cartCollection]);
+    }
+
+    public function success()  {
+        return view('public.mi-cotizacion.success');
     }
 
     public function add(Request $request){
@@ -63,7 +67,7 @@ class CartController extends Controller
                     'relative' => false,
                     'value' => $request->quantity
                 ),
-        ));
+            ));
         return redirect()->route('public.mi-cotizacion.index')->with('success_msg', 'Carro actualizado');
     }
 
@@ -78,17 +82,23 @@ class CartController extends Controller
         $neto = \Cart::getTotalQuantity() - $IVA;
         //dd($cartCollection);
 
+        $emailVendedor = $this->matchRut($request->rut);
+        $idUser = $this->getIdUser($emailVendedor);
+        $user = User::find($idUser);
+
         foreach ($cartCollection as $item) {
             $detalle[] = [
                 'nombre' => $item->name,
-                'color' => 'default',
-                'imagen' => $item->image,
-                'sku' => '0',
-                'imprenta' => 'default',
+                'color' => $item->attributes->color ?? 'no especifica',
+                'imagen' => '/storage/'.$item->attributes->image,
+                'sku' => $item->model->sku,
+                'imprenta' => $item->attributes->impresion,
                 'cantidad' => $item->quantity,
                 'precio' => $item->price,
                 'iva' => $item->price*0.19,
-                'suma' => $item->price*0.19
+                'suma' => $item->price*0.19,
+                'descripcion' => $item->model->descripcion_larga,
+                'product_id' => $item->model->id
             ];
         }
 
@@ -118,8 +128,9 @@ class CartController extends Controller
             'iva' => $IVA,
             'total' => 0,
             'tipo' => 'Web',
-            'activa_total' => true,
-            'activa_descuento' => true,
+            'activa_total' => false,
+            'activa_descuento' => false,
+            'vendedor' => $user,
             'cliente' => [
                 'nombre' => $request->empresa,
                 'rut' => $request->rut,
@@ -130,14 +141,7 @@ class CartController extends Controller
             ]
         ];
 
-        //dd($data);
-
-        $marcaTiempo = time();
-
-        $emailVendedor = $this->matchRut($request->rut);
-        $idUser = $this->getIdUser($emailVendedor);
-        
-        $cotizacion = Cotizacione::create([
+        Cotizacione::create([
             'forma_pago' => 'web',
             'entrega' => 10,
             'detalle' => json_encode($detalle),
@@ -146,30 +150,26 @@ class CartController extends Controller
             'iva' => $IVA,
             'total' => \Cart::getTotalQuantity(),
             'client_id' => $client->id,
-            'pdf' => '/cotizacion/cotizacion'.$request->empresa.$marcaTiempo.'.pdf',
             'user_id' => $idUser,
             'estado' => 1,
             'tipo' => 'Web'
         ]);
 
-        $view = \View::make('admin/cotizador.pdfinterno',compact('data'));
-        $html = $view->render();
-
-        //$pdf = new TCPDF();
-        PDF::SetTitle('cotizacion');
-        PDF::AddPage();
-        PDF::writeHTML($html, true, false, true, false, '');
-        PDF::Output(public_path('storage').'/cotizacion/cotizacion'.$request->empresa.$marcaTiempo.'.pdf', 'F');
-
         $message = new EnviaCotizacion($data);
-        //$message->attachData(PDF::Output($request->empresa.$marcaTiempo.'.pdf', 'E'), 'cotizacion'.$request->id.'.pdf');
-        $message->attachData(PDF::Output($request->empresa.$marcaTiempo.'.pdf', 'S'), 'cotizacion'.$request->id.'.pdf');
-        Mail::to($emailVendedor)->send($message);
+
+//        $pdf = app('dompdf.wrapper');
+//        $pdf = $pdf->loadView('admin/cotizador.pdfinterno', ['data'=>$data]);
+//        $message->attach($pdf->output(),[
+//            'as' => 'cotizacion.pdf',
+//            'mime' => 'application/pdf',
+//        ]);
+
+        Mail::to($client->email)->send($message);
 
         $messageCliente = new EnviaCotizacionCliente($data);
-        Mail::to($request->email)->send($messageCliente);
+        Mail::to($user->email)->send($messageCliente);
 
-        return redirect()->route('public.mi-cotizacion.index')->with('success_msg', 'Cotización solicitada con exito, pronto nos pondremos en contacto con usted.');
+        return redirect()->route('cart.success');
     }
 
     public function matchRut($rut){
@@ -185,7 +185,7 @@ class CartController extends Controller
                 "vendedor" => $result[$rand]->email,
                 "estado" => 1,
                 "procedencia" => 'Web');
-             MatchRut::insertData($insertData);
+            MatchRut::insertData($insertData);
 
             return $result[$rand]->email;
         }else{
@@ -195,7 +195,6 @@ class CartController extends Controller
 
     public function getIdUser($email){
         $result = DB::select("select id from users where email = '{$email}';");
-        //dd($email);
         return $result[0]->id;
     }
 }

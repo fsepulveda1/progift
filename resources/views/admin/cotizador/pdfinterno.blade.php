@@ -2,323 +2,252 @@
 <html>
 <head>
     <style>
+        @font-face {
+            font-family: 'Roboto';
+            src: url({{ asset('assets/fonts/Roboto/Roboto-Regular.ttf') }}) format("truetype");
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Roboto';
+            src: url({{ asset('assets/fonts/Roboto/Roboto-Bold.ttf') }}) format("truetype");
+            font-weight: bold;
+            font-style: normal;
+        }
+        @page {
+            margin: 0cm 0cm;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            padding: 2.5cm .5cm 2.5cm;
+        }
+
         .table{
-            border-color: yellow;
+            border-color: #F5C524;
+        }
+        .w-100 {
             width: 100%;
         }
+        .mt-1 {  margin-top: 1rem;  }
+        .mt-3 {  margin-top: 3rem;  }
         .table th,
         .table td {
-            border: 1px yellow solid;
-            padding: 10px;
+            border: 1px #F5C524 solid;
+            padding: 5px 10px;
+            font-size: 9pt;
+        }
+
+        header {
+            text-align: left;
+            position: fixed;
+            top: 0cm;
+            left: 0cm;
+            right: 0cm;
+            height: 2cm;
+            padding: .5cm;
+        }
+        footer {
+            position: fixed;
+            bottom: 0cm;
+            left: 0cm;
+            right: 0cm;
+            height: 2.5cm;
+            padding: .5cm;
+            background-color: #F5C524;
         }
     </style>
 </head>
 <body>
-<div style="padding: 0; text-align: left">
+<header>
     <img src="{{ asset('assets/images/logo_pdf.png') }}" width="150px"/>
-    <h1 style="text-align: center; padding: 1rem; margin-bottom: 2rem">COTIZACIÓN Nº XXXX</h1>
-    <table width="100%" style="margin: 2rem 0">
+</header>
+<main>
+    <h5 style="text-align: center; padding: 1rem; margin-bottom: 2rem; font-size: 10pt">COTIZACIÓN Nº XXXX</h5>
+    <table class="w-100" style="margin: 2rem 0; font-size: 10pt">
         <tr>
-            <th align="left" style="font-weight: bold">
-                {{$data['empresa']}}<br>
+            <th align="left" valign="top" style="font-weight: bold">
                 {{$data['nombre']}}<br>
+                {{$data['empresa']}}<br>
                 Presente
             </th>
-            <th align="right">
-                {{ date('d-m-Y') }}
+            <th align="right" valign="top">
+                {{ date('d/m/Y') }}
             </th>
         </tr>
     </table>
 
-    <table class="table" border="1" cellpadding="0" cellspacing="0">
+    <table class="table w-100" border="1" cellpadding="0" cellspacing="0">
         <tr>
-            <th>DESCRIPCIÓN</th>
-            <th>IMAGEN</th>
-            <th>CANTIDAD</th>
-            <th>VALOR UNITARIO</th>
-            <th>TOTAL (SIN IVA)</th>
+            <th width="40%">DESCRIPCIÓN</th>
+            <th width="25%">IMAGEN</th>
+            <th width="10%">CANTIDAD</th>
+            <th width="10%">VALOR UNITARIO</th>
+            <th width="15%">TOTAL<br> (SIN IVA)</th>
         </tr>
         @foreach ($data['detalle'] as $det)
             <tr>
-                <td>
+                <td valign="top">
                     {{$det['nombre']}}<br>
                     {{$det['descripcion']}}
                 </td>
-                <td><img src="{{ asset($det['imagen'])}}" width="100px"></td>
-                <td>{{$det['cantidad'][0]}}</td>
-                <td>{{$det['precio'][0]}}</td>
-                <td>{{$det['suma'][0]}}</td>
+                <td align="center" valign="top"><img src="{{ asset($det['imagen'])}}" width="100px"></td>
+                <td align="center" valign="top">{{$det['cantidad'][0]}}</td>
+                <td align="center" valign="top">${{number_format($det['precio'][0], 0, ',', '.')}}</td>
+                <td align="center" valign="top">${{number_format($det['suma'][0], 0, ',', '.')}}</td>
+            </tr>
+        @endforeach
+        @foreach ($data['detalle'] as $det)
+            <tr>
+                <td valign="top">
+                    {{$det['nombre']}}<br>
+                    {{$det['descripcion']}}
+                </td>
+                <td align="center" valign="top"><img src="{{ asset($det['imagen'])}}" width="100px"></td>
+                <td align="center" valign="top">{{$det['cantidad'][0]}}</td>
+                <td align="center" valign="top">${{number_format($det['precio'][0], 0, ',', '.')}}</td>
+                <td align="center" valign="top">${{number_format($det['suma'][0], 0, ',', '.')}}</td>
+            </tr>
+        @endforeach
+        @foreach ($data['detalle'] as $det)
+            <tr>
+                <td valign="top">
+                    {{$det['nombre']}}<br>
+                    {{$det['descripcion']}}
+                </td>
+                <td align="center" valign="top"><img src="{{ asset($det['imagen'])}}" width="100px"></td>
+                <td align="center" valign="top">{{$det['cantidad'][0]}}</td>
+                <td align="center" valign="top">${{number_format($det['precio'][0], 0, ',', '.')}}</td>
+                <td align="center" valign="top">${{number_format($det['suma'][0], 0, ',', '.')}}</td>
+            </tr>
+        @endforeach
+        @foreach ($data['detalle'] as $det)
+            <tr>
+                <td valign="top">
+                    {{$det['nombre']}}<br>
+                    {{$det['descripcion']}}
+                </td>
+                <td align="center" valign="top"><img src="{{ asset($det['imagen'])}}" width="100px"></td>
+                <td align="center" valign="top">{{$det['cantidad'][0]}}</td>
+                <td align="center" valign="top">${{number_format($det['precio'][0], 0, ',', '.')}}</td>
+                <td align="center" valign="top">${{number_format($det['suma'][0], 0, ',', '.')}}</td>
+            </tr>
+        @endforeach
+        @foreach ($data['detalle'] as $det)
+            <tr>
+                <td valign="top">
+                    {{$det['nombre']}}<br>
+                    {{$det['descripcion']}}
+                </td>
+                <td align="center" valign="top"><img src="{{ asset($det['imagen'])}}" width="100px"></td>
+                <td align="center" valign="top">{{$det['cantidad'][0]}}</td>
+                <td align="center" valign="top">${{number_format($det['precio'][0], 0, ',', '.')}}</td>
+                <td align="center" valign="top">${{number_format($det['suma'][0], 0, ',', '.')}}</td>
+            </tr>
+        @endforeach
+        @foreach ($data['detalle'] as $det)
+            <tr>
+                <td valign="top">
+                    {{$det['nombre']}}<br>
+                    {{$det['descripcion']}}
+                </td>
+                <td align="center" valign="top"><img src="{{ asset($det['imagen'])}}" width="100px"></td>
+                <td align="center" valign="top">{{$det['cantidad'][0]}}</td>
+                <td align="center" valign="top">${{number_format($det['precio'][0], 0, ',', '.')}}</td>
+                <td align="center" valign="top">${{number_format($det['suma'][0], 0, ',', '.')}}</td>
+            </tr>
+        @endforeach
+        @foreach ($data['detalle'] as $det)
+            <tr>
+                <td valign="top">
+                    {{$det['nombre']}}<br>
+                    {{$det['descripcion']}}
+                </td>
+                <td align="center" valign="top"><img src="{{ asset($det['imagen'])}}" width="100px"></td>
+                <td align="center" valign="top">{{$det['cantidad'][0]}}</td>
+                <td align="center" valign="top">${{number_format($det['precio'][0], 0, ',', '.')}}</td>
+                <td align="center" valign="top">${{number_format($det['suma'][0], 0, ',', '.')}}</td>
+            </tr>
+        @endforeach
+        @foreach ($data['detalle'] as $det)
+            <tr>
+                <td valign="top">
+                    {{$det['nombre']}}<br>
+                    {{$det['descripcion']}}
+                </td>
+                <td align="center" valign="top"><img src="{{ asset($det['imagen'])}}" width="100px"></td>
+                <td align="center" valign="top">{{$det['cantidad'][0]}}</td>
+                <td align="center" valign="top">${{number_format($det['precio'][0], 0, ',', '.')}}</td>
+                <td align="center" valign="top">${{number_format($det['suma'][0], 0, ',', '.')}}</td>
             </tr>
         @endforeach
     </table>
-</div>
+    <table class="w-100 mt-1">
+        <tr>
+            <td align="left" valign="top" width="75%" style="font-size: 10pt">
+                <div><strong>+ Los valores detallados no incluyen IVA</strong></div>
+                <div class="mt-1"><strong>Forma de pago:</strong> {{$data['forma_pago']}}</div>
+                <div><strong>Plazo de entrega:</strong> {{$data['entrega']}}</div>
+                <div><strong>Validéz de la cotización:</strong> {{$data['validez']}}</div>
+                <div class="mt-1">
+                    <strong>A la espera de una buena acogida,
+                        <br>Le saluda atentamente
+                    </strong>
+                </div>
+            </td>
+            <td width="25%" valign="top">
+                @if($data['activa_descuento'])
+                    <table class="table w-100" border="1" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <th width="43%">Descuento</th>
+                            <td>{{ $data['descuento'] }}%</td>
+                        </tr>
+                    </table>
+                @endif
 
-{{--<tr>--}}
-{{--<td width="60%">--}}
-{{--<table style="background-color: #ffffff;">--}}
-{{--<tr style="border-bottom: 1px solid #000000;background-color: #f8f8f8;">--}}
-{{--<td colspan="2">--}}
-{{--<span style="margin-bottom: 7px;">Datos del cliente</span>--}}
-{{--</td>--}}
-{{--</tr>--}}
-{{--<tr style="background-color: #ffffff;">--}}
-{{--<td width="40%">--}}
-{{--<span>--}}
-{{--Nombre:--}}
-{{--</span>--}}
-{{--</td>--}}
-{{--<td width="60%">--}}
-{{--<span>--}}
-{{--{{$data['nombre']}}--}}
-{{--</span>--}}
-{{--</td>--}}
-{{--</tr>--}}
-{{--<tr style="background-color: #ffffff;">--}}
-{{--<td width="40%">--}}
-{{--<span>--}}
-{{--Email:--}}
-{{--</span>--}}
-{{--</td>--}}
-{{--<td width="60%">--}}
-{{--<span>--}}
-{{--{{$data['email']}}--}}
-{{--</span>--}}
-{{--</td>--}}
-{{--</tr>--}}
-{{--<tr style="background-color: #ffffff;">--}}
-{{--<td width="40%">--}}
-{{--<span>--}}
-{{--Empresa:--}}
-{{--</span>--}}
-{{--</td>--}}
-{{--<td width="60%">--}}
-{{--<span>--}}
-{{--{{$data['empresa']}}--}}
-{{--</span>--}}
-{{--</td>--}}
-{{--</tr>--}}
-{{--<tr style="background-color: #ffffff;">--}}
-{{--<td width="40%">--}}
-{{--<span>--}}
-{{--Forma de pago:--}}
-{{--</span>--}}
-{{--</td>--}}
-{{--<td width="60%">--}}
-{{--<span>--}}
-{{--{{$data['forma_pago']}}--}}
-{{--</span>--}}
-{{--</td>--}}
-{{--</tr>--}}
-{{--<tr style="background-color: #ffffff;">--}}
-{{--<td width="40%">--}}
-{{--<span>--}}
-{{--Validez:--}}
-{{--</span>--}}
-{{--</td>--}}
-{{--<td width="60%">--}}
-{{--<span>--}}
-{{--{{$data['validez']}}--}}
-{{--</span>--}}
-{{--</td>--}}
-{{--</tr>--}}
-{{--<tr style="background-color: #ffffff;">--}}
-{{--<td width="40%">--}}
-{{--<span>--}}
-{{--Entrega:--}}
-{{--</span>--}}
-{{--</td>--}}
-{{--<td width="60%">--}}
-{{--<span>--}}
-{{--{{$data['entrega']}}--}}
-{{--</span>--}}
-{{--</td>--}}
-{{--</tr>--}}
-{{--<tr style="background-color: #ffffff;">--}}
-{{--<td width="40%">--}}
-{{--<span>--}}
-{{--Tipo de cotización:--}}
-{{--</span>--}}
-{{--</td>--}}
-{{--<td width="60%">--}}
-{{--<span>--}}
-{{--{{$data['tipo']}}--}}
-{{--</span>--}}
-{{--</td>--}}
-{{--</tr>--}}
-{{--</table>--}}
-{{--</td>--}}
-{{--<td width="40%" style="background-color: #ffffff;">--}}
-
-{{--</td>--}}
-{{--</tr>--}}
-{{--<tr>--}}
-{{--<td colspan="6">--}}
-
-{{--</td>--}}
-{{--</tr>--}}
-{{--<tr style="border-bottom: 1px solid #000000;background-color: #f8f8f8;">--}}
-{{--<td width="20%" align="center">--}}
-{{--Producto--}}
-{{--</td>--}}
-{{--<td width="10%" align="center">--}}
-{{--SKU--}}
-{{--</td>--}}
-{{--<td width="20%" align="center">--}}
-{{--Foto--}}
-{{--</td>--}}
-{{--<td width="10%" align="center">--}}
-{{--Color--}}
-{{--</td>--}}
-{{--<td width="10%" align="center">--}}
-{{--Imp.--}}
-{{--</td>--}}
-{{--<td width="10%" align="center">--}}
-{{--Cant.--}}
-{{--</td>--}}
-{{--<td width="10%" align="center">--}}
-{{--Precio--}}
-{{--</td>--}}
-{{--<td width="10%" align="center">--}}
-{{--IVA--}}
-{{--</td>--}}
-{{--</tr>--}}
-{{--@foreach ($data['detalle'] as $det)--}}
-{{--<tr style="background-color: #ffffff;">--}}
-{{--<td width="20%" align="center">--}}
-{{--{{ $det['nombre'] }}--}}
-{{--</td>--}}
-{{--<td width="10%" align="center">--}}
-{{--{{ $det['sku'] }}--}}
-{{--</td>--}}
-{{--<td width="20%" align="center">--}}
-{{--<img src="{{ $det['imagen'] }}"/>--}}
-{{--</td>--}}
-{{--<td width="10%" align="center">--}}
-{{--{{ $det['color'] }}--}}
-{{--</td>--}}
-{{--<td width="10%" align="center">--}}
-{{--{{ $det['imprenta'] }}--}}
-{{--</td>--}}
-{{--<td width="10%" align="center">--}}
-{{--{{ $det['cantidad'][0] }}--}}
-{{--</td>--}}
-{{--<td width="10%" align="center">--}}
-{{--${{ number_format($det['precio'][0], 0, ',', '.') }}--}}
-{{--</td>--}}
-{{--<td width="10%" align="center">--}}
-{{--${{ number_format($det['suma'][0], 0, ',', '.') }}--}}
-{{--</td>--}}
-{{--</tr>--}}
-{{--<?php--}}
-{{--if (empty($det['cantidad'])){--}}
-{{--?>--}}
-{{--@foreach ($det['cantidad'] as $key => $d)--}}
-{{--@if($key == 0)--}}
-
-{{--@else--}}
-{{--<tr>--}}
-{{--<td colspan="3"></td>--}}
-{{--<td width="10%" align="center">--}}
-{{--{{ $det['cantidad'][$key] }}--}}
-{{--</td>--}}
-{{--<td width="20%" align="center">--}}
-{{--${{ number_format($det['precio'][$key], 0, ',', '.') }}--}}
-{{--</td>--}}
-{{--<td width="10%" align="center">--}}
-{{--${{ number_format($det['suma'][$key], 0, ',', '.') }}--}}
-{{--</td>--}}
-{{--</tr>--}}
-{{--@endif--}}
-{{--@endforeach--}}
-{{--<?php--}}
-{{--}--}}
-{{--?>--}}
-{{--@endforeach--}}
-{{--<tr>--}}
-{{--<td colspan="6">--}}
-
-{{--</td>--}}
-{{--</tr>--}}
-{{--<tr>--}}
-{{--<td colspan="6">--}}
-
-{{--</td>--}}
-{{--</tr>--}}
-{{--<tr>--}}
-{{--<td width="50%">--}}
-
-{{--</td>--}}
-{{--<td width="50%">--}}
-{{--<table style="background-color: #ffffff;">--}}
-{{--<tr style="background-color: #ffffff;">--}}
-{{--<td width="40%">--}}
-{{--<span>--}}
-{{--Productos:--}}
-{{--</span>--}}
-{{--</td>--}}
-{{--<td width="60%">--}}
-{{--<span>--}}
-{{--${{number_format($data['total'], 0, ',', '.')}}--}}
-{{--</span>--}}
-{{--</td>--}}
-{{--</tr>--}}
-{{--@if ($data['activa_descuento'])--}}
-{{--<tr style="background-color: #ffffff;">--}}
-{{--<td width="40%">--}}
-{{--<span>--}}
-{{--Descuento:--}}
-{{--</span>--}}
-{{--</td>--}}
-{{--<td width="60%">--}}
-{{--<span>--}}
-{{--{{number_format($data['descuento'], 0, ',', '.')}}--}}
-{{--</span>--}}
-{{--</td>--}}
-{{--</tr>--}}
-{{--@endif--}}
-{{--@if ($data['activa_total'])--}}
-{{--<tr style="background-color: #ffffff;">--}}
-{{--<td width="40%">--}}
-{{--<span>--}}
-{{--Neto:--}}
-{{--</span>--}}
-{{--</td>--}}
-{{--<td width="60%">--}}
-{{--<span>--}}
-{{--${{number_format($data['neto'], 0, ',', '.')}}--}}
-{{--</span>--}}
-{{--</td>--}}
-{{--</tr>--}}
-{{--<tr style="background-color: #ffffff;">--}}
-{{--<td width="40%">--}}
-{{--<span>--}}
-{{--IVA:--}}
-{{--</span>--}}
-{{--</td>--}}
-{{--<td width="60%">--}}
-{{--<span>--}}
-{{--${{number_format($data['iva'], 0, ',', '.')}}--}}
-{{--</span>--}}
-{{--</td>--}}
-{{--</tr>--}}
-{{--<tr style="background-color: #ffffff;">--}}
-{{--<td width="40%">--}}
-{{--<span>--}}
-{{--Total:--}}
-{{--</span>--}}
-{{--</td>--}}
-{{--<td width="60%">--}}
-{{--<span>--}}
-{{--${{number_format($data['total'], 0, ',', '.')}}--}}
-{{--</span>--}}
-{{--</td>--}}
-{{--</tr>--}}
-{{--@endif--}}
-
-{{--</table>--}}
-{{--</td>--}}
-{{--</tr>--}}
-
-
+                @if($data['activa_total'])
+                    <table class="table mt-1 w-100" border="1" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <th width="43%" align="right">NETO</th>
+                            <td>${{ number_format($data['neto'], 0, ',', '.') }}</td>
+                        </tr>
+                        <tr>
+                            <th align="right">IVA</th>
+                            <td>${{ number_format($data['iva'], 0, ',', '.') }}</td>
+                        </tr>
+                        <tr>
+                            <th align="right">TOTAL</th>
+                            <td>${{ number_format($data['total'], 0, ',', '.') }}</td>
+                        </tr>
+                    </table>
+                @endif
+            </td>
+        </tr>
+    </table>
+</main>
+<footer>
+    <table class="w-100" style="font-size: 10pt">
+        <tr>
+            <th width="30%" align="left" valign="top">
+                Vendedor (a)<br>
+                {{ $data['vendedor']->name }}<br>
+                {{ $data['vendedor']->phone }}<br>
+                {{ $data['vendedor']->email }}<br>
+            </th>
+            <th width="40%" align="center" valign="top">
+                Pro-Gift Ltda<br>
+                Rut: 76.029.873-5<br>
+                Av. Rosario Sur 135 Piso 4, Las Condes<br>
+                Giro: Servicios Publicitarios<br>
+            </th>
+            <th width="30%" align="right" valign="top">
+                Datos Bancarios:<br>
+                Banco: BCI<br>
+                Cuenta Cte: Nº 45791163<br>
+                {{ "cobranza@pro-gift.cl" }}
+            </th>
+        </tr>
+    </table>
+</footer>
 </body>
 </html>

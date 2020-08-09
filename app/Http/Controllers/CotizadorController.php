@@ -226,68 +226,12 @@ class CotizadorController extends Controller
                 'imprenta' => $value['impresion'],
                 'cantidad' => $can,
                 'precio' => $pre,
-                'suma' => $sum,
-                'descuento' => $request->descuento ?? 0,
-                'neto' => $request->neto ?? 0,
-                'iva' => $request->iva ?? 0,
-                'total' => $request->total,
-                'activa_total' => isset($request->activar_totales),
-                'activa_descuento' => isset($request->activar_descuento),
+                'suma' => $sum
             ];
         }
 
         return $detalle;
     }
-
-//    /**
-//     * @param Cotizacione $cotizacion
-//     * @return array
-//     * @internal param Request $request
-//     */
-//    private function getFormattedData(Cotizacione $cotizacion)
-//    {
-//        $detalle = [];
-//        $productos = $cotizacion->detalle;
-//        foreach ($productos as $key => $value) {
-//
-//            foreach ($value['cantidad'] as $key => $cantidad) {
-//                $can[] = $cantidad;
-//            }
-//            foreach ($value['precio'] as $key => $precio) {
-//                $pre[] = $precio;
-//            }
-//            foreach ($value['suma'] as $key => $suma) {
-//                $sum[] = $suma;
-//            }
-//
-//            /** @var UploadedFile $new_file */
-//
-//            if(isset($request->producto[$key]['file_imagen'])) {
-//                $new_file = $request->producto[$key]['file_imagen'];
-//                $fileNameWithTheExtension = $new_file->getClientOriginalName();
-//                $fileName = pathinfo($fileNameWithTheExtension, PATHINFO_FILENAME);
-//                $extension = $new_file->getClientOriginalExtension();
-//                $newFileName = $fileName . '_' . time() . '.' . $extension;
-//                $new_file->storeAs('public/images/custom_products_images', $newFileName);
-//                $imagen = "/storage/images/custom_products_images/".$newFileName;
-//            }
-//            else {
-//                $imagen = $value['imagen'];
-//            }
-//
-//            $detalle[] = [
-//                'nombre' => $value['nombre'],
-//                'imagen' => $imagen,
-//                'sku' => $value['sku'],
-//                'color' => $value['color'],
-//                'imprenta' => $value['impresion'],
-//                'cantidad' => $can,
-//                'precio' => $pre,
-//                'suma' => $sum
-//            ];
-//        }
-//        return $detalle;
-//    }
 
     /**
      * @param Request $request
@@ -339,6 +283,7 @@ class CotizadorController extends Controller
     /**
      * @param Request $request
      * @param $detalle
+     * @return \Illuminate\Http\Response
      */
     private function savingPDF(Request $request, $detalle)
     {
@@ -379,17 +324,7 @@ class CotizadorController extends Controller
      */
     private function getEmailData(Request $request, $detalle)
     {
-        if (isset($request->activa_total)) {
-            $ac_total = true;
-        } else {
-            $ac_total = false;
-        }
-
-        if (isset($request->activa_descuento)) {
-            $ac_descuento = true;
-        } else {
-            $ac_descuento = false;
-        }
+        $vendedor = Auth::user();
 
         $data = [
             'nombre' => $request->nombre_cliente,
@@ -404,9 +339,11 @@ class CotizadorController extends Controller
             'iva' => $request->iva,
             'total' => $request->total,
             'tipo' => $request->tipo,
-            'activa_total' => $ac_total,
-            'activa_descuento' => $ac_descuento
+            'activa_total' => isset($request->activar_totales),
+            'activa_descuento' => isset($request->activar_descuento),
+            'vendedor' => $vendedor
         ];
+
         return $data;
     }
 }

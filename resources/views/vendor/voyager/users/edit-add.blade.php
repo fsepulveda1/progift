@@ -30,7 +30,7 @@
                         <div class="card-header bg-white border-0">
                             <div class="row align-items-center">
                                 <div class="col-8">
-                                    <h5 class="page-title" style="color: #000;height: 0px;padding-top: 15px;"> 
+                                    <h5 class="page-title" style="color: #000;height: 0px;padding-top: 15px;">
                                         {{ __('voyager::generic.'.(isset($dataTypeContent->id) ? 'edit' : 'add')).' ' }}
                                         <?php
                                             if($dataType->getTranslatedAttribute('display_name_singular') == "User"){
@@ -42,7 +42,7 @@
                                     </h5>
                                 </div>
                                 <div class="col-4 text-right">
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -68,6 +68,12 @@
                                 <label for="email">{{ __('voyager::generic.email') }}</label>
                                 <input type="email" class="form-control" id="email" name="email" placeholder="{{ __('voyager::generic.email') }}"
                                        value="{{ old('email', $dataTypeContent->email ?? '') }}">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">{{ __('Teléfono') }}</label>
+                                <input type="text" class="form-control" id="phone" name="phone" placeholder="{{ __('') }}"
+                                       value="{{ old('phone', $dataTypeContent->phone ?? '') }}">
                             </div>
 
                             <div class="form-group">

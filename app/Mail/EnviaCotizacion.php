@@ -16,7 +16,6 @@ class EnviaCotizacion extends Mailable
     /**
      * Create a new message instance.
      *
-     * @return void
      */
     public function __construct($cotizacion)
     {
@@ -30,7 +29,7 @@ class EnviaCotizacion extends Mailable
      */
     public function build()
     {
-        return $this->from('caromatiasm@gmail.com')
-                    ->view('mails.envia_cotizacion');
+        return $this->from(getenv('MAIL_FROM_ADDRESS'),getenv('MAIL_FROM_NAME'))
+            ->view('mails.envia_cotizacion');
     }
 }
