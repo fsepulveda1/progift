@@ -29,7 +29,7 @@ class EnviaCotizacion extends Mailable
      */
     public function build()
     {
-        return $this->from(getenv('MAIL_FROM_ADDRESS'),getenv('MAIL_FROM_NAME'))
+        return $this->from(config('mail.from')['address'],config('mail.from')['name'])
             ->view('mails.envia_cotizacion');
     }
 }

@@ -8,6 +8,7 @@ use App\Client;
 use App\User;
 use App\MatchRut;
 use Barryvdh\DomPDF\PDF;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use App\Mail\EnviaCotizacion;
 use App\Mail\EnviaCotizacionCliente;
@@ -164,10 +165,12 @@ class CartController extends Controller
 //            'mime' => 'application/pdf',
 //        ]);
 
-        Mail::to($client->email)->send($message);
+        Mail::to($request->email)->send($message);
 
         $messageCliente = new EnviaCotizacionCliente($data);
         Mail::to($user->email)->send($messageCliente);
+
+        \Cart::clear();
 
         return redirect()->route('cart.success');
     }

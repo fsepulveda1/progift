@@ -94,7 +94,6 @@
                                     <!-- End .product-single-filter -->
                                 </div>
                                 <!-- End .product-filters-container -->
-
                                 <div class="product-action">
                                         <div class="product-single-qty">
                                             <input class="horizontal-quantity form-control" value="100" type="number" id="quantity" name="quantity">
