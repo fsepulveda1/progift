@@ -31,7 +31,8 @@
 
     <!-- Main CSS File -->
     <link rel="stylesheet" href="/assets/css/style.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/vendor/fontawesome-free/css/all.min.css"> 
+    <link rel="stylesheet" href="/assets/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/fontawesome-free/css/all.min.css">
 </head>
 <body>
     <div class="page-wrapper">

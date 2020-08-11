@@ -53,11 +53,16 @@ class HomeController extends Controller
     }
 
     public function buscar(Request $request){
-        $q  = $request->q;
+        $textSearch  = $request->q;
+        $products = Product::with('colors', 'impresions', 'categories')->where('nombre', 'LIKE', "%{$textSearch}%")->paginate(16);
+        $lastPage = $products->lastPage();
 
-        $products = Product::with('colors', 'impresions', 'categories')->where('nombre', 'LIKE', "%{$q}%")->get();
+        if ($request->ajax()) {
+            $view = view('public.products.data',compact('products'))->render();
+            return response()->json(['html'=>$view,'lastPage'=>$lastPage]);
+        }
 
-        return view('public.products.buscar', compact('products'));
+        return view('public.products.buscar', compact('products','lastPage','textSearch'));
     }
     
 

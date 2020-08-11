@@ -58,11 +58,11 @@
                     @endforeach
             </div>
 
-            <!--
-            <div class="col-12 text-center loadmore">
-                <a href="#" class="btn btn-block btn-outline">Cargar Más ...</a>
-            </div>
-            -->
+            @if($lastPage > 1)
+                <div class="col-12 text-center loadmore">
+                    <a href="#" class="btn btn-block btn-outline" data-search="{{$textSearch}}" data-more-text="Cargar Más Productos ...">Cargar Más Productos ...</a>
+                </div>
+            @endif
         </div><!-- End .col-lg-9 -->
 
             @include('partials.cat-menu')

@@ -1,5 +1,5 @@
 /* ================================================
----------------------- Main.js ----------------- */
+ ---------------------- Main.js ----------------- */
 (function ($) {
   'use strict';
   var Porto = {
@@ -99,8 +99,8 @@
 
           // Clone and put in the header bottom for sticky header
           $('.header').find('.logo, .cart-dropdown')
-            .clone(true)
-            .prependTo(targetArea);
+              .clone(true)
+              .prependTo(targetArea);
         }
       }
 
@@ -160,7 +160,7 @@
       // Mobile Menu Toggle
       $('.mmenu-btn').on('click', function (e) {
         var $parent = $(this).closest('li'),
-          $targetUl = $parent.find('ul').eq(0);
+            $targetUl = $parent.find('ul').eq(0);
 
         if (!$parent.hasClass('open')) {
           $targetUl.slideDown(300, function () {
@@ -191,7 +191,7 @@
 
       // Init all carousel
       $('[data-toggle="owl"]').each(function () {
-        
+
         var pluginOptions = $(this).data('owl-options');
 
         if (typeof pluginOptions == 'string') {
@@ -306,15 +306,15 @@
           if ($.fn.elevateZoom) {
             $source.find('img').each(function () {
               var $this = $(this),
-                zoomConfig = {
-                  responsive: true,
-                  zoomWindowFadeIn: 350,
-                  zoomWindowFadeOut: 200,
-                  borderSize: 0,
-                  zoomContainer: $this.parent(),
-                  zoomType: 'inner',
-                  cursor: 'grab'
-                };
+                  zoomConfig = {
+                    responsive: true,
+                    zoomWindowFadeIn: 350,
+                    zoomWindowFadeOut: 200,
+                    borderSize: 0,
+                    zoomContainer: $this.parent(),
+                    zoomType: 'inner',
+                    cursor: 'grab'
+                  };
               $this.elevateZoom(zoomConfig);
             });
           }
@@ -344,7 +344,7 @@
     filterSlider: function () {
       // Slider For category pages / filter price
       var priceSlider = document.getElementById('price-slider'),
-        currencyVar = '$';
+          currencyVar = '$';
 
       // Check if #price-slider elem is exists if not return
       // to prevent error logs
@@ -386,9 +386,9 @@
           $('.count').waypoint(function () {
             $(this.element).countTo();
           }, {
-              offset: '90%',
-              triggerOnce: true
-            });
+            offset: '90%',
+            triggerOnce: true
+          });
         } else {
           $('.count').countTo();
         }
@@ -397,7 +397,7 @@
         // Get the data-to value and add it to element
         $('.count').each(function () {
           var $this = $(this),
-            countValue = $this.data('to');
+              countValue = $this.data('to');
           $this.text(countValue);
         });
       }
@@ -629,18 +629,27 @@
       $loadButton.click(function (e) {
         page ++;
         e.preventDefault();
-        $(this).text('Loading ...');
+        $(this).text('Cargando ...');
+        var searchText = $loadButton.data('search');
+        var url = '?page=' + page;
+        if(searchText) {
+           url = '?page='+page+'&q='+searchText;
+        }
+
         $.ajax({
-          url: '?page=' + page,
+          url: url,
           success: function (result) {
             var $newItems = $(result.html);
             if(result.lastPage == page) {
               $loadButton.hide();
             }
-            setTimeout(function () {
-              $newItems.appendTo('.product-ajax-grid').fadeIn();
-              $loadButton.text('Load More');
-            }, 350);
+
+            var latestScroll = $(window).scrollTop();
+            $newItems.hide().insertAfter($('.product-ajax-grid').last()).fadeIn();
+            $loadButton.text($loadButton.data('more-text'));
+
+            $(window).scrollTop(latestScroll);
+
           },
           failure: function () {
             $loadButton.text("Sorry something went wrong.");
@@ -721,7 +730,7 @@
                   $('.sticky-header.fixed').css('margin-right', newMargin);
                   $('.sticky-header.fixed-nav').css('margin-right', newMargin);
                   $('#scroll-top').css('margin-right', newMargin);
-                }              
+                }
               }
             },
             ajax: {
@@ -746,11 +755,11 @@
       });
       $('.modal#addCartModal').on('hidden.bs.modal', function(e){
         if($('.sticky-header.fixed').css('margin-right') && !Porto.mobile) {
-        var newMargin = Number($('.sticky-header.fixed').css('margin-right').slice(0, -2))-17+'px';
+          var newMargin = Number($('.sticky-header.fixed').css('margin-right').slice(0, -2))-17+'px';
 
-        $('.sticky-header.fixed').css('margin-right', newMargin);
-        $('.sticky-header.fixed-nav').css('margin-right', newMargin);
-        $('#scroll-top').css('margin-right', newMargin);
+          $('.sticky-header.fixed').css('margin-right', newMargin);
+          $('.sticky-header.fixed-nav').css('margin-right', newMargin);
+          $('#scroll-top').css('margin-right', newMargin);
         }
       })
     },

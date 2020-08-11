@@ -85,30 +85,45 @@ class CategoriesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $category = Category::find($id);
 
         $products = Product::whereHas('categories', function ($query) use ($id) {
             $query->where('id', '=', $id);
-        })->get();
+        })->paginate(16);
+        $lastPage = $products->lastPage();
 
-        return view('public.categories.show', compact('category', 'products'));
+        if ($request->ajax()) {
+            $view = view('public.products.data',compact('products'))->render();
+            return response()->json(['html'=>$view,'lastPage'=>$lastPage]);
+        }
+
+
+        return view('public.categories.show', compact('category', 'products','lastPage'));
     }
 
     /**
      * Display the specified resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function showDestacados()
+    public function showDestacados(Request $request)
     {
-        $products = Product::where('destacado',1)->orderBy('nombre','ASC')->get();
+        $products = Product::where('destacado',1)->orderBy('nombre','ASC')->paginate(16);
+        $lastPage = $products->lastPage();
 
-        return view('public.categories.showDestacados', compact('products'));
+        if ($request->ajax()) {
+            $view = view('public.products.data',compact('products'))->render();
+            return response()->json(['html'=>$view,'lastPage'=>$lastPage]);
+        }
+
+        return view('public.categories.showDestacados', compact('products','lastPage'));
     }
 
     /**

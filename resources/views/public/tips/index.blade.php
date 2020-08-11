@@ -43,7 +43,7 @@
                     </div>
                     @if($lastPage > 1)
                         <div class="col-12 text-center loadmore">
-                            <a href="#" class="btn btn-block btn-outline">Cargar Más ...</a>
+                            <a href="#" class="btn btn-block btn-outline" data-more-text="Cargar Más ...">Cargar Más ...</a>
                         </div>
                     @endif
                 </div><!-- End .col-lg-9 -->

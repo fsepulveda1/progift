@@ -21,7 +21,7 @@ class ProductsController extends Controller
     public function index()
     {
         $products = Product::orderBy('id', 'desc')
-                    ->get();
+            ->get();
 
         return view('admin.products.index', ['products' => $products]);
     }
@@ -95,7 +95,15 @@ class ProductsController extends Controller
     public function show($id)
     {
         $product = Product::with('colors', 'impresions', 'categories')->find($id);
-        $products = Product::find($id)->get();
+        $ids = array_map(function($item){ return $item['id']; },$product->categories->toArray());
+        $productId = $product->id;
+
+        $products = Product::join('product_category', function ($join) use ($ids,$productId) {
+            $join->on('product_category.product_id', '=', 'products.id')
+                ->whereIn('product_category.category_id', $ids)
+                ->where('product_category.product_id','<>',$productId);
+        })
+            ->take(8)->get();
 
         return view('public.products.show', compact('product', 'products'));
     }
