@@ -61,7 +61,7 @@
                 <div class="container">
                     <div class="header-left">
                         <a href="{{ url('/') }}" class="logo">
-                            <img src="/assets/images/logo_pro-gift_chico.png" alt="Porto Logo">
+                            <img src="/assets/images/logo_pro-gift_chico.png" alt="Logo Pro-Gift">
                         </a>
                     </div><!-- End .header-left -->
 
@@ -103,7 +103,7 @@
                                             
                                                 <div class="product-details">
                                                     <h4 class="product-title">
-                                                        <a href="detalle-producto.html">{{$item->name}}</a>
+                                                        <a href="/products/{{$item->id}}">{{$item->name}}</a>
                                                     </h4>
 
                                                     <span class="cart-product-info">

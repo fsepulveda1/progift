@@ -82,26 +82,13 @@
                                 </td>
                                 <td>{{$item->attributes->color}}</td>
                                 <td>
-                                    <input class="vertical-quantity form-control" value="{{ $item->quantity}}" type="text" onchange="myChangeFunction(this, document.getElementById('quantity-{{ $item->id}}'))">
-                                    <!--
-                                    <form action="{{ route('cart.update') }}" method="POST" style="margin-bottom: -6px;">
-                                    {{ csrf_field() }}
-                                        <div class="form-group row">
-                                            <input type="hidden" value="{{ $item->id}}" id="id" name="id">
-                                            <input type="text" onchange="myChangeFunction(this, document.getElementById('quantity-{{ $item->id}}'))" class="vertical-quantity form-control" value="{{ $item->quantity }}"
-                                                id="quantity" name="quantity" style="width: 70px; margin-right: 10px;">
-                                            <button class="btn btn-link" style="margin-right: 25px;"><i class="fa fa-edit"></i></button>
-                                        </div>
-                                    </form>
-                                    -->
+                                    <input class="vertical-quantity form-control" value="{{ $item->quantity}}" type="number" onchange="myChangeFunction(this, document.getElementById('quantity-{{ $item->id}}'))">
                                 </td>
                                 <td>{{$item->attributes->impresion}}</td>
                             </tr>
                             <tr class="product-action-row">
                                 <td colspan="5" class="clearfix">
                                     <div class="float-right">
-                                        <!--<a href="#" title="Editar" class="btn-edit"><span class="sr-only">Editar</span><i class="icon-pencil"></i></a>-->
-                                        <!--<a href="#" title="Remover" class="btn-remove"><span class="sr-only">Remover</span></a>-->
                                         <form action="{{ route('cart.update') }}" method="POST">
                                             {{ csrf_field() }}
                                             <input type="hidden" value="{{ $item->id}}" id="id" name="id">
@@ -195,59 +182,11 @@
 
     <div class="mb-6"></div><!-- margin -->
 </main><!-- End .main -->
-<script>
-    function checkRut(rut) {
-    // Despejar Puntos
-    var valor = rut.value.replace('.','');
-    // Despejar Guión
-    valor = valor.replace('-','');
-    
-    // Aislar Cuerpo y Dígito Verificador
-    cuerpo = valor.slice(0,-1);
-    dv = valor.slice(-1).toUpperCase();
-    
-    // Formatear RUN
-    rut.value = cuerpo + '-'+ dv
-    
-    // Si no cumple con el mínimo ej. (n.nnn.nnn)
-    if(cuerpo.length < 7) { rut.setCustomValidity("RUT Incompleto"); return false;}
-    
-    // Calcular Dígito Verificador
-    suma = 0;
-    multiplo = 2;
-    
-    // Para cada dígito del Cuerpo
-    for(i=1;i<=cuerpo.length;i++) {
-    
-        // Obtener su Producto con el Múltiplo Correspondiente
-        index = multiplo * valor.charAt(cuerpo.length - i);
-        
-        // Sumar al Contador General
-        suma = suma + index;
-        
-        // Consolidar Múltiplo dentro del rango [2,7]
-        if(multiplo < 7) { multiplo = multiplo + 1; } else { multiplo = 2; }
-  
-    }
-    
-    // Calcular Dígito Verificador en base al Módulo 11
-    dvEsperado = 11 - (suma % 11);
-    
-    // Casos Especiales (0 y K)
-    dv = (dv == 'K')?10:dv;
-    dv = (dv == 0)?11:dv;
-    
-    // Validar que el Cuerpo coincide con su Dígito Verificador
-    if(dvEsperado != dv) { rut.setCustomValidity("RUT no válido"); return false; }
-    
-    // Si todo sale bien, eliminar errores (decretar que es válido)
-    rut.setCustomValidity('');
-}
-</script>
+
 <script type="text/javascript">
     function myChangeFunction(input1, devol) {
-      //var input2 = document.getElementById('devol');
       devol.value = input1.value;
     }
 </script>
+<script src="/js/custom.js"></script>
 @endsection
