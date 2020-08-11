@@ -179,18 +179,41 @@ class CartController extends Controller
         $result = DB::select("select vendedor from match_ruts where rut = '{$rut}' ORDER BY id desc;");
 
         if(empty($result)){
-            $count = User::where('role_id', 2)->count();
-            $rand = rand(0,$count);
-            $result = DB::select("select email from users ORDER BY id desc;");
+
+            $lastId = 0;
+            $lastUser = User::where(['role_id'=>2,'flag'=>1])->first();
+            if($lastUser) {
+                $lastUser->flag = 0;
+                $lastUser->save();
+                $lastId = $lastUser->id;
+            }
+
+            $users = User::where([
+                ['role_id',2],
+                ['id','<>',$lastId]
+            ])->orderBy('id','asc')->get();
+
+            foreach($users as $user) {
+                if($user->id > $lastId) {
+                    $newUser = $user;
+                    break;
+                }
+            }
+            if(!$newUser) {
+                $newUser = $users[0];
+            }
+
+            $newUser->flag = 1;
+            $newUser->save();
 
             $insertData = array(
                 "rut" => $rut,
-                "vendedor" => $result[$rand]->email,
+                "vendedor" => $newUser->email,
                 "estado" => 1,
                 "procedencia" => 'Web');
             MatchRut::insertData($insertData);
 
-            return $result[$rand]->email;
+            return $newUser->email;
         }else{
             return $result[0]->vendedor;
         }
