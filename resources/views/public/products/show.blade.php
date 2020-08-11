@@ -86,7 +86,7 @@
                                     <div class="product-single-filter">
                                         <select id="impresion" name="impresion">
                                             <option disabled selected>Tipo de impresión</option>
-                                            @foreach($product->impresions as $impresion)
+                                            @foreach($impresions as $impresion)
                                             <option value="{{$impresion->nombre}}">{{$impresion->nombre}}</option>
                                             @endforeach
                                         </select>
@@ -111,7 +111,7 @@
                                                 </button>
                                             </div>
                                         </div>
-                                   
+
                                 </div>
                             </form>
                                 <!-- End .product-action -->
@@ -128,9 +128,9 @@
                 <div class="featured-section pt-sm bg-white">
                     <h2 class="carousel-title">ARTÍCULOS RELACIONADOS</h2>
                     <div class="product-intro">
-                        <div class="product-default col-sm-12 col-md-12">
                             @foreach($products as $pro)
-                                <div class="product-details" style="display: inline-flex;">
+                            <div class="product-default col-sm-6 col-md-3">
+                            <div class="product-details" style="display: inline-flex;">
                                     <figure>
                                         <a href="/products/{{$pro->id}}">
                                             <?php $images = json_decode($pro->imagen); ?>
@@ -161,8 +161,9 @@
                                         </a>
                                     </div>
                                 </div><!-- End .product-details -->
-                            @endforeach
-                        </div>
+                            </div>
+
+                        @endforeach
                     </div>
                 </div>
                 <!-- End .featured-section -->

@@ -95,7 +95,4 @@ class HomeController extends Controller
         return view('public.nuestra-empresa.index');
     }
 
-
-
-    
 }

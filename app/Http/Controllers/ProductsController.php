@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Impresion;
 use DB;
 use App\Product;
 use App\Category;
@@ -94,7 +95,8 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        $product = Product::with('colors', 'impresions', 'categories')->find($id);
+        $product = Product::with('colors', 'categories')->find($id);
+        $impresions = Impresion::all()->sortBy('orden');
         $ids = array_map(function($item){ return $item['id']; },$product->categories->toArray());
         $productId = $product->id;
 
@@ -105,7 +107,7 @@ class ProductsController extends Controller
         })
             ->take(8)->get();
 
-        return view('public.products.show', compact('product', 'products'));
+        return view('public.products.show', compact('product', 'products','impresions'));
     }
 
     /**

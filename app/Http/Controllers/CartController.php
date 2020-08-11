@@ -5,6 +5,8 @@ use App\Product;
 use App\Category;
 use App\Cotizacione;
 use App\Client;
+use App\ProductQuotationCount;
+use App\ProductsQuotationCount;
 use App\User;
 use App\MatchRut;
 use Barryvdh\DomPDF\PDF;
@@ -101,6 +103,7 @@ class CartController extends Controller
                 'descripcion' => $item->model->descripcion_larga,
                 'product_id' => $item->model->id
             ];
+            $this->incrementProductCount($item);
         }
 
         $client = Client::where('rut', $request->rut)->first();
@@ -173,6 +176,17 @@ class CartController extends Controller
         \Cart::clear();
 
         return redirect()->route('cart.success');
+    }
+
+    public function incrementProductCount($item) {
+        $productCount = ProductQuotationCount::where('product_id',$item->model->id)->first();
+
+        if(!$productCount) {
+            $productCount = new ProductQuotationCount();
+            $productCount->product_id = $item->model->id;
+        }
+        $productCount->count ++;
+        $productCount->save();
     }
 
     public function matchRut($rut){
