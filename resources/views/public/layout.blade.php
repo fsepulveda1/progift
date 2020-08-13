@@ -157,8 +157,6 @@
         </div><!-- End .header-bottom -->
     </header><!-- End .header -->
 
-
-
     @yield('content')
 
     <footer class="footer">
@@ -169,21 +167,12 @@
                         <div class="widget widget-newsletter">
                             <h4 class="widget-title">NEWSLETTER</h4>
 
-                            @if(session()->has('news_msg'))
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    {{ session()->get('news_msg') }}
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                </div>
-                            @endif
                             <form action="{{ route('home.suscribe') }}" method="POST">
                                 {{ csrf_field() }}
                                 <input type="email" class="form-control" name="email" placeholder="Ingresa aquí tu correo" required>
                                 <input type="hidden" value="1" name="estado"/>
                                 <input type="submit" class="btn" value="SUSCRIBIRSE">
                             </form>
-
 
                         </div><!-- End .widget -->
                     </div><!-- End .col-lg-12 -->
@@ -299,6 +288,7 @@
 
 <!-- www.addthis.com share plugin -->
 <script src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b927288a03dbde6"></script>
+<script src="/js/custom.js"></script>
 
 </body>
 </html>

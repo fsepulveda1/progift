@@ -145,23 +145,23 @@
 														</div>
 													</div>
 													<div class="row">
-														<div class="col-lg-3">
+														<div class="col-lg-4">
 															<div class="form-group">
 																<label class="form-control-label" for="input-country">Imágen</label>
 																<div class="custom-file">
 																	<div class="file-widget @if( !empty($d['imagen'])) hide @endif">
-																		<input type="file" class="custom-file-input" name="producto[0][file_imagen]" lang="es">
+																		<input type="file" class="custom-file-input" value="{{$d['imagen']}}" name="producto[{{$cnt}}][file_imagen]" lang="es">
 																		<label class="custom-file-label text-left">Foto</label>
 																	</div>
-																	<input type="hidden" name="producto[0][imagen]" id="imagen" class="himagen"/>
+																	<input type="hidden" name="producto[{{$cnt}}][imagen]" id="imagen" class="himagen"/>
 																	<img src="{{$d['imagen']}}" class="imagen" style="width: 65px;"/>
 																</div>
 															</div>
 														</div>
-														<div class="col-lg-9">
+														<div class="col-lg-8">
 															<div class="form-group">
 																<label class="form-control-label" for="descripcion">Descripción</label>
-																<textarea name="producto[0][descripcion]" id="descripcion" class="form-control form-control-alternative desciprion" rows="2">@if(isset($d['descripcion'])){{$d['descripcion']}}@endif</textarea>
+																<textarea name="producto[{{$cnt}}][descripcion]" id="descripcion" class="form-control form-control-alternative desciprion" rows="2">@if(isset($d['descripcion'])){{$d['descripcion']}}@endif</textarea>
 															</div>
 														</div>
 													</div>

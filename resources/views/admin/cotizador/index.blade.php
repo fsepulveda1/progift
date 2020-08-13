@@ -140,7 +140,7 @@
 													</div>
 												</div>
 												<div class="row">
-													<div class="col-lg-3">
+													<div class="col-lg-4">
 														<div class="form-group">
 															<label class="form-control-label" for="input-country">Imágen</label>
 															<div class="custom-file">
@@ -153,7 +153,7 @@
 															</div>
 														</div>
 													</div>
-													<div class="col-lg-9">
+													<div class="col-lg-8">
 														<div class="form-group">
 															<label class="form-control-label" for="descripcion">Descripción</label>
 															<textarea name="producto[0][descripcion]" id="descripcion" class="form-control form-control-alternative descripcion" rows="2"></textarea>
@@ -301,7 +301,6 @@
 		</div>
 	</div>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
 	<script src="/assets_admin/js/cotizations.js" type="text/javascript"></script>
 @endsection

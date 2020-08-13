@@ -8,6 +8,7 @@ use DB;
 use App\Category;
 use App\Contacto;
 use App\Newsletter;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -64,22 +65,46 @@ class HomeController extends Controller
 
         return view('public.products.buscar', compact('products','lastPage','textSearch'));
     }
-    
+
 
     public function contacto(Request $request){
 
         if($request->isMethod('post')){
+
+            $this->validate($request, [
+                'empresa' => 'required|max:100',
+                'rut' => 'required|max:12',
+                'contacto' => 'required|max:50',
+                'telefono' => 'required|max:20',
+                'email' => 'required|max:50|email',
+                'comentarios' => 'required|max:1000',
+            ], [
+                'required' => 'El campo :attribute es requerido',
+                'max' => 'El campo :attribute permite un máximo de :max caracteres',
+                'email' => 'El :attribute ingresado no es válido',
+            ]);
+
             Contacto::create($request->all());
 
-            return view('public.contacto.index')->with('success_msg', 'Hemos recibido su información, pronto nos contactaremos con usted.');
-        }else{
+            Session::flash('success_msg', 'Hemos recibido su información, pronto nos contactaremos con usted.');
+            return view('public.contacto.index');
+
+        } else {
             return view('public.contacto.index');
         }
-        
+
     }
 
     public function suscribe(Request $request){
         if($request->isMethod('post')){
+
+            $this->validate($request, [
+                'email' => 'required|max:100',
+            ], [
+                'required' => 'El campo :attribute es requerido',
+                'max' => 'El campo :attribute permite un máximo de :max caracteres',
+            ]);
+
             Newsletter::create($request->all());
 
             return back()->with('news_msg', 'Suscrito correctamente.');

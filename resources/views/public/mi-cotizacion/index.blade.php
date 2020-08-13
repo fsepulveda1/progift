@@ -188,5 +188,4 @@
       devol.value = input1.value;
     }
 </script>
-<script src="/js/custom.js"></script>
 @endsection
