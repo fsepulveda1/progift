@@ -62,10 +62,12 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/cotiza/nueva/guarda', 'CotizadorController@soloStore')->middleware('admin.user')->name('admin.cotizaGuarda');
     Route::post('/cotiza', 'CotizadorController@store')->middleware('admin.user')->name('admin.cotiza');
     Route::post('/genera', 'CotizadorController@genera')->middleware('admin.user')->name('admin.genera');
+    Route::get('/genera', 'CotizadorController@generateFromDB')->middleware('admin.user')->name('admin.genera');
     Route::get('/pdf', 'CotizadorController@pdf')->middleware('admin.user')->name('admin.pdf');
 
     Route::get('/import', 'ImportController@getImport')->name('import');
     Route::post('/import_parse', 'ImportController@parseImport')->name('import_parse');
     Route::post('/import_process', 'ImportController@processImport')->name('import_process');
     Route::post('/uploadFile', 'ImportController@uploadFile')->name('importa');
+    Route::get('/change/status','CotizadorController@changeStatus')->name('admin.change_status');
 });

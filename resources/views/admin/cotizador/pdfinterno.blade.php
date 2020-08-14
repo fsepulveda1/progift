@@ -67,8 +67,8 @@
     <table class="w-100" style="margin: 2rem 0; font-size: 10pt">
         <tr>
             <th align="left" valign="top" style="font-weight: bold">
-                {{$data['nombre']}}<br>
-                {{$data['empresa']}}<br>
+                {{ $client->contacto }}<br>
+                {{ $client->nombre }}<br>
                 Presente
             </th>
             <th align="right" valign="top">
@@ -86,16 +86,16 @@
             <th width="15%">TOTAL<br> (SIN IVA)</th>
         </tr>
 
-        @foreach ($data['detalle'] as $det)
+        @foreach (json_decode($data['detalle']) as $det)
             <tr>
                 <td valign="top">
-                    {{$det['nombre']}}<br>
-                    {!! $det['descripcion'] !!}
+                    {{ $det->nombre }}<br>
+                    {!! $det->descripcion !!}
                 </td>
-                <td align="center" valign="top"><img src="{{ asset($det['imagen'])}}" width="100px"></td>
-                <td align="center" valign="top">{{$det['cantidad'][0]}}</td>
-                <td align="center" valign="top">${{number_format($det['precio'][0], 0, ',', '.')}}</td>
-                <td align="center" valign="top">${{number_format($det['suma'][0], 0, ',', '.')}}</td>
+                <td align="center" valign="top"><img src="{{ asset($det->imagen)}}" width="100px"></td>
+                <td align="center" valign="top">{{$det->cantidad[0]}}</td>
+                <td align="center" valign="top">${{number_format($det->precio[0], 0, ',', '.')}}</td>
+                <td align="center" valign="top">${{number_format($det->suma[0], 0, ',', '.')}}</td>
             </tr>
         @endforeach
 
@@ -148,9 +148,9 @@
         <tr>
             <th width="30%" align="left" valign="top">
                 Vendedor (a)<br>
-                {{ $data['vendedor']->name }}<br>
-                {{ $data['vendedor']->phone }}<br>
-                {{ $data['vendedor']->email }}<br>
+                {{ $user->name }}<br>
+                {{ $user->phone }}<br>
+                {{ $user->email }}<br>
             </th>
             <th width="40%" align="center" valign="top">
                 Pro-Gift Ltda<br>

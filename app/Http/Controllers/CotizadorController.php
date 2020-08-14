@@ -19,16 +19,24 @@ use Illuminate\Support\Facades\Auth;
 
 class CotizadorController extends Controller
 {
-    public function index()
-    {
+    public function index() {
         $user_avatar = false;
         $colors = json_encode(Color::all('nombre')->toArray());
         $impresions = json_encode(Impresion::all('nombre')->toArray());
         return view('admin/cotizador.index', compact('user_avatar','colors','impresions'));
     }
 
-    public function edit($id)
-    {
+    public function changeStatus(Request $request) {
+        $cotizacion = Cotizacione::where('id', $request->id)->first();
+        if($cotizacion) {
+            $cotizacion->estado = $cotizacion->estado ? 0 : 1;
+            $cotizacion->save();
+        }
+
+        return back()->with('success','Cotización marcada como enviada al cliente');
+    }
+
+    public function edit($id) {
         $user_avatar = false;
 
         $cotizacion = Cotizacione::where('id', $id)->first();
@@ -39,8 +47,7 @@ class CotizadorController extends Controller
         return view('admin/cotizador.edit', compact('user_avatar', 'cotizacion', 'cliente','colors','impresions'));
     }
 
-    public function busca(Request $request)
-    {
+    public function busca(Request $request) {
         $result = DB::select("select id, nombre AS name, descripcion_larga as descripcion, precio, imagen, sku from products where nombre LIKE '%{$request->input('query')}%'");
         foreach ($result as $key => $rs) {
             $colors = DB::select("select c.nombre from product_color pc inner join colors c on pc.color_id = c.id where pc.product_id = ".$rs->id);
@@ -50,21 +57,11 @@ class CotizadorController extends Controller
         return response()->json($result);
     }
 
-    public function guarda(Request $request)
-    {
-        $detalle = $this->getProductsArrayFromRequest($request);
-
+    public function guarda(Request $request) {
+        $user_id = Auth::user()->id;
         $client = $this->createClientIfNotExist($request);
-
-        $this->updatingCotization($request, $detalle, $client);
-
-        $data = $this->getEmailData($request, $detalle);
-
-        $view = \View::make('admin/cotizador.pdfinterno',compact('data'));
-        $html = $view->render();
-
-        //TODO GENERAR PDF??
-
+        $data = $this->formatingArrayFromRequest($request,$client,$user_id);
+        $this->updatingCotization($data,$request->id);
 
         return back()->with([
             'message'    => 'Cotización editada correctamente, Fue guardada con el mismo ID y puede verificar los datos en la sección Cotizaciones',
@@ -72,15 +69,11 @@ class CotizadorController extends Controller
         ]);
 
     }
-    public function guardaNueva(Request $request)
-    {
-        $detalle = $this->getProductsArrayFromRequest($request);
-
+    public function guardaNueva(Request $request) {
+        $user_id = Auth::user()->id;
         $client = $this->createClientIfNotExist($request);
-
-        $this->savingCotization($request, $detalle, $client);
-
-        $this->savingPDF($request, $detalle);
+        $data = $this->formatingArrayFromRequest($request,$client,$user_id);
+        $this->savingCotization($data);
 
         return back()->with([
             'message'    => 'Cotización creada correctamente, puede verificar los datos en la sección Cotizaciones',
@@ -89,35 +82,19 @@ class CotizadorController extends Controller
 
     }
 
-    public function guardaEnvia(Request $request)
-    {
-
-        $detalle = $this->getProductsArrayFromRequest($request);
-
+    public function guardaEnvia(Request $request) {
+        $user = Auth::user();
         $client = $this->createClientIfNotExist($request);
+        $data = $this->formatingArrayFromRequest($request,$client,$user->id);
+        $this->updatingCotization($data,$request->id);
 
-        $data = $this->getEmailData($request, $detalle);
+        $emailData = $this->getEmailData($request,$user);
+        $pdfname = 'Pro-Gift_'.urlencode($request->nombre_cliente).date("Y-m-d").'.pdf';
+        $pdf = $this->getPDFOutput($data,$client,$user);
 
-        $cotizacion = Cotizacione::where('id', $request->id)->update([
-            'validez' => $request->validez,
-            'forma_pago' => $request->forma_pago,
-            'entrega' => $request->plazo,
-            'detalle' => json_encode($detalle),
-            'descuento' => $request->descuento,
-            'neto' => $request->neto,
-            'iva' => $request->iva,
-            'total' => $request->total,
-            'client_id' => $client->id,
-            'user_id' => Auth::user()->id,
-            'pdf' => '/cotizacion/Pro-Gift_'.urlencode($request->nombre_cliente).date("Y-m-d").'.pdf',
-            'tipo' => $request->tipo,
-            'estado' => 1
-        ]);
+        $message = new EnviaCotizacion($emailData);
+        $message->attachData($pdf, $pdfname);
 
-        $this->savingPDF($request,$detalle);
-
-        $message = new EnviaCotizacion($data);
-        $message->attachData(PDF::Output('Pro-Gift_'.urlencode($request->nombre_cliente).date("Y-m-d").'.pdf', 'S'), 'Pro-Gift_'.urlencode($request->nombre_cliente).date("Y-m-d").'.pdf');
         Mail::to($request->email)->send($message);
 
         return back()->with([
@@ -127,23 +104,20 @@ class CotizadorController extends Controller
 
     }
 
-    public function store(Request $request)
-    {
-        $detalle = $this->getProductsArrayFromRequest($request);
-
+    public function store(Request $request) {
+        $user = Auth::user();
         $client = $this->createClientIfNotExist($request);
+        $data = $this->formatingArrayFromRequest($request,$client,$user->id);
 
-        $this->savingCotization($request,$detalle, $client);
+        $this->savingCotization($data);
 
-        $data = $this->getEmailData($request, $detalle);
+        $emailData = $this->getEmailData($request,$user);
+        $pdfname = 'Pro-Gift_'.urlencode($request->nombre_cliente).date("Y-m-d").'.pdf';
+        $pdf = '';
 
-        $view = \View::make('admin/cotizador.pdfinterno',compact('data'));
-        $html = $view->render();
+        $message = new EnviaCotizacion($emailData);
+        $message->attachData($pdf, $pdfname);
 
-        //TODO GENERAR PDF??
-
-        $message = new EnviaCotizacion($data);
-        $message->attachData(PDF::Output('Pro-Gift_'.urlencode($request->nombre_cliente).date("Y-m-d").'.pdf', 'S'), 'Pro-Gift_'.urlencode($request->nombre_cliente).date("Y-m-d").'.pdf');
         Mail::to($request->email)->send($message);
 
         return back()->with([
@@ -153,28 +127,44 @@ class CotizadorController extends Controller
 
     }
 
-    public function soloStore(Request $request)
-    {
-        $detalle = $this->getProductsArrayFromRequest($request);
-
+    public function soloStore(Request $request) {
+        $user_id = Auth::user()->id;
         $client = $this->createClientIfNotExist($request);
-
-        $cotizacion = $this->savingCotization($request, $detalle, $client);
-
-        $this->savingPDF($request,$detalle);
+        $data = $this->formatingArrayFromRequest($request,$client,$user_id);
+        $cotizacion = $this->savingCotization($data);
 
         $id = $cotizacion->id;
 
         return redirect('/admin/cotizador/editar/'.$id);
     }
 
-    public function genera(Request $request){
-
-        $detalle = $this->getProductsArrayFromRequest($request);
+    public function genera(Request $request) {
+        $user = Auth::user();
+        $client = $this->createClientIfNotExist($request);
+        $data = $this->formatingArrayFromRequest($request,$client,$user->id);
 
         $this->createClientIfNotExist($request);
 
-        return $this->savingPDF($request, $detalle);
+        return $this->getPDF($data,$client,$user);
+    }
+
+    public function generateFromDB(Request $request) {
+        $cotizacion = Cotizacione::with('client','user')->where(['id'=>$request->get('id')])->first();
+
+        $data  = [
+            'detalle' => $cotizacion->detalle,
+            'validez' => $cotizacion->validez,
+            'forma_pago' => $cotizacion->forma_pago,
+            'entrega' => $cotizacion->plazo,
+            'descuento' => $cotizacion->descuento,
+            'neto' => $cotizacion->neto,
+            'iva' => $cotizacion->iva,
+            'total' => $cotizacion->total,
+            'activa_total'=>$cotizacion->activa_total,
+            'activa_descuento'=>$cotizacion->activa_descuento,
+        ];
+
+        return $this->getPDF($data,$cotizacion->client,$cotizacion->user);
     }
 
     public function pdf(){
@@ -183,10 +173,117 @@ class CotizadorController extends Controller
 
     /**
      * @param Request $request
+     * @return mixed
+     */
+    private function createClientIfNotExist(Request $request) {
+        $client = Client::where('rut', $request->rut)->first();
+
+        if (!$client) {
+            $client = Client::create([
+                'nombre' => $request->empresa,
+                'rut' => $request->rut,
+                'contacto' => $request->nombre_cliente,
+                'telefono' => 0,
+                'email' => $request->email,
+                'comentarios' => 'Vía cotizador'
+            ]);
+            return $client;
+        }
+        return $client;
+    }
+
+    /**
+     * @param $data
+     * @return mixed
+     */
+    private function savingCotization($data) {
+        $cotizacion = Cotizacione::create($data);
+        return $cotizacion;
+    }
+
+    /**
+     * @param $data
+     * @param $id
+     */
+    private function updatingCotization($data,$id) {
+        Cotizacione::where('id', $id)->update($data);
+    }
+
+    /**
+     * @param $data
+     * @return \Illuminate\Http\Response
+     */
+    private function getPDF($data, $client,$user) {
+        /** @var PDF $pdf */
+        $pdf = app('dompdf.wrapper');
+        $pdf = $pdf->loadView('admin/cotizador.pdfinterno', ['data'=>$data,'client'=>$client,'user'=>$user]);
+        return $pdf->stream('archivo.pdf');
+    }
+
+
+    private function getPDFOutput($data,$client,$user) {
+
+        /** @var PDF $pdf */
+        $pdf = app('dompdf.wrapper');
+        $pdf = $pdf->loadView('admin/cotizador.pdfinterno', ['data'=>$data,'client'=>$client,'user'=>$user]);
+        return $pdf->output();
+    }
+
+    private function formatingArrayFromRequest(Request $request, $client, $user_id) {
+
+        $detalle = $this->getProductsArrayFromRequest($request);
+
+        return [
+            'validez' => $request->validez,
+            'forma_pago' => $request->forma_pago,
+            'entrega' => $request->plazo,
+            'detalle' => json_encode($detalle),
+            'descuento' => $request->descuento,
+            'neto' => $request->neto,
+            'iva' => $request->iva,
+            'total' => $request->total,
+            'client_id' => $client->id,
+            'user_id' => $user_id,
+            'tipo' => isset($request->tipo) ? $request->tipo : 'normal',
+            'activa_total'=>isset($request->activar_totales),
+            'activa_descuento'=>isset($request->activar_descuento),
+        ];
+    }
+
+    /**
+     * @param Request $request
      * @return array
      */
-    private function getProductsArrayFromRequest(Request $request)
+    private function getEmailData(Request $request, $user)
     {
+        $detalle = $this->getProductsArrayFromRequest($request);
+
+        $data = [
+            'nombre' => $request->nombre_cliente,
+            'validez' => $request->validez,
+            'empresa' => $request->empresa,
+            'forma_pago' => $request->forma_pago,
+            'email' => $request->email,
+            'entrega' => $request->plazo,
+            'detalle' => $detalle,
+            'descuento' => $request->descuento,
+            'neto' => $request->neto,
+            'iva' => $request->iva,
+            'total' => $request->total,
+            'tipo' => isset($request->tipo) ? $request->tipo : 'normal',
+            'activa_total' => isset($request->activar_totales),
+            'activa_descuento' => isset($request->activar_descuento),
+            'vendedor' => $user
+        ];
+
+        return $data;
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    private function getProductsArrayFromRequest(Request $request) {
         $detalle = [];
         $producto = $request->producto;
         foreach ($producto as $key => $value) {
@@ -231,119 +328,5 @@ class CotizadorController extends Controller
         }
 
         return $detalle;
-    }
-
-    /**
-     * @param Request $request
-     * @return mixed
-     */
-    private function createClientIfNotExist(Request $request)
-    {
-        $client = Client::where('rut', $request->rut)->first();
-
-        if (!$client) {
-            $client = Client::create([
-                'nombre' => $request->empresa,
-                'rut' => $request->rut,
-                'contacto' => $request->nombre_cliente,
-                'telefono' => 0,
-                'email' => $request->email,
-                'comentarios' => 'Vía cotizador'
-            ]);
-            return $client;
-        }
-        return $client;
-    }
-
-    /**
-     * @param Request $request
-     * @param $detalle
-     * @param $client
-     * @return mixed
-     */
-    private function savingCotization(Request $request, $detalle, $client)
-    {
-        $cotizacion = Cotizacione::create([
-            'validez' => $request->validez,
-            'forma_pago' => $request->forma_pago,
-            'entrega' => $request->plazo,
-            'detalle' => json_encode($detalle),
-            'descuento' => $request->descuento,
-            'neto' => $request->neto,
-            'iva' => $request->iva,
-            'total' => $request->total,
-            'client_id' => $client->id,
-            'user_id' => Auth::user()->id,
-            'pdf' => '/cotizacion/Pro-Gift_' . urlencode($request->nombre_cliente) . date("Y-m-d") . '.pdf',
-            'tipo' => 'normal'
-        ]);
-        return $cotizacion;
-    }
-
-    /**
-     * @param Request $request
-     * @param $detalle
-     * @return \Illuminate\Http\Response
-     */
-    private function savingPDF(Request $request, $detalle)
-    {
-        $data = $this->getEmailData($request, $detalle);
-        /** @var PDF $pdf */
-        $pdf = app('dompdf.wrapper');
-        $pdf = $pdf->loadView('admin/cotizador.pdfinterno', ['data'=>$data]);
-        return $pdf->stream('archivo.pdf');
-    }
-
-    /**
-     * @param Request $request
-     * @param $detalle
-     * @param $client
-     */
-    private function updatingCotization(Request $request, $detalle, $client)
-    {
-        Cotizacione::where('id', $request->id)->update([
-            'validez' => $request->validez,
-            'forma_pago' => $request->forma_pago,
-            'entrega' => $request->plazo,
-            'detalle' => json_encode($detalle),
-            'descuento' => $request->descuento,
-            'neto' => $request->neto,
-            'iva' => $request->iva,
-            'total' => $request->total,
-            'client_id' => $client->id,
-            'user_id' => Auth::user()->id,
-            'pdf' => '/cotizacion/Pro-Gift_' . urlencode($request->nombre_cliente) . date("Y-m-d") . '.pdf',
-            'tipo' => $request->tipo
-        ]);
-    }
-
-    /**
-     * @param Request $request
-     * @param $detalle
-     * @return array
-     */
-    private function getEmailData(Request $request, $detalle)
-    {
-        $vendedor = Auth::user();
-
-        $data = [
-            'nombre' => $request->nombre_cliente,
-            'validez' => $request->validez,
-            'empresa' => $request->empresa,
-            'forma_pago' => $request->forma_pago,
-            'email' => $request->email,
-            'entrega' => $request->plazo,
-            'detalle' => $detalle,
-            'descuento' => $request->descuento,
-            'neto' => $request->neto,
-            'iva' => $request->iva,
-            'total' => $request->total,
-            'tipo' => $request->tipo,
-            'activa_total' => isset($request->activar_totales),
-            'activa_descuento' => isset($request->activar_descuento),
-            'vendedor' => $vendedor
-        ];
-
-        return $data;
     }
 }

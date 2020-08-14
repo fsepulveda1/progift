@@ -26,7 +26,11 @@
                     {{ $det['color'] }}
                 </td>
                 <td width="20%" align="center">
-                    {{ $det['cantidad'] }}
+                    @if(is_array($det['cantidad']))
+                        {{ $det['cantidad'][0] }}
+                    @else
+                        {{ $det['cantidad'] }}
+                    @endif
                 </td>
                 <td width="20%" align="center">
                     {{ $det['imprenta'] }}

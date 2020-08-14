@@ -83,12 +83,15 @@ class CartController extends Controller
         $cartCollection = \Cart::getContent();
         $IVA = \Cart::getTotalQuantity() * 0.19;
         $neto = \Cart::getTotalQuantity() - $IVA;
-        //dd($cartCollection);
+
+        if($cartCollection->isEmpty()) {
+            return back()->with('alert_msg', 'El carro esta vacío');
+        }
 
         $emailVendedor = $this->matchRut($request->rut);
         $idUser = $this->getIdUser($emailVendedor);
         $user = User::find($idUser);
-
+        $detalle = [];
         foreach ($cartCollection as $item) {
             $detalle[] = [
                 'nombre' => $item->name,
@@ -160,13 +163,6 @@ class CartController extends Controller
         ]);
 
         $message = new EnviaCotizacion($data);
-
-//        $pdf = app('dompdf.wrapper');
-//        $pdf = $pdf->loadView('admin/cotizador.pdfinterno', ['data'=>$data]);
-//        $message->attach($pdf->output(),[
-//            'as' => 'cotizacion.pdf',
-//            'mime' => 'application/pdf',
-//        ]);
 
         Mail::to($request->email)->send($message);
 

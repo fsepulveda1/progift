@@ -9,7 +9,7 @@
                 <i class="{{ $action->getIcon() }}"></i> <span class="hidden-xs hidden-sm">{{ $action->getTitle() }}</span>
             </a>
         @elseif($dataType->name == "cotizaciones" && $action->getTitle() == "Ver")
-            <a target="_blank" href="{{url('/storage'.$data->pdf)}}" title="PDF" {!! $action->convertAttributesToHtml() !!}>
+            <a target="_blank" href="{{route('admin.genera',['id'=>$data->id])}}" title="PDF" {!! $action->convertAttributesToHtml() !!}>
                 <i class="{{ $action->getIcon() }}"></i> <span class="hidden-xs hidden-sm">PDF</span>
             </a>
         @else

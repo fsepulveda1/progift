@@ -80,7 +80,7 @@ class MigrateProducts extends Command
             $newProduct = new Product();
             $newProduct->nombre = $product->Title;
             $newProduct->destacado = $product->progift_destacado;
-            $newProduct->descripcion_larga = $product->Content;
+            $newProduct->descripcion_larga = html_entity_decode($product->Content);
             $newProduct->descripcion_corta = '';
             $newProduct->sku = $product->progift_codigo ?? '-';
             $newProduct->precio = 0;
@@ -110,6 +110,7 @@ class MigrateProducts extends Command
 
             if(!empty($colors)) {
                 foreach ($colors as $colorName) {
+                    $colorName = ucwords(mb_strtolower($colorName));
 
                     $color = Color::where('nombre', html_entity_decode(trim($colorName)))->first();
 

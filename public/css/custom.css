@@ -61,9 +61,7 @@ app-container.expanded .content-container .side-menu .navbar-header .navbar-bran
 .page-title>i {
     font-size: 24px;
 }
-.voyager .panel {
-    margin: 0px 25px 22px 25px;
-}
+
 .voyager .navbar, .voyager .navbar.navbar-default {
     border-bottom: 1px solid #fff;
     box-shadow: 0 0 0;
@@ -194,6 +192,16 @@ app-container.expanded .content-container .side-menu .navbar-header .navbar-bran
 {
     .mb-xl-0, .my-xl-0 {
         margin-bottom: 0 !important;
+    }
+}
+@media (max-width: 767px) {
+    .container-fluid {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+
+    #search-input > .input-group {
+        display: table;
     }
 }
 

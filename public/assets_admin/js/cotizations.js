@@ -222,7 +222,7 @@
             '<label class="form-control-label" for="input-country">Imágen</label>'+
             '<div class="custom-file">'+
             '<div class="file-widget">'+
-            '<input type="file" class="custom-file-input" name="producto[0][file_imagen]" lang="es">' +
+            '<input type="file" class="custom-file-input" name="producto['+c+'][file_imagen]" lang="es">' +
             '<label class="custom-file-label text-left">Foto</label>' +
             '</div>' +
             '<img src="" class="imagen" style="width: 65px;"/>'+
@@ -233,7 +233,7 @@
             '<div class="col-lg-8">'+
             '<div class="form-group">'+
             '<label class="form-control-label" for="descripcion">Descripción</label>'+
-            '<textarea name="producto[0][descripcion]" id="descripcion" class="form-control form-control-alternative descripcion" rows="2"></textarea>'+
+            '<textarea name="producto['+c+'][descripcion]" id="descripcion" class="form-control form-control-alternative descripcion" rows="2"></textarea>'+
             '</div>'+
             '</div>'+
             '</div>'+

@@ -2,10 +2,6 @@
 
 
 @section('content')
-
-	<!-- Favicon -->
-	{{--<link href="/assets_admin/img/brand/favicon.png" rel="icon" type="image/png">--}}
-	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 	<!-- Icons -->
 	<link href="/assets_admin/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
@@ -271,7 +267,7 @@
 										<div class="col-lg-1">
 											<label for="example-search-input" class="form-control-label">Activar</label>
 											<label class="custom-toggle mt-2">
-												<input type="checkbox" checked name="activar_descuento">
+												<input type="checkbox" name="activar_descuento"  @if($cotizacion->activa_descuento) checked @endif>
 												<span class="custom-toggle-slider rounded-circle"></span>
 											</label>
 										</div>
@@ -291,7 +287,7 @@
 											<div class="col-lg-1">
 												<label for="example-search-input" class="form-control-label">Activar</label>
 												<label class="custom-toggle mt-2">
-													<input type="checkbox" name="activar_totales" checked>
+													<input type="checkbox" name="activar_totales" @if($cotizacion->activa_total) checked @endif>
 													<span class="custom-toggle-slider rounded-circle"></span>
 												</label>
 											</div>
