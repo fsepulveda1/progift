@@ -156,7 +156,7 @@
 													<div class="col-lg-8">
 														<div class="form-group">
 															<label class="form-control-label" for="descripcion">Descripción</label>
-															<textarea name="producto[0][descripcion]" id="descripcion" class="form-control form-control-alternative descripcion" rows="2"></textarea>
+															<textarea name="producto[0][descripcion]" id="descripcion" class="form-control form-control-alternative descripcion textarea richTextBox" rows="2"></textarea>
 														</div>
 													</div>
 												</div>

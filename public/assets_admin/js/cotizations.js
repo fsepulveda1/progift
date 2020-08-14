@@ -1,4 +1,11 @@
 (function($) {
+
+    function stripHtml(html) {
+        var tmp = document.createElement("DIV");
+        tmp.innerHTML = html;
+        return tmp.textContent || tmp.innerText || "";
+    }
+
     function initTypeAhead() {
         $('.search').typeahead({
             minLength: 2,
@@ -16,7 +23,7 @@
                 this.$element.closest('.pduct').find('.imagen').attr('src', '/storage/' + imagen);
                 this.$element.closest('.pduct').find('.himagen').val('/storage/' + imagen);
                 this.$element.closest('.pduct').find('.precio').val(args.precio);
-                this.$element.closest('.pduct').find('.descripcion').val(args.descripcion);
+                this.$element.closest('.pduct').find('.descripcion').val(stripHtml(args.descripcion));
                 this.$element.closest('.pduct').find('.sku').val(args.sku);
                 this.$element.closest('.pduct').find('.precio').val(args.precio);
                 this.$element.closest('.pduct').find('.cantidad').val(1);

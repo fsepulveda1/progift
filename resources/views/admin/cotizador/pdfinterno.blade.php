@@ -85,11 +85,12 @@
             <th width="10%">VALOR UNITARIO</th>
             <th width="15%">TOTAL<br> (SIN IVA)</th>
         </tr>
+
         @foreach ($data['detalle'] as $det)
             <tr>
                 <td valign="top">
                     {{$det['nombre']}}<br>
-                    {{$det['descripcion']}}
+                    {!! $det['descripcion'] !!}
                 </td>
                 <td align="center" valign="top"><img src="{{ asset($det['imagen'])}}" width="100px"></td>
                 <td align="center" valign="top">{{$det['cantidad'][0]}}</td>
@@ -97,90 +98,7 @@
                 <td align="center" valign="top">${{number_format($det['suma'][0], 0, ',', '.')}}</td>
             </tr>
         @endforeach
-        @foreach ($data['detalle'] as $det)
-            <tr>
-                <td valign="top">
-                    {{$det['nombre']}}<br>
-                    {{$det['descripcion']}}
-                </td>
-                <td align="center" valign="top"><img src="{{ asset($det['imagen'])}}" width="100px"></td>
-                <td align="center" valign="top">{{$det['cantidad'][0]}}</td>
-                <td align="center" valign="top">${{number_format($det['precio'][0], 0, ',', '.')}}</td>
-                <td align="center" valign="top">${{number_format($det['suma'][0], 0, ',', '.')}}</td>
-            </tr>
-        @endforeach
-        @foreach ($data['detalle'] as $det)
-            <tr>
-                <td valign="top">
-                    {{$det['nombre']}}<br>
-                    {{$det['descripcion']}}
-                </td>
-                <td align="center" valign="top"><img src="{{ asset($det['imagen'])}}" width="100px"></td>
-                <td align="center" valign="top">{{$det['cantidad'][0]}}</td>
-                <td align="center" valign="top">${{number_format($det['precio'][0], 0, ',', '.')}}</td>
-                <td align="center" valign="top">${{number_format($det['suma'][0], 0, ',', '.')}}</td>
-            </tr>
-        @endforeach
-        @foreach ($data['detalle'] as $det)
-            <tr>
-                <td valign="top">
-                    {{$det['nombre']}}<br>
-                    {{$det['descripcion']}}
-                </td>
-                <td align="center" valign="top"><img src="{{ asset($det['imagen'])}}" width="100px"></td>
-                <td align="center" valign="top">{{$det['cantidad'][0]}}</td>
-                <td align="center" valign="top">${{number_format($det['precio'][0], 0, ',', '.')}}</td>
-                <td align="center" valign="top">${{number_format($det['suma'][0], 0, ',', '.')}}</td>
-            </tr>
-        @endforeach
-        @foreach ($data['detalle'] as $det)
-            <tr>
-                <td valign="top">
-                    {{$det['nombre']}}<br>
-                    {{$det['descripcion']}}
-                </td>
-                <td align="center" valign="top"><img src="{{ asset($det['imagen'])}}" width="100px"></td>
-                <td align="center" valign="top">{{$det['cantidad'][0]}}</td>
-                <td align="center" valign="top">${{number_format($det['precio'][0], 0, ',', '.')}}</td>
-                <td align="center" valign="top">${{number_format($det['suma'][0], 0, ',', '.')}}</td>
-            </tr>
-        @endforeach
-        @foreach ($data['detalle'] as $det)
-            <tr>
-                <td valign="top">
-                    {{$det['nombre']}}<br>
-                    {{$det['descripcion']}}
-                </td>
-                <td align="center" valign="top"><img src="{{ asset($det['imagen'])}}" width="100px"></td>
-                <td align="center" valign="top">{{$det['cantidad'][0]}}</td>
-                <td align="center" valign="top">${{number_format($det['precio'][0], 0, ',', '.')}}</td>
-                <td align="center" valign="top">${{number_format($det['suma'][0], 0, ',', '.')}}</td>
-            </tr>
-        @endforeach
-        @foreach ($data['detalle'] as $det)
-            <tr>
-                <td valign="top">
-                    {{$det['nombre']}}<br>
-                    {{$det['descripcion']}}
-                </td>
-                <td align="center" valign="top"><img src="{{ asset($det['imagen'])}}" width="100px"></td>
-                <td align="center" valign="top">{{$det['cantidad'][0]}}</td>
-                <td align="center" valign="top">${{number_format($det['precio'][0], 0, ',', '.')}}</td>
-                <td align="center" valign="top">${{number_format($det['suma'][0], 0, ',', '.')}}</td>
-            </tr>
-        @endforeach
-        @foreach ($data['detalle'] as $det)
-            <tr>
-                <td valign="top">
-                    {{$det['nombre']}}<br>
-                    {{$det['descripcion']}}
-                </td>
-                <td align="center" valign="top"><img src="{{ asset($det['imagen'])}}" width="100px"></td>
-                <td align="center" valign="top">{{$det['cantidad'][0]}}</td>
-                <td align="center" valign="top">${{number_format($det['precio'][0], 0, ',', '.')}}</td>
-                <td align="center" valign="top">${{number_format($det['suma'][0], 0, ',', '.')}}</td>
-            </tr>
-        @endforeach
+
     </table>
     <table class="w-100 mt-1">
         <tr>
