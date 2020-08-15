@@ -1,13 +1,10 @@
 @extends('admin.layout')
 
+@section('css')
+	<link href="/assets_admin/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
+@endsection
 
 @section('content')
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-	<!-- Icons -->
-	<link href="/assets_admin/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
-	<link href="/assets_admin/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
-	<link href="/assets_admin/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
-
 	<div class="main-content">
 
 		<div class="header bg-gradient-progift pb-8 pt-5 pt-md-8">
@@ -345,7 +342,6 @@
 		</div>
 	</div>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
 	<script src="/assets_admin/js/cotizations.js" type="text/javascript"></script>
 @endsection

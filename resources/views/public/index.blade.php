@@ -80,13 +80,12 @@
                     <div class="row">
                         <div class="col-lg-6 col-sm-6">
                             <div class="banner banner-image discount">
-                                <a href="#">
-                                    <img src="assets/images/banners/banner_25_descuento_libreta.jpg" alt="banner">
+                                <a href="{{ setting('portada.enlace_oferta') }}">
+                                    <img src="{{ asset('/storage/'.setting('portada.imagen_oferta')) }}" alt="banner">
                                     <div class="promo-text-cover">
 	                                    <div class="promo-text bottom">
-		                                    <h2 class="product-title">Bloc Notas Makrono</h2>
-		                                    <p>Obten tu descuento por compras superiores de $ 150.000</p>
-		                                    <button class="btn-icon btn-add-cart" data-toggle="modal" data-target="#addCartModal">COTIZAR</button> 
+                                            {!! setting('portada.texto_oferta') !!}
+                                            <button class="btn-icon btn-add-cart" data-toggle="modal" data-target="#addCartModal">COTIZAR</button>
 	                                    </div>
                                     </div>
                                 </a>
@@ -96,11 +95,13 @@
 
                         <div class="col-lg-6 col-sm-6 order-lg-last">
                             <div class="banner banner-image recent">
-                                <a href="#">
-                                    <img src="assets/images/banners/banner_posavasos.jpg" alt="banner">
+                                <a href="{{ setting('portada.enlace_nuevo') }}">
+                                    <img src="{{ asset('/storage/'.setting('portada.imagen_nuevo')) }}" alt="banner">
                                     <div class="promo-text-cover">
 	                                    <div class="promo-text middle">
-	                                    	<p class="product-title">Posavasos con abridor<br>metálico integrado</p>
+	                                    	<p class="product-title">
+                                                {!! setting('portada.texto_nuevo') !!}
+                                            </p>
 	                                    </div>
                                     </div>
                                 </a>
