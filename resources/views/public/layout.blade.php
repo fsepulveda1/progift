@@ -290,7 +290,7 @@
 <script src="/assets/js/main.js"></script>
 
 <!-- www.addthis.com share plugin -->
-<script src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b927288a03dbde6"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f39905c391aec6f"></script>
 <script src="/js/custom.js"></script>
 
 </body>

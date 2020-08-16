@@ -6,7 +6,7 @@
             <ul>
                 <li><a href="/destacados">Destacados</a></li>
                 @php
-                    $categories = App\Category::orderBy('orden', 'ASC')->get();
+                    $categories = App\Category::where('estado',1)->orderBy('orden', 'ASC')->get();
                 @endphp
                 @foreach($categories as $cat)
                     <li><a href="/categories/{{$cat['id']}}">{{ $cat->nombre }}</a></li>

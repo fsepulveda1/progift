@@ -21,7 +21,7 @@ class CartController extends Controller
 {
     public function shop()
     {
-        $products = DB::table('products')->take(8)->where('destacado', 1)->get();
+        $products = DB::table('products')->take(32)->where('destacado', 1)->get();
         return view('public.index')->withTitle('E-COMMERCE STORE | SHOP')->with(['products' => $products]);
     }
 

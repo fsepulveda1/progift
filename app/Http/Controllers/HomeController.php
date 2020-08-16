@@ -31,7 +31,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $posts = Tip::orderBy('id', 'desc')->paginate(3);
+        $posts = Tip::orderBy('id', 'asc')->paginate(3);
         $lastPage = $posts->lastPage();
 
         if ($request->ajax()) {
@@ -81,7 +81,7 @@ class HomeController extends Controller
             ], [
                 'required' => 'El campo :attribute es requerido',
                 'max' => 'El campo :attribute permite un máximo de :max caracteres',
-                'email' => 'El :attribute ingresado no es válido',
+                'email' => 'El  :attribute no es válido',
             ]);
 
             Contacto::create($request->all());

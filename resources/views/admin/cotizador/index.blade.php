@@ -13,16 +13,16 @@
 			<br/>
 			<br/>
 		</div>
-		<div class="container-fluid mt--7">
+		<div class="mx-md-5 mt--7">
 			<div class="row">
 				<div class="col-xl-12 order-xl-1">
 					<div class="card bg-secondary shadow">
 						<div class="card-header bg-white border-0">
 							<div class="row align-items-center">
-								<div class="col-8">
+								<div class="col-md-8 col-12">
 									<h3 class="mb-0">Nueva Cotización</h3>
 								</div>
-								<div class="col-4 text-right">
+								<div class="col-md-4 col-12 text-right">
 									<a href="{{ url('admin/cotizaciones') }}" class="btn btn-sm btn-success">Histórico Cotizaciones</a>
 								</div>
 							</div>

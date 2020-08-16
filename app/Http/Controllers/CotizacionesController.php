@@ -34,8 +34,8 @@ class CotizacionesController extends VoyagerBaseController
         $getter = $dataType->server_side ? 'paginate' : 'get';
 
         $searchNames = [
-            'clients.rut' => $request->get('rut'),
             'clients.nombre' => $request->get('empresa'),
+            'clients.rut' => $request->get('rut'),
             'clients.contacto' => $request->get('nombre'),
             'clients.email' => $request->get('email'),
             'cotizaciones.updated_at' => $request->get('fecha'),
