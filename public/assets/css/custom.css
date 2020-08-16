@@ -3,3 +3,21 @@
     white-space: normal;
     text-align: center;
 }
+
+.table.table-cart tr th {
+    font-weight: bold !important;
+}
+
+.table.table-cart .bootstrap-touchspin.input-group {
+    margin-right: auto !important;
+}
+
+.paction:hover,
+.form-footer .btn:hover,
+.btn .btn-primary:hover,
+.table.table-cart tfoot .btn:hover,
+.widget-newsletter .btn:hover,
+.product-default .btn-add-cart:hover {
+    background: #fff;
+    color: #f5c524 !important;
+}

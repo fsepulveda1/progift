@@ -48,7 +48,7 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('home.contacto') }}" method="POST" class="contact-form">
+                    <form action="{{ route('home.contacto') }}" method="POST" class="contact-form row">
                         {{ csrf_field() }}
                         <div class="col-lg-12">
                             <div class="form-group required-field">

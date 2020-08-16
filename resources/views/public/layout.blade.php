@@ -176,7 +176,7 @@
 
                         </div><!-- End .widget -->
                     </div><!-- End .col-lg-12 -->
-                    <div class="col-lg-3">
+                    <div class="col-lg-5">
                         <div class="widget">
                             <h4 class="widget-title">CONTACTO</h4>
                             <ul class="contact-info">
@@ -190,7 +190,7 @@
                         </div><!-- End .widget -->
                     </div><!-- End .col-lg-3 -->
 
-                    <div class="col-lg-9">
+                    <div class="col-lg-7">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="widget">
@@ -212,7 +212,10 @@
                                                         </a>
                                                     </figure>
                                                     <p class="product-title">
-                                                        <a href="/product/{{$product->products->id}}">{{$product->products->nombre}}</a>
+                                                        <a href="/product/{{$product->products->id}}">
+                                                            {{$product->products->nombre}}<br>
+                                                            {{$product->products->sku}}
+                                                        </a>
                                                     </p>
                                                 </div><!-- End .product-details -->
                                             </div><!-- End .col-sm-6 -->

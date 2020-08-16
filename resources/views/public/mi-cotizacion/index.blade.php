@@ -33,7 +33,7 @@
                     </div>
                 @endif
                 @if(count($errors) > 0)
-                    @foreach($errors0>all() as $error)
+                    @foreach($errors->all() as $error)
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             {{ $error }}
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -66,10 +66,11 @@
                         @foreach($cartCollection as $item)
 
                             <tr class="product-row">
-                                <td class="product-col">
-                                    <h2 class="product-title">
+                                <td class="product-col d-table-cell">
+                                    <h2 class="product-title mb-1">
                                     <a href="/products/{{$item->model->id}}">{{$item->name}}</a>
-                                    </h2>
+                                    </h2><br>
+                                    <div class="product-price">{{$item->model->sku}}</div>
                                 </td>
                                 <td>
                                     <div class="product-col">
@@ -131,7 +132,7 @@
 
                 <div class="cart-form">
                     <h2>INFORMACIÓN PARA COTIZAR</h2>
-                    <form action="{{ route('cart.cotiza') }}" method="POST" class="contact-form">
+                    <form action="{{ route('cart.cotiza') }}" method="POST" class="contact-form row">
                         {{ csrf_field() }}
                         <div class="col-lg-12">	
                             <div class="form-group required-field">
