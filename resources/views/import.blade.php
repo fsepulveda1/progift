@@ -1,13 +1,13 @@
 @extends('admin.layout')
 
 @section('content')
-    <div class="container">
+    <div class="page-content container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">  Importación</div>
+                    <div class="panel-heading"><h4 style="margin: 0; padding: 10px">Importación</h4></div>
 
-                    <div class="panel-body">
+                    <div class="panel-body" style="padding-top: 10px">
                         <form method='post' action='{{ route('importa') }}' enctype='multipart/form-data' class="form-horizontal">
                             {{ csrf_field() }}
 

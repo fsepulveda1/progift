@@ -85,12 +85,12 @@ class CotizadorController extends Controller
     public function guardaEnvia(Request $request) {
         $user = Auth::user();
         $client = $this->createClientIfNotExist($request);
-        $data = $this->formatingArrayFromRequest($request,$client,$user->id);
+        $data = $this->formatingArrayFromRequest($request,$client,$user->id,1);
         $this->updatingCotization($data,$request->id);
 
         $emailData = $this->getEmailData($request,$user);
         $pdfname = 'Pro-Gift_'.urlencode($request->nombre_cliente).date("Y-m-d").'.pdf';
-        $pdf = $this->getPDFOutput($data,$client,$user);
+        $pdf = $this->generateOutputFromDB($request);
 
         $message = new EnviaCotizacion($emailData);
         $message->attachData($pdf, $pdfname);
@@ -152,6 +152,7 @@ class CotizadorController extends Controller
         $cotizacion = Cotizacione::with('client','user')->where(['id'=>$request->get('id')])->first();
 
         $data  = [
+            'number' => $request->get('id'),
             'detalle' => $cotizacion->detalle,
             'validez' => $cotizacion->validez,
             'forma_pago' => $cotizacion->forma_pago,
@@ -165,6 +166,26 @@ class CotizadorController extends Controller
         ];
 
         return $this->getPDF($data,$cotizacion->client,$cotizacion->user);
+    }
+
+    public function generateOutputFromDB(Request $request) {
+        $cotizacion = Cotizacione::with('client','user')->where(['id'=>$request->get('id')])->first();
+
+        $data  = [
+            'number' => $request->get('id'),
+            'detalle' => $cotizacion->detalle,
+            'validez' => $cotizacion->validez,
+            'forma_pago' => $cotizacion->forma_pago,
+            'entrega' => $cotizacion->plazo,
+            'descuento' => $cotizacion->descuento,
+            'neto' => $cotizacion->neto,
+            'iva' => $cotizacion->iva,
+            'total' => $cotizacion->total,
+            'activa_total'=>$cotizacion->activa_total,
+            'activa_descuento'=>$cotizacion->activa_descuento,
+        ];
+
+        return $this->getPDFOutput($data,$cotizacion->client,$cotizacion->user);
     }
 
     public function pdf(){
@@ -229,7 +250,7 @@ class CotizadorController extends Controller
         return $pdf->output();
     }
 
-    private function formatingArrayFromRequest(Request $request, $client, $user_id) {
+    private function formatingArrayFromRequest(Request $request, $client, $user_id, $status = 0) {
 
         $detalle = $this->getProductsArrayFromRequest($request);
 
@@ -247,6 +268,7 @@ class CotizadorController extends Controller
             'tipo' => isset($request->tipo) ? $request->tipo : 'normal',
             'activa_total'=>isset($request->activar_totales),
             'activa_descuento'=>isset($request->activar_descuento),
+            'estado' => $status
         ];
     }
 

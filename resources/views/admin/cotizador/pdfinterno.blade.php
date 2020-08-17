@@ -63,7 +63,7 @@
     <img src="{{ asset('assets/images/logo_pdf.png') }}" width="150px"/>
 </header>
 <main>
-    <h5 style="text-align: center; padding: 1rem; margin-bottom: 2rem; font-size: 10pt">COTIZACIÓN Nº XXXX</h5>
+    <h5 style="text-align: center; padding: 1rem; margin-bottom: 2rem; font-size: 10pt">COTIZACIÓN Nº @if(isset($data['number'])){{$data['number']}}@else XXXXX @endif</h5>
     <table class="w-100" style="margin: 2rem 0; font-size: 10pt">
         <tr>
             <th align="left" valign="top" style="font-weight: bold">
