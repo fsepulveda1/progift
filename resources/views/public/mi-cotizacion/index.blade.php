@@ -95,12 +95,12 @@
                                             <input type="hidden" value="{{ $item->id}}" id="id" name="id">
                                             <input type="hidden" class="form-control" value="{{ $item->quantity }}"
                                                 id="quantity-{{ $item->id}}" name="quantity">
-                                            <button class="btn-edit btn btn-link"><i class="icon-pencil"></i></button>
+                                            <button data-toggle="tooltip" title="Actualizar" class="btn-edit btn btn-link"><i class="fas fa-sync"></i></button>
                                         </form>
                                         <form action="{{ route('cart.remove') }}" method="POST">
                                             {{ csrf_field() }}
                                             <input type="hidden" value="{{ $item->id }}" id="id" name="id">
-                                            <button class="btn-remove btn btn-link"></button>
+                                            <button data-toggle="tooltip" title="Eliminar" class="btn-edit btn btn-link"><i class="fas fa-times"></i></button>
                                         </form>
                                     </div><!-- End .float-right -->
                                 </td>

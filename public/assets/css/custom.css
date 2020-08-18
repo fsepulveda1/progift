@@ -21,3 +21,25 @@
     background: #fff;
     color: #f5c524 !important;
 }
+
+.product-intro.owl-carousel.owl-theme .owl-nav.disabled+.owl-dots {
+    margin-top: 1rem;
+}
+.cart-dropdown .dropdown-toggle .cart-count {
+    padding: 3px 2px 2px;
+    height: auto;
+}
+
+@media (min-width: 768px) {
+    .product-details > figure a {
+        max-height: 202px;
+        min-height: 202px;
+    }
+}
+
+@media (max-width: 768px) {
+    .promo-text-cover {
+        position: static;
+    }
+}
+

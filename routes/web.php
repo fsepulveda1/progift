@@ -54,7 +54,7 @@ Route::post('/cotiza', 'CartController@cotiza')->name('cart.cotiza');
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
     Route::get('/cotizador/editar/{id}', 'CotizadorController@edit')->middleware('admin.user');
-    Route::get('/cotizador', 'CotizadorController@index')->middleware('admin.user');
+    Route::get('/cotizador', 'CotizadorController@index')->middleware('admin.user')->name('admin.cotizador');
     Route::get('/typeahead', 'CotizadorController@busca')->middleware('admin.user');
     Route::post('/cotiza/guarda', 'CotizadorController@guarda')->middleware('admin.user')->name('admin.guarda');
     Route::post('/cotiza/guarda/nueva', 'CotizadorController@guardaNueva')->middleware('admin.user')->name('admin.guarda');

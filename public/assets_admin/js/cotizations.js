@@ -15,7 +15,6 @@
                 });
             },
             afterSelect: function (args) {
-                console.log(args);
                 var imagen = args.imagen.split(',');
                 imagen = imagen[0].replace('["', '');
                 imagen = imagen.replace('"', '');
@@ -204,14 +203,14 @@
             '<div class="col-lg-3 mb-0">'+
             '<div class="form-group">'+
             '<label class="form-control-label" for="input-country">Color</label>'+
-            '<select class="form-control form-control-alternative color" name="producto['+c+'][color]" id="color" required>'+
+            '<select class="form-control form-control-alternative color" name="producto['+c+'][color]" id="color_'+c+'" required>'+
             '</select>'+
             '</div>'+
             '</div>'+
             '<div class="col-lg-3 mb-0">'+
             '<div class="form-group">'+
             '<label class="form-control-label" for="exampleFormControlSelect1">Impresión</label>'+
-            '<select class="form-control form-control-alternative impresions" name="producto['+c+'][impresion]" id="impresion" required>'+
+            '<select class="form-control form-control-alternative impresions" name="producto['+c+'][impresion]" id="impresion_'+c+'" required>'+
             '</select>'+
             '</div>'+
             '</div>'+
@@ -283,6 +282,10 @@
         var colors = $('form#cotization_form').data('colors');
         var impresions = $('form#cotization_form').data('impresions');
 
+        colors.sort(function(a, b){
+            return a.nombre - b.nombre;
+        });
+
         colorSelect.append('<option value=""></option>');
         impresionsSelect.append('<option value=""></option>');
 
@@ -294,7 +297,10 @@
             impresionsSelect.append('<option value="'+value.nombre+'">'+value.nombre+'</option>');
         });
 
+
         $('.nuevos_productos').append(appendProduct);
+
+        appendProduct.find('select').select2({});
 
         ShowHideTotalsFields();
         initTypeAhead();
@@ -302,5 +308,7 @@
     });
 
     initTypeAhead();
+
+    $('select').select2({});
 
 })(jQuery);

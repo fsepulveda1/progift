@@ -108,7 +108,7 @@
 													<div class="col-lg-3 mb-0">
 														<div class="form-group mb-lg-0">
 															<label class="form-control-label" for="input-country">Color</label>
-															@php $colors = App\Color::all(); @endphp
+															@php $colors = App\Color::orderBy('nombre','asc')->get(); @endphp
 															<select name="producto[0][color]" id="color" required class="form-control form-control-alternative color">
 																<option value=""></option>
 																@foreach($colors as $color)
@@ -295,7 +295,8 @@
 			</div>
 		</div>
 	</div>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+@section('javascript')
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
 	<script src="/assets_admin/js/cotizations.js" type="text/javascript"></script>
+@endsection
 @endsection

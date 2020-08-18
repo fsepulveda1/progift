@@ -649,6 +649,7 @@
             var latestScroll = $(window).scrollTop();
             $newItems.hide().insertAfter($('.product-ajax-grid').last()).fadeIn();
             $loadButton.text($loadButton.data('more-text'));
+              $('.product-title').matchHeight();
 
             $(window).scrollTop(latestScroll);
 
@@ -787,7 +788,10 @@
     }
   };
 
-  $('body').prepend('<div class="loading-overlay"><div class="bounce-loader"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div>');
+    $('.product-title').matchHeight();
+
+
+    $('body').prepend('<div class="loading-overlay"><div class="bounce-loader"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div>');
 
   //Variables
   var $loadButton = $('.loadmore .btn');

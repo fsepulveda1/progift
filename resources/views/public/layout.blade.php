@@ -204,7 +204,7 @@
 
                                         @foreach($products as $product)
                                             @php($img = json_decode($product->products->imagen))
-                                            <div class="col-sm-6 col-md-2">
+                                            <div class="col-6 col-md-2">
                                                 <div class="product-details">
                                                     <figure>
                                                         <a href="/product/{{$product->products->id}}">
@@ -245,7 +245,7 @@
         <span class="mobile-menu-close"><i class="icon-cancel"></i></span>
         <nav class="mobile-nav">
             <ul class="mobile-menu">
-                <li class="active"><a href="inicio.html">INICIO</a></li>
+                <li class="active"><a href="{{ url('/') }}">INICIO</a></li>
                 <li><a href="{{ url('/nuestra-empresa') }}">NUESTRA EMPRESA</a></li>
                 <li><a href="{{ url('/mi-cotizacion') }}">MI COTIZACIÓN</a></li>
                 <li><a href="{{ url('/preguntas-frecuentes') }}">PREGUNTAS FRECUENTES</a></li>
@@ -285,7 +285,7 @@
 <script src="/assets/js/jquery.min.js"></script>
 <script src="/assets/js/bootstrap.bundle.min.js"></script>
 <script src="/assets/js/plugins.min.js"></script>
-
+<script src="/assets/js/matchHeight.min.js"></script>
 <!-- Main JS File -->
 <script src="/assets/js/main.js"></script>
 

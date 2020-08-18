@@ -111,7 +111,7 @@
 														<div class="col-lg-3 mb-0">
 															<div class="form-group mb-lg-0">
 																<label class="form-control-label" for="input-country">Color</label>
-																@php $colors = App\Color::all(); @endphp
+																@php $colors = App\Color::orderBy('nombre','asc')->get(); @endphp
 																<select name="producto[{{$cnt}}][color]" id="color" required class="form-control form-control-alternative color">
 																	<option value=""></option>
 																	@foreach($colors as $color)
@@ -167,7 +167,7 @@
 														<div class="col-lg-2 mb-lg-0">
 															<div class="form-group">
 																<label for="example-search-input" class="form-control-label">Cantidad</label>
-																<input type="number" value="{{$d['cantidad'][0]}}" name="producto[{{$cnt}}][cantidad][]" id="cantidad" class="form-control form-control-alternative cantidad" placeholder="0" required>
+																<input type="number" value="@if(is_array($d['cantidad'])){{$d['cantidad'][0]}}@else{{(int)$d['cantidad']}}@endif" name="producto[{{$cnt}}][cantidad][]" id="cantidad" class="form-control form-control-alternative cantidad" placeholder="0" required>
 															</div>
 														</div>
 														<div class="col-lg-4 mb-lg-0">
@@ -341,7 +341,8 @@
 			</div>
 		</div>
 	</div>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+@section('javascript')
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
 	<script src="/assets_admin/js/cotizations.js" type="text/javascript"></script>
+@endsection
 @endsection

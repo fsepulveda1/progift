@@ -21,7 +21,7 @@ class CotizadorController extends Controller
 {
     public function index() {
         $user_avatar = false;
-        $colors = json_encode(Color::all('nombre')->toArray());
+        $colors = json_encode(Color::orderBy('nombre','asc')->get()->toArray());
         $impresions = json_encode(Impresion::all('nombre')->toArray());
         return view('admin/cotizador.index', compact('user_avatar','colors','impresions'));
     }
@@ -41,7 +41,7 @@ class CotizadorController extends Controller
 
         $cotizacion = Cotizacione::where('id', $id)->first();
         $cliente = Client::where('id', $cotizacion->client_id)->first();
-        $colors = json_encode(Color::all('nombre')->toArray());
+        $colors = json_encode(Color::orderBy('nombre','asc')->get()->toArray());
         $impresions = json_encode(Impresion::all('nombre')->toArray());
 
         return view('admin/cotizador.edit', compact('user_avatar', 'cotizacion', 'cliente','colors','impresions'));

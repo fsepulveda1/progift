@@ -65,6 +65,9 @@ class CotizacionesController extends VoyagerBaseController
                     $query = $query->withTrashed();
                 }
             }
+
+            $user = auth()->user();
+            $query->where('cotizaciones.user_id',$user->id);
             /** @var $query Builder */
             $query->join('clients','cotizaciones.client_id','=','clients.id');
 

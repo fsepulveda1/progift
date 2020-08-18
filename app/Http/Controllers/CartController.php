@@ -89,6 +89,10 @@ class CartController extends Controller
         }
 
         $emailVendedor = $this->matchRut($request->rut);
+
+        if(!$emailVendedor)
+            return;
+
         $idUser = $this->getIdUser($emailVendedor);
         $user = User::find($idUser);
         $detalle = [];
@@ -158,7 +162,7 @@ class CartController extends Controller
             'total' => \Cart::getTotalQuantity(),
             'client_id' => $client->id,
             'user_id' => $idUser,
-            'estado' => 1,
+            'estado' => 0,
             'tipo' => 'Web'
         ]);
 
@@ -209,22 +213,25 @@ class CartController extends Controller
                     break;
                 }
             }
-            if(!$newUser) {
+            if(!isset($newUser) and isset($users[0])) {
                 $newUser = $users[0];
             }
 
-            $newUser->flag = 1;
-            $newUser->save();
+            if(isset($newUser)) {
+                $newUser->flag = 1;
+                $newUser->save();
 
-            $insertData = array(
-                "rut" => $rut,
-                "vendedor" => $newUser->email,
-                "estado" => 1,
-                "procedencia" => 'Web');
-            MatchRut::insertData($insertData);
+                $insertData = array(
+                    "rut" => $rut,
+                    "vendedor" => $newUser->email,
+                    "estado" => 1,
+                    "procedencia" => 'Web');
+                MatchRut::insertData($insertData);
 
-            return $newUser->email;
-        }else{
+                return $newUser->email;
+            }
+        }
+        else{
             return $result[0]->vendedor;
         }
     }
