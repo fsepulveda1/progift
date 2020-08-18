@@ -1,4 +1,5 @@
 @extends('public.layout')
+@section('title')Contacto | @endsection
 
 
 @section('content')

@@ -1,5 +1,5 @@
 @extends('public.layout')
-
+@section('title')Destacados | @endsection
 
 @section('content')
 

@@ -1,5 +1,5 @@
 @extends('public.layout')
-
+@section('title'){{ $category->nombre }} | @endsection
 
 @section('content')
 

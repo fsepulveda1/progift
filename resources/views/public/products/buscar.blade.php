@@ -1,5 +1,5 @@
 @extends('public.layout')
-
+@section('title')Resultados de búsqueda | @endsection
 
 @section('content')
 

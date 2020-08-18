@@ -1,4 +1,5 @@
 @extends('public.layout')
+@section('title')Preguntas Frecuentes | @endsection
 
 
 @section('content')

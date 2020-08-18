@@ -67,7 +67,9 @@ class CotizacionesController extends VoyagerBaseController
             }
 
             $user = auth()->user();
-            $query->where('cotizaciones.user_id',$user->id);
+            if($user->hasRole('vendedor')) {
+                $query->where('cotizaciones.user_id', $user->id);
+            }
             /** @var $query Builder */
             $query->join('clients','cotizaciones.client_id','=','clients.id');
 

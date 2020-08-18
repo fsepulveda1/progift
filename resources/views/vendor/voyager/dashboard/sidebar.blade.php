@@ -29,12 +29,15 @@
             </div>
 
         </div>
-        <div id="adminmenu">
-            @if (Auth::user()->hasRole('vendedor'))
-                <admin-menu :items="{{ menu('vendedor', '_json') }}"></admin-menu>
-            @else
+        @if (Auth::user()->hasRole('vendedor'))
+            <div id="adminmenu" class="menu-vendedor">
                 <admin-menu :items="{{ menu('admin', '_json') }}"></admin-menu>
-            @endif
-        </div>
+            </div>
+        @else
+            <div id="adminmenu">
+                <admin-menu :items="{{ menu('admin', '_json') }}"></admin-menu>
+            </div>
+        @endif
+
     </nav>
 </div>

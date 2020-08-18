@@ -1,5 +1,5 @@
 @extends('public.layout')
-
+@section('title')Tips | @endsection
 
 @section('content')
 

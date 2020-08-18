@@ -4,12 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <title>Pro-Gift</title>
-
-    <meta name="keywords" content="HTML5 Template" />
-    <meta name="description" content="Porto - Bootstrap eCommerce Template">
-    <meta name="author" content="SW-THEMES">
+    <title>@yield('title','Pro-Gift | ')@yield('main-title','Articulos publicitarios Ferias y regalos corporativos santiago chile')</title>
+    <meta name="keywords" content="pro-gift, pro, gift, merchandising, Ferias, articulos, regalos, regalo, publicitarios, publicitario, corporativos, corporativo, empresas, santiago, las condes, chile, metro, manquehue" />
+    <meta name="description" content="@yield('page-description','12 años en el Mercado - Más de 2.000 Productos disponibles - Envíos a todo Chile. - Lo invitamos a cotizar con nosotros.')">
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="../assets/images/icons/favicon.ico">
@@ -36,206 +33,13 @@
 </head>
 <body>
 <div class="page-wrapper">
-    <header class="header">
-        <div class="header-top">
-            <div class="container">
-                <div class="header-left header-dropdowns">
-                </div><!-- End .header-left -->
 
-                <div class="header-right">
-                    <div class="header-dropdown dropdown-expanded">
-                        <p class="welcome-msg" class="float-left"><img src="/assets/images/icono_telefono.png"> </p>
-                        <a href="#">Teléfonos</a>
-                        <div class="header-menu">
-                            <ul>
-                                <li><a href="tel:(+56) 22 246 3180">(+56) 22 247 8162</a></li>
-                                <li><a href="tel:(+56) 22 246 2399">(+56) 22 246 2399</a></li>
-                                <li><a href="tel:(+56) 22 246 2399">(+56) 22 246 3180</a></li>
-                            </ul>
-                        </div><!-- End .header-menu -->
-                    </div><!-- End .header-dropown -->
-                </div><!-- End .header-right -->
-            </div><!-- End .container -->
-        </div><!-- End .header-top -->
-        <div class="header-middle">
-            <div class="container">
-                <div class="header-left">
-                    <a href="{{ url('/') }}" class="logo">
-                        <img src="/assets/images/logo_pro-gift_chico.png" alt="Logo Pro-Gift">
-                    </a>
-                </div><!-- End .header-left -->
-
-                <div class="header-center">
-                    <div class="header-search">
-                        <a href="#" class="search-toggle" role="button"><i class="icon-magnifier"></i></a>
-                        <form action="{{ route('home.buscar') }}" method="get">
-                            {{ csrf_field() }}
-                            <div class="header-search-wrapper">
-                                <input type="search" class="form-control" name="q" id="q" placeholder="Buscar..." required>
-                                <button class="btn" type="submit"><i class="icon-magnifier"></i></button>
-                            </div><!-- End .header-search-wrapper -->
-                        </form>
-                    </div><!-- End .header-search -->
-                </div><!-- End .headeer-center -->
-
-                <div class="header-right">
-                    <button class="mobile-menu-toggler" type="button">
-                        <i class="icon-menu"></i>
-                    </button>
-                    <div class="header-contact">
-                        <a href="mailto:ventas@pro-gift.cl">ventas@pro-gift.cl</a>
-                    </div><!-- End .header-contact -->
-
-                    <div class="dropdown cart-dropdown">
-                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-                            <span class="cart-count">{{ \Cart::getTotalQuantity()}}</span>
-                        </a>
-
-                        <div class="dropdown-menu" >
-                            <div class="dropdownmenu-wrapper">
-                                <div class="dropdown-cart-header">
-                                    <span>{{ \Cart::getTotalQuantity()}} Items</span>
-                                </div><!-- End .dropdown-cart-header -->
-                                <div class="dropdown-cart-products">
-                                    @if(count(\Cart::getContent()) > 0)
-                                        @foreach(\Cart::getContent() as $item)
-                                            <div class="product">
-
-                                                <div class="product-details">
-                                                    <h4 class="product-title">
-                                                        <a href="/products/{{$item->id}}">{{$item->name}}</a>
-                                                    </h4>
-
-                                                    <span class="cart-product-info">
-                                                        <span class="cart-product-qty">Cantidad: {{$item->quantity}}</span>
-                                                    </span>
-                                                    <br>
-                                                </div><!-- End .product-details -->
-                                                <figure class="product-image-container">
-                                                    <a href="/products/{{$item->id}}" class="product-image">
-                                                        <img src="/storage/{{$item->attributes->image}}" alt="product">
-                                                    </a>
-                                                    <!--<a href="#" class="btn-remove" title="Remove Product"><i class="icon-cancel"></i></a>-->
-                                                    <form action="{{ route('cart.remove') }}" method="POST">
-                                                        {{ csrf_field() }}
-                                                        <input type="hidden" value="{{ $item->id }}" id="id" name="id">
-                                                        <button class="btn-remove" title="Remove Product"><i class="icon-cancel"></i></button>
-                                                    </form>
-                                                </figure>
-                                            </div><!-- End .product -->
-                                        @endforeach
-
-                                    @else
-                                        <li class="list-group-item">Carrito vacío</li>
-                                    @endif
-
-                                </div><!-- End .cart-product -->
-
-                                <div class="dropdown-cart-action">
-                                    <a href="{{ url('/mi-cotizacion') }}" class="btn btn-block">Carro Cotizador</a>
-                                </div><!-- End .dropdown-cart-total -->
-                            </div><!-- End .dropdownmenu-wrapper -->
-                        </div><!-- End .dropdown-menu -->
-                    </div><!-- End .dropdown -->
-                </div><!-- End .header-right -->
-            </div><!-- End .container -->
-        </div><!-- End .header-middle -->
-
-        <div class="header-bottom sticky-header">
-            <div class="container">
-                <nav class="main-nav">
-                    <ul class="menu sf-arrows">
-                        <li class="float-right {{ request()->is('tips') || request()->is('/tips/*') ? 'active' : '' }}"><a href="{{ url('/tips') }}">TIPS</a></li>
-                        <li class="float-right {{ request()->is('contacto') || request()->is('/contacto/*') ? 'active' : '' }}"><a href="{{ url('/contacto') }}">CONTACTO</a></li>
-                        <li class="float-right {{ request()->is('preguntas-frecuentes') || request()->is('/preguntas-frecuentes/*') ? 'active' : '' }}"><a href="{{ url('/preguntas-frecuentes') }}">PREGUNTAS FRECUENTES</a></li>
-                        <li class="float-right {{ request()->is('mi-cotizacion') || request()->is('/mi-cotizacion/*') ? 'active' : '' }}"><a href="{{ url('/mi-cotizacion') }}">MI COTIZACIÓN</a></li>
-                        <li class="float-right {{ request()->is('nuestra-empresa') || request()->is('/nuestra-empresa/*') ? 'active' : '' }}"><a href="{{ url('/nuestra-empresa') }}">NUESTRA EMPRESA</a></li>
-                        <li class="float-right {{ request()->is('/') || request()->is('/') ? 'active' : '' }}"><a href="{{ url('/') }}">INICIO</a></li>
-                    </ul>
-                </nav>
-            </div><!-- End .header-bottom -->
-        </div><!-- End .header-bottom -->
-    </header><!-- End .header -->
+    @include('public.header')
 
     @yield('content')
 
-    <footer class="footer">
-        <div class="footer-middle">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="widget widget-newsletter">
-                            <h4 class="widget-title">NEWSLETTER</h4>
+    @include('public.footer')
 
-                            <form action="{{ route('home.suscribe') }}" method="POST">
-                                {{ csrf_field() }}
-                                <input type="email" class="form-control" name="email" placeholder="Ingresa aquí tu correo" required>
-                                <input type="hidden" value="1" name="estado"/>
-                                <input type="submit" class="btn" value="SUSCRIBIRSE">
-                            </form>
-
-                        </div><!-- End .widget -->
-                    </div><!-- End .col-lg-12 -->
-                    <div class="col-lg-5">
-                        <div class="widget">
-                            <h4 class="widget-title">CONTACTO</h4>
-                            <ul class="contact-info">
-                                <li> Rosario Sur 135, Piso 4, Las Condes</li>
-                                <li>Estación metro Manquehue</li>
-                                <li><a href="tel:(+56) 22 247 8162">(+56) 22 247 8162</a> - <a href="tel:(+56) 22 246 2399">(+56) 22 246 2399</a><br>
-                                    <a href="tel:(+56) 22 246 3180">(+56) 22 246 3180</a>
-                                </li>
-                                <li><a href="mailto:contacto@pro-gift.cl">contacto@pro-gift.cl</a></li>
-                            </ul>
-                        </div><!-- End .widget -->
-                    </div><!-- End .col-lg-3 -->
-
-                    <div class="col-lg-7">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="widget">
-                                    @php
-                                        $products = App\ProductQuotationCount::with('products')->orderBy('count','desc')->take(6)->get()
-                                    @endphp
-                                    @if($products)
-                                        <h4 class="widget-title">PRODUCTOS MÁS COTIZADOS</h4>
-                                    @endif
-                                    <div class="row">
-
-                                        @foreach($products as $product)
-                                            @php($img = json_decode($product->products->imagen))
-                                            <div class="col-6 col-md-2">
-                                                <div class="product-details">
-                                                    <figure>
-                                                        <a href="/product/{{$product->products->id}}">
-                                                            <img src="{{asset('storage/'.$img[0])}}">
-                                                        </a>
-                                                    </figure>
-                                                    <p class="product-title">
-                                                        <a href="/product/{{$product->products->id}}">
-                                                            {{$product->products->nombre}}<br>
-                                                            {{$product->products->sku}}
-                                                        </a>
-                                                    </p>
-                                                </div><!-- End .product-details -->
-                                            </div><!-- End .col-sm-6 -->
-                                        @endforeach
-                                    </div><!-- End .row -->
-                                </div><!-- End .widget -->
-                            </div><!-- End .col-md-12 -->
-
-                        </div><!-- End .row -->
-                    </div><!-- End .col-lg-9 -->
-                </div><!-- End .row -->
-            </div><!-- End .container -->
-        </div><!-- End .footer-middle -->
-
-        <div class="container">
-            <div class="footer-bottom">
-                <p class="footer-copyright">&copy; 2020 Pro-Gift. Desarrollado por <a href="https://www.bigbuda.cl/" target="_blank">Agencia Digital Bigbuda</a></p>
-            </div><!-- End .footer-bottom -->
-        </div><!-- End .container -->
-    </footer><!-- End .footer -->
 </div><!-- End .page-wrapper -->
 
 <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
@@ -282,6 +86,7 @@
 <a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
 
 <!-- Plugins JS File -->
+<script async="" src="//www.google-analytics.com/analytics.js"></script>
 <script src="/assets/js/jquery.min.js"></script>
 <script src="/assets/js/bootstrap.bundle.min.js"></script>
 <script src="/assets/js/plugins.min.js"></script>
@@ -292,7 +97,16 @@
 <!-- www.addthis.com share plugin -->
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f39905c391aec6f"></script>
 <script src="/js/custom.js"></script>
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
+    ga('create', '{{ setting('admin.google_analytics_client_id') }}', 'pro-gift.cl');
+    ga('send', 'pageview');
+
+</script>
 </body>
 </html>
 		

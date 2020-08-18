@@ -1,4 +1,5 @@
 @extends('public.layout')
+@section('title')Nuestra Empresa | @endsection
 
 
 @section('content')
