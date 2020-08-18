@@ -635,7 +635,7 @@
         var searchText = $loadButton.data('search');
         var url = '?page=' + page;
         if(searchText) {
-           url = '?page='+page+'&q='+searchText;
+          url = '?page='+page+'&q='+searchText;
         }
 
         $.ajax({
@@ -649,7 +649,7 @@
             var latestScroll = $(window).scrollTop();
             $newItems.hide().insertAfter($('.product-ajax-grid').last()).fadeIn();
             $loadButton.text($loadButton.data('more-text'));
-              $('.product-title').matchHeight();
+            $('.product-title').matchHeight();
 
             $(window).scrollTop(latestScroll);
 
@@ -788,10 +788,10 @@
     }
   };
 
-    $('.product-title').matchHeight();
+  $('.product-title').matchHeight();
 
 
-    $('body').prepend('<div class="loading-overlay"><div class="bounce-loader"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div>');
+  $('body').prepend('<div class="loading-overlay"><div class="bounce-loader"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div>');
 
   //Variables
   var $loadButton = $('.loadmore .btn');
@@ -812,4 +812,19 @@
   $(window).on('scroll', function () {
     Porto.scrollBtnAppear();
   });
+
+  $('#q').typeahead({
+    minLength: 2,
+    source: function (query, process) {
+      return $.get("/admin/typeahead", {query: query}, function (data) {
+        return process(data);
+      });
+    },
+    afterSelect: function (args) {
+      $('#form-search').submit();
+    }
+  });
+
+
+
 })(jQuery);

@@ -91,6 +91,8 @@
 <script src="/assets/js/bootstrap.bundle.min.js"></script>
 <script src="/assets/js/plugins.min.js"></script>
 <script src="/assets/js/matchHeight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+
 <!-- Main JS File -->
 <script src="/assets/js/main.js"></script>
 

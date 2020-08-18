@@ -30,10 +30,10 @@
             <div class="header-center">
                 <div class="header-search">
                     <a href="#" class="search-toggle" role="button"><i class="icon-magnifier"></i></a>
-                    <form action="{{ route('home.buscar') }}" method="get">
+                    <form action="{{ route('home.buscar') }}" method="get" id="form-search">
                         {{ csrf_field() }}
                         <div class="header-search-wrapper">
-                            <input type="search" class="form-control" name="q" id="q" placeholder="Buscar..." required>
+                            <input type="search" class="form-control" name="q" id="q" placeholder="Buscar..." autocomplete="off" required>
                             <button class="btn" type="submit"><i class="icon-magnifier"></i></button>
                         </div><!-- End .header-search-wrapper -->
                     </form>

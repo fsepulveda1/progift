@@ -63,7 +63,7 @@ class HomeController extends Controller
             return response()->json(['html'=>$view,'lastPage'=>$lastPage]);
         }
 
-        return view('public.products.buscar', compact('products','lastPage','textSearch'));
+        return view('public.products.buscar', compact('products','lastPage','textSearch','textSearch'));
     }
 
 

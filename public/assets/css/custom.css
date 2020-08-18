@@ -30,6 +30,15 @@
     height: auto;
 }
 
+.typeahead {
+    width: 100%;
+    margin-top: 5px;
+}
+.typeahead .dropdown-item {
+    padding: 10px;
+    font-size: 14px;
+}
+
 @media (min-width: 768px) {
     .product-details > figure a {
         max-height: 202px;
