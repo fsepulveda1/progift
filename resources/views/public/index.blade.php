@@ -22,7 +22,6 @@
                             Pro-Gift a través de sus 12 Años de experiencia ha dado un Servicio de excelencia y atención personalizada a más de 2.500 Clientes!! Les damos las gracias por seguir prefiriéndonos y confiar en nosotros.</section>
 
                         <section class="featured-section">
-                            <div class="container">
                                 <h2 class="carousel-title">ARTÍCULOS PUBLICITARIOS DESTACADOS</h2>
                                 <div class="product-intro owl-carousel owl-theme" data-toggle="owl" data-owl-options="{
                         'margin': 20,
@@ -72,7 +71,6 @@
                                             @if($loop->even || $loop->last)</div>@endif
                                     @endforeach
                                 </div><!-- End .owl-carousel -->
-                            </div>
                         </section>
 
                         <div class="banners-group">

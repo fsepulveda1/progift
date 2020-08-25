@@ -1,6 +1,9 @@
 <html>
 <head>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+    </style>
+    <style>
         @font-face {
             font-family: 'Roboto';
             src: url({{ asset('assets/fonts/Roboto/Roboto-Regular.ttf') }}) format("truetype");

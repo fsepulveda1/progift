@@ -16,7 +16,7 @@
                         </ol>
 
                     </nav>
-                    <br><h2>Destacados</h2>
+                    <br><h2 class="category-title">Destacados</h2>
                     <div class="row row-sm product-ajax-grid">
                         @if(count($products) <= 0)
                             <p>No existen porductos en esta categoría.</p>

@@ -95,8 +95,8 @@ class CategoriesController extends Controller
 
         $products = Product::whereHas('categories', function ($query) use ($id) {
             $query->where('id', '=', $id);
-        })->paginate(16);
-        $lastPage = $products->lastPage();
+        })->get();
+        $lastPage = null;
 
         if ($request->ajax()) {
             $view = view('public.products.data',compact('products'))->render();
@@ -115,8 +115,8 @@ class CategoriesController extends Controller
      */
     public function showDestacados(Request $request)
     {
-        $products = Product::where('destacado',1)->orderBy('nombre','ASC')->paginate(16);
-        $lastPage = $products->lastPage();
+        $products = Product::where('destacado',1)->orderBy('nombre','ASC')->get();
+        $lastPage = null;
 
         if ($request->ajax()) {
             $view = view('public.products.data',compact('products'))->render();
@@ -143,7 +143,6 @@ class CategoriesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Category $category)
@@ -185,7 +184,6 @@ class CategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request)

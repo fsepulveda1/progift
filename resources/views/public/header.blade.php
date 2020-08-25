@@ -50,7 +50,7 @@
 
                 <div class="dropdown cart-dropdown">
                     <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-                        <span class="cart-count">{{ \Cart::getTotalQuantity()}}</span>
+                        <span class="cart-count">{{ \Cart::getContent()->count() }}</span>
                     </a>
 
                     <div class="dropdown-menu" >

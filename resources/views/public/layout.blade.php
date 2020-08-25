@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>@yield('title','Pro-Gift | ')@yield('main-title','Articulos publicitarios Ferias y regalos corporativos santiago chile')</title>
+    <title>@yield('title','Pro-Gift | ')@yield('main-title','Merchandising - Articulos publicitarios Ferias y regalos corporativos santiago chile')</title>
     <meta name="keywords" content="pro-gift, pro, gift, merchandising, Ferias, articulos, regalos, regalo, publicitarios, publicitario, corporativos, corporativo, empresas, santiago, las condes, chile, metro, manquehue" />
     <meta name="description" content="@yield('page-description','12 años en el Mercado - Más de 2.000 Productos disponibles - Envíos a todo Chile. - Lo invitamos a cotizar con nosotros.')">
 

@@ -45,6 +45,8 @@ class CartController extends Controller
         $this->validate($request, [
             'id' => 'required|max:100|exists:App\Product,id',
             'quantity' => 'required|numeric|max:1000000|min:1',
+            'impresion' => 'required',
+            'color' => 'required'
         ], [
             'required' => 'El campo :attribute es requerido',
             'min' => 'El campo :attribute permite un valor mínimo de :min',
@@ -106,7 +108,7 @@ class CartController extends Controller
             'contacto' => 'required|max:50',
             'telefono' => 'required|max:20',
             'email' => 'required|max:50|email',
-            'comentarios' => 'required|max:1000',
+            'comentarios' => 'max:1000',
         ], [
             'required' => 'El campo :attribute es requerido',
             'max' => 'El campo :attribute permite un máximo de :max caracteres',

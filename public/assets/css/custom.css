@@ -39,6 +39,11 @@
     font-size: 14px;
 }
 
+.category-title {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #f5c524;
+}
+
 @media (min-width: 768px) {
     .product-details > figure a {
         max-height: 202px;
@@ -49,6 +54,9 @@
 @media (max-width: 768px) {
     .promo-text-cover {
         position: static;
+    }
+    .sticky-wrapper {
+        display: none;
     }
 }
 

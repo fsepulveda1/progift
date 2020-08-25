@@ -92,7 +92,7 @@
                     {{ $det->nombre }}<br>
                     {!! $det->descripcion !!}
                 </td>
-                <td align="center" valign="top"><img src="{{ asset(stripcslashes($det->imagen))}}" width="100px"></td>
+                <td align="center" valign="top"><img src="{{ asset(stripcslashes($det->imagen))}}" height="70px"></td>
                 <td align="center" valign="top">{{$det->cantidad[0]}}</td>
                 <td align="center" valign="top">${{number_format($det->precio[0], 0, ',', '.')}}</td>
                 <td align="center" valign="top">${{number_format($det->suma[0], 0, ',', '.')}}</td>

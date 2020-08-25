@@ -88,8 +88,8 @@
                                     {{ csrf_field() }}
                                     <div class="product-filters-container">
                                         <div class="product-single-filter">
-                                            <select id="color" name="color">
-                                                <option disabled selected>Color</option>
+                                            <select id="color" name="color" required>
+                                                <option value="" disabled selected>Color</option>
                                                 @foreach($product->colors as $color)
                                                     <option value="{{$color->nombre}}">{{$color->nombre}}</option>
                                                 @endforeach
@@ -97,8 +97,8 @@
                                         </div>
                                         <!-- End .product-single-filter -->
                                         <div class="product-single-filter">
-                                            <select id="impresion" name="impresion">
-                                                <option disabled selected>Tipo de impresión</option>
+                                            <select id="impresion" name="impresion" required>
+                                                <option value="" disabled selected>Tipo de impresión</option>
                                                 @foreach($impresions as $impresion)
                                                     <option value="{{$impresion->nombre}}">{{$impresion->nombre}}</option>
                                                 @endforeach
@@ -115,7 +115,7 @@
                                         <input type="hidden" value="{{ $product->id }}" id="id" name="id">
                                         <div class="" style="background-color: white;">
                                             <div class="row">
-                                                <button class="btn-icon btn-add-cart paction add-cart" class="tooltip-test" title="add to cart">
+                                                <button type="submit" class="btn-icon btn-add-cart paction add-cart" class="tooltip-test" title="add to cart">
                                                     <span>COTIZAR</span>
                                                 </button>
                                             </div>

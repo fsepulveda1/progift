@@ -166,9 +166,9 @@
                                 </div><!-- End .form-group -->
                             </div><!-- End .col-lg-6 -->
                             <div class="col-lg-12">
-                                <div class="form-group required-field">
+                                <div class="form-group">
                                     <label for="contact-message">Comentarios</label>
-                                    <textarea cols="30" rows="3" id="contact-message" class="form-control" name="comentarios" required></textarea>
+                                    <textarea cols="30" rows="3" id="contact-message" class="form-control" name="comentarios"></textarea>
                                 </div><!-- End .form-group -->
 
                                 <div class="form-footer">

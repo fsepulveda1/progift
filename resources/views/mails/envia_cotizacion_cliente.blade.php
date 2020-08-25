@@ -1,7 +1,7 @@
 @extends('mails.layout')
 
 @section('content')
-    <p style="font-size: 13pt; margin-bottom: 2rem">
+    <p style="font-family: 'Roboto', sans-serif;font-size: 13pt; margin-bottom: 2rem">
         <strong>Empresa:</strong> {{$cotizacion['cliente']['nombre']}}<br/>
         <strong>Rut Empresa:</strong> {{$cotizacion['cliente']['rut']}}<br/>
         <strong>Contacto:</strong> {{$cotizacion['cliente']['contacto']}}<br/>
@@ -10,7 +10,7 @@
         <strong>Comentarios:</strong> {{$cotizacion['cliente']['comentarios']}}<br/>
     </p>
 
-    <table width="100%" class="table" style="margin-bottom: 1rem" border="1" cellpadding="0" cellspacing="0">
+    <table width="100%" class="table" style="font-family: 'Roboto', sans-serif;margin-bottom: 1rem" border="1" cellpadding="0" cellspacing="0">
         <tr>
             <th width="20%" align="center">PRODUCTO</th>
             <th width="20%" align="center">IMAGEN</th>
@@ -26,7 +26,7 @@
                     {{ $det['sku'] }}
                 </td>
                 <td width="20%" align="center">
-                    <img src="{{ asset(stripcslashes(($det['imagen']))) }}" style="height: 50px;"/>
+                    <img src="{{ asset(stripcslashes($det['imagen'])) }}" height="70px" style="height: 70px;"/>
                 </td>
                 <td width="20%" align="center">
                     {{ $det['color'] }}
@@ -41,5 +41,5 @@
         @endforeach
     </table>
 
-    <p style="font-size: 12pt;">Este e-mail es sólo un aviso, la solicitud ya se encuentra disponible en el Cotizador para ser completada y enviada al Cliente. </p>
+    <p style="font-family: 'Roboto', sans-serif;font-size: 12pt;">Este e-mail es sólo un aviso, la solicitud ya se encuentra disponible en el Cotizador para ser completada y enviada al Cliente. </p>
 @endsection
