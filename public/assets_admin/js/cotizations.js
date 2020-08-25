@@ -31,11 +31,28 @@
                 this.$element.closest('.pduct').find('.precio_suma').val(args.precio);
                 this.$element.closest('.pduct').find('.file-widget').hide();
                 var colorSelect = this.$element.closest('.pduct').find('.color');
-                colorSelect.empty();
-                colorSelect.append('<option value=""></option>');
+
+                if(colorSelect.hasClass('select2-hidden-accessible')) {
+                    colorSelect.select2('destroy');
+                }
+
+                var parentSelect = colorSelect.parent();
+                var newColorSelect = $("" +
+                    "<select " +
+                    "name='"+colorSelect.attr('name')+"' " +
+                    "class='"+colorSelect.attr('class')+"' " +
+                    "id='"+colorSelect.attr('id')+"'></select>");
+                newColorSelect.append('<option value=""></option>');
+                parentSelect.append(newColorSelect);
+                colorSelect.remove();
+
                 $.each(args.colors, function (index, value) {
-                    colorSelect.append('<option value="' + value + '">' + value + '</option>')
+                    newColorSelect.append('<option value="' + value + '">' + value + '</option>');
                 });
+
+                newColorSelect.select2({});
+
+                console.log('asd');
 
                 calculaTotales();
             }
@@ -203,15 +220,13 @@
             '<div class="col-lg-3 mb-0">'+
             '<div class="form-group">'+
             '<label class="form-control-label" for="input-country">Color</label>'+
-            '<select class="form-control form-control-alternative color" name="producto['+c+'][color]" id="color_'+c+'" required>'+
-            '</select>'+
+            '<input type="text" class="form-control form-control-alternative color" name="producto['+c+'][color]" id="color_'+c+'" required>'+
             '</div>'+
             '</div>'+
             '<div class="col-lg-3 mb-0">'+
             '<div class="form-group">'+
             '<label class="form-control-label" for="exampleFormControlSelect1">Impresión</label>'+
-            '<select class="form-control form-control-alternative impresions" name="producto['+c+'][impresion]" id="impresion_'+c+'" required>'+
-            '</select>'+
+            '<input type="text" class="form-control form-control-alternative impresions" name="producto['+c+'][impresion]" id="impresion_'+c+'" required>'+
             '</div>'+
             '</div>'+
             '</div>' +
@@ -264,41 +279,24 @@
             '<div class="form-group">'+
             '<input type="hidden" class="orden" value="'+c+'"/>'+
             '<label for="example-search-input" class="form-control-label">Acciones</label>'+
-            '<button type="button" class="btn btn-danger btn-sm btn-eliminar_producto" data-id="'+i+'">'+
+            '<div class="d-flex">' +
+            '<button data-toggle="tooltip" title="Eliminar Producto" type="button" class="btn btn-danger btn-sm btn-eliminar_producto" data-id="'+i+'">'+
             '<span class="btn-inner--icon"><i class="fas fa-trash-alt"></i></span>'+
             '</button>'+
-            '<button type="button" class="btn btn-warning btn-sm btn-agrega_cant">'+
+            '<button data-toggle="tooltip" title="Agregar Cantidad" type="button" class="btn btn-warning btn-sm btn-agrega_cant">'+
             '<span class="btn-inner--icon"><i class="fas fa-plus"></i></span>'+
             '</button>'+
+            '</div>'+
             '</div>'+
             '</div>'+
             '<hr class="my-4"/>'+
             '</div>'+
             '<div class="cant-add '+i+'"></div></div></fieldset></div>');
 
-        var colorSelect = appendProduct.find('.color');
-        var impresionsSelect = appendProduct.find('.impresions');
-
-        var colors = $('form#cotization_form').data('colors');
-        var impresions = $('form#cotization_form').data('impresions');
-
-        colors.sort(function(a, b){
-            return a.nombre - b.nombre;
-        });
-
-        colorSelect.append('<option value=""></option>');
-        impresionsSelect.append('<option value=""></option>');
-
-        $.each(colors,function(index,value) {
-            colorSelect.append('<option value="'+value.nombre+'">'+value.nombre+'</option>');
-        });
-
-        $.each(impresions,function(index,value) {
-            impresionsSelect.append('<option value="'+value.nombre+'">'+value.nombre+'</option>');
-        });
 
 
         $('.nuevos_productos').append(appendProduct);
+        $("[data-toggle='tooltip']").tooltip({trigger: 'hover'});
 
         appendProduct.find('select').select2({});
 
@@ -310,5 +308,34 @@
     initTypeAhead();
 
     $('select').select2({});
+
+    $('.btn-reset-producto').on('click',function () {
+        var container = $(this).closest('.pduct');
+        container.find("input[type='text']").val('');
+        container.find("input[type='search']").val('');
+        container.find("input[type='number']").val('');
+        container.find("textarea").val('');
+        container.find('.file-widget').removeClass('hide');
+        container.find('.file-widget').show();
+        container.find('img').attr('src','');
+
+        var colorSelect = container.find('.color');
+
+        if(colorSelect.hasClass('select2-hidden-accessible')) {
+            colorSelect.select2('destroy');
+            var parentSelect = colorSelect.parent();
+            var newColorInput = $("" +
+                "<input type='text' " +
+                "name='" + colorSelect.attr('name') + "' " +
+                "class='" + colorSelect.attr('class') + "' " +
+                "id='" + colorSelect.attr('id') + "'>");
+            parentSelect.append(newColorInput);
+            colorSelect.remove();
+        }
+
+
+    });
+
+    $("[data-toggle='tooltip']").tooltip({trigger: 'hover'});
 
 })(jQuery);

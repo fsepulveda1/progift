@@ -1,3 +1,17 @@
+function fixAside() {
+    console.log('asd');
+    if ($(window).width() > 768) {
+        $('.app-container').addClass('expanded');
+        $('.hamburger').hide();
+    }
+    else {
+        $('.hamburger').show();
+        $('.app-container').removeClass('expanded');
+    }
+}
+$(window).on('load resize', function () {
+    fixAside();
+});
 
 function checkRut(rut) {
     rut.value = rut.value.replace(/[^0-9kK]/g, '').replace(/(\..*)\./g, '$1');

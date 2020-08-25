@@ -11,7 +11,7 @@
                             <nav aria-label="breadcrumb" class="breadcrumb-nav">
 
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="index.html"><i class="icon-home"></i></a></li>
+                                        <li class="breadcrumb-item"><a href="/"><i class="icon-home"></i></a></li>
                                         <li class="breadcrumb-item"><a href="#">Computación & Tecnología</a></li>
                                     </ol>
 

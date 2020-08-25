@@ -42,19 +42,35 @@ class CartController extends Controller
 
     public function add(Request $request){
 
+        $this->validate($request, [
+            'id' => 'required|max:100|exists:App\Product,id',
+            'quantity' => 'required|numeric|max:1000000|min:1',
+        ], [
+            'required' => 'El campo :attribute es requerido',
+            'min' => 'El campo :attribute permite un valor mínimo de :min',
+            'max' => 'El campo :attribute permite un valor máximo de :max',
+            'numeric' => 'El campo :attribute debe ser numérico',
+            'exists' => 'Ha ocurrido un error al añadir el producto'
+        ]);
+
+        $product = Product::where(['id'=>$request->id])->first();
+
+        $imageFirst = json_decode($product->imagen)[0];
+
         \Cart::add(array(
-            'id' => $request->id,
-            'name' => $request->name,
-            'price' => $request->price,
+            'id' => $product->id,
+            'name' => $product->nombre,
+            'price' => $product->precio,
             'quantity' => $request->quantity,
             'associatedModel' => 'App\Product',
             'attributes' => array(
-                'image' => $request->image,
+                'image' => $imageFirst,
                 'color' => $request->color,
                 'impresion' => $request->impresion,
-                'slug' => $request->slug
+                'slug' => $product->slug
             )
         ));
+
         return redirect()->route('public.mi-cotizacion.index')->with('success_msg', $request->name.' agregado al carro');
     }
 
@@ -84,9 +100,18 @@ class CartController extends Controller
         $IVA = \Cart::getTotalQuantity() * 0.19;
         $neto = \Cart::getTotalQuantity() - $IVA;
 
-        if($cartCollection->isEmpty()) {
-            return back()->with('alert_msg', 'El carro esta vacío');
-        }
+        $this->validate($request, [
+            'empresa' => 'required|max:100',
+            'rut' => 'required|max:12',
+            'contacto' => 'required|max:50',
+            'telefono' => 'required|max:20',
+            'email' => 'required|max:50|email',
+            'comentarios' => 'required|max:1000',
+        ], [
+            'required' => 'El campo :attribute es requerido',
+            'max' => 'El campo :attribute permite un máximo de :max caracteres',
+            'email' => 'El  :attribute no es válido',
+        ]);
 
         $emailVendedor = $this->matchRut($request->rut);
 
@@ -113,7 +138,11 @@ class CartController extends Controller
             $this->incrementProductCount($item);
         }
 
-        $client = Client::where('rut', $request->rut)->first();
+        $client = Client::where([
+            ['rut', $request->rut],
+            ['email', $request->email],
+            ['telefono', $request->telefono]
+        ])->first();
 
         if(!$client){
             $client = Client::create([

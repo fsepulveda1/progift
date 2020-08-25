@@ -5,6 +5,18 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-9">
+                @if($errors->any())
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                @endif
                 <div class="product-single-container product-single-default">
                     <nav aria-label="breadcrumb" class="breadcrumb-nav">
                         <ol class="breadcrumb">
@@ -21,7 +33,7 @@
                                         <?php $images = json_decode($product->imagen); ?>
                                         <?php $imageFirst = json_decode($product->imagen); ?>
                                         <?php $count = 1; ?>
-                                            @foreach($images as $image)
+                                        @foreach($images as $image)
                                             <?php
                                             if($count == 1){
                                                 $imageFirst=$image;
@@ -31,7 +43,7 @@
                                             <div class="product-item">
                                                 <img class="product-single-image" src="{{ asset('/storage/'.$image) }}" data-zoom-image="{{ asset('/storage/'.$image) }}" />
                                             </div>
-                                            @endforeach
+                                        @endforeach
                                     </div>
                                     <!-- End .product-single-carousel -->
                                     <span class="prod-full-screen">
@@ -40,11 +52,11 @@
                                 </div>
                                 <div class="prod-thumbnail row owl-dots" id='carousel-custom-dots'>
                                     <?php $images = json_decode($product->imagen); ?>
-                                        @foreach($images as $image)
+                                    @foreach($images as $image)
                                         <div class="col-3 owl-dot active">
                                             <img src="{{ asset('/storage/'.$image) }}" />
                                         </div>
-                                        @endforeach
+                                    @endforeach
                                 </div>
                             </div>
                             <!-- End .product-single-gallery -->
@@ -74,37 +86,33 @@
                                 <!-- End .product single-share -->
                                 <form action="{{ route('cart.store') }}" method="POST">
                                     {{ csrf_field() }}
-                                <div class="product-filters-container">
-                                    <div class="product-single-filter">
-                                        <select id="color" name="color">
-                                            <option disabled selected>Color</option>
-                                            @foreach($product->colors as $color)
-                                            <option value="{{$color->nombre}}">{{$color->nombre}}</option>
-                                            @endforeach
-                                        </select>
+                                    <div class="product-filters-container">
+                                        <div class="product-single-filter">
+                                            <select id="color" name="color">
+                                                <option disabled selected>Color</option>
+                                                @foreach($product->colors as $color)
+                                                    <option value="{{$color->nombre}}">{{$color->nombre}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <!-- End .product-single-filter -->
+                                        <div class="product-single-filter">
+                                            <select id="impresion" name="impresion">
+                                                <option disabled selected>Tipo de impresión</option>
+                                                @foreach($impresions as $impresion)
+                                                    <option value="{{$impresion->nombre}}">{{$impresion->nombre}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <!-- End .product-single-filter -->
                                     </div>
-                                    <!-- End .product-single-filter -->
-                                    <div class="product-single-filter">
-                                        <select id="impresion" name="impresion">
-                                            <option disabled selected>Tipo de impresión</option>
-                                            @foreach($impresions as $impresion)
-                                            <option value="{{$impresion->nombre}}">{{$impresion->nombre}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <!-- End .product-single-filter -->
-                                </div>
-                                <!-- End .product-filters-container -->
-                                <div class="product-action">
+                                    <!-- End .product-filters-container -->
+                                    <div class="product-action">
                                         <div class="product-single-qty">
                                             <input class="horizontal-quantity form-control" value="100" type="number" id="quantity" name="quantity">
                                         </div>
                                         <!-- End .product-single-qty -->
                                         <input type="hidden" value="{{ $product->id }}" id="id" name="id">
-                                        <input type="hidden" value="{{ $product->nombre }}" id="name" name="name">
-                                        <input type="hidden" value="{{ $product->precio }}" id="price" name="price">
-                                        <input type="hidden" value="{{ $imageFirst }}" id="image" name="image">
-                                        <input type="hidden" value="{{ $product->sku }}" id="slug" name="slug">
                                         <div class="" style="background-color: white;">
                                             <div class="row">
                                                 <button class="btn-icon btn-add-cart paction add-cart" class="tooltip-test" title="add to cart">
@@ -113,8 +121,8 @@
                                             </div>
                                         </div>
 
-                                </div>
-                            </form>
+                                    </div>
+                                </form>
                                 <!-- End .product-action -->
 
                             </div>
@@ -129,9 +137,9 @@
                 <div class="featured-section pt-sm bg-white">
                     <h2 class="carousel-title">ARTÍCULOS RELACIONADOS</h2>
                     <div class="product-intro">
-                            @foreach($products as $pro)
+                        @foreach($products as $pro)
                             <div class="product-default col-sm-6 col-md-3">
-                            <div class="product-details" style="display: inline-flex;">
+                                <div class="product-details" style="display: inline-flex;">
                                     <figure>
                                         <a href="/products/{{$pro->id}}">
                                             <?php $images = json_decode($pro->imagen); ?>
@@ -140,10 +148,10 @@
                                             @foreach($images as $image)
                                                 <?php
                                                 if($count == 1){
-                                                    $imageFirst = $image;
-                                                    ?>
-                                                    <img style="width: 200px;" src="{{ asset('/storage/'.$image) }}" alt="Producto">
-                                                    <?php
+                                                $imageFirst = $image;
+                                                ?>
+                                                <img style="width: 200px;" src="{{ asset('/storage/'.$image) }}" alt="Producto">
+                                                <?php
                                                 }
                                                 $count++;
                                                 ?>
@@ -170,8 +178,8 @@
                 <!-- End .featured-section -->
             </div>
             <!-- End .col-lg-9 -->
-            @include('partials.cat-menu')
-            <!-- End .col-lg-3 -->
+        @include('partials.cat-menu')
+        <!-- End .col-lg-3 -->
         </div>
         <!-- End .row -->
 

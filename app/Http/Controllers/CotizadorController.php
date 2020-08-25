@@ -48,7 +48,8 @@ class CotizadorController extends Controller
     }
 
     public function busca(Request $request) {
-        $result = DB::select("select id, nombre AS name, descripcion_larga as descripcion, precio, imagen, sku from products where nombre LIKE '%{$request->input('query')}%'");
+        $result = DB::select("select id, nombre AS name, descripcion_larga as descripcion, precio, imagen, sku from products 
+                              where (nombre LIKE '%{$request->input('query')}%' OR sku LIKE '%{$request->input('query')}%')");
         foreach ($result as $key => $rs) {
             $colors = DB::select("select c.nombre from product_color pc inner join colors c on pc.color_id = c.id where pc.product_id = ".$rs->id);
             $colors = array_map(function($item){ return $item->nombre; },$colors);

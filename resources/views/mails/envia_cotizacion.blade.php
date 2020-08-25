@@ -12,31 +12,32 @@
             <th width="20%" align="center">CANTIDAD</th>
             <th width="20%" align="center">IMPRESION</th>
         </tr>
-
-        @foreach ($cotizacion['detalle'] as $det)
-            <tr>
-                <td width="20%" align="left">
-                    &nbsp;{{ $det['nombre'] }}<br/>
-                    &nbsp;{{ $det['sku'] }}
-                </td>
-                <td width="20%" align="center">
-                    <img src="{{ asset(stripcslashes($det['imagen'])) }}" style="height: 50px;"/>
-                </td>
-                <td width="20%" align="center">
-                    {{ $det['color'] }}
-                </td>
-                <td width="20%" align="center">
-                    @if(is_array($det['cantidad']))
-                        {{ $det['cantidad'][0] }}
-                    @else
-                        {{ $det['cantidad'] }}
-                    @endif
-                </td>
-                <td width="20%" align="center">
-                    {{ $det['imprenta'] }}
-                </td>
-            </tr>
-        @endforeach
+        @if(!empty($cotizacion['detalle']))
+            @foreach ($cotizacion['detalle'] as $det)
+                <tr>
+                    <td width="20%" align="left">
+                        &nbsp;{{ $det['nombre'] }}<br/>
+                        &nbsp;{{ $det['sku'] }}
+                    </td>
+                    <td width="20%" align="center">
+                        <img src="{{ asset(stripcslashes($det['imagen'])) }}" style="height: 50px;"/>
+                    </td>
+                    <td width="20%" align="center">
+                        {{ $det['color'] }}
+                    </td>
+                    <td width="20%" align="center">
+                        @if(is_array($det['cantidad']))
+                            {{ $det['cantidad'][0] }}
+                        @else
+                            {{ $det['cantidad'] }}
+                        @endif
+                    </td>
+                    <td width="20%" align="center">
+                        {{ $det['imprenta'] }}
+                    </td>
+                </tr>
+            @endforeach
+        @endif
     </table>
 
     <p style="font-size: 14pt;">Ante cualquier duda o consulta puede contactar al siguiente Ejecutivo(a) que recibió su solicitud. </p>

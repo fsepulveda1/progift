@@ -344,3 +344,6 @@ select[name=dataTable_length] {
 }
 
 .menu-vendedor .navbar-nav > li.dropdown:last-child{ display: none}
+.tooltip.fade.in {
+    opacity: 1 !important;
+}
