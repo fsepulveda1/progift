@@ -20,7 +20,7 @@
         }
 
         body {
-            padding: 2.5cm .5cm 2.5cm;
+            padding: 2cm .5cm 2.35cm;
         }
 
         .table{
@@ -44,16 +44,16 @@
             top: 0cm;
             left: 0cm;
             right: 0cm;
-            height: 2cm;
-            padding: .5cm;
+            height: 1.5cm;
+            padding: .5cm .5cm .25cm;
         }
         footer {
             position: fixed;
             bottom: 0cm;
             left: 0cm;
             right: 0cm;
-            height: 2.5cm;
-            padding: .5cm;
+            height: 2.35cm;
+            padding: .25cm .5cm;
             background-color: #F5C524;
         }
     </style>
@@ -62,87 +62,6 @@
 <header>
     <img src="{{ asset('assets/images/logo_pdf.png') }}" width="150px"/>
 </header>
-<main>
-    <h5 style="text-align: center; padding: 1rem; margin-bottom: 2rem; font-size: 10pt">COTIZACIÓN Nº @if(isset($data['number'])){{$data['number']}}@else XXXXX @endif</h5>
-    <table class="w-100" style="margin: 2rem 0; font-size: 10pt">
-        <tr>
-            <th align="left" valign="top" style="font-weight: bold">
-                {{ $client->contacto }}<br>
-                {{ $client->nombre }}<br>
-                Presente
-            </th>
-            <th align="right" valign="top">
-                {{ date('d/m/Y') }}
-            </th>
-        </tr>
-    </table>
-
-    <table class="table w-100" border="1" cellpadding="0" cellspacing="0">
-        <tr>
-            <th width="40%">DESCRIPCIÓN</th>
-            <th width="25%">IMAGEN</th>
-            <th width="10%">CANTIDAD</th>
-            <th width="10%">VALOR UNITARIO</th>
-            <th width="15%">TOTAL<br> (SIN IVA)</th>
-        </tr>
-
-        @foreach (json_decode($data['detalle']) as $det)
-            <tr>
-                <td valign="top">
-                    {{ $det->nombre }}<br>
-                    {!! $det->descripcion !!}
-                </td>
-                <td align="center" valign="top"><img src="{{ asset(stripcslashes($det->imagen))}}" height="70px"></td>
-                <td align="center" valign="top">{{$det->cantidad[0]}}</td>
-                <td align="center" valign="top">${{number_format($det->precio[0], 0, ',', '.')}}</td>
-                <td align="center" valign="top">${{number_format($det->suma[0], 0, ',', '.')}}</td>
-            </tr>
-        @endforeach
-
-    </table>
-    <table class="w-100 mt-1">
-        <tr>
-            <td align="left" valign="top" width="75%" style="font-size: 10pt">
-                <div><strong>+ Los valores detallados no incluyen IVA</strong></div>
-                <div class="mt-1"><strong>Forma de pago:</strong> {{$data['forma_pago']}}</div>
-                <div><strong>Plazo de entrega:</strong> {{$data['entrega']}}</div>
-                <div><strong>Validéz de la cotización:</strong> {{$data['validez']}}</div>
-                <div class="mt-1">
-                    <strong>A la espera de una buena acogida,
-                        <br>Le saluda atentamente
-                    </strong>
-                </div>
-            </td>
-            <td width="25%" valign="top">
-                @if($data['activa_descuento'])
-                    <table class="table w-100" border="1" cellpadding="0" cellspacing="0">
-                        <tr>
-                            <th width="43%">Descuento</th>
-                            <td>{{ $data['descuento'] }}%</td>
-                        </tr>
-                    </table>
-                @endif
-
-                @if($data['activa_total'])
-                    <table class="table mt-1 w-100" border="1" cellpadding="0" cellspacing="0">
-                        <tr>
-                            <th width="43%" align="right">NETO</th>
-                            <td>${{ number_format($data['neto'], 0, ',', '.') }}</td>
-                        </tr>
-                        <tr>
-                            <th align="right">IVA</th>
-                            <td>${{ number_format($data['iva'], 0, ',', '.') }}</td>
-                        </tr>
-                        <tr>
-                            <th align="right">TOTAL</th>
-                            <td>${{ number_format($data['total'], 0, ',', '.') }}</td>
-                        </tr>
-                    </table>
-                @endif
-            </td>
-        </tr>
-    </table>
-</main>
 <footer>
     <table class="w-100" style="font-size: 10pt">
         <tr>
@@ -167,5 +86,88 @@
         </tr>
     </table>
 </footer>
+<main style="padding: 0; margin: 0">
+    <h5 style="text-align: center; margin-bottom: 1rem; margin-top: 0; font-size: 10pt">COTIZACIÓN Nº @if(isset($data['number'])){{$data['number']}}@else XXXXX @endif</h5>
+    <table class="w-100" style="margin: 1rem 0; font-size: 10pt">
+        <tr>
+            <th align="left" valign="top" style="font-weight: bold">
+                {{ $client->contacto }}<br>
+                {{ $client->nombre }}<br>
+                Presente
+            </th>
+            <th align="right" valign="top">
+                {{ date('d/m/Y') }}
+            </th>
+        </tr>
+    </table>
+
+    <table class="table w-100" border="1" cellpadding="0" cellspacing="0">
+        <tr>
+            <th width="40%">DESCRIPCIÓN</th>
+            <th width="25%">IMAGEN</th>
+            <th width="10%">CANTIDAD</th>
+            <th width="10%">VALOR UNITARIO</th>
+            <th width="15%">TOTAL<br> (SIN IVA)</th>
+        </tr>
+
+        @foreach (json_decode($data['detalle']) as $det)
+            <tr>
+                <td valign="top">
+                    {{ $det->nombre }} ({{ $det->sku }})<br>
+                    {!! $det->descripcion !!}<br>
+                    Color: {{ $det->color }}<br>
+                    Impresión :{{ $det->imprenta }}<br>
+                </td>
+                <td align="center" valign="middle"><img src="{{ asset(stripcslashes($det->imagen))}}" height="120px"></td>
+                <td align="center" valign="top">{{$det->cantidad[0]}}</td>
+                <td align="center" valign="top">${{number_format($det->precio[0], 0, ',', '.')}}</td>
+                <td align="center" valign="top">${{number_format($det->suma[0], 0, ',', '.')}}</td>
+            </tr>
+        @endforeach
+
+    </table>
+    <table class="w-100" border="0">
+        <tr>
+            <td align="left" valign="top" width="75%" style="padding-top:1rem;font-size: 10pt">
+                <div><strong>+ Los valores detallados no incluyen IVA</strong></div>
+                <div class="mt-1"><strong>Forma de pago:</strong> {{$data['forma_pago']}}</div>
+                <div><strong>Plazo de entrega:</strong> {{$data['entrega']}}</div>
+                <div><strong>Validéz de la cotización:</strong> {{$data['validez']}}</div>
+                <div class="mt-1">
+                    <strong>A la espera de una buena acogida,
+                        <br>Le saluda atentamente
+                    </strong>
+                </div>
+            </td>
+            <td width="25%" valign="top">
+                @if($data['activa_descuento'])
+                    <table class="table w-100" style="margin-top: .5rem" border="1" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <th width="43%">Descuento</th>
+                            <td>{{ $data['descuento'] }}%</td>
+                        </tr>
+                    </table>
+                @endif
+
+                @if($data['activa_total'])
+                    <table class="table w-100" border="1" cellpadding="0" cellspacing="0" style="margin-top: .5rem">
+                        <tr>
+                            <th width="43%" align="right">NETO</th>
+                            <td>${{ number_format($data['neto'], 0, ',', '.') }}</td>
+                        </tr>
+                        <tr>
+                            <th align="right">IVA</th>
+                            <td>${{ number_format($data['iva'], 0, ',', '.') }}</td>
+                        </tr>
+                        <tr>
+                            <th align="right">TOTAL</th>
+                            <td>${{ number_format($data['total'], 0, ',', '.') }}</td>
+                        </tr>
+                    </table>
+                @endif
+            </td>
+        </tr>
+    </table>
+</main>
 </body>
 </html>

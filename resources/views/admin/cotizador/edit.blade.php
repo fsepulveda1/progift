@@ -89,144 +89,138 @@
 								@php $detalle = json_decode($cotizacion->detalle, true); @endphp
 								@foreach ($detalle as $key => $d)
 									@php $cnt = $key; @endphp
-									<div class="pl-lg-4 pduct">
+									<div class="pl-lg-4 pduct" id="row_pduct_{{$cnt}}">
 										<div class="row">
-											<div class="col-lg-6">
-												<fieldset>
-													<h6 class="heading-small text-muted mb-4">Detalle</h6>
-													<div class="row">
-														<div class="col-lg-4 mb-0">
-															<div class="form-group mb-lg-0">
-																<label for="example-search-input" class="form-control-label">Producto</label>
-																<input type="hidden" name="producto[{{$cnt}}][id]" id="id"/>
-																<input class="form-control form-control-alternative search" autocomplete="off" type="search" placeholder="Busca por sku/nombre..." id="nombre" name="producto[{{$cnt}}][nombre]" value="{{$d['nombre']}}" required>
-															</div>
+											<div class="col-lg-7">
+												<div class="row">
+													<div class="col-lg-4 mb-0">
+														<div class="form-group mb-lg-0">
+															<label for="example-search-input" class="form-control-label">Producto</label>
+															<input type="hidden" name="producto[{{$cnt}}][id]" id="id"/>
+															<input class="form-control form-control-alternative search" autocomplete="off" type="search" placeholder="Producto" id="nombre" name="producto[{{$cnt}}][nombre]" value="{{$d['nombre']}}" required>
 														</div>
-														<div class="col-lg-2 mb-0">
-															<div class="form-group mb-lg-0">
-																<label for="example-search-input" class="form-control-label">SKU</label>
-																<input class="form-control form-control-alternative sku" autocomplete="off" type="text" placeholder="SKU" id="sku" value="{{$d['sku']}}" name="producto[{{$cnt}}][sku]" required>
-															</div>
+														<div class="form-group mb-lg-0 mt-1">
+															<input class="form-control form-control-alternative sku" autocomplete="off" type="text" placeholder="Código" id="sku" value="{{$d['sku']}}" name="producto[{{$cnt}}][sku]" required>
 														</div>
-														<div class="col-lg-3 mb-0">
-															<div class="form-group mb-lg-0">
-																<label class="form-control-label" for="input-country">Color</label>
-																<input type="text" name="producto[{{$cnt}}][color]" value="{{$d['color']}}" id="color" required class="form-control form-control-alternative color">
-															</div>
-														</div>
-														<div class="col-lg-3">
-															<div class="form-group mb-lg-0">
-																<label class="form-control-label" for="exampleFormControlSelect1">Impresión</label>
-																<input type="text" name="producto[{{$cnt}}][impresion]" value="{{$d['imprenta']}}" id="impresion" class="form-control form-control-alternative impresion">
-															</div>
+														<div class="form-group mt-1">
+															<textarea name="producto[{{$cnt}}][descripcion]" id="descripcion" placeholder="Descripción" class="form-control form-control-alternative descripcion textarea richTextBox" rows="2">@if(isset($d['descripcion'])){!! strip_tags($d['descripcion']) !!}@endif</textarea>
 														</div>
 													</div>
-													<div class="row">
-														<div class="col-lg-4">
-															<div class="form-group">
-																<label class="form-control-label" for="input-country">Imágen</label>
-																<div class="custom-file">
-																	<div class="file-widget @if( !empty($d['imagen'])) hide @endif">
-																		<input type="file" class="custom-file-input" value="" name="producto[{{$cnt}}][file_imagen]" lang="es">
-																		<label class="custom-file-label text-left">Foto</label>
-																	</div>
-																	<input type="hidden" name="producto[{{$cnt}}][imagen]" value="{{$d['imagen']}}" id="imagen" class="himagen"/>
-																	<img src="{{$d['imagen']}}" class="imagen" style="width: 65px;"/>
+													<div class="col-lg-3 mb-0">
+														<div class="form-group mb-lg-0">
+															<label class="form-control-label" for="input-country">Color</label>
+															<input type="text" name="producto[{{$cnt}}][color]" value="{{$d['color']}}" id="color" required class="form-control form-control-alternative color">
+														</div>
+													</div>
+													<div class="col-lg-3">
+														<div class="form-group mb-lg-0">
+															<label class="form-control-label" for="exampleFormControlSelect1">Impresión</label>
+															<input type="text" name="producto[{{$cnt}}][impresion]" value="{{$d['imprenta']}}" id="impresion" class="form-control form-control-alternative impresion">
+														</div>
+													</div>
+													<div class="col-lg-2">
+														<div class="form-group">
+															<label class="form-control-label" for="input-country">Imágen</label>
+															<div class="custom-file">
+																<div class="file-widget @if( !empty($d['imagen'])) hide @endif">
+																	<input type="file" class="custom-file-input" value="" name="producto[{{$cnt}}][file_imagen]" lang="es">
+																	<label class="custom-file-label text-left">Foto</label>
 																</div>
-															</div>
-														</div>
-														<div class="col-lg-8">
-															<div class="form-group">
-																<label class="form-control-label" for="descripcion">Descripción</label>
-																<textarea name="producto[{{$cnt}}][descripcion]" id="descripcion" class="form-control form-control-alternative descripcion textarea richTextBox" rows="2">@if(isset($d['descripcion'])){!! strip_tags($d['descripcion']) !!}@endif</textarea>
+																<input type="hidden" name="producto[{{$cnt}}][imagen]" value="{{$d['imagen']}}" id="imagen" class="himagen"/>
+																<img src="{{$d['imagen']}}" class="imagen" style="width: 65px;"/>
 															</div>
 														</div>
 													</div>
-												</fieldset>
+												</div>
 											</div>
-											<div class="col-lg-6">
-												<fieldset>
-													<h6 class="heading-small text-muted mb-4">Cantidades</h6>
-													<div class="row">
-														<div class="col-lg-2 mb-lg-0">
-															<div class="form-group">
-																<label for="example-search-input" class="form-control-label">Cantidad</label>
-																<input type="number" value="@if(is_array($d['cantidad'])){{$d['cantidad'][0]}}@else{{(int)$d['cantidad']}}@endif" name="producto[{{$cnt}}][cantidad][]" id="cantidad" class="form-control form-control-alternative cantidad" placeholder="0" required>
-															</div>
+											<div class="col-lg-5">
+												<div class="row">
+													<div class="col-lg-3 mb-lg-0">
+														<div class="form-group">
+															<label for="example-search-input" class="form-control-label">Cantidad</label>
+															<input type="number" value="@if(is_array($d['cantidad'])){{$d['cantidad'][0]}}@else{{(int)$d['cantidad']}}@endif" name="producto[{{$cnt}}][cantidad][]" id="cantidad" class="form-control form-control-alternative cantidad" placeholder="0" required>
 														</div>
-														<div class="col-lg-4 mb-lg-0">
-															<div class="form-group">
-																<input type="hidden" id="precio_unitario" class="precio_unitario"/>
-																<label for="example-search-input" class="form-control-label">Valor Unitario</label>
-																<input type="number" value="{{$d['precio'][0]}}" name="producto[{{$cnt}}][precio][]" id="precio" class="form-control form-control-alternative money precio" placeholder="0" required>
-															</div>
+													</div>
+													<div class="col-lg-3 mb-lg-0">
+														<div class="form-group">
+															<input type="hidden" id="precio_unitario" class="precio_unitario"/>
+															<label for="example-search-input" class="form-control-label">Valor Unitario</label>
+															<input type="number" value="{{$d['precio'][0]}}" name="producto[{{$cnt}}][precio][]" id="precio" class="form-control form-control-alternative money precio" placeholder="0" required>
 														</div>
-														<div class="col-lg-4 mb-lg-0">
-															<div class="form-group">
-																<label for="example-search-input" class="form-control-label">Total</label>
-																<input type="number" value="{{$d['suma'][0]}}" name="producto[{{$cnt}}][suma][]" id="precio_suma" class="form-control form-control-alternative money precio_suma" placeholder="0" required readonly>
-															</div>
+													</div>
+													<div class="col-lg-3 mb-lg-0">
+														<div class="form-group">
+															<label for="example-search-input" class="form-control-label">Total</label>
+															<input type="number" value="{{$d['suma'][0]}}" name="producto[{{$cnt}}][suma][]" id="precio_suma" class="form-control form-control-alternative money precio_suma" placeholder="0" required readonly>
 														</div>
-														<div class="col-lg-2 mb-lg-0">
-															<div class="form-group">
-																<input type="hidden" class="orden" value="{{$cnt}}"/>
-																<label for="example-search-input" class="form-control-label">Acciones</label>
-																<div class="d-flex">
+													</div>
+													<div class="col-lg-3 mb-lg-0">
+														<div class="form-group">
+															<input type="hidden" class="orden" value="{{$cnt}}"/>
+															<label for="example-search-input" class="form-control-label">Acciones</label>
+															<div class="d-flex">
+																@if($cnt == 0)
 																	<button data-toggle="tooltip" title="Eliminar datos" type="button" class="btn btn-sm btn-danger btn-sm btn-reset-producto">
 																		<span class="btn-inner--icon"><i class="fas fa-trash-alt"></i></span>
 																	</button>
-																	<button data-toggle="tooltip" title="Agregar cantidad" type="button" class="btn btn-sm btn-success d-{{str_replace(' ', '', $d['nombre'])}} btn-agrega_cant">
-																		<span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
+																@else
+																	<button data-toggle="tooltip" title="Eliminar Producto" type="button" class="btn btn-danger btn-sm btn-eliminar_producto" data-id="row_pduct_{{$cnt}}">
+																		<span class="btn-inner--icon"><i class="fas fa-trash-alt"></i></span>
 																	</button>
-																</div>
+																@endif
+
+																<button data-toggle="tooltip" title="Agregar cantidad" type="button" class="btn btn-sm btn-success d-{{str_replace(' ', '', $d['nombre'])}} btn-agrega_cant">
+																	<span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
+																</button>
 															</div>
 														</div>
 													</div>
-													@php
-														$clase = 'd-'.str_replace(' ', '', $d['nombre']);
-													@endphp
-													<div class="cant-add">
+												</div>
+												@php
+													$clase = 'd-'.str_replace(' ', '', $d['nombre']);
+												@endphp
+												<div class="cant-add">
 
-														@if (is_array($d['cantidad']))
-															@foreach($d['cantidad'] as $key => $cantidad)
-																@if($key != 0)
-																	@php
-																		$num = rand(1, 9999);
-																	@endphp
-																	<div class="row" id="{{$num}}">
-																		<div class="col-lg-2 mb-lg-0">
-																			<div class="form-group">
-																				<label for="example-search-input" class="form-control-label">Cantidad</label>
-																				<input type="number" value="{{$cantidad}}" name="producto[{{$cnt}}][cantidad][]" id="cantidad" class="form-control form-control-alternative cantidad" placeholder="0" required="" />
-																			</div>
-																		</div>
-																		<div class="col-lg-4 mb-lg-0">
-																			<div class="form-group">
-																				<input type="hidden" id="precio_unitario" class="precio_unitario" /><label for="example-search-input" class="form-control-label">Valor Unitario</label>
-																				<input type="number" value="{{$d['precio'][$key]}}" name="producto[{{$cnt}}][precio][]" id="precio" class="form-control form-control-alternative money precio p_{{$num}}" placeholder="0" required="" />
-																			</div>
-																		</div>
-																		<div class="col-lg-4 mb-lg-0">
-																			<div class="form-group">
-																				<label for="example-search-input" class="form-control-label">Valor total</label>
-																				<input type="number" value="{{$d['suma'][$key]}}" name="producto[{{$cnt}}][suma][]" id="precio_suma" class="form-control form-control-alternative money precio_suma" placeholder="0" required="" readonly />
-																			</div>
-																		</div>
-																		<div class="col-lg-2 mb-lg-0">
-																			<div class="form-group">
-																				<label for="example-search-input" class="form-control-label">Eliminar</label>
-																				<button type="button" class="btn btn-danger btn-elimina_cant" data-id="{{$num}}">
-																					<span class="btn-inner--icon"><i class="fas fa-trash-alt"></i></span>
-																				</button>
-																			</div>
+													@if (is_array($d['cantidad']))
+														@foreach($d['cantidad'] as $key => $cantidad)
+															@if($key != 0)
+																@php
+																	$num = rand(1, 9999);
+																@endphp
+																<div class="row" id="{{$num}}">
+																	<div class="col-lg-2 mb-lg-0">
+																		<div class="form-group">
+																			<label for="example-search-input" class="form-control-label">Cantidad</label>
+																			<input type="number" value="{{$cantidad}}" name="producto[{{$cnt}}][cantidad][]" id="cantidad" class="form-control form-control-alternative cantidad" placeholder="0" required="" />
 																		</div>
 																	</div>
-																@endif
-															@endforeach
-														@else
+																	<div class="col-lg-4 mb-lg-0">
+																		<div class="form-group">
+																			<input type="hidden" id="precio_unitario" class="precio_unitario" /><label for="example-search-input" class="form-control-label">Valor Unitario</label>
+																			<input type="number" value="{{$d['precio'][$key]}}" name="producto[{{$cnt}}][precio][]" id="precio" class="form-control form-control-alternative money precio p_{{$num}}" placeholder="0" required="" />
+																		</div>
+																	</div>
+																	<div class="col-lg-4 mb-lg-0">
+																		<div class="form-group">
+																			<label for="example-search-input" class="form-control-label">Valor total</label>
+																			<input type="number" value="{{$d['suma'][$key]}}" name="producto[{{$cnt}}][suma][]" id="precio_suma" class="form-control form-control-alternative money precio_suma" placeholder="0" required="" readonly />
+																		</div>
+																	</div>
+																	<div class="col-lg-2 mb-lg-0">
+																		<div class="form-group">
+																			<label for="example-search-input" class="form-control-label">Eliminar</label>
+																			<button type="button" class="btn btn-danger btn-elimina_cant" data-id="{{$num}}">
+																				<span class="btn-inner--icon"><i class="fas fa-trash-alt"></i></span>
+																			</button>
+																		</div>
+																	</div>
+																</div>
+															@endif
+														@endforeach
+													@else
 
-														@endif
-													</div>
+													@endif
+												</div>
 												</fieldset>
 											</div>
 										</div>
@@ -297,18 +291,19 @@
 											</div>
 										</div>
 									</div>
-								</div>
 
-								<div class="pl-lg-4">
-									<div class="row justify-content-end">
-										<div class="col-lg-2">
-											<div class="form-group">
-												<label for="example-search-input" id="number" class="form-control-label FormatNumer">Total</label>
-												<input type="number" id="total" name="total" value="{{$cotizacion->total}}" class="form-control form-control-alternative money total" placeholder="0" readonly>
+									<div class="pl-lg-4">
+										<div class="row justify-content-end">
+											<div class="col-lg-2">
+												<div class="form-group">
+													<label for="example-search-input" id="number" class="form-control-label FormatNumer">Total</label>
+													<input type="number" id="total" name="total" value="{{$cotizacion->total}}" class="form-control form-control-alternative money total" placeholder="0" readonly>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
+
 								<hr class="my-4"/>
 
 								<div class="pl-lg-4">

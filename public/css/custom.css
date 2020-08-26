@@ -148,7 +148,7 @@ app-container.expanded .content-container .side-menu .navbar-header .navbar-bran
     margin-right: 0px;
 }
 /*.container-fluid{*/
-    /*padding-right: 0px;*/
+/*padding-right: 0px;*/
 /*}*/
 .voyager .navbar .navbar-nav>li.profile {
     border-left: 0;
@@ -191,8 +191,8 @@ app-container.expanded .content-container .side-menu .navbar-header .navbar-bran
         padding: 0rem 2rem !important;
     }
     /*.main-content .container-fluid {*/
-        /*padding-left: 39px !important;*/
-        /*padding-right: 39px !important;*/
+    /*padding-left: 39px !important;*/
+    /*padding-right: 39px !important;*/
     /*}*/
 }
 @media (min-width: 1200px)
@@ -203,8 +203,8 @@ app-container.expanded .content-container .side-menu .navbar-header .navbar-bran
 }
 @media (max-width: 767px) {
     /*.container-fluid {*/
-        /*padding-right: 0px;*/
-        /*padding-left: 0px;*/
+    /*padding-right: 0px;*/
+    /*padding-left: 0px;*/
     /*}*/
 
     #search-input > .input-group {
@@ -346,4 +346,22 @@ select[name=dataTable_length] {
 .menu-vendedor .navbar-nav > li.dropdown:last-child{ display: none}
 .tooltip.fade.in {
     opacity: 1 !important;
+}
+
+.card .card-body {
+    /*padding: 5px;*/
+}
+.card .card-body .row {
+    margin-left: -5px;
+    margin-right: -5px;
+}
+.card .card-body .row > div {
+    padding: 0 5px !important;
+}
+.custom-file-label::after {
+    content: "Subir Archivo";
+    font-size: 12px;
+    width: 100%;
+    background-color: #00aaff;
+    color: white;
 }
