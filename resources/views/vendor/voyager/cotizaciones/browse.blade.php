@@ -288,6 +288,11 @@
                                                     @include('voyager::multilingual.input-hidden-bread-browse')
                                                     <span>{{ $data->{$row->field} }}</span>
                                                 @endif
+                                                @if($row->field == "estado")
+                                                    <br><a href="/admin/change/status?id={{$row->id}}" title="Cambiar estado" class="btn btn-sm btn-default">
+                                                        <i class=""></i> <span class="hidden-xs hidden-sm">Cambiar estado</span>
+                                                    </a>
+                                                @endif
                                             </td>
                                         @endforeach
                                         <td class="no-sort no-click bread-actions">

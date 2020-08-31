@@ -29,7 +29,7 @@
                 this.$element.closest('.pduct').find('.precio_unitario').val(args.precio);
                 this.$element.closest('.pduct').find('.p_u').val(args.precio);
                 this.$element.closest('.pduct').find('.precio_suma').val(args.precio);
-                this.$element.closest('.pduct').find('.file-widget').hide();
+                this.$element.closest('.pduct').find('.file-widget').addClass('hide');
                 var colorSelect = this.$element.closest('.pduct').find('.color');
 
                 if(colorSelect.hasClass('select2-hidden-accessible')) {
@@ -136,13 +136,6 @@
         $('.total').val(Math.round(total));
     }
 
-    $(document).on('change','.custom-file input[type="file"]', function () {
-        var label = $(this).closest('.custom-file').find('label');
-        var value = $(this).val();
-        var filename = value.split('\\').pop();
-        label.text(filename);
-    });
-
     $('body').on('click', '.btn-agrega_cant', function() {
         var i = "row_qty_" + ($('.row-qty').length + 1);
 
@@ -237,8 +230,9 @@
             '<input type="file" class="custom-file-input" name="producto['+c+'][file_imagen]" lang="es">' +
             '<label class="custom-file-label text-left">Foto</label>' +
             '</div>' +
-            '<img src="" class="imagen" style="width: 65px;"/>'+
             '<input type="hidden" name="producto['+c+'][imagen]" id="imagen" class="himagen"/>'+
+            '<img src="" class="imagen" style="width: 100%;"/>'+
+            '<span class="delete-image"><i class="fas fa-trash-alt"></i></span>'+
             '</div>'+
             '</div>'+
             '</div>'+
@@ -328,8 +322,39 @@
 
     $("[data-toggle='tooltip']").tooltip({trigger: 'hover'});
 
-    $(document).on('change','.custom-file-input',function () {
-        alert('subir archivo');
+    $(document).on('change','.custom-file input[type="file"]', function () {
+
+        var formData = new FormData(document.getElementById("cotization_form"));
+        var img = $(this).closest('.custom-file').find('img');
+        var container = $(this).closest('.file-widget');
+        var input = $(this).closest('.custom-file').find('.himagen');
+        var current = $(this).closest('.pduct').find('.orden').val();
+        $.ajax({
+            url: '/admin/upload-image?num='+current,
+            type: "post",
+            dataType: "json",
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false
+        }).done( function(res) {
+            img.attr('src',res);
+            input.val(res);
+            container.addClass('hide');
+        }).fail( function(e, res, xhr) {
+            var arr = e.responseJSON.errors;
+            $.each(arr['producto.'+current+'.file_imagen'], function (index,value) {
+                toastr.error(value);
+            });
+        });
+
+    });
+
+    $(document).on('click','.custom-file .delete-image', function () {
+        var container = $(this).closest('.custom-file');
+        container.find('img').attr('src','');
+        container.find('.file-widget').removeClass('hide');
+        container.find('.himagen').val('');
     })
 
 })(jQuery);

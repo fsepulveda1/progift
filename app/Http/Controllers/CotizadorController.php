@@ -19,6 +19,31 @@ use Illuminate\Support\Facades\Auth;
 
 class CotizadorController extends Controller
 {
+
+    public function uploadImage(Request $request) {
+        $key = $request->query->get('num');
+        $imagen = '';
+            if (isset($request->producto[$key]['file_imagen'])) {
+                $rules = ['producto.'.$key.'.file_imagen' => 'required|image|max:5000'];
+                $messages['producto.'.$key.'.file_imagen.required'] = 'Debes seleccionar una imagen';
+                $messages['producto.'.$key.'.file_imagen.image'] = 'Debes seleccionar una imagen';
+                $messages['producto.'.$key.'.file_imagen.max'] = 'El tamaño máximo permitido es 5 MB';
+                request()->validate($rules,$messages);
+
+                /** @var UploadedFile $new_file */
+                $new_file = $request->producto[$key]['file_imagen'];
+                $fileNameWithTheExtension = $new_file->getClientOriginalName();
+                $fileName = pathinfo($fileNameWithTheExtension, PATHINFO_FILENAME);
+                $extension = $new_file->getClientOriginalExtension();
+                $newFileName = $fileName . '_' . time() . '.' . $extension;
+                $new_file->storeAs('public/images/custom_products_images', $newFileName);
+                $imagen = "/storage/images/custom_products_images/".$newFileName;
+            }
+
+
+        return response()->json($imagen);
+    }
+
     public function index() {
         $user_avatar = false;
         $colors = json_encode(Color::orderBy('nombre','asc')->get()->toArray());
@@ -322,25 +347,10 @@ class CotizadorController extends Controller
                 $sum[] = $suma;
             }
 
-            /** @var UploadedFile $new_file */
-
-            if(isset($request->producto[$key]['file_imagen'])) {
-                $new_file = $request->producto[$key]['file_imagen'];
-                $fileNameWithTheExtension = $new_file->getClientOriginalName();
-                $fileName = pathinfo($fileNameWithTheExtension, PATHINFO_FILENAME);
-                $extension = $new_file->getClientOriginalExtension();
-                $newFileName = $fileName . '_' . time() . '.' . $extension;
-                $new_file->storeAs('public/images/custom_products_images', $newFileName);
-                $imagen = "/storage/images/custom_products_images/".$newFileName;
-            }
-            else {
-                $imagen = $value['imagen'];
-            }
-
             $detalle[] = [
                 'nombre' => $value['nombre'],
                 'descripcion' => $value['descripcion'],
-                'imagen' => $imagen,
+                'imagen' => $value['imagen'],
                 'sku' => $value['sku'],
                 'color' => $value['color'],
                 'imprenta' => $value['impresion'],

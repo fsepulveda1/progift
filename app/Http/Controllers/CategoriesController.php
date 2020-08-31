@@ -21,8 +21,7 @@ class CategoriesController extends Controller
     public function index()
     {
         //
-        $categories = Category::orderBy('id', 'desc')
-                    ->get();
+        $categories = Category::orderBy('id', 'desc')->get();
 
         return view('admin.categories.index', ['categories' => $categories]);
     }
@@ -95,7 +94,7 @@ class CategoriesController extends Controller
 
         $products = Product::whereHas('categories', function ($query) use ($id) {
             $query->where('id', '=', $id);
-        })->get();
+        })->orderBy('nombre','asc')->get();
         $lastPage = null;
 
         if ($request->ajax()) {

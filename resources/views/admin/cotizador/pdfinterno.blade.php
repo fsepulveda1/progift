@@ -28,13 +28,14 @@
         }
         .w-100 {
             width: 100%;
+            max-width: 100%;
         }
         .mt-1 {  margin-top: 1rem;  }
         .mt-3 {  margin-top: 3rem;  }
         .table th,
         .table td {
             border: 1px #F5C524 solid;
-            padding: 5px 10px;
+            padding: 5px;
             font-size: 9pt;
         }
 
@@ -118,7 +119,7 @@
                     Color: {{ $det->color }}<br>
                     Impresión :{{ $det->imprenta }}<br>
                 </td>
-                <td align="center" valign="middle"><img src="{{ asset(stripcslashes($det->imagen))}}" height="120px"></td>
+                <td align="center" valign="middle"><img src="{{ asset(stripcslashes($det->imagen))}}" style="max-width: 150px"></td>
                 <td align="center" valign="top">{{$det->cantidad[0]}}</td>
                 <td align="center" valign="top">${{number_format($det->precio[0], 0, ',', '.')}}</td>
                 <td align="center" valign="top">${{number_format($det->suma[0], 0, ',', '.')}}</td>
@@ -126,8 +127,8 @@
         @endforeach
 
     </table>
-    <table class="w-100" border="0">
-        <tr>
+    <table class="w-100" border="0" cellpadding="0" cellspacing="0">
+        <tr style="padding: 0; margin: 0">
             <td align="left" valign="top" width="75%" style="padding-top:1rem;font-size: 10pt">
                 <div><strong>+ Los valores detallados no incluyen IVA</strong></div>
                 <div class="mt-1"><strong>Forma de pago:</strong> {{$data['forma_pago']}}</div>
@@ -139,11 +140,11 @@
                     </strong>
                 </div>
             </td>
-            <td width="25%" valign="top">
+            <td width="25%" align="right" valign="top" style="padding: 0; margin: 0">
                 @if($data['activa_descuento'])
                     <table class="table w-100" style="margin-top: .5rem" border="1" cellpadding="0" cellspacing="0">
                         <tr>
-                            <th width="43%">Descuento</th>
+                            <th width="40%">Descuento</th>
                             <td>{{ $data['descuento'] }}%</td>
                         </tr>
                     </table>
@@ -152,7 +153,7 @@
                 @if($data['activa_total'])
                     <table class="table w-100" border="1" cellpadding="0" cellspacing="0" style="margin-top: .5rem">
                         <tr>
-                            <th width="43%" align="right">NETO</th>
+                            <th width="40%" align="right">NETO</th>
                             <td>${{ number_format($data['neto'], 0, ',', '.') }}</td>
                         </tr>
                         <tr>

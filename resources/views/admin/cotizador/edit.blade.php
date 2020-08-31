@@ -127,7 +127,8 @@
 																	<label class="custom-file-label text-left">Foto</label>
 																</div>
 																<input type="hidden" name="producto[{{$cnt}}][imagen]" value="{{$d['imagen']}}" id="imagen" class="himagen"/>
-																<img src="{{$d['imagen']}}" class="imagen" style="width: 65px;"/>
+																<img src="{{$d['imagen']}}" class="imagen" style="width: 100%;"/>
+																<span class="delete-image"><i class="fas fa-trash-alt"></i></span>
 															</div>
 														</div>
 													</div>

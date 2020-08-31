@@ -64,6 +64,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/genera', 'CotizadorController@genera')->middleware('admin.user')->name('admin.genera');
     Route::get('/genera', 'CotizadorController@generateFromDB')->middleware('admin.user')->name('admin.genera');
     Route::get('/pdf', 'CotizadorController@pdf')->middleware('admin.user')->name('admin.pdf');
+    Route::post('/upload-image', 'CotizadorController@uploadImage')->middleware('admin.user')->name('admin.upload');
 
     Route::get('/import', 'ImportController@getImport')->name('import');
     Route::post('/import_parse', 'ImportController@parseImport')->name('import_parse');
