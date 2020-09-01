@@ -32,7 +32,7 @@
 									<h3 class="mb-0">Listado Productos</h3>
 								</div>
 								<div class="col-4 text-right">
-									<a href="/products/create" class="btn btn-sm btn-success">Agregar Producto</a>
+									<a href="/producto/create" class="btn btn-sm btn-success">Agregar Producto</a>
 								</div>
 							</div>
 						</div>
@@ -70,7 +70,7 @@
                                         <td>{{ $product->brand_id }}</td>
                                         <td><img src="{{ asset('/storage/images/products_images/'.$product['image_path']) }}" alt="{{ $product['image_path'] }}" width="100"></td>
                                         <td>
-                                            <a href="/products/{{ $product['id'] }}/edit"><i class="fa fa-edit"></i></a>
+                                            <a href="/producto/{{ $product['id'] }}/edit"><i class="fa fa-edit"></i></a>
                                             <a href="#"  data-toggle="modal" data-target="#deleteModal" data-productid="{{$product['id']}}"><i class="fas fa-trash-alt"></i></a>
                                         </td>
                                     </tr>
@@ -103,7 +103,7 @@
             <div class="modal-body">Selecciona "Eliminar" si deseas eliminar el producto.</div>
             <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-            <form method="POST" action="/products/{{ $product->id }}">
+            <form method="POST" action="/producto/{{ $product->id }}">
                 @method('DELETE')
                 @csrf
                 <input type="hidden" id="product_id" name="product_id" value="DELETE">

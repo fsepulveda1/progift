@@ -32,7 +32,7 @@
 									<h3 class="mb-0">Listado Categorías</h3>
 								</div>
 								<div class="col-4 text-right">
-									<a href="/categories/create" class="btn btn-sm btn-success">Agregar Categoría</a>
+									<a href="/categoria/create" class="btn btn-sm btn-success">Agregar Categoría</a>
 								</div>
 							</div>
 						</div>
@@ -68,7 +68,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="/categories/{{ $category['id'] }}/edit"><i class="fa fa-edit"></i></a>
+                                            <a href="/categoria/{{ $category['id'] }}/edit"><i class="fa fa-edit"></i></a>
                                             <a href="#"  data-toggle="modal" data-target="#deleteModal" data-categoryid="{{$category['id']}}"><i class="fas fa-trash-alt"></i></a>
                                         </td>
                                     </tr>
@@ -101,7 +101,7 @@
             <div class="modal-body">Selecciona "Eliminar" si deseas eliminar la categoría.</div>
             <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-            <form method="POST" action="/categories/{{ $category->id }}">
+            <form method="POST" action="/categoria/{{ $category->id }}">
                 @method('DELETE')
                 @csrf
                 <input type="hidden" id="category_id" name="category_id" value="DELETE">

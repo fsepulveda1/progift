@@ -141,7 +141,7 @@
                             <div class="product-default col-sm-6 col-md-3">
                                 <div class="product-details" style="display: inline-flex;">
                                     <figure>
-                                        <a href="/products/{{$pro->slug}}">
+                                        <a href="/producto/{{$pro->slug}}">
                                             <?php $images = json_decode($pro->imagen); ?>
                                             <?php $imageFirst = json_decode($pro->imagen); ?>
                                             <?php $count = 1; ?>
@@ -159,13 +159,13 @@
                                         </a>
                                     </figure>
                                     <h2 class="product-title">
-                                        <a href="/products/{{$pro->slug}}">{{ $pro->nombre }}</a>
+                                        <a href="/producto/{{$pro->slug}}">{{ $pro->nombre }}</a>
                                     </h2>
                                     <div class="price-box">
                                         <span class="product-price">{{ $pro->sku }}</span>
                                     </div><!-- End .price-box -->
                                     <div class="product-action">
-                                        <a class="btn-icon btn-add-cart add-cart" href="/products/{{$pro->slug}}" class="tooltip-test" style="color: #fff;" title="add to cart">
+                                        <a class="btn-icon btn-add-cart add-cart" href="/producto/{{$pro->slug}}" class="tooltip-test" style="color: #fff;" title="add to cart">
                                             &nbsp;&nbsp; Cotizar
                                         </a>
                                     </div>

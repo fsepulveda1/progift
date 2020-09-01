@@ -42,7 +42,7 @@
                                 </ul>
                             </div>
                         @endif
-						<form method="POST" action="/products/{{ $product->id }}" enctype="multipart/form-data">
+						<form method="POST" action="/producto/{{ $product->id }}" enctype="multipart/form-data">
                             @method('PATCH')
                             @csrf()
 								<h6 class="heading-small text-muted mb-4">Información Producto</h6>

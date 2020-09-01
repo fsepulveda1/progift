@@ -78,7 +78,7 @@ class CategoriesController extends Controller
 
         $category->save();
 
-        return redirect('/categories');
+        return redirect('/categoria');
     }
 
     /**
@@ -177,7 +177,7 @@ class CategoriesController extends Controller
 
         $category->save();
 
-        return redirect('/categories');
+        return redirect('/categoria');
     }
 
     /**
@@ -198,6 +198,6 @@ class CategoriesController extends Controller
 
         $category->delete();
 
-        return redirect('/categories');
+        return redirect('/categoria');
     }
 }

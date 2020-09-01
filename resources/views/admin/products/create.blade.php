@@ -42,7 +42,7 @@
 								</ul>
 							</div>
 						@endif
-						<form method="POST" action="/products" enctype="multipart/form-data">
+						<form method="POST" action="/producto" enctype="multipart/form-data">
     					{{ csrf_field() }}
 								<h6 class="heading-small text-muted mb-4">Información Producto</h6>
 								<div class="pl-lg-4">

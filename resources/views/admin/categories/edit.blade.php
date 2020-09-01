@@ -28,7 +28,7 @@
 									<h3 class="mb-0">Editar Categoría</h3>
 								</div>
 								<div class="col-4 text-right">
-									<a href="/categories" class="btn btn-sm btn-success">Listar Todos</a>
+									<a href="/categoria" class="btn btn-sm btn-success">Listar Todos</a>
 								</div>
 							</div>
 						</div>
@@ -42,7 +42,7 @@
                                 </ul>
                             </div>
                         @endif
-						<form method="POST" action="/categories/{{ $category->id }}" enctype="multipart/form-data">
+						<form method="POST" action="/categoria/{{ $category->id }}" enctype="multipart/form-data">
                             @method('PATCH')
                             @csrf()
 								<h6 class="heading-small text-muted mb-4">Información Categoría</h6>

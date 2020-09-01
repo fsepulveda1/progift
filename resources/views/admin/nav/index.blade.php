@@ -102,12 +102,12 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link " href="/products">
+						<a class="nav-link " href="/producto">
 							<i class="ni ni-cart text-yellow"></i> Products
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link " href="/categories">
+						<a class="nav-link " href="/categoria">
 							<i class="ni ni-bullet-list-67 text-red"></i> Categorías
 						</a>
 					</li>

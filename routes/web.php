@@ -26,12 +26,9 @@ Route::get('/contacto', 'HomeController@contacto')->name('home.contacto');
     return view('public.tips.index');
 });
 */
-Route::get('/detalle-categoria', function () {
-    return view('public.detalle-categoria.index');
-});
-Route::get('/categories/{id}', 'CategoriesController@show');
+Route::get('/categoria/{id}', 'CategoriesController@show');
 Route::get('/destacados', 'CategoriesController@showDestacados')->name('destacados');
-Route::get('/products/{id}', 'ProductsController@show');
+Route::get('/producto/{id}', 'ProductsController@show');
 Route::get('/tips', 'HomeController@index')->name('tips');
 Route::get('/tips/{slug}', 'HomeController@show');
 Route::get('/buscar', 'HomeController@buscar')->name('home.buscar');

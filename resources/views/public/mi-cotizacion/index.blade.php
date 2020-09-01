@@ -69,14 +69,14 @@
                                 <tr class="product-row">
                                     <td class="product-col d-table-cell">
                                         <h2 class="product-title mb-1">
-                                            <a href="/products/{{$item->model->slug}}">{{$item->name}}</a>
+                                            <a href="/producto/{{$item->model->slug}}">{{$item->name}}</a>
                                         </h2><br>
                                         <div class="product-price">{{$item->model->sku}}</div>
                                     </td>
                                     <td>
                                         <div class="product-col">
                                             <figure class="product-image-container">
-                                                <a href="/products/{{$item->model->slug}}" class="product-image">
+                                                <a href="/producto/{{$item->model->slug}}" class="product-image">
                                                     <img src="/storage/{{$item->attributes->image}}" alt="product">
                                                 </a>
                                             </figure>

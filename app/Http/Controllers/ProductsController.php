@@ -84,7 +84,7 @@ class ProductsController extends Controller
 
         $product->save();
 
-        return redirect('/products');
+        return redirect('/producto');
     }
 
     /**
@@ -170,7 +170,7 @@ class ProductsController extends Controller
 
         $product->save();
 
-        return redirect('/products');
+        return redirect('/producto');
     }
 
     /**
@@ -190,7 +190,7 @@ class ProductsController extends Controller
 
         $product->delete();
 
-        return redirect('/products');
+        return redirect('/producto');
     }
 
     public function moreCotizedProducts() {
