@@ -26,7 +26,7 @@
                                 <div class="product-default">
                                     <div class="product-details">
                                         <figure>
-                                            <a href="/products/{{$pro->id}}">
+                                            <a href="/products/{{$pro->slug}}">
                                                 <?php $images = json_decode($pro->imagen); ?>
                                                 <?php $imageFirst = json_decode($pro->imagen); ?>
                                                 <?php $count = 1; ?>
@@ -44,14 +44,14 @@
                                             </a>
                                         </figure>
                                         <h2 class="product-title">
-                                            <a href="/products/{{$pro->id}}">{{ $pro->nombre }}</a>
+                                            <a href="/products/{{$pro->slug}}">{{ $pro->nombre }}</a>
                                         </h2>
                                         <div class="price-box">
                                             <span class="product-price">{{ $pro->sku }}</span>
                                         </div><!-- End .price-box -->
 
                                         <div class="product-action">
-                                            <a class="btn-icon btn-add-cart add-cart white" href="/products/{{$pro->id}}" style="color: #fff;">
+                                            <a class="btn-icon btn-add-cart add-cart white" href="/products/{{$pro->slug}}" style="color: #fff;">
                                                 &nbsp;&nbsp; Cotizar
                                             </a>
                                         </div>

@@ -27,7 +27,7 @@
                                 <div class="product-default">
                                     <div class="product-details">
                                         <figure>
-                                            <a href="/products/{{$pro->id}}">
+                                            <a href="/products/{{$pro->slug}}">
                                                 <?php $images = json_decode($pro->imagen); ?>
                                                 <?php $imageFirst = json_decode($pro->imagen); ?>
                                                 <?php $count = 1; ?>
@@ -45,14 +45,14 @@
                                             </a>
                                         </figure>
                                         <h2 class="product-title">
-                                            <a href="/products/{{$pro->id}}">{{ $pro->nombre }}</a>
+                                            <a href="/products/{{$pro->slug}}">{{ $pro->nombre }}</a>
                                         </h2>
                                         <div class="price-box">
                                             <span class="product-price">{{ $pro->sku }}</span>
                                         </div><!-- End .price-box -->
 
                                         <div class="product-action">
-                                            <a href="/products/{{$pro->id}}" class="btn-icon btn-add-cart"><i class="icon-bag"></i>COTIZAR</a>
+                                            <a href="/products/{{$pro->slug}}" class="btn-icon btn-add-cart"><i class="icon-bag"></i>COTIZAR</a>
                                         </div>
                                     </div><!-- End .product-details -->
                                 </div>

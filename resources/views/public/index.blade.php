@@ -40,7 +40,7 @@
                                         @if($loop->odd)<div class="product-default">@endif
                                             <div class="product-details">
                                                 <figure>
-                                                    <a href="/products/{{$pro->id}}">
+                                                    <a href="/products/{{$pro->slug}}">
                                                         <?php $images = json_decode($pro->imagen); ?>
                                                         <?php $count = 1; ?>
                                                         @foreach($images as $image)
@@ -56,14 +56,14 @@
                                                     </a>
                                                 </figure>
                                                 <h2 class="product-title">
-                                                    <a href="/products/{{$pro->id}}">{{ $pro->nombre }}</a>
+                                                    <a href="/products/{{$pro->slug}}">{{ $pro->nombre }}</a>
                                                 </h2>
                                                 <div class="price-box">
                                                     <span class="product-price">{{ $pro->sku }}</span>
                                                 <!--<span class="product-price">${{ number_format($pro->precio, 0, ',', '.') }}</span>-->
                                                 </div><!-- End .price-box -->
                                                 <div class="product-action">
-                                                    <a class="btn-icon btn-add-cart add-cart" href="/products/{{$pro->id}}" class="tooltip-test" style="color: #fff;" title="add to cart">
+                                                    <a class="btn-icon btn-add-cart add-cart" href="/products/{{$pro->slug}}" class="tooltip-test" style="color: #fff;" title="add to cart">
                                                         &nbsp;&nbsp; Cotizar
                                                     </a>
                                                 </div>

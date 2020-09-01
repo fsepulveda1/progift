@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Color;
 use App\Impresion;
+use App\Mail\EnviaCotizacionFinal;
 use Barryvdh\DomPDF\PDF;
 use DB;
 use Illuminate\Http\UploadedFile;
@@ -118,7 +119,7 @@ class CotizadorController extends Controller
         $pdfname = 'Pro-Gift_'.urlencode($request->nombre_cliente).date("Y-m-d").'.pdf';
         $pdf = $this->generateOutputFromDB($request);
 
-        $message = new EnviaCotizacion($emailData);
+        $message = new EnviaCotizacionFinal($emailData);
         $message->attachData($pdf, $pdfname);
 
         Mail::to($request->email)->send($message);

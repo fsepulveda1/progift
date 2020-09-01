@@ -90,10 +90,10 @@ class CategoriesController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $category = Category::find($id);
+        $category = Category::where('id',$id)->orWhere('slug',$id)->first();
 
-        $products = Product::whereHas('categories', function ($query) use ($id) {
-            $query->where('id', '=', $id);
+        $products = Product::whereHas('categories', function ($query) use ($category) {
+            $query->where('id', '=', $category->id);
         })->orderBy('nombre','asc')->get();
         $lastPage = null;
 

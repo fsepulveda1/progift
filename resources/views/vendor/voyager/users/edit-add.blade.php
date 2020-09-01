@@ -33,11 +33,11 @@
                                     <h5 class="page-title" style="color: #000;height: 0px;padding-top: 15px;">
                                         {{ __('voyager::generic.'.(isset($dataTypeContent->id) ? 'edit' : 'add')).' ' }}
                                         <?php
-                                            if($dataType->getTranslatedAttribute('display_name_singular') == "User"){
-                                                echo "Usuario";
-                                            }else{
-                                                echo $dataType->getTranslatedAttribute('display_name_singular');
-                                            }
+                                        if($dataType->getTranslatedAttribute('display_name_singular') == "User"){
+                                            echo "Usuario";
+                                        }else{
+                                            echo $dataType->getTranslatedAttribute('display_name_singular');
+                                        }
                                         ?>
                                     </h5>
                                 </div>
@@ -46,7 +46,7 @@
                                 </div>
                             </div>
                         </div>
-                    {{-- <div class="panel"> --}}
+                        {{-- <div class="panel"> --}}
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
                                 <ul>
@@ -106,19 +106,19 @@
                                 </div>
                             @endcan
                             @php
-                            if (isset($dataTypeContent->locale)) {
-                                $selected_locale = $dataTypeContent->locale;
-                            } else {
-                                $selected_locale = config('app.locale', 'en');
-                            }
+                                if (isset($dataTypeContent->locale)) {
+                                    $selected_locale = $dataTypeContent->locale;
+                                } else {
+                                    $selected_locale = config('app.locale', 'en');
+                                }
 
                             @endphp
                             <div class="form-group" style="display: none;">
                                 <label for="locale">{{ __('voyager::generic.locale') }}</label>
                                 <select class="form-control select2" id="locale" name="locale">
                                     @foreach (Voyager::getLocales() as $locale)
-                                    <option value="{{ $locale }}"
-                                    {{ ($locale == $selected_locale ? 'selected' : '') }}>{{ $locale }}</option>
+                                        <option value="{{ $locale }}"
+                                                {{ ($locale == $selected_locale ? 'selected' : '') }}>{{ $locale }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -129,11 +129,16 @@
                 <div class="col-md-4">
                     <div class="panel panel panel-bordered panel-warning">
                         <div class="panel-body">
-                            <div class="form-group">
+                            <div class="form-group center-block text-center">
                                 @if(isset($dataTypeContent->avatar))
-                                    <img src="{{ filter_var($dataTypeContent->avatar, FILTER_VALIDATE_URL) ? $dataTypeContent->avatar : Voyager::image( $dataTypeContent->avatar ) }}" style="width:200px; height:auto; clear:both; display:block; padding:2px; border:1px solid #ddd; margin-bottom:10px;" />
+                                    <img src="{{ filter_var($dataTypeContent->avatar, FILTER_VALIDATE_URL) ? $dataTypeContent->avatar : Voyager::image( $dataTypeContent->avatar ) }}"
+                                         width="200px"
+                                         style="margin-bottom: 2rem"
+                                    />
                                 @endif
-                                <input type="file" data-name="avatar" name="avatar">
+                                <div class="text-center" style="display: flex;justify-content: center">
+                                    <input type="file" data-name="avatar" name="avatar">
+                                </div>
                             </div>
                         </div>
                     </div>

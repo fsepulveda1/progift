@@ -9,7 +9,7 @@
                     $categories = App\Category::where('estado',1)->orderBy('orden', 'ASC')->get();
                 @endphp
                 @foreach($categories as $cat)
-                    <li><a href="/categories/{{$cat['id']}}">{{ $cat->nombre }}</a></li>
+                    <li><a href="/categories/{{$cat['slug']}}">{{ $cat->nombre }}</a></li>
                 @endforeach
             </ul>
         </div><!-- End .side-menu-body -->

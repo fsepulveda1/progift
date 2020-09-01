@@ -65,7 +65,7 @@
 
                                             <div class="product-details">
                                                 <h4 class="product-title">
-                                                    <a href="/products/{{$item->id}}">{{$item->name}}</a>
+                                                    <a href="/products/{{$item->model->slug}}">{{$item->name}}</a>
                                                 </h4>
 
                                                 <span class="cart-product-info">
@@ -74,7 +74,7 @@
                                                 <br>
                                             </div><!-- End .product-details -->
                                             <figure class="product-image-container">
-                                                <a href="/products/{{$item->id}}" class="product-image">
+                                                <a href="/products/{{$item->model->slug}}" class="product-image">
                                                     <img src="/storage/{{$item->attributes->image}}" alt="product">
                                                 </a>
                                                 <!--<a href="#" class="btn-remove" title="Remove Product"><i class="icon-cancel"></i></a>-->

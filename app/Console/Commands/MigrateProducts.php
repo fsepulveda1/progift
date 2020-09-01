@@ -207,7 +207,7 @@ class MigrateProducts extends Command
                     $name = $parts[0]."_".$x++.".".$parts[1];
                 }
                 Storage::put("public/products/migrated/" . $name, $contents);
-                $images[] = "products/migrated/".$name;
+                $images[] = urlencode("products/migrated/".$name);
             }
         }
 

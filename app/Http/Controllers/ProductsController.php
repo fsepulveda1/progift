@@ -90,12 +90,16 @@ class ProductsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param $id
      * @return \Illuminate\Http\Response
+     * @internal param int $slug
      */
     public function show($id)
     {
-        $product = Product::with('colors', 'categories')->find($id);
+        $product = Product::with('colors', 'categories')
+            ->where('slug',$id)
+            ->orWhere('id',$id)
+            ->first();
         $impresions = Impresion::all()->sortBy('orden');
         $ids = array_map(function($item){ return $item['id']; },$product->categories->toArray());
         $productId = $product->id;
