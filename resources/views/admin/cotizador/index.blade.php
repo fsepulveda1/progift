@@ -77,7 +77,7 @@
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-validez">Validez de la cotización</label>
-                                                <input max="250" type="text" name="validez" class="form-control form-control-alternative" placeholder="10 días" value="" required>
+                                                <input max="250" type="text" name="validez" class="form-control form-control-alternative" placeholder="10 días" value="10 días" required>
                                             </div>
                                         </div>
                                     </div>
@@ -95,9 +95,6 @@
                                                         <label for="example-search-input" class="form-control-label">Producto</label>
                                                         <input type="hidden" name="producto[0][id]" id="id"/>
                                                         <input class="form-control form-control-alternative search" autocomplete="off" type="search" placeholder="Producto" id="nombre" name="producto[0][nombre]" required>
-                                                    </div>
-                                                    <div class="form-group mb-lg-0 mt-1">
-                                                        <input class="form-control form-control-alternative sku" autocomplete="off" type="text" placeholder="Código" id="sku" name="producto[0][sku]" required>
                                                     </div>
                                                     <div class="form-group mb-lg-0 mt-1">
                                                         <textarea name="producto[0][descripcion]" placeholder="descripción" id="descripcion" class="form-control form-control-alternative descripcion textarea richTextBox" rows="2"></textarea>
@@ -192,32 +189,33 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="pl-lg-4">
-                                    <div class="row justify-content-end">
-                                        <div class="col-lg-1">
-                                            <label for="example-search-input" class="form-control-label">Activar</label>
-                                            <label class="custom-toggle mt-2">
-                                                <input type="checkbox" checked name="activar_descuento">
-                                                <span class="custom-toggle-slider rounded-circle"></span>
-                                            </label>
-                                        </div>
-
-                                        <div class="col-lg-2">
-                                            <div class="form-group">
-                                                <label for="example-search-input" class="form-control-label">% Descuento</label>
-                                                <input type="text" id="descuento" name="descuento" class="form-control form-control-alternative" placeholder="0" value="0">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <div id="total-fields">
+
                                     <div class="pl-lg-4">
                                         <div class="row justify-content-end">
                                             <div class="col-lg-1">
                                                 <label for="example-search-input" class="form-control-label">Activar</label>
                                                 <label class="custom-toggle mt-2">
-                                                    <input type="checkbox" name="activar_totales" checked>
+                                                    <input type="checkbox" name="activar_descuento">
+                                                    <span class="custom-toggle-slider rounded-circle"></span>
+                                                </label>
+                                            </div>
+
+                                            <div class="col-lg-2">
+                                                <div class="form-group">
+                                                    <label for="example-search-input" class="form-control-label">% Descuento</label>
+                                                    <input type="text" id="descuento" name="descuento" class="form-control form-control-alternative" placeholder="0" value="0">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="pl-lg-4">
+                                        <div class="row justify-content-end">
+                                            <div class="col-lg-1">
+                                                <label for="example-search-input" class="form-control-label">Activar</label>
+                                                <label class="custom-toggle mt-2">
+                                                    <input type="checkbox" name="activar_totales">
                                                     <span class="custom-toggle-slider rounded-circle"></span>
                                                 </label>
                                             </div>

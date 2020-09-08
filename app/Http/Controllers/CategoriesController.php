@@ -92,6 +92,9 @@ class CategoriesController extends Controller
     {
         $category = Category::where('id',$id)->orWhere('slug',$id)->first();
 
+        if(!$category)
+            abort(404);
+
         $products = Product::whereHas('categories', function ($query) use ($category) {
             $query->where('id', '=', $category->id);
         })->orderBy('nombre','asc')->get();

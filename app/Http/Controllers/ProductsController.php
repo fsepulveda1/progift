@@ -100,8 +100,15 @@ class ProductsController extends Controller
             ->where('slug',$id)
             ->orWhere('id',$id)
             ->first();
+
+        if(!$product)
+            return response()->view('errors.404', [], 404);
+
         $impresions = Impresion::all()->sortBy('orden');
-        $ids = array_map(function($item){ return $item['id']; },$product->categories->toArray());
+        $ids = array_map(function($item) {
+            if($item['slug'] != 'nuevos' )
+                return $item['id'];
+        },$product->categories->toArray());
         $productId = $product->id;
 
         $products = Product::join('product_category', function ($join) use ($ids,$productId) {

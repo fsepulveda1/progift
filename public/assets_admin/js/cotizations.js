@@ -14,6 +14,9 @@
                     return process(data);
                 });
             },
+            displayText: function (item) {
+                return item.name+" - Cód: "+item.sku;
+            },
             afterSelect: function (args) {
                 var imagen = args.imagen.split(',');
                 imagen = imagen[0].replace('["', '');
@@ -23,7 +26,6 @@
                 this.$element.closest('.pduct').find('.himagen').val('/storage/' + imagen);
                 this.$element.closest('.pduct').find('.precio').val(args.precio);
                 this.$element.closest('.pduct').find('.descripcion').val(stripHtml(args.descripcion));
-                this.$element.closest('.pduct').find('.sku').val(args.sku);
                 this.$element.closest('.pduct').find('.precio').val(args.precio);
                 this.$element.closest('.pduct').find('.cantidad').val(1);
                 this.$element.closest('.pduct').find('.precio_unitario').val(args.precio);
@@ -119,6 +121,9 @@
                 total = neto = neto - descuento;
             }
         }
+        else {
+            $('#descuento').val(0)
+        }
 
 
         if($('input[name="activar_totales"]').is(':checked')) {
@@ -139,8 +144,8 @@
     $('body').on('click', '.btn-agrega_cant', function() {
         var i = "row_qty_" + ($('.row-qty').length + 1);
 
-        var a = $(this).parent().find('.orden').val();
-        var pr = $(this).parent().find('.p_u').val();
+        var a = $(this).closest('.form-group').find('.orden').val();
+        var pr = $(this).closest('.form-group').find('.p_u').val();
         $(this).closest('.pduct').find('.cant-add').append(
             '<div class="row row-qty" id="'+i+'">'+
             '<div class="col-lg-3 mb-lg-0">'+
@@ -202,9 +207,6 @@
             '<label for="example-search-input" class="form-control-label">Producto</label>'+
             '<input type="hidden" name="producto['+c+'][id]" id="id"/>'+
             '<input class="form-control form-control-alternative search" autocomplete="off" type="search" placeholder="Producto" id="nombre" name="producto['+c+'][nombre]">'+
-            '</div>'+
-            '<div class="form-group mt-1 mb-0">'+
-            '<input class="form-control form-control-alternative sku" autocomplete="off" type="text" placeholder="Código" id="sku" name="producto['+c+'][sku]" required>'+
             '</div>'+
             '<div class="form-group mt-1">'+
             '<textarea name="producto['+c+'][descripcion]" placeholder="Descripción" id="descripcion" class="form-control form-control-alternative descripcion" rows="2"></textarea>'+

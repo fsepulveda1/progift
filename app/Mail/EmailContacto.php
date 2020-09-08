@@ -6,21 +6,20 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use TCG\Voyager\Facades\Voyager;
 
-class EnviaCotizacionCliente extends Mailable
+class EnviaCotizacion extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $cotizacion;
+    public $contacto;
 
     /**
      * Create a new message instance.
      *
      */
-    public function __construct($cotizacion)
+    public function __construct($contacto)
     {
-        $this->cotizacion = $cotizacion;
+        $this->contacto = $contacto;
     }
 
     /**
@@ -31,7 +30,6 @@ class EnviaCotizacionCliente extends Mailable
     public function build()
     {
         return $this->from(config('mail.from')['address'],config('mail.from')['name'])
-            ->cc(Voyager::setting('admin.email_cotizaciones', ''))
-            ->view('mails.envia_cotizacion_cliente');
+            ->view('mails.contacto');
     }
 }

@@ -8,6 +8,7 @@ use DB;
 use App\Category;
 use App\Contacto;
 use App\Newsletter;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -85,6 +86,10 @@ class HomeController extends Controller
             ]);
 
             Contacto::create($request->all());
+
+            $message = new EmailContacto('');
+
+            Mail::to($request->email)->send($message);
 
             Session::flash('success_msg', 'Hemos recibido su información, pronto nos contactaremos con usted.');
             return view('public.contacto.index');

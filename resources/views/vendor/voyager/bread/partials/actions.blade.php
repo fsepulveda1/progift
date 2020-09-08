@@ -12,7 +12,7 @@
             <a target="_blank" href="{{route('admin.genera',['id'=>$data->id])}}" title="PDF" {!! $action->convertAttributesToHtml() !!}>
                 <i class="{{ $action->getIcon() }}"></i> <span class="hidden-xs hidden-sm">PDF</span>
             </a>
-        @elseif($action->getTitle() != "Cambiar estado")
+        @elseif($action->getTitle() != "Cambiar estado" && $action->getTitle() != "Ver")
             <a href="{{ $action->getRoute($dataType->name) }}" title="{{ $action->getTitle() }}" {!! $action->convertAttributesToHtml() !!}>
                 <i class="{{ $action->getIcon() }}"></i> <span class="hidden-xs hidden-sm">{{ $action->getTitle() }}</span>
             </a>

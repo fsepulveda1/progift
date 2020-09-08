@@ -96,14 +96,14 @@
                                     @endphp
                                     @include('voyager::formfields.relationship')
                                 </div>
-                                <div class="form-group">
-                                    <label for="additional_roles">{{ __('voyager::profile.roles_additional') }}</label>
-                                    @php
-                                        $row     = $dataTypeRows->where('field', 'user_belongstomany_role_relationship')->first();
-                                        $options = $row->details;
-                                    @endphp
-                                    @include('voyager::formfields.relationship')
-                                </div>
+                                {{--<div class="form-group">--}}
+                                    {{--<label for="additional_roles">{{ __('voyager::profile.roles_additional') }}</label>--}}
+                                    {{--@php--}}
+                                        {{--$row     = $dataTypeRows->where('field', 'user_belongstomany_role_relationship')->first();--}}
+                                        {{--$options = $row->details;--}}
+                                    {{--@endphp--}}
+                                    {{--@include('voyager::formfields.relationship')--}}
+                                {{--</div>--}}
                             @endcan
                             @php
                                 if (isset($dataTypeContent->locale)) {

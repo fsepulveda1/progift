@@ -25,6 +25,9 @@ class Product extends Model
         parent::boot();
 
         static::creating(function($model) {
+            if(!empty($model->slug))
+                return true;
+
             $newSlug = $slug = str_slug($model->nombre);
 
             // Loop until we can query for the slug and it returns false

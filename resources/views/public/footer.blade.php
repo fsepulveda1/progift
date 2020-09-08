@@ -46,12 +46,12 @@
                                         <div class="col-6 col-md-2">
                                             <div class="product-details">
                                                 <figure>
-                                                    <a href="/product/{{$product->products->id}}">
+                                                    <a href="/producto/{{$product->products->slug}}">
                                                         <img src="{{asset('storage/'.$img[0])}}">
                                                     </a>
                                                 </figure>
                                                 <p class="product-title">
-                                                    <a href="/product/{{$product->products->id}}">
+                                                    <a href="/producto/{{$product->products->slug}}">
                                                         {{$product->products->nombre}}<br>
                                                         {{$product->products->sku}}
                                                     </a>

@@ -55,9 +55,6 @@
 
                     <div class="dropdown-menu" >
                         <div class="dropdownmenu-wrapper">
-                            <div class="dropdown-cart-header">
-                                <span>{{ \Cart::getTotalQuantity()}} Items</span>
-                            </div><!-- End .dropdown-cart-header -->
                             <div class="dropdown-cart-products">
                                 @if(count(\Cart::getContent()) > 0)
                                     @foreach(\Cart::getContent() as $item)

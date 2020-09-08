@@ -90,7 +90,7 @@
                                     @endif
                                     @foreach($dataType->browseRows as $row)
                                         <th>
-                                            @if ($isServerSide)
+                                            @if ($isServerSide && $row->field !== "cotizacione_belongsto_client_relationship")
                                                 <a href="{{ $row->sortByUrl($orderBy, $sortOrder) }}">
                                                     @endif
                                                     {{ $row->getTranslatedAttribute('display_name') }}

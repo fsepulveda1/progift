@@ -53,7 +53,7 @@
             bottom: 0cm;
             left: 0cm;
             right: 0cm;
-            height: 2.35cm;
+            height: 1.75cm;
             padding: .25cm .5cm;
             background-color: #F5C524;
         }
@@ -61,24 +61,24 @@
 </head>
 <body>
 <header>
-    <img src="{{ asset('assets/images/logo_pdf.png') }}" width="150px"/>
+    <img src="{{ asset('assets/images/logo_pdf.png') }}" width="170px"/>
 </header>
 <footer>
     <table class="w-100" style="font-size: 10pt">
         <tr>
-            <th width="30%" align="left" valign="top">
+            <th width="30%" align="left" valign="top" style="line-height: .75rem">
                 Vendedor (a)<br>
                 {{ $user->name }}<br>
                 {{ $user->phone }}<br>
                 {{ $user->email }}<br>
             </th>
-            <th width="40%" align="center" valign="top">
+            <th width="40%" align="center" valign="top"  style="line-height: .75rem">
                 Pro-Gift Ltda<br>
                 Rut: 76.029.873-5<br>
                 Av. Rosario Sur 135 Piso 4, Las Condes<br>
                 Giro: Servicios Publicitarios<br>
             </th>
-            <th width="30%" align="right" valign="top">
+            <th width="30%" align="right" valign="top"  style="line-height: .75rem">
                 Datos Bancarios:<br>
                 Banco: BCI<br>
                 Cuenta Cte: Nº 45791163<br>
@@ -91,7 +91,7 @@
     <h5 style="text-align: center; margin-bottom: 1rem; margin-top: 0; font-size: 10pt">COTIZACIÓN Nº @if(isset($data['number'])){{$data['number']}}@else XXXXX @endif</h5>
     <table class="w-100" style="margin: 1rem 0; font-size: 10pt">
         <tr>
-            <th align="left" valign="top" style="font-weight: bold">
+            <th align="left" valign="top" style="font-weight: bold; line-height: .75rem">
                 {{ $client->contacto }}<br>
                 {{ $client->nombre }}<br>
                 Presente
@@ -114,12 +114,12 @@
         @foreach (json_decode($data['detalle']) as $det)
             <tr>
                 <td valign="top">
-                    {{ $det->nombre }} ({{ $det->sku }})<br>
+                    {{ $det->nombre }}<br>
                     {!! $det->descripcion !!}<br>
                     Color: {{ $det->color }}<br>
                     Impresión :{{ $det->imprenta }}<br>
                 </td>
-                <td align="center" valign="middle"><img src="{{ asset(stripcslashes($det->imagen))}}" style="max-width: 150px"></td>
+                <td align="center" valign="middle"><img src="{{ asset(stripcslashes($det->imagen))}}" style="max-width: 120px"></td>
                 <td align="center" valign="top">{{$det->cantidad[0]}}</td>
                 <td align="center" valign="top">${{number_format($det->precio[0], 0, ',', '.')}}</td>
                 <td align="center" valign="top">${{number_format($det->suma[0], 0, ',', '.')}}</td>

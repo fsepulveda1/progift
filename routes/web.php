@@ -63,9 +63,10 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/pdf', 'CotizadorController@pdf')->middleware('admin.user')->name('admin.pdf');
     Route::post('/upload-image', 'CotizadorController@uploadImage')->middleware('admin.user')->name('admin.upload');
 
+    Route::get('/export', 'ExportController@exportMatchRut')->name('export.match_rut');
+
     Route::get('/import', 'ImportController@getImport')->name('import');
-    Route::post('/import_parse', 'ImportController@parseImport')->name('import_parse');
-    Route::post('/import_process', 'ImportController@processImport')->name('import_process');
+    Route::post('/import_process_failures', 'ImportController@processFailures')->name('import.process.failures');
     Route::post('/uploadFile', 'ImportController@uploadFile')->name('importa');
     Route::get('/change/status','CotizadorController@changeStatus')->name('admin.change_status');
 });

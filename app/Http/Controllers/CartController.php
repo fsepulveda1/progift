@@ -33,6 +33,9 @@ class CartController extends Controller
 
     public function cart()  {
         $cartCollection = \Cart::getContent();
+        $cartCollection = $cartCollection->sortBy(function ($product, $key) {
+            return $product->attributes->order;
+        });
         return view('public.mi-cotizacion.index')->withTitle('E-COMMERCE STORE | CART')->with(['cartCollection' => $cartCollection]);
     }
 
@@ -41,39 +44,49 @@ class CartController extends Controller
     }
 
     public function add(Request $request){
-
-        $this->validate($request, [
-            'id' => 'required|max:100|exists:App\Product,id',
-            'quantity' => 'required|numeric|max:1000000|min:1',
-            'impresion' => 'required',
-            'color' => 'required'
-        ], [
+        $messages = [
             'required' => 'El campo :attribute es requerido',
+            'impresion.required' => 'El campo tipo de impresión es requerido',
             'min' => 'El campo :attribute permite un valor mínimo de :min',
             'max' => 'El campo :attribute permite un valor máximo de :max',
             'numeric' => 'El campo :attribute debe ser numérico',
             'exists' => 'Ha ocurrido un error al añadir el producto'
-        ]);
+        ];
+
+        $this->validate($request, ['id' => 'required|max:100|exists:App\Product,id'],$messages);
 
         $product = Product::where(['id'=>$request->id])->first();
 
+        $rules = [
+            'quantity' => 'required|numeric|max:1000000|min:1',
+            'impresion' => 'required',
+        ];
+
+        if(!empty($product->colors->count())) {
+            $rules['color'] = 'required';
+        }
+
+        $this->validate($request,$rules , $messages);
+
         $imageFirst = json_decode($product->imagen)[0];
+        $qty = $request->quantity;
 
         \Cart::add(array(
             'id' => $product->id,
             'name' => $product->nombre,
             'price' => $product->precio,
-            'quantity' => $request->quantity,
+            'quantity' => $qty,
             'associatedModel' => 'App\Product',
             'attributes' => array(
                 'image' => $imageFirst,
                 'color' => $request->color,
                 'impresion' => $request->impresion,
-                'slug' => $product->slug
+                'slug' => $product->slug,
+                'order' => \Cart::getContent()->count()
             )
         ));
 
-        return redirect()->route('public.mi-cotizacion.index')->with('success_msg', $request->name.' agregado al carro');
+        return redirect()->route('public.mi-cotizacion.index')->with('success_msg','Agregado al carro '. $product->nombre.' ('.$qty.')');
     }
 
     public function remove(Request $request){
@@ -221,25 +234,27 @@ class CartController extends Controller
     }
 
     public function matchRut($rut){
-        $result = DB::select("select vendedor from match_ruts where rut = '{$rut}' ORDER BY id desc;");
+        $result = DB::select("select vendedor from match_ruts where rut = '{$rut}'");
 
         if(empty($result)){
 
+            $lastName = '';
             $lastId = 0;
             $lastUser = User::where(['role_id'=>2,'flag'=>1])->first();
             if($lastUser) {
                 $lastUser->flag = 0;
                 $lastUser->save();
                 $lastId = $lastUser->id;
+                $lastName = $lastUser->nombre;
             }
 
             $users = User::where([
                 ['role_id',2],
                 ['id','<>',$lastId]
-            ])->orderBy('id','asc')->get();
+            ])->orderBy('nombre','asc')->get();
 
             foreach($users as $user) {
-                if($user->id > $lastId) {
+                if($user->nombre > $lastName) {
                     $newUser = $user;
                     break;
                 }

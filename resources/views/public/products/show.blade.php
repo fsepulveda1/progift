@@ -21,7 +21,7 @@
                     <nav aria-label="breadcrumb" class="breadcrumb-nav">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/"><i class="icon-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="#">{{ $product->categories->first()->nombre }}</a></li>
+                            <li class="breadcrumb-item"><a href="/categoria/{{$product->categories->first()->slug}}">{{ $product->categories->first()->nombre }}</a></li>
                             <li class="breadcrumb-item active" aria-current="page">{{ $product->nombre }}</li>
                         </ol>
                     </nav>
@@ -88,7 +88,7 @@
                                     {{ csrf_field() }}
                                     <div class="product-filters-container">
                                         <div class="product-single-filter">
-                                            <select id="color" name="color" required>
+                                            <select id="color" name="color">
                                                 <option value="" disabled selected>Color</option>
                                                 @foreach($product->colors as $color)
                                                     <option value="{{$color->nombre}}">{{$color->nombre}}</option>
@@ -97,7 +97,7 @@
                                         </div>
                                         <!-- End .product-single-filter -->
                                         <div class="product-single-filter">
-                                            <select id="impresion" name="impresion" required>
+                                            <select id="impresion" name="impresion">
                                                 <option value="" disabled selected>Tipo de impresión</option>
                                                 @foreach($impresions as $impresion)
                                                     <option value="{{$impresion->nombre}}">{{$impresion->nombre}}</option>

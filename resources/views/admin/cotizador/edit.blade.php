@@ -99,9 +99,6 @@
 															<input type="hidden" name="producto[{{$cnt}}][id]" id="id"/>
 															<input class="form-control form-control-alternative search" autocomplete="off" type="search" placeholder="Producto" id="nombre" name="producto[{{$cnt}}][nombre]" value="{{$d['nombre']}}" required>
 														</div>
-														<div class="form-group mb-lg-0 mt-1">
-															<input class="form-control form-control-alternative sku" autocomplete="off" type="text" placeholder="Código" id="sku" value="{{$d['sku']}}" name="producto[{{$cnt}}][sku]" required>
-														</div>
 														<div class="form-group mt-1">
 															<textarea name="producto[{{$cnt}}][descripcion]" id="descripcion" placeholder="Descripción" class="form-control form-control-alternative descripcion textarea richTextBox" rows="2">@if(isset($d['descripcion'])){!! strip_tags($d['descripcion']) !!}@endif</textarea>
 														</div>
@@ -186,28 +183,29 @@
 														@foreach($d['cantidad'] as $key => $cantidad)
 															@if($key != 0)
 																@php
+																	$hasQty = true;
 																	$num = rand(1, 9999);
 																@endphp
 																<div class="row" id="{{$num}}">
-																	<div class="col-lg-2 mb-lg-0">
+																	<div class="col-lg-3 mb-lg-0">
 																		<div class="form-group">
 																			<label for="example-search-input" class="form-control-label">Cantidad</label>
 																			<input type="number" value="{{$cantidad}}" name="producto[{{$cnt}}][cantidad][]" id="cantidad" class="form-control form-control-alternative cantidad" placeholder="0" required="" />
 																		</div>
 																	</div>
-																	<div class="col-lg-4 mb-lg-0">
+																	<div class="col-lg-3 mb-lg-0">
 																		<div class="form-group">
 																			<input type="hidden" id="precio_unitario" class="precio_unitario" /><label for="example-search-input" class="form-control-label">Valor Unitario</label>
 																			<input type="number" value="{{$d['precio'][$key]}}" name="producto[{{$cnt}}][precio][]" id="precio" class="form-control form-control-alternative money precio p_{{$num}}" placeholder="0" required="" />
 																		</div>
 																	</div>
-																	<div class="col-lg-4 mb-lg-0">
+																	<div class="col-lg-3 mb-lg-0">
 																		<div class="form-group">
 																			<label for="example-search-input" class="form-control-label">Valor total</label>
 																			<input type="number" value="{{$d['suma'][$key]}}" name="producto[{{$cnt}}][suma][]" id="precio_suma" class="form-control form-control-alternative money precio_suma" placeholder="0" required="" readonly />
 																		</div>
 																	</div>
-																	<div class="col-lg-2 mb-lg-0">
+																	<div class="col-lg-3 mb-lg-0">
 																		<div class="form-group">
 																			<label for="example-search-input" class="form-control-label">Eliminar</label>
 																			<button type="button" class="btn btn-danger btn-elimina_cant" data-id="{{$num}}">
@@ -243,26 +241,28 @@
 										</div>
 									</div>
 								</div>
-								<div class="pl-lg-4">
-									<div class="row justify-content-end">
-										<div class="col-lg-1">
-											<label for="example-search-input" class="form-control-label">Activar</label>
-											<label class="custom-toggle mt-2">
-												<input type="checkbox" name="activar_descuento"  @if($cotizacion->activa_descuento) checked @endif>
-												<span class="custom-toggle-slider rounded-circle"></span>
-											</label>
-										</div>
 
-										<div class="col-lg-2">
-											<div class="form-group">
-												<label for="example-search-input" class="form-control-label">% Descuento</label>
-												<input type="text" id="descuento" name="descuento" class="form-control form-control-alternative" placeholder="0" value="{{$cotizacion->descuento}}">
+								<div id="total-fields" @if(isset($hasQty)) style="display: none" @endif>
+
+									<div class="pl-lg-4">
+										<div class="row justify-content-end">
+											<div class="col-lg-1">
+												<label for="example-search-input" class="form-control-label">Activar</label>
+												<label class="custom-toggle mt-2">
+													<input type="checkbox" name="activar_descuento"  @if($cotizacion->activa_descuento) checked @endif>
+													<span class="custom-toggle-slider rounded-circle"></span>
+												</label>
+											</div>
+
+											<div class="col-lg-2">
+												<div class="form-group">
+													<label for="example-search-input" class="form-control-label">% Descuento</label>
+													<input type="text" id="descuento" name="descuento" class="form-control form-control-alternative" placeholder="0" value="{{$cotizacion->descuento}}">
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
 
-								<div id="total-fields">
 									<div class="pl-lg-4">
 										<div class="row justify-content-end">
 											<div class="col-lg-1">

@@ -16,12 +16,6 @@
 
                                 <div class="col-md-6">
                                     <input type='file' name='file' required>
-
-                                    @if ($errors->has('file'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('file') }}</strong>
-                                    </span>
-                                    @endif
                                 </div>
                             </div>
 
@@ -49,4 +43,11 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="{{ voyager_asset('js/app.js') }}"></script>
+    <script>
+        @if($errors->has('file'))
+          let alerts = {!! json_encode($errors->first('file')) !!};
+          toastr.error(alerts)
+        @endif
+    </script>
 @endsection

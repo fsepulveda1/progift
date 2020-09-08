@@ -20,11 +20,9 @@
                                     </a>
                                 @endif
                                 @can('add', app($dataType->model_name))
-                                    @if($dataType->model_name != "App\Cotizacione")
-                                        <a href="{{ route('voyager.'.$dataType->slug.'.create') }}" class="btn btn-success btn-sm btn-add-new">
-                                            <span>{{ __('voyager::generic.add_new') }}</span>
-                                        </a>
-                                    @endif
+                                    <a href="{{ route('voyager.'.$dataType->slug.'.create') }}" class="btn btn-success btn-sm btn-add-new">
+                                        <span>{{ __('voyager::generic.add_new') }}</span>
+                                    </a>
                                 @endcan
                                 @can('delete', app($dataType->model_name))
                                     {{--@include('voyager::partials.bulk-delete')--}}
@@ -72,12 +70,6 @@
                             </form>
                         @endif
                         <div class="table-responsive">
-                            @php
-                                $est = "";
-                                if($dataType->name == "cotizaciones"){
-                                    $est = "cotizaciones";
-                                }
-                            @endphp
                             <table id="dataTable" class="table table-hover">
                                 <thead>
                                 <tr>
@@ -103,13 +95,6 @@
                                                 </a>
                                             @endif
                                         </th>
-                                        @php
-                                            if($row->field === "cotizacione_belongsto_client_relationship"){
-                                                echo "<th>Rut Empresa</th>";
-                                                echo "<th>Nombre cliente</th>";
-                                                echo "<th>Email</th>";
-                                            }
-                                        @endphp
                                     @endforeach
                                     <th class="actions text-right">{{ __('voyager::generic.actions') }}</th>
                                 </tr>
@@ -128,7 +113,7 @@
                                                     $data->{$row->field} = $data->{$row->field.'_browse'};
                                                 }
                                             @endphp
-                                            <td @if($row->field == 'rut') nowrap="nowrap" @endif>
+                                            <td>
                                                 @if (isset($row->details->view))
                                                     @include($row->details->view, ['row' => $row, 'dataType' => $dataType, 'dataTypeContent' => $dataTypeContent, 'content' => $data->{$row->field}, 'action' => 'browse', 'view' => 'browse', 'options' => $row->details])
                                                 @elseif($row->type == 'image')

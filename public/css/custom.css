@@ -392,3 +392,8 @@ select[name=dataTable_length] {
     justify-content: center;
     align-items: center;
 }
+
+
+textarea {
+    transition: none !important;
+}

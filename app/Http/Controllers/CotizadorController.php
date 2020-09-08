@@ -142,7 +142,7 @@ class CotizadorController extends Controller
         $pdfname = 'Pro-Gift_'.urlencode($request->nombre_cliente).date("Y-m-d").'.pdf';
         $pdf = '';
 
-        $message = new EnviaCotizacion($emailData);
+        $message = new EnviaCotizacionFinal($emailData);
         $message->attachData($pdf, $pdfname);
 
         Mail::to($request->email)->send($message);
@@ -335,6 +335,7 @@ class CotizadorController extends Controller
     private function getProductsArrayFromRequest(Request $request) {
         $detalle = [];
         $producto = $request->producto;
+
         foreach ($producto as $key => $value) {
             $can = $pre = $sum = [];
 
@@ -352,7 +353,6 @@ class CotizadorController extends Controller
                 'nombre' => $value['nombre'],
                 'descripcion' => $value['descripcion'],
                 'imagen' => $value['imagen'],
-                'sku' => $value['sku'],
                 'color' => $value['color'],
                 'imprenta' => $value['impresion'],
                 'cantidad' => $can,
