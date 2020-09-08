@@ -45,11 +45,10 @@
     </style>
 </head>
 <body>
-<header>
-    <img src="{{ asset('assets/images/logo_correos.png') }}" alt="Logo" width="150px">
-</header>
 
 @yield('content')
-
+<footer>
+    <img src="{{ asset('assets/images/logo_correos.png') }}" alt="Logo" width="150px">
+</footer>
 </body>
 </html>

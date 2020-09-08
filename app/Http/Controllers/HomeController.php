@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\EnviaContacto;
 use App\Product;
 use App\Tip;
 use DB;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use TCG\Voyager\Facades\Voyager;
 
 class HomeController extends Controller
 {
@@ -85,11 +87,10 @@ class HomeController extends Controller
                 'email' => 'El  :attribute no es válido',
             ]);
 
-            Contacto::create($request->all());
+            $contacto = Contacto::create($request->all());
 
-            $message = new EmailContacto('');
-
-            Mail::to($request->email)->send($message);
+            $message = new EnviaContacto($contacto);
+            Mail::to(Voyager::setting('admin.email_contacto', ''))->send($message);
 
             Session::flash('success_msg', 'Hemos recibido su información, pronto nos contactaremos con usted.');
             return view('public.contacto.index');
