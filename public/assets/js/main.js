@@ -23,7 +23,7 @@
       this.productTabSroll();
       this.scrollToTop();
       this.quantityInputs();
-      this.countTo();
+      // this.countTo();
       this.tooltip();
       this.popover();
       this.changePassToggle();

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Color;
+use App\Exports\MatchRutExport;
 use App\Impresion;
 use App\Mail\EnviaCotizacionFinal;
+use App\MatchRut;
 use Barryvdh\DomPDF\PDF;
 use DB;
 use Illuminate\Http\UploadedFile;
@@ -101,6 +103,7 @@ class CotizadorController extends Controller
         $client = $this->createClientIfNotExist($request);
         $data = $this->formatingArrayFromRequest($request,$client,$user_id);
         $this->savingCotization($data);
+        $this->createOrUpdateMatchRut($client);
 
         return back()->with([
             'message'    => 'Cotización creada correctamente, puede verificar los datos en la sección Cotizaciones',
@@ -137,6 +140,7 @@ class CotizadorController extends Controller
         $data = $this->formatingArrayFromRequest($request,$client,$user->id);
 
         $this->savingCotization($data);
+        $this->createOrUpdateMatchRut($client);
 
         $emailData = $this->getEmailData($request,$user);
         $pdfname = 'Pro-Gift_'.urlencode($request->nombre_cliente).date("Y-m-d").'.pdf';
@@ -159,6 +163,7 @@ class CotizadorController extends Controller
         $client = $this->createClientIfNotExist($request);
         $data = $this->formatingArrayFromRequest($request,$client,$user_id);
         $cotizacion = $this->savingCotization($data);
+        $this->createOrUpdateMatchRut($client);
 
         $id = $cotizacion->id;
 
@@ -238,6 +243,15 @@ class CotizadorController extends Controller
             return $client;
         }
         return $client;
+    }
+
+    private function createOrUpdateMatchRut($client) {
+        $matchRut = MatchRut::updateOrCreate(
+            ['rut' => $client->rut],
+            ['vendedor' => Auth::user()->email]
+        );
+
+        return $matchRut;
     }
 
     /**

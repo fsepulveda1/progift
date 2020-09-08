@@ -40,8 +40,8 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-empresa">Empresa Cliente</label>
-                                                <input max="250" type="text" name="empresa" class="form-control form-control-alternative" placeholder="Nombre Empresa" value="" required>
+                                                <label class="form-control-label" for="input-empresa">Empresa</label>
+                                                <input max="250" type="text" name="empresa" class="form-control form-control-alternative" placeholder="Empresa" value="" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-3">
@@ -135,20 +135,20 @@
                                                 <div class="col-lg-3 mb-lg-0">
                                                     <div class="form-group">
                                                         <label for="example-search-input" class="form-control-label">Cantidad</label>
-                                                        <input type="number" name="producto[0][cantidad][]" id="cantidad" class="form-control form-control-alternative cantidad" placeholder="0" required>
+                                                        <input type="number" name="producto[0][cantidad][]" id="cantidad" value="0" min="0" class="form-control form-control-alternative cantidad" placeholder="0" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 mb-lg-0">
                                                     <div class="form-group">
                                                         <input type="hidden" id="precio_unitario" class="precio_unitario"/>
                                                         <label for="example-search-input" class="form-control-label">Valor Unitario</label>
-                                                        <input type="number" name="producto[0][precio][]" id="precio" class="form-control form-control-alternative money precio" placeholder="0" required>
+                                                        <input type="number" name="producto[0][precio][]" id="precio"  value="0" min="0" class="form-control form-control-alternative money precio" placeholder="0" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 mb-lg-0">
                                                     <div class="form-group">
                                                         <label for="example-search-input" class="form-control-label">Total</label>
-                                                        <input type="number" name="producto[0][suma][]" id="precio_suma" class="form-control form-control-alternative money precio_suma" placeholder="0" readonly required>
+                                                        <input type="number" name="producto[0][suma][]" id="precio_suma"  value="0" min="0" class="form-control form-control-alternative money precio_suma" placeholder="0" readonly required>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 mb-lg-0">

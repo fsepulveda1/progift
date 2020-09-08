@@ -39,8 +39,8 @@
 									<div class="row">
 										<div class="col-lg-3">
 											<div class="form-group">
-												<label class="form-control-label" for="input-empresa">Empresa Cliente</label>
-												<input max="250" type="text" name="empresa" readonly="readonly" class="form-control form-control-alternative" placeholder="Nombre Empresa" value="{{$cliente->nombre}}" required>
+												<label class="form-control-label" for="input-empresa">Empresa</label>
+												<input max="250" type="text" name="empresa" readonly="readonly" class="form-control form-control-alternative" placeholder="Empresa" value="{{$cliente->nombre}}" required>
 											</div>
 										</div>
 										<div class="col-lg-3">
@@ -136,20 +136,20 @@
 													<div class="col-lg-3 mb-lg-0">
 														<div class="form-group">
 															<label for="example-search-input" class="form-control-label">Cantidad</label>
-															<input type="number" value="@if(is_array($d['cantidad'])){{$d['cantidad'][0]}}@else{{(int)$d['cantidad']}}@endif" name="producto[{{$cnt}}][cantidad][]" id="cantidad" class="form-control form-control-alternative cantidad" placeholder="0" required>
+															<input type="number" value="@if(is_array($d['cantidad'])){{$d['cantidad'][0]}}@else{{(int)$d['cantidad']}}@endif" name="producto[{{$cnt}}][cantidad][]" id="cantidad" min="0" class="form-control form-control-alternative cantidad" placeholder="0" required>
 														</div>
 													</div>
 													<div class="col-lg-3 mb-lg-0">
 														<div class="form-group">
 															<input type="hidden" id="precio_unitario" class="precio_unitario"/>
 															<label for="example-search-input" class="form-control-label">Valor Unitario</label>
-															<input type="number" value="{{$d['precio'][0]}}" name="producto[{{$cnt}}][precio][]" id="precio" class="form-control form-control-alternative money precio" placeholder="0" required>
+															<input type="number" value="{{$d['precio'][0]}}" name="producto[{{$cnt}}][precio][]" id="precio" min="0" class="form-control form-control-alternative money precio" placeholder="0" required>
 														</div>
 													</div>
 													<div class="col-lg-3 mb-lg-0">
 														<div class="form-group">
 															<label for="example-search-input" class="form-control-label">Total</label>
-															<input type="number" value="{{$d['suma'][0]}}" name="producto[{{$cnt}}][suma][]" id="precio_suma" class="form-control form-control-alternative money precio_suma" placeholder="0" required readonly>
+															<input type="number" value="{{$d['suma'][0]}}" name="producto[{{$cnt}}][suma][]" id="precio_suma" min="0" class="form-control form-control-alternative money precio_suma" placeholder="0" required readonly>
 														</div>
 													</div>
 													<div class="col-lg-3 mb-lg-0">
