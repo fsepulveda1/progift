@@ -12,7 +12,7 @@
                             {{ csrf_field() }}
 
                             <div class="form-group">
-                                <label for="csv_file" class="col-md-4 control-label">Importar un archivo CSV</label>
+                                <label for="csv_file" class="col-md-4 control-label">Importar un archivo XLSX</label>
 
                                 <div class="col-md-6">
                                     <input type='file' name='file' required>
@@ -25,7 +25,7 @@
                                         El archivo no debe contener cabeceras.
                                     </label>
                                     <label>
-                                        <a href="/ejemplo.csv" target="_blank">Archivo de ejemplo</a>
+                                        {{--<a href="/ejemplo.xlsx" target="_blank">Archivo de ejemplo</a>--}}
                                     </label>
                                 </div>
                             </div>
@@ -33,7 +33,7 @@
                             <div class="form-group">
                                 <div class="col-md-8 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
-                                        Importar CSV
+                                        Importar XLSX
                                     </button>
                                 </div>
                             </div>

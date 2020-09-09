@@ -149,20 +149,20 @@ class CotizadorController extends Controller
         $this->validateRequest($request);
         $user = Auth::user();
         $client = $this->createClientIfNotExist($request);
-        $data = $this->formatingArrayFromRequest($request,$client,$user->id);
+        $data = $this->formatingArrayFromRequest($request,$client,$user->id,1);
 
         if(!empty($request->id)) {
-            $this->updatingCotization($data,$request->id,1);
+            $this->updatingCotization($data,$request->id);
         }
         else {
-            $this->savingCotization($data,1);
+            $this->savingCotization($data);
         }
 
         $this->createOrUpdateMatchRut($client);
 
         $emailData = $this->getEmailData($request,$user);
+        $pdf = $this->getPDFOutput($data,$client,$user);
         $pdfname = 'Pro-Gift_'.urlencode($request->nombre_cliente).date("Y-m-d").'.pdf';
-        $pdf = '';
 
         $message = new EnviaCotizacionFinal($emailData);
         $message->attachData($pdf, $pdfname);
@@ -293,12 +293,9 @@ class CotizadorController extends Controller
      * @param $data
      * @return mixed
      */
-    private function savingCotization($data, $status = 0) {
+    private function savingCotization($data) {
         $cotizacion = Cotizacione::create($data);
-        if($status) {
-            $cotizacion->estado = $status;
-            $cotizacion->save();
-        }
+
         return $cotizacion;
     }
 
