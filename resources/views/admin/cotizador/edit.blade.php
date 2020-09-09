@@ -190,19 +190,19 @@
 																	<div class="col-lg-3 mb-lg-0">
 																		<div class="form-group">
 																			<label for="example-search-input" class="form-control-label">Cantidad</label>
-																			<input type="number" value="{{$cantidad}}" name="producto[{{$cnt}}][cantidad][]" id="cantidad" class="form-control form-control-alternative cantidad" placeholder="0" />
+																			<input type="number" value="{{$cantidad}}" name="producto[{{$cnt}}][cantidad][{{$key}}]" id="cantidad" class="form-control form-control-alternative cantidad" placeholder="0" />
 																		</div>
 																	</div>
 																	<div class="col-lg-3 mb-lg-0">
 																		<div class="form-group">
 																			<input type="hidden" id="precio_unitario" class="precio_unitario" /><label for="example-search-input" class="form-control-label">Valor Unitario</label>
-																			<input type="number" value="{{$d['precio'][$key]}}" name="producto[{{$cnt}}][precio][]" id="precio" class="form-control form-control-alternative money precio p_{{$num}}" placeholder="0" />
+																			<input type="number" value="{{$d['precio'][$key]}}" name="producto[{{$cnt}}][precio][{{$key}}]" id="precio" class="form-control form-control-alternative money precio p_{{$num}}" placeholder="0" />
 																		</div>
 																	</div>
 																	<div class="col-lg-3 mb-lg-0">
 																		<div class="form-group">
 																			<label for="example-search-input" class="form-control-label">Valor total</label>
-																			<input type="number" value="{{$d['suma'][$key]}}" name="producto[{{$cnt}}][suma][]" id="precio_suma" class="form-control form-control-alternative money precio_suma" placeholder="0" readonly />
+																			<input type="number" value="{{$d['suma'][$key]}}" name="producto[{{$cnt}}][suma][{{$key}}]" id="precio_suma" class="form-control form-control-alternative money precio_suma" placeholder="0" readonly />
 																		</div>
 																	</div>
 																	<div class="col-lg-3 mb-lg-0">
@@ -311,8 +311,8 @@
 									<div class="d-dlex justify-content-end">
 
 										<div style="text-align: right;">
-											<button class="btn btn-danger" onclick="$('form').attr('target', '_blank');$('form').attr('action', '/admin/genera');">PDF</button><br/>
-											<button type="submit" class="btn btn-success" onclick="$('form').attr('target', '');$('form').attr('action', '/admin/cotiza/guarda');">Guardar Cambios en esta Cotización</button>&nbsp;o&nbsp;
+											<button class="btn btn-danger" onclick="getPdf();">PDF</button><br/>
+											<button type="submit" class="btn btn-success save" onclick="$('form').attr('target', '');$('form').attr('action', '/admin/cotiza/guarda');">Guardar Cambios en esta Cotización</button>&nbsp;o&nbsp;
 											<button type="submit" class="btn btn-success" onclick="$('form').attr('target', '');$('form').attr('action', '/admin/cotiza/guarda/nueva');">Guardar y crear Nueva Cotización</button><br/>
 											<button type="submit" class="btn btn-warning" onclick="$('form').attr('target', '');$('form').attr('action', '/admin/cotiza/guarda/envia');">Enviar Cotización a e-mail Cliente</button>
 										</div>

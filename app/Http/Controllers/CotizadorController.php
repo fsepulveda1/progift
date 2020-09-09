@@ -382,7 +382,7 @@ class CotizadorController extends Controller
         $rules = [
             'nombre_cliente'=>'required',
             'validez'=>'required',
-            'rut'=>'required',
+            'rut'=>'required|cl_rut',
             'empresa'=>'required',
             'forma_pago'=>'required',
             'email'=>'required',
@@ -414,6 +414,7 @@ class CotizadorController extends Controller
             "required" => "Debes completar este campo.",
             "producto.*.imagen.required" => "Debes seleccionar una imagen.",
             "min" => "Ingresa un número positivo",
+            "cl_rut" => "EL rut ingresado no es válido",
         ];
 
         return $this->validate($request,$rules,$messages);

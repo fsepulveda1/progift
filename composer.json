@@ -13,6 +13,7 @@
         "crockett/csv-seeder": "^1.1",
         "darryldecode/cart": "^4.1",
         "fideloper/proxy": "^4.0",
+        "freshwork/chilean-bundle": "^2.1",
         "laravel/framework": "^6.2",
         "laravel/helpers": "^1.2",
         "laravel/tinker": "^2.0",
