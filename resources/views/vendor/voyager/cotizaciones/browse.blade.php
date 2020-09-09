@@ -5,7 +5,9 @@
 @section('content')
     <div class="page-content browse container-fluid">
         @include('voyager::alerts')
-        @php($showCheckboxColumn=false)
+        @php
+            $showCheckboxColumn=false;
+        @endphp
         <div class="row no-margin">
             <div class="col-md-12">
                 <div class="panel panel-bordered">
