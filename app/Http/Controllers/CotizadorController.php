@@ -10,6 +10,7 @@ use App\MatchRut;
 use Barryvdh\DomPDF\PDF;
 use DB;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Response;
 use Mail;
 use App\Category;
 use App\Product;
@@ -26,22 +27,22 @@ class CotizadorController extends Controller
     public function uploadImage(Request $request) {
         $key = $request->query->get('num');
         $imagen = '';
-            if (isset($request->producto[$key]['file_imagen'])) {
-                $rules = ['producto.'.$key.'.file_imagen' => 'required|image|max:5000'];
-                $messages['producto.'.$key.'.file_imagen.required'] = 'Debes seleccionar una imagen';
-                $messages['producto.'.$key.'.file_imagen.image'] = 'Debes seleccionar una imagen';
-                $messages['producto.'.$key.'.file_imagen.max'] = 'El tamaño máximo permitido es 5 MB';
-                request()->validate($rules,$messages);
+        if (isset($request->producto[$key]['file_imagen'])) {
+            $rules = ['producto.'.$key.'.file_imagen' => 'required|image|max:5000'];
+            $messages['producto.'.$key.'.file_imagen.required'] = 'Debes seleccionar una imagen';
+            $messages['producto.'.$key.'.file_imagen.image'] = 'Debes seleccionar una imagen';
+            $messages['producto.'.$key.'.file_imagen.max'] = 'El tamaño máximo permitido es 5 MB';
+            request()->validate($rules,$messages);
 
-                /** @var UploadedFile $new_file */
-                $new_file = $request->producto[$key]['file_imagen'];
-                $fileNameWithTheExtension = $new_file->getClientOriginalName();
-                $fileName = pathinfo($fileNameWithTheExtension, PATHINFO_FILENAME);
-                $extension = $new_file->getClientOriginalExtension();
-                $newFileName = $fileName . '_' . time() . '.' . $extension;
-                $new_file->storeAs('public/images/custom_products_images', $newFileName);
-                $imagen = "/storage/images/custom_products_images/".$newFileName;
-            }
+            /** @var UploadedFile $new_file */
+            $new_file = $request->producto[$key]['file_imagen'];
+            $fileNameWithTheExtension = $new_file->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithTheExtension, PATHINFO_FILENAME);
+            $extension = $new_file->getClientOriginalExtension();
+            $newFileName = $fileName . '_' . time() . '.' . $extension;
+            $new_file->storeAs('public/images/custom_products_images', $newFileName);
+            $imagen = "/storage/images/custom_products_images/".$newFileName;
+        }
 
 
         return response()->json($imagen);
@@ -88,24 +89,33 @@ class CotizadorController extends Controller
 
     public function guarda(Request $request) {
         $user_id = Auth::user()->id;
+        $this->validateRequest($request);
         $client = $this->createClientIfNotExist($request);
         $data = $this->formatingArrayFromRequest($request,$client,$user_id);
         $this->updatingCotization($data,$request->id);
 
-        return back()->with([
+        return Response::json([
             'message'    => 'Cotización editada correctamente, Fue guardada con el mismo ID y puede verificar los datos en la sección Cotizaciones',
             'alert-type' => 'success',
         ]);
 
     }
     public function guardaNueva(Request $request) {
+        $this->validateRequest($request);
         $user_id = Auth::user()->id;
         $client = $this->createClientIfNotExist($request);
         $data = $this->formatingArrayFromRequest($request,$client,$user_id);
-        $this->savingCotization($data);
+
+        if(!empty($request->id)) {
+            $this->updatingCotization($data,$request->id);
+        }
+        else {
+            $this->savingCotization($data);
+        }
+
         $this->createOrUpdateMatchRut($client);
 
-        return back()->with([
+        return Response::json([
             'message'    => 'Cotización creada correctamente, puede verificar los datos en la sección Cotizaciones',
             'alert-type' => 'success',
         ]);
@@ -113,6 +123,7 @@ class CotizadorController extends Controller
     }
 
     public function guardaEnvia(Request $request) {
+        $this->validateRequest($request);
         $user = Auth::user();
         $client = $this->createClientIfNotExist($request);
         $data = $this->formatingArrayFromRequest($request,$client,$user->id,1);
@@ -127,7 +138,7 @@ class CotizadorController extends Controller
 
         Mail::to($request->email)->send($message);
 
-        return back()->with([
+        return Response::json([
             'message'    => 'Cotización editada y enviada correctamente, Fue guardada con el mismo ID y puede verificar los datos en la sección Cotizaciones',
             'alert-type' => 'success',
         ]);
@@ -135,11 +146,18 @@ class CotizadorController extends Controller
     }
 
     public function store(Request $request) {
+        $this->validateRequest($request);
         $user = Auth::user();
         $client = $this->createClientIfNotExist($request);
         $data = $this->formatingArrayFromRequest($request,$client,$user->id);
 
-        $this->savingCotization($data);
+        if(!empty($request->id)) {
+            $this->updatingCotization($data,$request->id,1);
+        }
+        else {
+            $this->savingCotization($data,1);
+        }
+
         $this->createOrUpdateMatchRut($client);
 
         $emailData = $this->getEmailData($request,$user);
@@ -151,7 +169,7 @@ class CotizadorController extends Controller
 
         Mail::to($request->email)->send($message);
 
-        return back()->with([
+        return Response::json([
             'message'    => 'Cotización creada correctamente, Fue enviada al cliente y puede verificar los datos en la sección Cotizaciones',
             'alert-type' => 'success',
         ]);
@@ -159,18 +177,32 @@ class CotizadorController extends Controller
     }
 
     public function soloStore(Request $request) {
+        $this->validateRequest($request);
         $user_id = Auth::user()->id;
         $client = $this->createClientIfNotExist($request);
         $data = $this->formatingArrayFromRequest($request,$client,$user_id);
-        $cotizacion = $this->savingCotization($data);
+        if(!empty($request->id)) {
+            $this->updatingCotization($data,$request->id);
+            $id = $request->id;
+        }
+        else {
+            $cotizacion = $this->savingCotization($data);
+            $id = $cotizacion->id;
+        }
+
         $this->createOrUpdateMatchRut($client);
 
-        $id = $cotizacion->id;
 
-        return redirect('/admin/cotizador/editar/'.$id);
+        return Response::json([
+            'message'    => 'Cotización guardada correctamente.',
+            'alert-type' => 'success',
+            'id' => $id
+        ]);
     }
 
     public function genera(Request $request) {
+        $this->validateRequest($request);
+
         $user = Auth::user();
         $client = $this->createClientIfNotExist($request);
         $data = $this->formatingArrayFromRequest($request,$client,$user->id);
@@ -229,7 +261,10 @@ class CotizadorController extends Controller
      * @return mixed
      */
     private function createClientIfNotExist(Request $request) {
-        $client = Client::where('rut', $request->rut)->first();
+        $client = Client::where([
+            ['rut', $request->rut],
+            ['email', $request->email]
+        ])->first();
 
         if (!$client) {
             $client = Client::create([
@@ -258,8 +293,12 @@ class CotizadorController extends Controller
      * @param $data
      * @return mixed
      */
-    private function savingCotization($data) {
+    private function savingCotization($data, $status = 0) {
         $cotizacion = Cotizacione::create($data);
+        if($status) {
+            $cotizacion->estado = $status;
+            $cotizacion->save();
+        }
         return $cotizacion;
     }
 
@@ -340,6 +379,47 @@ class CotizadorController extends Controller
         ];
 
         return $data;
+    }
+
+    private function validateRequest(Request $request) {
+        $rules = [
+            'nombre_cliente'=>'required',
+            'validez'=>'required',
+            'rut'=>'required',
+            'empresa'=>'required',
+            'forma_pago'=>'required',
+            'email'=>'required',
+            'plazo'=>'required',
+            'descuento'=>'',
+            'neto' =>'',
+            'iva' =>'',
+            'total' =>'',
+        ];
+
+        foreach($request->producto as $key=>$product) {
+            $rules['producto.'.$key.'.nombre'] = "required";
+            $rules['producto.'.$key.'.descripcion'] = "required";
+            $rules['producto.'.$key.'.imagen'] = "required";
+            $rules['producto.'.$key.'.color'] = "required";
+            $rules['producto.'.$key.'.impresion'] = "required";
+            foreach($product['cantidad'] as $keyQty=>$qty) {
+                $rules['producto.'.$key.'.cantidad.'.$keyQty] = "required|min:0";
+            }
+            foreach($product['precio'] as $keyPrice=>$price) {
+                $rules['producto.'.$key.'.precio.'.$keyPrice] = "required|min:0";
+            }
+            foreach($product['suma'] as $keySum=>$sum) {
+                $rules['producto.'.$key.'.suma.'.$keySum] = "required|min:0";
+            }
+        }
+
+        $messages = [
+            "required" => "Debes completar este campo.",
+            "producto.*.imagen.required" => "Debes seleccionar una imagen.",
+            "min" => "Ingresa un número positivo",
+        ];
+
+        return $this->validate($request,$rules,$messages);
     }
 
     /**

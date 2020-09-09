@@ -92,4 +92,34 @@ class ImportController extends Controller
         ]);
     }
 
+    public function getVendedoresForm() {
+
+        $emails = MatchRut::select('vendedor')->distinct()->get()->toArray();
+        $emails = array_map('end',$emails);
+        return view('importer.vendedores',compact('emails'));
+    }
+
+    public function saveVendedores(Request $request) {
+
+        $rules = ['emails.*.new' => 'required|email'];
+        $messages = [
+            'required' => 'No puede ingresar un email vacío',
+            'email' => 'El email ":input" no es válido',
+        ];
+
+        $this->validate($request,$rules,$messages);
+
+        foreach($request->emails as $email) {
+            if($email['old'] != $email['new']) {
+                MatchRut::where('vendedor', $email['old'])
+                    ->update(['vendedor' => $email['new']]);
+            }
+        }
+
+        return redirect()->route('email.vendedores')->with([
+            'message' => 'Vendedores actualizados',
+            'alert-type' => 'success'
+        ]);
+    }
+
 }

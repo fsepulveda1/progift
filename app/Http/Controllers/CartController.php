@@ -139,7 +139,7 @@ class CartController extends Controller
         foreach ($cartCollection as $item) {
             $detalle[] = [
                 'nombre' => $item->name,
-                'color' => $item->attributes->color ?? 'no especifica',
+                'color' => $item->attributes->color ?? 'No aplica',
                 'imagen' => '/storage/'.$item->attributes->image,
                 'sku' => $item->model->sku,
                 'imprenta' => $item->attributes->impresion,

@@ -22,6 +22,8 @@
                 imagen = imagen[0].replace('["', '');
                 imagen = imagen.replace('"', '');
                 imagen = imagen.replace(']', '');
+                this.$element.closest('.pduct').find('.has-error').removeClass('has-error');
+                this.$element.closest('.pduct').find('.error-message').remove();
                 this.$element.closest('.pduct').find('.imagen').attr('src', '/storage/' + imagen);
                 this.$element.closest('.pduct').find('.himagen').val('/storage/' + imagen);
                 this.$element.closest('.pduct').find('.precio').val(args.precio);
@@ -142,7 +144,8 @@
     }
 
     $('body').on('click', '.btn-agrega_cant', function() {
-        var i = "row_qty_" + ($('.row-qty').length + 1);
+        var num = $('.row-qty').length + 1;
+        var i = "row_qty_" + (num);
 
         var a = $(this).closest('.form-group').find('.orden').val();
         var pr = $(this).closest('.form-group').find('.p_u').val();
@@ -151,20 +154,20 @@
             '<div class="col-lg-3 mb-lg-0">'+
             '<div class="form-group">'+
             '<label for="example-search-input" class="form-control-label">Cantidad</label>'+
-            '<input type="number" name="producto['+a+'][cantidad][]" id="cantidad" class="form-control form-control-alternative cantidad" value="0" min="0" placeholder="0" required>'+
+            '<input type="number" name="producto['+a+'][cantidad]['+num+']" id="cantidad" class="form-control form-control-alternative cantidad" value="0" min="0" placeholder="0" >'+
             '</div>'+
             '</div>'+
             '<div class="col-lg-3 mb-lg-0">'+
             '<div class="form-group">'+
             '<input type="hidden" id="precio_unitario" class="precio_unitario"/>'+
             '<label for="example-search-input" class="form-control-label">Valor Unitario</label>'+
-            '<input type="number" name="producto['+a+'][precio][]" id="precio" class="form-control form-control-alternative money precio" value="0" min="0" placeholder="0" required>'+
+            '<input type="number" name="producto['+a+'][precio]['+num+']" id="precio" class="form-control form-control-alternative money precio" value="0" min="0" placeholder="0" >'+
             '</div>'+
             '</div>'+
             '<div class="col-lg-3 mb-lg-0">'+
             '<div class="form-group">'+
             '<label for="example-search-input" class="form-control-label">Valor total</label>'+
-            '<input type="number" name="producto['+a+'][suma][]" id="precio_suma" class="form-control form-control-alternative money precio_suma" value="0" min="0" placeholder="0" readonly required>'+
+            '<input type="number" name="producto['+a+'][suma]['+num+']" id="precio_suma" class="form-control form-control-alternative money precio_suma" value="0" min="0" placeholder="0" readonly >'+
             '</div>'+
             '</div>'+
             '<div class="col-lg-3 mb-lg-0">'+
@@ -215,13 +218,13 @@
             '<div class="col-lg-3 mb-0">'+
             '<div class="form-group">'+
             '<label class="form-control-label" for="input-country">Color</label>'+
-            '<input type="text" class="form-control form-control-alternative color" name="producto['+c+'][color]" id="color_'+c+'" required>'+
+            '<input type="text" class="form-control form-control-alternative color" name="producto['+c+'][color]" id="color_'+c+'" >'+
             '</div>'+
             '</div>'+
             '<div class="col-lg-3 mb-0">'+
             '<div class="form-group">'+
             '<label class="form-control-label" for="exampleFormControlSelect1">Impresión</label>'+
-            '<input type="text" class="form-control form-control-alternative impresions" name="producto['+c+'][impresion]" id="impresion_'+c+'" required>'+
+            '<input type="text" class="form-control form-control-alternative impresions" name="producto['+c+'][impresion]" id="impresion_'+c+'" >'+
             '</div>'+
             '</div>'+
             '<div class="col-lg-2">'+
@@ -245,20 +248,20 @@
             '<div class="col-lg-3 mb-lg-0">'+
             '<div class="form-group">'+
             '<label for="example-search-input" class="form-control-label">Cantidad</label>'+
-            '<input type="number" name="producto['+c+'][cantidad][]" id="cantidad" class="form-control form-control-alternative cantidad" value="0" min="0" placeholder="0">'+
+            '<input type="number" name="producto['+c+'][cantidad][0]" id="cantidad" class="form-control form-control-alternative cantidad" value="0" min="0" placeholder="0">'+
             '</div>'+
             '</div>'+
             '<div class="col-lg-3 mb-lg-0">'+
             '<div class="form-group">'+
             '<input type="hidden" id="precio_unitario" class="precio_unitario"/>'+
             '<label for="example-search-input" class="form-control-label">Valor Unitario</label>'+
-            '<input type="number" name="producto['+c+'][precio][]" id="precio" class="form-control form-control-alternative money precio" value="0" min="0" placeholder="0">'+
+            '<input type="number" name="producto['+c+'][precio][0]" id="precio" class="form-control form-control-alternative money precio" value="0" min="0" placeholder="0">'+
             '</div>'+
             '</div>'+
             '<div class="col-lg-3 mb-lg-0">'+
             '<div class="form-group">'+
             '<label for="example-search-input" class="form-control-label">Total</label>'+
-            '<input type="number" name="producto['+c+'][suma][]" id="precio_suma" class="form-control form-control-alternative money precio_suma" value="0" min="0" readonly placeholder="0">'+
+            '<input type="number" name="producto['+c+'][suma][0]" id="precio_suma" class="form-control form-control-alternative money precio_suma" value="0" min="0" readonly placeholder="0">'+
             '</div>'+
             '</div>'+
             '<div class="col-lg-3 mb-lg-0">'+
@@ -297,6 +300,8 @@
 
     $('.btn-reset-producto').on('click',function () {
         var container = $(this).closest('.pduct');
+        container.find('.has-error').removeClass('has-error');
+        container.find('.error-message').remove();
         container.find("input[type='text']").val('');
         container.find("input[type='search']").val('');
         container.find("input[type='number']").val('');
@@ -357,6 +362,84 @@
         container.find('img').attr('src','');
         container.find('.file-widget').removeClass('hide');
         container.find('.himagen').val('');
+    })
+
+    $(document).on('submit','#cotization_form', function (e) {
+        e.preventDefault();
+
+        var action = $(this).attr('action');
+        var loading = $('#voyager-loader');
+        var data = $(this).serialize();
+        var pdf = false;
+
+        console.log(action);
+
+        if(action == '/admin/genera') {
+            pdf = true;
+            action = '/admin/cotiza/nueva/guarda'
+        }
+
+        loading.show();
+
+        $.ajax({
+            url: action,
+            type: "post",
+            dataType: "json",
+            data: data,
+        }).done( function(res) {
+            loading.hide();
+            toastr.success(res.message);
+            if(typeof res.id !== "undefined") {
+                $('input[name="id"]').val(res.id);
+            }
+
+            if(pdf) {
+                var win = window.open('/admin/genera?id='+$('input[name="id"]').val(), '_blank');
+                win.focus();
+            }
+
+        }).fail( function(e, res, xhr) {
+            loading.hide();
+            if(typeof e.responseJSON.errors === "undefined")
+                return;
+
+            var errors = e.responseJSON.errors;
+
+            if(! errors)
+                return false;
+
+            $.each(errors, function (index,message) {
+                var name = index;
+                if(index.indexOf('.') >-1){
+                    var name_parts =  index.split('.');
+                    name = name_parts[0];
+                    $.each(name_parts, function (key,value) {
+                        if(key !== 0) {
+                            name = name+"["+value+"]";
+                        }
+                    })
+                }
+
+                var field = $('[name="'+name+'"]').closest('.form-group');
+                field.addClass('has-error');
+                if(field.find('.error-message').length) {
+                    field.find('.error-message').text(message);
+                }
+                else {
+                    field.append('<span class="error-message text-danger">' + message + '</span>');
+                }
+
+            });
+
+
+            $('html, body').animate({ scrollTop: $('.has-error').first().offset().top - 100}, 'slow');
+        });
+    })
+
+    $(document).on('change','input, select, textarea', function () {
+        var field = $(this).closest('.form-group');
+        field.removeClass('has-error');
+        field.find('.error-message').text('');
     })
 
 })(jQuery);

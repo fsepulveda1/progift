@@ -116,7 +116,7 @@
                 <td valign="top">
                     {{ $det->nombre }}<br>
                     {!! $det->descripcion !!}<br>
-                    Color: {{ $det->color }}<br>
+                    @if(!empty($det->color))Color: {{ $det->color }}<br>@endif
                     Impresión :{{ $det->imprenta }}<br>
                 </td>
                 <td align="center" valign="middle"><img src="{{ asset(stripcslashes($det->imagen))}}" style="max-width: 120px"></td>

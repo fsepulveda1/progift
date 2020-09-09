@@ -35,49 +35,51 @@
                                   data-colors="{{$colors}}"
                                   data-impresions="{{$impresions}}">
 
+                                <input type="hidden" name="id" value=""/>
+
                                 <h6 class="heading-small text-muted mb-4">Información cliente</h6>
                                 <div class="pl-lg-4">
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-empresa">Empresa</label>
-                                                <input max="250" type="text" name="empresa" class="form-control form-control-alternative" placeholder="Empresa" value="" required>
+                                                <input max="250" type="text" name="empresa" class="form-control form-control-alternative" placeholder="Empresa" value="" >
                                             </div>
                                         </div>
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-username">RUT</label>
-                                                <input max="13" type="text" name="rut" class="form-control form-control-alternative rut" placeholder="22222222-2" value="" oninput="checkRut(this)" required>
+                                                <input max="13" type="text" name="rut" class="form-control form-control-alternative rut" placeholder="22222222-2" value="" oninput="checkRut(this)" >
                                             </div>
                                         </div>
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-username">Contacto</label>
-                                                <input max="250" type="text" name="nombre_cliente" class="form-control form-control-alternative" placeholder="Nombre Cliente" value="" required>
+                                                <input max="250" type="text" name="nombre_cliente" class="form-control form-control-alternative" placeholder="Nombre Cliente" value="" >
                                             </div>
                                         </div>
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-email">Email</label>
-                                                <input max="100" type="email" name="email" class="form-control form-control-alternative" placeholder=" ejemplo@empresa.cl" required>
+                                                <input max="100" type="email" name="email" class="form-control form-control-alternative" placeholder=" ejemplo@empresa.cl" >
                                             </div>
                                         </div>
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-pay">Forma de Pago</label>
-                                                <input max="100" type="text" name="forma_pago" class="form-control form-control-alternative" placeholder="A convenir" value="A convenir" required>
+                                                <input max="100" type="text" name="forma_pago" class="form-control form-control-alternative" placeholder="A convenir" value="A convenir" >
                                             </div>
                                         </div>
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-term">Plazo de Entrega</label>
-                                                <input max="100" type="text" name="plazo" class="form-control form-control-alternative" placeholder="A convenir" value="A convenir" required>
+                                                <input max="100" type="text" name="plazo" class="form-control form-control-alternative" placeholder="A convenir" value="A convenir" >
                                             </div>
                                         </div>
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-validez">Validez de la cotización</label>
-                                                <input max="250" type="text" name="validez" class="form-control form-control-alternative" placeholder="10 días" value="10 días" required>
+                                                <input max="250" type="text" name="validez" class="form-control form-control-alternative" placeholder="10 días" value="10 días" >
                                             </div>
                                         </div>
                                     </div>
@@ -94,7 +96,7 @@
                                                     <div class="form-group mb-lg-0">
                                                         <label for="example-search-input" class="form-control-label">Producto</label>
                                                         <input type="hidden" name="producto[0][id]" id="id"/>
-                                                        <input class="form-control form-control-alternative search" autocomplete="off" type="search" placeholder="Producto" id="nombre" name="producto[0][nombre]" required>
+                                                        <input class="form-control form-control-alternative search" autocomplete="off" type="search" placeholder="Producto" id="nombre" name="producto[0][nombre]" >
                                                     </div>
                                                     <div class="form-group mb-lg-0 mt-1">
                                                         <textarea name="producto[0][descripcion]" placeholder="descripción" id="descripcion" class="form-control form-control-alternative descripcion textarea richTextBox" rows="2"></textarea>
@@ -135,20 +137,20 @@
                                                 <div class="col-lg-3 mb-lg-0">
                                                     <div class="form-group">
                                                         <label for="example-search-input" class="form-control-label">Cantidad</label>
-                                                        <input type="number" name="producto[0][cantidad][]" id="cantidad" value="0" min="0" class="form-control form-control-alternative cantidad" placeholder="0" required>
+                                                        <input type="number" name="producto[0][cantidad][0]" id="cantidad" value="0" min="0" class="form-control form-control-alternative cantidad" placeholder="0" >
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 mb-lg-0">
                                                     <div class="form-group">
                                                         <input type="hidden" id="precio_unitario" class="precio_unitario"/>
                                                         <label for="example-search-input" class="form-control-label">Valor Unitario</label>
-                                                        <input type="number" name="producto[0][precio][]" id="precio"  value="0" min="0" class="form-control form-control-alternative money precio" placeholder="0" required>
+                                                        <input type="number" name="producto[0][precio][0]" id="precio"  value="0" min="0" class="form-control form-control-alternative money precio" placeholder="0" >
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 mb-lg-0">
                                                     <div class="form-group">
                                                         <label for="example-search-input" class="form-control-label">Total</label>
-                                                        <input type="number" name="producto[0][suma][]" id="precio_suma"  value="0" min="0" class="form-control form-control-alternative money precio_suma" placeholder="0" readonly required>
+                                                        <input type="number" name="producto[0][suma][0]" id="precio_suma"  value="0" min="0" class="form-control form-control-alternative money precio_suma" placeholder="0" readonly >
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 mb-lg-0">
