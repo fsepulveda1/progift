@@ -83,8 +83,7 @@ class CotizacionesController extends VoyagerBaseController
 
                 $search_value = '%'.$value.'%';
                 if($key == 'cotizaciones.updated_at') {
-                    $date = \DateTime::createFromFormat('m-d-Y',str_replace('/','-',substr($value,0,10)));
-                    $query->whereDate($key,'=', $date->format('Y-m-d'));
+                    $query->whereDate($key,'=', $value);
                 }
                 else {
                     $query->where($key, 'LIKE', $search_value);

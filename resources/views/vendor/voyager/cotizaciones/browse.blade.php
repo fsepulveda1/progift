@@ -61,7 +61,7 @@
                                         <input type="text" class="form-control" placeholder="RUT Empresa" name="rut" value="{{ $searchNames['clients.rut'] }}">
                                         <input type="text" class="form-control" placeholder="Nombre Cliente" name="nombre" value="{{ $searchNames['clients.contacto'] }}">
                                         <input type="text" class="form-control" placeholder="Email Cliente" name="email" value="{{ $searchNames['clients.email'] }}">
-                                        <input type="text" class="form-control datepicker" placeholder="Fecha" name="fecha" value="{{ $searchNames['cotizaciones.updated_at'] }}">
+                                        <input type="date" class="form-control" style="margin-right: 2rem;" placeholder="Fecha" name="fecha" value="{{ $searchNames['cotizaciones.updated_at'] }}">
 
                                         <span class="input-group-btn">
                                             <button class="btn btn-info btn-lg" type="submit">
