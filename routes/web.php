@@ -65,10 +65,10 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::get('/export', 'ExportController@exportMatchRut')->name('export.match_rut');
 
-    Route::get('/import', 'ImportController@getImport')->name('import');
-    Route::get('/email-vendedores', 'ImportController@getVendedoresForm')->name('email.vendedores');
-    Route::post('/email-vendedores', 'ImportController@saveVendedores')->name('email.vendedores');
+    Route::get('/import', 'ImportController@getImport')->middleware('admin.user')->name('import');
+    Route::get('/email-vendedores', 'ImportController@getVendedoresForm')->middleware('admin.user')->name('email.vendedores');
+    Route::post('/email-vendedores', 'ImportController@saveVendedores')->middleware('admin.user')->name('email.vendedores');
     Route::post('/import_process_failures', 'ImportController@processFailures')->name('import.process.failures');
-    Route::post('/uploadFile', 'ImportController@uploadFile')->name('importa');
-    Route::get('/change/status','CotizadorController@changeStatus')->name('admin.change_status');
+    Route::post('/uploadFile', 'ImportController@uploadFile')->middleware('admin.user')->name('importa');
+    Route::get('/change/status','CotizadorController@changeStatus')->middleware('admin.user')->name('admin.change_status');
 });
