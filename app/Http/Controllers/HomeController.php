@@ -76,7 +76,7 @@ class HomeController extends Controller
 
             $this->validate($request, [
                 'empresa' => 'required|max:100',
-                'rut' => 'required|max:12',
+                'rut' => 'required|cl_rut|max:12',
                 'contacto' => 'required|max:50',
                 'telefono' => 'required|max:20',
                 'email' => 'required|max:50|email',
@@ -85,6 +85,7 @@ class HomeController extends Controller
                 'required' => 'El campo :attribute es requerido',
                 'max' => 'El campo :attribute permite un máximo de :max caracteres',
                 'email' => 'El  :attribute no es válido',
+                'cl_rut' => 'El RUT ingresado no es válido'
             ]);
 
             $contacto = Contacto::create($request->all());
