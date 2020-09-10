@@ -57,11 +57,11 @@
                             <form method="get" class="form-search">
                                 <div id="search-input">
                                     <div class="input-group col-md-12">
-                                        <input type="text" class="form-control" placeholder="Empresa" name="empresa" value="{{ $searchNames['clients.nombre'] }}">
-                                        <input type="text" class="form-control" placeholder="RUT Empresa" name="rut" value="{{ $searchNames['clients.rut'] }}">
-                                        <input type="text" class="form-control" placeholder="Nombre Cliente" name="nombre" value="{{ $searchNames['clients.contacto'] }}">
-                                        <input type="text" class="form-control" placeholder="Email Cliente" name="email" value="{{ $searchNames['clients.email'] }}">
-                                        <input type="date" class="form-control" style="margin-right: 2rem;" placeholder="Fecha" name="fecha" value="{{ $searchNames['cotizaciones.updated_at'] }}">
+                                        <span class="search-icon"><input type="text" class="form-control" placeholder="Empresa" name="empresa" value="{{ $searchNames['clients.nombre'] }}"></span>
+                                        <span class="search-icon"><input type="text" class="form-control" placeholder="RUT Empresa" name="rut" value="{{ $searchNames['clients.rut'] }}"></span>
+                                        <span class="search-icon"><input type="text" class="form-control" placeholder="Nombre Cliente" name="nombre" value="{{ $searchNames['clients.contacto'] }}"></span>
+                                        <span class="search-icon"><input type="text" class="form-control" placeholder="Email Cliente" name="email" value="{{ $searchNames['clients.email'] }}"></span>
+                                        <span class="search-icon"><input type="text" class="form-control custom-datepicker" style="margin-right: 2rem;" placeholder="Fecha" name="fecha" value="{{ $searchNames['cotizaciones.created_at'] }}"></span>
 
                                         <span class="input-group-btn">
                                             <button class="btn btn-info btn-lg" type="submit">
@@ -325,7 +325,7 @@
                                     'empresa' => $searchNames['clients.nombre'],
                                     'nombre' => $searchNames['clients.contacto'],
                                     'email' => $searchNames['clients.email'],
-                                    'fecha' => $searchNames['cotizaciones.updated_at'],
+                                    'fecha' => $searchNames['cotizaciones.created_at'],
                                     'order_by' => $orderBy,
                                     'sort_order' => $sortOrder,
                                     'showSoftDeleted' => $showSoftDeleted,
@@ -439,5 +439,7 @@
             });
             $('.selected_ids').val(ids);
         });
+
+        $('.custom-datepicker').datetimepicker({ format:'DD-MM-YYYY'});
     </script>
 @stop

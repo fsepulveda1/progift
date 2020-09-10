@@ -44,6 +44,7 @@ class VoyagerClientsController extends VoyagerBaseController
             'clients.nombre' => $search->value,
             'clients.rut' => $search->value,
             'clients.contacto' => $search->value,
+            'clients.telefono' => $search->value,
             'clients.email' => $search->value,
             'clients.comentarios' => $search->value,
         ];

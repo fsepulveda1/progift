@@ -155,6 +155,8 @@ class CartController extends Controller
         }
 
         $client = Client::where([
+            ['nombre',$request->empresa],
+            ['contacto',$request->contacto],
             ['rut', $request->rut],
             ['email', $request->email],
             ['telefono', $request->telefono]

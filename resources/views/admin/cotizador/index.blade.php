@@ -241,19 +241,19 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-
-                                <div class="pl-lg-4">
-                                    <div class="row justify-content-end">
-                                        <div class="col-lg-2">
-                                            <div class="form-group">
-                                                <label for="example-search-input" id="number" class="form-control-label FormatNumer">Total</label>
-                                                <input type="number" id="total" name="total" class="form-control form-control-alternative money total" placeholder="0" readonly>
+                                    <div class="pl-lg-4">
+                                        <div class="row justify-content-end">
+                                            <div class="col-lg-2">
+                                                <div class="form-group">
+                                                    <label for="example-search-input" id="number" class="form-control-label FormatNumer">Total</label>
+                                                    <input type="number" id="total" name="total" class="form-control form-control-alternative money total" placeholder="0" readonly>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
                                 <hr class="my-4"/>
 
                                 <div class="pl-lg-4">

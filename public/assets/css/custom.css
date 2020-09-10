@@ -44,6 +44,16 @@
     border-bottom: 1px solid #f5c524;
 }
 
+.product-single-qty {
+    max-width: 88px;
+}
+.bootstrap-touchspin.input-group {
+    max-width: 85px;
+}
+.bootstrap-touchspin .form-control {
+    max-width: 63px;
+}
+
 @media (min-width: 768px) {
     .product-details > figure a {
         max-height: 202px;

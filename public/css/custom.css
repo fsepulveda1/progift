@@ -18,6 +18,7 @@ app-container.expanded .content-container .side-menu .navbar-header .navbar-bran
 }
 .voyager .side-menu.sidebar-inverse .navbar {
     background: #ffffff;
+    max-height: 100%;
 }
 .voyager .side-menu .navbar-nav {
     width: 100%;
@@ -135,6 +136,7 @@ app-container.expanded .content-container .side-menu .navbar-header .navbar-bran
 .app-container .content-container .side-menu .navbar-nav li a .title {
     font-size: 0.9rem;
 }
+
 #search-input {
     /* padding: 1px; */
     border: 1px solid #eaeaf1;
@@ -144,6 +146,37 @@ app-container.expanded .content-container .side-menu .navbar-header .navbar-bran
     display: -webkit-box;
     display: flex;
 }
+
+#search-input .select2-container--default .select2-selection--single {
+    border: none;
+}
+
+#search-input span.search-icon {
+    position: relative !important;
+    padding-left: 30px;
+}
+#search-input span.search-icon:before {
+    content: "\E012";
+    font-family: voyager!important;
+    font-style: normal!important;
+    font-weight: 400!important;
+    font-variant: normal!important;
+    text-transform: none!important;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+    position: absolute;
+    left:0;
+    font-size: 14px;
+    width: 30px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#search-input .form-control{
+    max-width: 90%;
+}
+
 .app-container .side-body {
     margin-right: 0px;
 }
@@ -162,7 +195,6 @@ app-container.expanded .content-container .side-menu .navbar-header .navbar-bran
     padding: 3px;
 }
 .form-control{
-    max-width: 500px;
     box-shadow: 0 1px 3px rgba(50, 50, 93, 0.15), 0 1px 0 rgba(0, 0, 0, 0.02);
     border: 0;
     transition: box-shadow .15s ease;
@@ -180,6 +212,7 @@ app-container.expanded .content-container .side-menu .navbar-header .navbar-bran
     box-shadow: none;
     transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
+
 .header {
     position: relative;
 }
@@ -416,4 +449,8 @@ textarea {
 }
 .page-title {
     z-index: 3;
+}
+
+.btn:not(:last-child) {
+    margin-right: 0 !important;
 }

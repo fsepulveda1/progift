@@ -9,6 +9,7 @@
     function initTypeAhead() {
         $('.search').typeahead({
             minLength: 2,
+            items: 20,
             source: function (query, process) {
                 return $.get("/admin/typeahead", {query: query}, function (data) {
                     return process(data);
@@ -16,6 +17,47 @@
             },
             displayText: function (item) {
                 return item.name+" - Cód: "+item.sku;
+            },
+            matcher: function (item) {
+                var it = item.name+" "+item.sku;
+                return ~it.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(this.query.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ""));
+            },
+            sorter: function (items) {
+                var beginswith = [];
+                var caseSensitive = [];
+                var caseInsensitive = [];
+                var exactMatch = [];
+                var item;
+
+                while ((item = items.shift())) {
+                    var code = item.sku;
+                    var name = item.name;
+
+                    if(code.toLowerCase() == this.query.toLowerCase()) {
+                        exactMatch.push(item);
+                    }
+                    else if(name.toLowerCase() == this.query.toLowerCase()) {
+                        exactMatch.push(item);
+                    }
+                    else if (!code.toLowerCase().indexOf(this.query.toLowerCase())) {
+                        beginswith.push(item);
+                    }
+                    else if (!name.toLowerCase().indexOf(this.query.toLowerCase())) {
+                        beginswith.push(item);
+                    }
+                    else if (~code.indexOf(this.query)) {
+                        caseSensitive.push(item);
+                    }
+                    else if (~name.indexOf(this.query)) {
+                        caseSensitive.push(item);
+                    }
+                    else {
+                        caseInsensitive.push(item);
+                    }
+
+                }
+
+                return exactMatch.concat(beginswith,caseSensitive, caseInsensitive);
             },
             afterSelect: function (args) {
                 var imagen = args.imagen.split(',');

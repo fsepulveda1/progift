@@ -262,8 +262,10 @@ class CotizadorController extends Controller
      */
     private function createClientIfNotExist(Request $request) {
         $client = Client::where([
+            ['nombre', $request->empresa],
             ['rut', $request->rut],
-            ['email', $request->email]
+            ['email', $request->email],
+            ['contacto', $request->nombre_cliente],
         ])->first();
 
         if (!$client) {
@@ -271,7 +273,7 @@ class CotizadorController extends Controller
                 'nombre' => $request->empresa,
                 'rut' => $request->rut,
                 'contacto' => $request->nombre_cliente,
-                'telefono' => 0,
+                'telefono' => '',
                 'email' => $request->email,
                 'comentarios' => 'Vía cotizador'
             ]);

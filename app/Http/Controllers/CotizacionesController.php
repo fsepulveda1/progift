@@ -38,7 +38,7 @@ class CotizacionesController extends VoyagerBaseController
             'clients.rut' => $request->get('rut'),
             'clients.contacto' => $request->get('nombre'),
             'clients.email' => $request->get('email'),
-            'cotizaciones.updated_at' => $request->get('fecha'),
+            'cotizaciones.created_at' => $request->get('fecha'),
         ];
 
         $orderBy = $request->get('order_by', $dataType->order_column);
@@ -82,8 +82,9 @@ class CotizacionesController extends VoyagerBaseController
                     continue;
 
                 $search_value = '%'.$value.'%';
-                if($key == 'cotizaciones.updated_at') {
-                    $query->whereDate($key,'=', $value);
+                if($key == 'cotizaciones.created_at') {
+                    $date = \DateTime::createFromFormat('d-m-Y',$value);
+                    $query->whereDate($key,'=', $date->format('Y-m-d'));
                 }
                 else {
                     $query->where($key, 'LIKE', $search_value);
