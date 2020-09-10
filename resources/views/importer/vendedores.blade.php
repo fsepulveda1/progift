@@ -57,28 +57,32 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="{{ voyager_asset('js/app.js') }}"></script>
+@endsection
+@section('javascript')
     <script>
-        $('.btn_edit').click(function (e) {
-            e.preventDefault();
-            var row = $(this).closest('tr');
-            row.find('input[type="text"]').removeClass('hide');
-            row.find('.text-email').addClass('hide');
-            row.find('.botonera_default').addClass('hide');
-            row.find('.botonera_oculta').removeClass('hide');
-        });
+        $(document).ready(function () {
 
-        $('.btn_cancel').click(function (e) {
-            e.preventDefault();
-            var row = $(this).closest('tr');
-            row.find('input[type="text"]').addClass('hide');
-            row.find('.text-email').removeClass('hide');
-            row.find('input[type="text"]').val(row.find('input[type="hidden"]').val());
-            row.find('.botonera_default').removeClass('hide');
-            row.find('.botonera_oculta').addClass('hide');
-        });
+            $('.btn_edit').click(function (e) {
+                e.preventDefault();
+                var row = $(this).closest('tr');
+                row.find('input[type="text"]').removeClass('hide');
+                row.find('.text-email').addClass('hide');
+                row.find('.botonera_default').addClass('hide');
+                row.find('.botonera_oculta').removeClass('hide');
+            });
 
-        $('[data-toggle="tooltip"]').tooltip({});
+            $('.btn_cancel').click(function (e) {
+                e.preventDefault();
+                var row = $(this).closest('tr');
+                row.find('input[type="text"]').addClass('hide');
+                row.find('.text-email').removeClass('hide');
+                row.find('input[type="text"]').val(row.find('input[type="hidden"]').val());
+                row.find('.botonera_default').removeClass('hide');
+                row.find('.botonera_oculta').addClass('hide');
+            });
+
+            $('[data-toggle="tooltip"]').tooltip({});
+        });
     </script>
     <script>
                 @if($errors->has('file'))

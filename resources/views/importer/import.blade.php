@@ -43,11 +43,14 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="{{ voyager_asset('js/app.js') }}"></script>
+@endsection
+{{--<script type="text/javascript" src="{{ voyager_asset('js/app.js') }}"></script>--}}
+@section('javascript')
+
     <script>
-        @if($errors->has('file'))
-          let alerts = {!! json_encode($errors->first('file')) !!};
-          toastr.error(alerts)
+                @if($errors->has('file'))
+        let alerts = {!! json_encode($errors->first('file')) !!};
+        toastr.error(alerts)
         @endif
     </script>
 @endsection

@@ -311,7 +311,7 @@
 									<div class="d-dlex justify-content-end">
 
 										<div style="text-align: right;">
-											<button class="btn btn-danger" onclick="getPdf();">PDF</button><br/>
+											<button class="btn btn-danger" onclick="$('form').attr('target', '_blank');$('form').attr('action', '/admin/genera');">PDF</button><br/>
 											<button type="submit" class="btn btn-success save" onclick="$('form').attr('target', '');$('form').attr('action', '/admin/cotiza/guarda');">Guardar Cambios en esta Cotización</button>&nbsp;o&nbsp;
 											<button type="submit" class="btn btn-success" onclick="$('form').attr('target', '');$('form').attr('action', '/admin/cotiza/guarda/nueva');">Guardar y crear Nueva Cotización</button><br/>
 											<button type="submit" class="btn btn-warning" onclick="$('form').attr('target', '');$('form').attr('action', '/admin/cotiza/guarda/envia');">Enviar Cotización a e-mail Cliente</button>
