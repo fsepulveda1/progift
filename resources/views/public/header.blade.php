@@ -34,6 +34,8 @@
                         {{ csrf_field() }}
                         <div class="header-search-wrapper">
                             <input type="search" class="form-control" name="q" id="q" placeholder="Buscar..." autocomplete="off" required>
+                            <input type="hidden" name="name" id="search_name">
+                            <input type="hidden" name="code" id="search_code">
                             <button class="btn" type="submit"><i class="icon-magnifier"></i></button>
                         </div><!-- End .header-search-wrapper -->
                     </form>

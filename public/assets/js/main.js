@@ -867,6 +867,8 @@
       return exactMatch.concat(beginswith,caseSensitive, caseInsensitive);
     },
     afterSelect: function (args) {
+      $('#form-search').find('input[name="name"]').val(args.name);
+      $('#form-search').find('input[name="code"]').val(args.sku);
       $('#form-search').submit();
     }
   });

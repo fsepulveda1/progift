@@ -57,8 +57,16 @@ class HomeController extends Controller
     }
 
     public function buscar(Request $request){
+
         $textSearch  = $request->q;
-        $products = Product::with('colors', 'impresions', 'categories')->where('nombre', 'LIKE', "%{$textSearch}%")->paginate(16);
+        $nameSearch  = $request->name;
+        $codeSearch  = $request->code;
+
+        $products = Product::with('colors', 'impresions', 'categories')
+            ->where('nombre', 'LIKE', "%{$textSearch}%")
+            ->orWhere('nombre',$nameSearch)
+            ->orWhere('sku',$codeSearch)
+            ->paginate(16);
         $lastPage = $products->lastPage();
 
         if ($request->ajax()) {
