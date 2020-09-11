@@ -47,7 +47,7 @@
         </div>
     </div>
     <!-- Page content -->
-    <div class="container mt--8 pb-5">
+    <div class="container mt--9 pb-5">
         <div class="row justify-content-center">
             <div class="col-lg-5 col-md-7">
                 <div class="card bg-secondary shadow border-0">
@@ -56,9 +56,16 @@
                             <img src="{{asset('assets/images/logo_pdf.png')}}" alt="" width="150px">
                         </div>
                         <div class="text-center text-muted mb-5">
-                            {{--<small>Introduce tus credenciales para entrar a tu cuenta</small>--}}
                         </div>
-
+                        @if(!$errors->isEmpty())
+                            <div class="alert alert-danger mb-4">
+                                <ul class="list-unstyled mb-0">
+                                    @foreach($errors->all() as $err)
+                                        <li>{{ $err }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <form method="POST" class="login" action="{{ route('voyager.login') }}">
                             {{ csrf_field() }}
                             <div class="form-group row">
@@ -99,16 +106,6 @@
                         </form>
 
                         <div style="clear:both"></div>
-
-                        @if(!$errors->isEmpty())
-                            <div class="alert alert-red">
-                                <ul class="list-unstyled">
-                                    @foreach($errors->all() as $err)
-                                        <li>{{ $err }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
                     </div>
                 </div>
             </div>
