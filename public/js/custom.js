@@ -67,3 +67,25 @@ function tinymce_setup_callback(editor) {
     editor.settings.plugins = "link, code, table, textcolor, lists"
     return editor;
 }
+
+$('.btn-show-comments').on('click', function (e) {
+
+    e.preventDefault();
+    var modalContainer = $('#modal-comments');
+    var loading = $('#voyager-loader');
+    loading.show();
+
+    $.ajax({
+        url: $(this).attr('href'),
+        type: "get",
+        dataType: "html",
+    }).done( function(res) {
+        console.log(modalContainer);
+        modalContainer.find('#modal-comment-text').text(res);
+        modalContainer.modal('show');
+        loading.hide()
+    }).fail( function(e, res, xhr) {
+        loading.hide();
+    });
+
+});

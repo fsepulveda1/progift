@@ -80,6 +80,13 @@
 												<input max="100" type="text" name="validez" class="form-control form-control-alternative" placeholder="10 días" value="{{$cotizacion->validez}}" >
 											</div>
 										</div>
+										<div class="col-lg-3">
+											<div class="form-group">
+												<label class="form-control-label" for="input-validez">Comentarios</label>
+												<textarea class="form-control form-control-alternative" readonly name="comentarios" id="comentarios" cols="" rows="1">{{ $cotizacion->client->comentarios }}</textarea>
+											</div>
+										</div>
+
 									</div>
 								</div>
 								<hr class="my-4" />

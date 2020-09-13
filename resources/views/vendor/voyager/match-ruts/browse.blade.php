@@ -14,11 +14,9 @@
                             <div class="col-sm-8">
                             </div>
                             <div class="col-sm-4 text-right">
-                                @if($dataType->model_name == 'App\MatchRut')
-                                    <a href="{{  route('export.match_rut') }}" class="btn btn-success btn-sm btn-add-new">
-                                        <span>Exportar</span>
-                                    </a>
-                                @endif
+                                <a href="{{  route('export',['type'=>'match_rut']) }}" class="btn btn-success btn-sm btn-add-new">
+                                    <span>Exportar</span>
+                                </a>
                                 @can('add', app($dataType->model_name))
                                     <a href="{{ route('voyager.'.$dataType->slug.'.create') }}" class="btn btn-success btn-sm btn-add-new">
                                         <span>{{ __('voyager::generic.add_new') }}</span>

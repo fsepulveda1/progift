@@ -275,7 +275,7 @@ class CotizadorController extends Controller
                 'contacto' => $request->nombre_cliente,
                 'telefono' => '',
                 'email' => $request->email,
-                'comentarios' => 'Vía cotizador'
+                'comentarios' => ''
             ]);
             return $client;
         }
@@ -456,5 +456,11 @@ class CotizadorController extends Controller
         }
 
         return $detalle;
+    }
+
+    public function showComments($client_id) {
+        $client = Client::find($client_id);
+
+        return $client->comentarios;
     }
 }

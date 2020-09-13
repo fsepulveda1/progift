@@ -150,5 +150,25 @@ if (\Illuminate\Support\Str::startsWith(Auth::user()->avatar, 'http://') || \Ill
     @foreach(config('voyager.additional_js') as $js)<script type="text/javascript" src="{{ asset($js) }}"></script>@endforeach
 @endif
 
+<!-- Comments Modal -->
+<div class="modal fade modal-info" id="modal-comments">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Comentarios
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div id="modal-comment-text"></div>
+            </div>
+
+            <div class="modal-footer text-left">
+                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

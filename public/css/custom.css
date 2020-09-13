@@ -454,3 +454,7 @@ textarea {
 .btn:not(:last-child) {
     margin-right: 0 !important;
 }
+
+.form-group .btn-success {
+    margin-left: .5rem !important;
+}

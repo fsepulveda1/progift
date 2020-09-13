@@ -62,9 +62,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/genera', 'CotizadorController@generateFromDB')->middleware('admin.user')->name('admin.genera');
     Route::get('/pdf', 'CotizadorController@pdf')->middleware('admin.user')->name('admin.pdf');
     Route::post('/upload-image', 'CotizadorController@uploadImage')->middleware('admin.user')->name('admin.upload');
+    Route::get('/comments/{client_id}', 'CotizadorController@showComments')->name('admin.show.comments');
 
-    Route::get('/export', 'ExportController@exportMatchRut')->name('export.match_rut');
-
+    Route::get('/export/{type}', 'ExportController@export')->name('export');
     Route::get('/import', 'ImportController@getImport')->middleware('admin.user')->name('import');
     Route::get('/email-vendedores', 'ImportController@getVendedoresForm')->middleware('admin.user')->name('email.vendedores');
     Route::post('/email-vendedores', 'ImportController@saveVendedores')->middleware('admin.user')->name('email.vendedores');

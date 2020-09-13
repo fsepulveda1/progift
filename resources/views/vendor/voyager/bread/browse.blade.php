@@ -14,8 +14,13 @@
                             <div class="col-sm-8">
                             </div>
                             <div class="col-sm-4 text-right">
-                                @if($dataType->model_name == 'App\MatchRut')
-                                    <a href="{{  route('export.match_rut') }}" class="btn btn-success btn-sm btn-add-new">
+                                @if($dataType->model_name == 'App\Newsletter')
+                                    <a href="{{  route('export',['type'=>'newsletter']) }}" class="btn btn-success btn-sm btn-add-new">
+                                        <span>Exportar</span>
+                                    </a>
+                                @endif
+                                @if($dataType->model_name == 'App\Client')
+                                    <a href="{{  route('export',['type'=>'clients']) }}" class="btn btn-success btn-sm btn-add-new">
                                         <span>Exportar</span>
                                     </a>
                                 @endif

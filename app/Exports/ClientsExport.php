@@ -2,18 +2,18 @@
 
 namespace App\Exports;
 
-use App\MatchRut;
+use App\Client;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class MatchRutExport implements FromCollection, WithHeadings
+class ClientsExport implements FromCollection, WithHeadings
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        return MatchRut::all(['rut','vendedor']);
+        return Client::all(['nombre','rut','contacto','telefono','email']);
     }
 
     /**
@@ -22,8 +22,11 @@ class MatchRutExport implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
+            'Empresa',
             'RUT',
-            'Vendedor'
+            'Nombre Cliente',
+            'Teléfono',
+            'Email'
         ];
     }
 }
