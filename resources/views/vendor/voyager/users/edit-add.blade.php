@@ -96,22 +96,19 @@
                                     @endphp
                                     @include('voyager::formfields.relationship')
                                 </div>
-                                {{--<div class="form-group">--}}
-                                    {{--<label for="additional_roles">{{ __('voyager::profile.roles_additional') }}</label>--}}
-                                    {{--@php--}}
-                                        {{--$row     = $dataTypeRows->where('field', 'user_belongstomany_role_relationship')->first();--}}
-                                        {{--$options = $row->details;--}}
-                                    {{--@endphp--}}
-                                    {{--@include('voyager::formfields.relationship')--}}
-                                {{--</div>--}}
                             @endcan
+                            <div class="form-group">
+                                <label class="control-label" for="name">Ruleta</label>
+                                <br>
+                                <input type="checkbox" name="ruleta" data-on="Si" data-off="No" class="toggleswitch" @if($dataTypeContent->ruleta) checked @endif>
+
+                            </div>
                             @php
                                 if (isset($dataTypeContent->locale)) {
                                     $selected_locale = $dataTypeContent->locale;
                                 } else {
                                     $selected_locale = config('app.locale', 'en');
                                 }
-
                             @endphp
                             <div class="form-group" style="display: none;">
                                 <label for="locale">{{ __('voyager::generic.locale') }}</label>

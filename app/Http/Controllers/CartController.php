@@ -252,7 +252,7 @@ class CartController extends Controller
             }
 
             $users = User::where([
-                ['role_id',2],
+                ['ruleta',1],
                 ['id','<>',$lastId]
             ])->orderBy('nombre','asc')->get();
 
