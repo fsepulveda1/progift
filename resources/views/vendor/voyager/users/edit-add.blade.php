@@ -97,12 +97,14 @@
                                     @include('voyager::formfields.relationship')
                                 </div>
                             @endcan
-                            <div class="form-group">
-                                <label class="control-label" for="name">Ruleta</label>
-                                <br>
-                                <input type="checkbox" name="ruleta" data-on="Si" data-off="No" class="toggleswitch" @if($dataTypeContent->ruleta) checked @endif>
+                            @if(Auth::user()->role_id == 1)
+                                <div class="form-group">
+                                    <label class="control-label" for="name">Ruleta</label>
+                                    <br>
+                                    <input type="checkbox" name="ruleta" data-on="Si" data-off="No" class="toggleswitch" @if($dataTypeContent->ruleta) checked @endif>
 
-                            </div>
+                                </div>
+                            @endif
                             @php
                                 if (isset($dataTypeContent->locale)) {
                                     $selected_locale = $dataTypeContent->locale;

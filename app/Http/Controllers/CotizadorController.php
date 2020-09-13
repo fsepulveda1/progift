@@ -285,7 +285,7 @@ class CotizadorController extends Controller
     private function createOrUpdateMatchRut($client) {
         $matchRut = MatchRut::updateOrCreate(
             ['rut' => $client->rut],
-            ['vendedor' => Auth::user()->email]
+            ['vendedor' => Auth::user()->email,'estado' => 1, 'procedencia' => 'Web']
         );
 
         return $matchRut;

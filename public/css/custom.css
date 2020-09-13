@@ -458,3 +458,7 @@ textarea {
 .form-group .btn-success {
     margin-left: .5rem !important;
 }
+
+.browse .panel-body {
+    min-height: 400px;
+}
