@@ -39,6 +39,7 @@ class CotizacionesController extends VoyagerBaseController
             'clients.contacto' => $request->get('nombre'),
             'clients.email' => $request->get('email'),
             'cotizaciones.created_at' => $request->get('fecha'),
+            'users.email' => $request->get('vendedor'),
         ];
 
         $orderBy = $request->get('order_by', $dataType->order_column);
@@ -72,6 +73,7 @@ class CotizacionesController extends VoyagerBaseController
             }
             /** @var $query Builder */
             $query->join('clients','cotizaciones.client_id','=','clients.id');
+            $query->join('users','cotizaciones.user_id','=','users.id');
 
             // If a column has a relationship associated with it, we do not want to show that field
             $this->removeRelationshipField($dataType, 'browse');

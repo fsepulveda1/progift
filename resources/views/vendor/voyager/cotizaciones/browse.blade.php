@@ -63,7 +63,7 @@
                                         <span class="search-icon"><input type="text" class="form-control" placeholder="Email Cliente" name="email" value="{{ $searchNames['clients.email'] }}"></span>
                                         <span class="search-icon"><input type="text" class="form-control custom-datepicker" style="margin-right: 2rem;" placeholder="Fecha" name="fecha" value="{{ $searchNames['cotizaciones.created_at'] }}"></span>
                                         @if(Auth::user()->role_id == 1)
-                                            <span class="search-icon"><input type="text" class="form-control" placeholder="Vendedor" name="vendedor" value="{{ $searchNames['cotizaciones.user.email'] }}"></span>
+                                            <span class="search-icon"><input type="text" class="form-control" placeholder="Vendedor" name="vendedor" value="{{ $searchNames['users.email'] }}"></span>
                                         @endif
                                         <span class="input-group-btn">
                                             <button class="btn btn-info btn-lg" type="submit">
