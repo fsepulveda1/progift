@@ -1,5 +1,4 @@
 function fixAside() {
-    console.log('asd');
     if ($(window).width() > 768) {
         $('.app-container').addClass('expanded');
         $('.hamburger').hide();

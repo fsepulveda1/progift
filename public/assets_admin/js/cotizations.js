@@ -60,10 +60,12 @@
                 return exactMatch.concat(beginswith,caseSensitive, caseInsensitive);
             },
             afterSelect: function (args) {
+
                 var imagen = args.imagen.split(',');
                 imagen = imagen[0].replace('["', '');
                 imagen = imagen.replace('"', '');
                 imagen = imagen.replace(']', '');
+
                 this.$element.closest('.pduct').find('.has-error').removeClass('has-error');
                 this.$element.closest('.pduct').find('.error-message').remove();
                 this.$element.closest('.pduct').find('.imagen').attr('src', '/storage/' + imagen);
@@ -91,14 +93,16 @@
                 newColorSelect.append('<option value=""></option>');
                 parentSelect.append(newColorSelect);
                 colorSelect.remove();
-
+                var empty = true;
                 $.each(args.colors, function (index, value) {
+                    empty = false;
                     newColorSelect.append('<option value="' + value + '">' + value + '</option>');
                 });
 
-                newColorSelect.select2({});
+                if(empty)
+                    newColorSelect.append('<option value="No aplica" selected>No aplica</option>');
 
-                console.log('asd');
+                newColorSelect.select2({'placeholder':'Color'});
 
                 calculaTotales();
             }
