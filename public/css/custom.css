@@ -399,6 +399,11 @@ select[name=dataTable_length] {
     font-size: 12px;
     width: 100%;
 }
+.loading .custom-file-label::after {
+    content: "Cargando...";
+    font-size: 12px;
+    width: 100%;
+}
 
 .custom-file {
     position: relative;

@@ -447,7 +447,5 @@
             });
             $('.selected_ids').val(ids);
         });
-
-        $('.custom-datepicker').datetimepicker({ format:'DD-MM-YYYY'});
     </script>
 @stop

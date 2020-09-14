@@ -79,10 +79,12 @@ class VoyagerMatchRutsController extends VoyagerBaseController
             if($filters['vendedor'])
                 $query->where('match_ruts.vendedor',$filters['vendedor']);
             if(!empty($filters['fecha_desde'])) {
-                $query->where('match_ruts.created_at','>=',$filters['fecha_desde']." 00:00:00");
+                $from = \DateTime::createFromFormat('d-m-Y',$filters['fecha_desde']);
+                $query->whereDate('match_ruts.created_at','>=', $from->format('Y-m-d'));
             }
             if(!empty($filters['fecha_hasta'])) {
-                $query->where('match_ruts.created_at','<=',$filters['fecha_hasta']." 00:00:00");
+                $from = \DateTime::createFromFormat('d-m-Y',$filters['fecha_hasta']);
+                $query->whereDate('match_ruts.created_at','<=', $from->format('Y-m-d'));
             }
 
             if ($orderBy && in_array($orderBy, $dataType->fields())) {

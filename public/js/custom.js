@@ -89,3 +89,5 @@ $('.btn-show-comments').on('click', function (e) {
     });
 
 });
+
+$('.custom-datepicker').datetimepicker({ format:'DD-MM-YYYY'});

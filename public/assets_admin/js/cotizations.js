@@ -378,6 +378,9 @@
         var container = $(this).closest('.file-widget');
         var input = $(this).closest('.custom-file').find('.himagen');
         var current = $(this).closest('.pduct').find('.orden').val();
+
+        container.addClass('loading');
+
         $.ajax({
             url: '/admin/upload-image?num='+current,
             type: "post",
@@ -390,7 +393,9 @@
             img.attr('src',res);
             input.val(res);
             container.addClass('hide');
+            container.removeClass('loading');
         }).fail( function(e, res, xhr) {
+            container.removeClass('loading');
             var arr = e.responseJSON.errors;
             $.each(arr['producto.'+current+'.file_imagen'], function (index,value) {
                 toastr.error(value);

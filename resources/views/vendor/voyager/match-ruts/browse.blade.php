@@ -53,19 +53,27 @@
                             <form method="get" class="form-search">
                                 <div id="search-input">
                                     <div class="input-group col-md-12">
-                                        <select class="form-control" name="vendedor" id="vendedor" data-placeholder="Vendedor">
+                                        <select class="form-control" name="vendedor" id="vendedor"
+                                                data-allow-clear="true"
+                                                data-placeholder="Vendedor"
+                                                data-dropdown-auto-width="true"
+                                        >
                                             <option value=""></option>
                                             @foreach($vendedores as $vendedor)
                                                 <option value="{{$vendedor}}" @if($filters['vendedor']==$vendedor) selected @endif>{{$vendedor}}</option>
                                             @endforeach
                                         </select>
-                                        <select class="form-control" name="procedencia" id="procedencia" data-placeholder="Procedencia">
+                                        <select class="form-control" name="procedencia" id="procedencia"
+                                                data-allow-clear="true"
+                                                data-placeholder="Procedencia"
+                                                data-dropdown-auto-width="true"
+                                        >
                                             <option value=""></option>
                                             <option value="Web" @if($filters['procedencia']=='Web') selected @endif>Web</option>
                                             <option value="importador" @if($filters['procedencia']=='importador') selected @endif>Importador</option>
                                         </select>
-                                        <input class="form-control" type="date" name="fecha_desde" value="{{$filters['fecha_desde']}}" placeholder="Desde">
-                                        <input class="form-control" style="margin-right: 1rem" type="date" name="fecha_hasta" value="{{$filters['fecha_hasta']}}" placeholder="Hasta">
+                                        <input class="form-control custom-datepicker" type="text" name="fecha_desde" value="{{$filters['fecha_desde']}}" placeholder="Desde">
+                                        <input class="form-control custom-datepicker" style="margin-right: 1rem" type="text" name="fecha_hasta" value="{{$filters['fecha_hasta']}}" placeholder="Hasta">
 
                                         <span class="input-group-btn">
                                             <button class="btn btn-info btn-lg" type="submit">
