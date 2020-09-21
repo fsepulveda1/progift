@@ -382,13 +382,13 @@ class CotizadorController extends Controller
 
     private function validateRequest(Request $request) {
         $rules = [
-            'nombre_cliente'=>'required',
-            'validez'=>'required',
+            'nombre_cliente'=>'required|max:200',
+            'validez'=>'required|max:100',
             'rut'=>'required|cl_rut',
-            'empresa'=>'required',
-            'forma_pago'=>'required',
-            'email'=>'required',
-            'plazo'=>'required',
+            'empresa'=>'required|max:200',
+            'forma_pago'=>'required|max:100',
+            'email'=>'required|email|max:100',
+            'plazo'=>'required|max:100',
             'descuento'=>'',
             'neto' =>'',
             'iva' =>'',
@@ -396,19 +396,19 @@ class CotizadorController extends Controller
         ];
 
         foreach($request->producto as $key=>$product) {
-            $rules['producto.'.$key.'.nombre'] = "required";
-            $rules['producto.'.$key.'.descripcion'] = "required";
+            $rules['producto.'.$key.'.nombre'] = "required|max:250";
+            $rules['producto.'.$key.'.descripcion'] = "required|max:2000";
             $rules['producto.'.$key.'.imagen'] = "required";
-            $rules['producto.'.$key.'.color'] = "required";
-            $rules['producto.'.$key.'.impresion'] = "required";
+            $rules['producto.'.$key.'.color'] = "required|max:100";
+            $rules['producto.'.$key.'.impresion'] = "required|max:100";
             foreach($product['cantidad'] as $keyQty=>$qty) {
-                $rules['producto.'.$key.'.cantidad.'.$keyQty] = "required|min:0";
+                $rules['producto.'.$key.'.cantidad.'.$keyQty] = "required|min:0|integer";
             }
             foreach($product['precio'] as $keyPrice=>$price) {
-                $rules['producto.'.$key.'.precio.'.$keyPrice] = "required|min:0";
+                $rules['producto.'.$key.'.precio.'.$keyPrice] = "required|min:0|integer";
             }
             foreach($product['suma'] as $keySum=>$sum) {
-                $rules['producto.'.$key.'.suma.'.$keySum] = "required|min:0";
+                $rules['producto.'.$key.'.suma.'.$keySum] = "required|min:0|integer";
             }
         }
 
@@ -416,7 +416,9 @@ class CotizadorController extends Controller
             "required" => "Debes completar este campo.",
             "producto.*.imagen.required" => "Debes seleccionar una imagen.",
             "min" => "Ingresa un número positivo",
-            "cl_rut" => "EL rut ingresado no es válido",
+            "max" => "Ingresa hasta :max caracteres",
+            "cl_rut" => "El RUT no es válido",
+            "email" => "El email no es válido",
         ];
 
         return $this->validate($request,$rules,$messages);

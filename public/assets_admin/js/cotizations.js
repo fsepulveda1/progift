@@ -200,20 +200,20 @@
             '<div class="col-lg-3 mb-lg-0">'+
             '<div class="form-group">'+
             '<label for="example-search-input" class="form-control-label">Cantidad</label>'+
-            '<input type="number" name="producto['+a+'][cantidad]['+num+']" id="cantidad" class="form-control form-control-alternative cantidad" value="0" min="0" placeholder="0" >'+
+            '<input type="number" name="producto['+a+'][cantidad]['+num+']" id="cantidad" class="form-control form-control-alternative cantidad" value="0" placeholder="0" >'+
             '</div>'+
             '</div>'+
             '<div class="col-lg-3 mb-lg-0">'+
             '<div class="form-group">'+
             '<input type="hidden" id="precio_unitario" class="precio_unitario"/>'+
             '<label for="example-search-input" class="form-control-label">Valor Unitario</label>'+
-            '<input type="number" name="producto['+a+'][precio]['+num+']" id="precio" class="form-control form-control-alternative money precio" value="0" min="0" placeholder="0" >'+
+            '<input type="number" name="producto['+a+'][precio]['+num+']" id="precio" class="form-control form-control-alternative money precio" value="0" placeholder="0" >'+
             '</div>'+
             '</div>'+
             '<div class="col-lg-3 mb-lg-0">'+
             '<div class="form-group">'+
             '<label for="example-search-input" class="form-control-label">Valor total</label>'+
-            '<input type="number" name="producto['+a+'][suma]['+num+']" id="precio_suma" class="form-control form-control-alternative money precio_suma" value="0" min="0" placeholder="0" readonly >'+
+            '<input type="number" name="producto['+a+'][suma]['+num+']" id="precio_suma" class="form-control form-control-alternative money precio_suma" value="0" placeholder="0" readonly >'+
             '</div>'+
             '</div>'+
             '<div class="col-lg-3 mb-lg-0">'+
@@ -294,20 +294,20 @@
             '<div class="col-lg-3 mb-lg-0">'+
             '<div class="form-group">'+
             '<label for="example-search-input" class="form-control-label">Cantidad</label>'+
-            '<input type="number" name="producto['+c+'][cantidad][0]" id="cantidad" class="form-control form-control-alternative cantidad" value="0" min="0" placeholder="0">'+
+            '<input type="number" name="producto['+c+'][cantidad][0]" id="cantidad" class="form-control form-control-alternative cantidad" value="0" placeholder="0">'+
             '</div>'+
             '</div>'+
             '<div class="col-lg-3 mb-lg-0">'+
             '<div class="form-group">'+
             '<input type="hidden" id="precio_unitario" class="precio_unitario"/>'+
             '<label for="example-search-input" class="form-control-label">Valor Unitario</label>'+
-            '<input type="number" name="producto['+c+'][precio][0]" id="precio" class="form-control form-control-alternative money precio" value="0" min="0" placeholder="0">'+
+            '<input type="number" name="producto['+c+'][precio][0]" id="precio" class="form-control form-control-alternative money precio" value="0" placeholder="0">'+
             '</div>'+
             '</div>'+
             '<div class="col-lg-3 mb-lg-0">'+
             '<div class="form-group">'+
             '<label for="example-search-input" class="form-control-label">Total</label>'+
-            '<input type="number" name="producto['+c+'][suma][0]" id="precio_suma" class="form-control form-control-alternative money precio_suma" value="0" min="0" readonly placeholder="0">'+
+            '<input type="number" name="producto['+c+'][suma][0]" id="precio_suma" class="form-control form-control-alternative money precio_suma" value="0" readonly placeholder="0">'+
             '</div>'+
             '</div>'+
             '<div class="col-lg-3 mb-lg-0">'+
