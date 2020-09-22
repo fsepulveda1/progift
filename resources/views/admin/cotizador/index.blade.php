@@ -259,9 +259,9 @@
                                 <div class="pl-lg-4">
                                     <div class="d-dlex justify-content-end">
                                         <div style="text-align: right;">
-                                            <button type="submit" class="btn btn-success" onclick="$('form').attr('target', '');$('form').attr('action', '/admin/cotiza/nueva/guarda');">Guardar</button>
-                                            <button class="btn btn-danger" onclick="$('form').attr('target', '_blank');$('form').attr('action', '/admin/genera');">PDF</button>
-                                            <button type="submit" class="btn btn-warning" onclick="$('form').attr('target', '');$('form').attr('action', '/admin/cotiza');">Enviar Cotización a e-mail Cliente</button>
+                                            <button type="submit" class="btn btn-success" onclick="$('#cotization_form').attr('target', '');$('#cotization_form').attr('action', '/admin/cotiza/nueva/guarda');">Guardar</button>
+                                            <button class="btn btn-danger" onclick="$('#cotization_form').attr('target', '_blank');$('#cotization_form').attr('action', '/admin/genera');">PDF</button>
+                                            <button type="submit" class="btn btn-warning" onclick="$('#cotization_form').attr('target', '');$('#cotization_form').attr('action', '/admin/cotiza');">Enviar Cotización a e-mail Cliente</button>
                                         </div>
                                     </div>
                                 </div>

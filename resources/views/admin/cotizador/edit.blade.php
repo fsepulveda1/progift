@@ -80,10 +80,10 @@
 												<input max="100" type="text" name="validez" class="form-control form-control-alternative" placeholder="10 días" value="{{$cotizacion->validez}}" >
 											</div>
 										</div>
-										<div class="col-lg-3">
+										<div class="col-lg-12">
 											<div class="form-group">
-												<label class="form-control-label" for="input-validez">Comentarios</label>
-												<textarea class="form-control form-control-alternative" readonly name="comentarios" id="comentarios" cols="" rows="1">{{ $cotizacion->client->comentarios }}</textarea>
+												<label class="form-control-label" style="color: #22a7f0" for="input-validez">Comentarios</label>
+												<textarea style="border-color: #22a7f0" class="form-control form-control-alternative" readonly name="comentarios" id="comentarios" cols="" rows="1">{{ $cotizacion->client->comentarios }}</textarea>
 											</div>
 										</div>
 
@@ -318,10 +318,10 @@
 									<div class="d-dlex justify-content-end">
 
 										<div style="text-align: right;">
-											<button class="btn btn-danger" onclick="$('form').attr('target', '_blank');$('form').attr('action', '/admin/genera');">PDF</button><br/>
-											<button type="submit" class="btn btn-success save" onclick="$('form').attr('target', '');$('form').attr('action', '/admin/cotiza/guarda');">Guardar Cambios en esta Cotización</button>&nbsp;o&nbsp;
-											<button type="submit" class="btn btn-success" onclick="$('form').attr('target', '');$('form').attr('action', '/admin/cotiza/guarda/nueva');">Guardar y crear Nueva Cotización</button><br/>
-											<button type="submit" class="btn btn-warning" onclick="$('form').attr('target', '');$('form').attr('action', '/admin/cotiza/guarda/envia');">Enviar Cotización a e-mail Cliente</button>
+											<button class="btn btn-danger" onclick="$('#cotization_form').attr('target', '_blank');$('#cotization_form').attr('action', '/admin/genera');">PDF</button><br/>
+											<button type="submit" class="btn btn-success save" onclick="$('#cotization_form').attr('target', '');$('#cotization_form').attr('action', '/admin/cotiza/guarda');">Guardar Cambios en esta Cotización</button>&nbsp;o&nbsp;
+											<button type="submit" class="btn btn-success" onclick="$('#cotization_form').attr('target', '');$('#cotization_form').attr('action', '/admin/cotiza/guarda/nueva');">Guardar y crear Nueva Cotización</button><br/>
+											<button type="submit" class="btn btn-warning" onclick="$('#cotization_form').attr('target', '');$('#cotization_form').attr('action', '/admin/cotiza/guarda/envia');">Enviar Cotización a e-mail Cliente</button>
 										</div>
 									</div>
 								</div>

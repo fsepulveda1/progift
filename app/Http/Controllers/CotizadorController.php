@@ -127,11 +127,11 @@ class CotizadorController extends Controller
         $user = Auth::user();
         $client = $this->createClientIfNotExist($request);
         $data = $this->formatingArrayFromRequest($request,$client,$user->id,1);
-        $this->updatingCotization($data,$request->id);
+        $cotization = $this->updatingCotization($data,$request->id);
 
         $emailData = $this->getEmailData($request,$user);
         $pdfname = 'Pro-Gift_'.urlencode($request->nombre_cliente).date("Y-m-d").'.pdf';
-        $pdf = $this->generateOutputFromDB($request);
+        $pdf = $this->generateOutputFromDB($cotization);
 
         $message = new EnviaCotizacionFinal($emailData);
         $message->attachData($pdf, $pdfname);
@@ -152,16 +152,16 @@ class CotizadorController extends Controller
         $data = $this->formatingArrayFromRequest($request,$client,$user->id,1);
 
         if(!empty($request->id)) {
-            $this->updatingCotization($data,$request->id);
+            $cotizacion = $this->updatingCotization($data,$request->id);
         }
         else {
-            $this->savingCotization($data);
+            $cotizacion = $this->savingCotization($data);
         }
 
         $this->createOrUpdateMatchRut($client);
 
         $emailData = $this->getEmailData($request,$user);
-        $pdf = $this->getPDFOutput($data,$client,$user);
+        $pdf = $this->generateOutputFromDB($cotizacion);
         $pdfname = 'Pro-Gift_'.urlencode($request->nombre_cliente).date("Y-m-d").'.pdf';
 
         $message = new EnviaCotizacionFinal($emailData);
@@ -172,6 +172,7 @@ class CotizadorController extends Controller
         return Response::json([
             'message'    => 'Cotización creada correctamente, Fue enviada al cliente y puede verificar los datos en la sección Cotizaciones',
             'alert-type' => 'success',
+            'id' => $cotizacion->id
         ]);
 
     }
@@ -180,12 +181,14 @@ class CotizadorController extends Controller
         $this->validateRequest($request);
         $user_id = Auth::user()->id;
         $client = $this->createClientIfNotExist($request);
-        $data = $this->formatingArrayFromRequest($request,$client,$user_id);
+
         if(!empty($request->id)) {
+            $data = $this->formatingArrayFromRequest($request,$client,$user_id);
             $this->updatingCotization($data,$request->id);
             $id = $request->id;
         }
         else {
+            $data = $this->formatingArrayFromRequest($request,$client,$user_id,0);
             $cotizacion = $this->savingCotization($data);
             $id = $cotizacion->id;
         }
@@ -207,8 +210,6 @@ class CotizadorController extends Controller
         $client = $this->createClientIfNotExist($request);
         $data = $this->formatingArrayFromRequest($request,$client,$user->id);
 
-        $this->createClientIfNotExist($request);
-
         return $this->getPDF($data,$client,$user);
     }
 
@@ -220,7 +221,7 @@ class CotizadorController extends Controller
             'detalle' => $cotizacion->detalle,
             'validez' => $cotizacion->validez,
             'forma_pago' => $cotizacion->forma_pago,
-            'entrega' => $cotizacion->plazo,
+            'entrega' => $cotizacion->entrega,
             'descuento' => $cotizacion->descuento,
             'neto' => $cotizacion->neto,
             'iva' => $cotizacion->iva,
@@ -232,15 +233,15 @@ class CotizadorController extends Controller
         return $this->getPDF($data,$cotizacion->client,$cotizacion->user);
     }
 
-    public function generateOutputFromDB(Request $request) {
-        $cotizacion = Cotizacione::with('client','user')->where(['id'=>$request->get('id')])->first();
+    public function generateOutputFromDB($cotizacion) {
+
 
         $data  = [
-            'number' => $request->get('id'),
+            'number' => $cotizacion->id,
             'detalle' => $cotizacion->detalle,
             'validez' => $cotizacion->validez,
             'forma_pago' => $cotizacion->forma_pago,
-            'entrega' => $cotizacion->plazo,
+            'entrega' => $cotizacion->entrega,
             'descuento' => $cotizacion->descuento,
             'neto' => $cotizacion->neto,
             'iva' => $cotizacion->iva,
@@ -307,6 +308,7 @@ class CotizadorController extends Controller
      */
     private function updatingCotization($data,$id) {
         Cotizacione::where('id', $id)->update($data);
+        return Cotizacione::find($id);
     }
 
     /**
@@ -329,11 +331,11 @@ class CotizadorController extends Controller
         return $pdf->output();
     }
 
-    private function formatingArrayFromRequest(Request $request, $client, $user_id, $status = 0) {
+    private function formatingArrayFromRequest(Request $request, $client, $user_id, $status = null) {
 
         $detalle = $this->getProductsArrayFromRequest($request);
 
-        return [
+        $values = [
             'validez' => $request->validez,
             'forma_pago' => $request->forma_pago,
             'entrega' => $request->plazo,
@@ -347,8 +349,13 @@ class CotizadorController extends Controller
             'tipo' => isset($request->tipo) ? $request->tipo : 'normal',
             'activa_total'=>isset($request->activar_totales),
             'activa_descuento'=>isset($request->activar_descuento),
-            'estado' => $status
         ];
+
+        if($status !== null) {
+            $values['estado'] = $status;
+        }
+
+        return $values;
     }
 
     /**
