@@ -11,6 +11,6 @@
     <p style="font-family: 'Roboto', sans-serif;font-weight: bold; font-size: 12pt;">
         {{ $cotizacion['vendedor']->name }}<br>
         {{ $cotizacion['vendedor']->phone }}<br>
-        {{ $cotizacion['vendedor']->email }}
+        <a href="mailto: {{ $cotizacion['vendedor']->email }}" style="color: #0066cc">{{ $cotizacion['vendedor']->email }}</a>
     </p>
 @endsection
