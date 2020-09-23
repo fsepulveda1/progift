@@ -43,6 +43,11 @@
             font-size: 12pt;
         }
     </style>
+    <!--[if mso]>
+    <style type="text/css">
+        body, table, td, p, a, h4 {font-family: Arial, Helvetica, sans-serif !important;}
+    </style>
+    <![endif]-->
 </head>
 <body>
 
