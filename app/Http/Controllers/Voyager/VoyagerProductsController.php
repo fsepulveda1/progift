@@ -74,7 +74,7 @@ class VoyagerProductsController extends VoyagerBaseController
 
             $query->join('product_category', 'products.id', '=', 'product_category.product_id');
             $query->join('categories', 'categories.id', '=', 'product_category.category_id');
-            $query->groupBy('products.id');
+//            $query->groupBy('products.id');
 
 // If a column has a relationship associated with it, we do not want to show that field
             $this->removeRelationshipField($dataType, 'browse');
