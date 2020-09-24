@@ -77,7 +77,7 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-lg-6 col-sm-6">
-                                        <div class="banner banner-image discount">
+                                        <div class="banner banner-image">
                                             <a href="{{ setting('portada.enlace_oferta') }}">
                                                 <img src="{{ asset('/storage/'.setting('portada.imagen_oferta')) }}" alt="banner">
                                                 <div class="promo-text-cover">
@@ -92,7 +92,7 @@
                                     </div><!-- End .col-lg-3 -->
 
                                     <div class="col-lg-6 col-sm-6 order-lg-last">
-                                        <div class="banner banner-image recent">
+                                        <div class="banner banner-image">
                                             <a href="{{ setting('portada.enlace_nuevo') }}">
                                                 <img src="{{ asset('/storage/'.setting('portada.imagen_nuevo')) }}" alt="banner">
                                                 <div class="promo-text-cover">
