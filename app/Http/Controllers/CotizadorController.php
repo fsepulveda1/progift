@@ -104,22 +104,17 @@ class CotizadorController extends Controller
         $this->validateRequest($request);
         $user_id = Auth::user()->id;
         $client = $this->createClientIfNotExist($request);
-        $data = $this->formatingArrayFromRequest($request,$client,$user_id);
+        $data = $this->formatingArrayFromRequest($request,$client,$user_id,0);
 
-        if(!empty($request->id)) {
-            $this->updatingCotization($data,$request->id);
-        }
-        else {
-            $this->savingCotization($data);
-        }
+        $cotization = $this->savingCotization($data);
 
         $this->createOrUpdateMatchRut($client);
 
         return Response::json([
             'message'    => 'Cotización creada correctamente, puede verificar los datos en la sección Cotizaciones',
             'alert-type' => 'success',
+            'new_id' => $cotization->id
         ]);
-
     }
 
     public function guardaEnvia(Request $request) {

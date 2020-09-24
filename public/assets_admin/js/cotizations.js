@@ -413,7 +413,7 @@
         container.find('img').attr('src','');
         container.find('.file-widget').removeClass('hide');
         container.find('.himagen').val('');
-    })
+    });
 
     $(document).on('submit','#cotization_form', function (e) {
         e.preventDefault();
@@ -422,8 +422,6 @@
         var loading = $('#voyager-loader');
         var data = $(this).serialize();
         var pdf = false;
-
-        console.log(action);
 
         if(action == '/admin/genera') {
             pdf = true;
@@ -442,6 +440,10 @@
             toastr.success(res.message);
             if(typeof res.id !== "undefined") {
                 $('input[name="id"]').val(res.id);
+            }
+
+            if(typeof res.new_id !== "undefined") {
+                location.href = '/admin/cotizador/editar/'+res.new_id
             }
 
             if(pdf) {
