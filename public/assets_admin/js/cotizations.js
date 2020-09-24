@@ -446,7 +446,9 @@
             if(typeof res.new_id !== "undefined") {
                 location.href = '/admin/cotizador/editar/'+res.new_id
             }
-            loading.hide();
+            else {
+                loading.hide();
+            }
 
             if(pdf) {
                 var win = window.open('/admin/genera?id='+$('input[name="id"]').val(), '_blank');
