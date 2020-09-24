@@ -78,31 +78,6 @@
                 this.$element.closest('.pduct').find('.p_u').val(args.precio);
                 this.$element.closest('.pduct').find('.precio_suma').val(args.precio);
                 this.$element.closest('.pduct').find('.file-widget').addClass('hide');
-                var colorSelect = this.$element.closest('.pduct').find('.color');
-
-                if(colorSelect.hasClass('select2-hidden-accessible')) {
-                    colorSelect.select2('destroy');
-                }
-
-                var parentSelect = colorSelect.parent();
-                var newColorSelect = $("" +
-                    "<select " +
-                    "name='"+colorSelect.attr('name')+"' " +
-                    "class='"+colorSelect.attr('class')+"' " +
-                    "id='"+colorSelect.attr('id')+"'></select>");
-                newColorSelect.append('<option value=""></option>');
-                parentSelect.append(newColorSelect);
-                colorSelect.remove();
-                var empty = true;
-                $.each(args.colors, function (index, value) {
-                    empty = false;
-                    newColorSelect.append('<option value="' + value + '">' + value + '</option>');
-                });
-
-                if(empty)
-                    newColorSelect.append('<option value="No aplica" selected>No aplica</option>');
-
-                newColorSelect.select2({'placeholder':'Color'});
 
                 calculaTotales();
             }
