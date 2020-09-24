@@ -128,7 +128,11 @@ class CotizadorController extends Controller
         $pdfname = 'Pro-Gift_'.urlencode($request->nombre_cliente).date("Y-m-d").'.pdf';
         $pdf = $this->generateOutputFromDB($cotization);
 
-        $message = new EnviaCotizacionFinal($emailData);
+
+        $from['name'] = $user->name;
+        $from['address'] = $user->email;
+
+        $message = new EnviaCotizacionFinal($emailData,$from);
         $message->attachData($pdf, $pdfname);
 
         Mail::to($request->email)->send($message);
@@ -159,7 +163,10 @@ class CotizadorController extends Controller
         $pdf = $this->generateOutputFromDB($cotizacion);
         $pdfname = 'Pro-Gift_'.urlencode($request->nombre_cliente).date("Y-m-d").'.pdf';
 
-        $message = new EnviaCotizacionFinal($emailData);
+        $from['name'] = $user->name;
+        $from['address'] = $user->email;
+
+        $message = new EnviaCotizacionFinal($emailData,$from);
         $message->attachData($pdf, $pdfname);
 
         Mail::to($request->email)->send($message);

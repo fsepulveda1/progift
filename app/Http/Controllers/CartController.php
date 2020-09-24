@@ -213,7 +213,10 @@ class CartController extends Controller
             'tipo' => 'Web'
         ]);
 
-        $message = new EnviaCotizacion($data);
+        $from['address'] = $user->email;
+        $from['name'] = $user->name;
+
+        $message = new EnviaCotizacion($data,$from);
 
         Mail::to($request->email)->send($message);
 

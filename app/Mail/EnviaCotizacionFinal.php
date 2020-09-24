@@ -13,13 +13,16 @@ class EnviaCotizacionFinal extends Mailable
 
     public $cotizacion;
 
+    public $from;
+
     /**
      * Create a new message instance.
      *
      */
-    public function __construct($cotizacion)
+    public function __construct($cotizacion,$from)
     {
         $this->cotizacion = $cotizacion;
+        $this->from = $from;
     }
 
     /**
@@ -31,7 +34,8 @@ class EnviaCotizacionFinal extends Mailable
     {
         return $this
             ->subject('COTIZACIÓN PRO-GIFT - 12 AÑOS DE ARTÍCULOS PUBLICITARIOS EN CHILE')
-            ->from(config('mail.from')['address'],config('mail.from')['name'])
+            ->from($this->from['address'],$this->from['name'])
+            ->replyTo($this->from['address'],$this->from['name'])
             ->view('mails.envia_cotizacion_final');
     }
 }
