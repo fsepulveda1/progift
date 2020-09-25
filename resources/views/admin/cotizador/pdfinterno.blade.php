@@ -110,20 +110,29 @@
             <th width="10%">VALOR UNITARIO</th>
             <th width="15%">TOTAL<br> (SIN IVA)</th>
         </tr>
-
         @foreach (json_decode($data['detalle']) as $det)
+            @php
+                $qty_rows = count($det->cantidad);
+            @endphp
             <tr>
-                <td valign="top">
+                <td valign="top" rowspan="{{$qty_rows}}">
                     {{ $det->nombre }}<br>
                     {!! $det->descripcion !!}<br>
                     @if(!empty($det->color))Color: {{ $det->color }}<br>@endif
                     Impresión :{{ $det->imprenta }}<br>
                 </td>
-                <td align="center" valign="middle"><img src="{{ asset(stripcslashes($det->imagen))}}" style="max-width: 120px"></td>
-                <td align="center" valign="top">{{$det->cantidad[0]}}</td>
-                <td align="center" valign="top">${{number_format($det->precio[0], 0, ',', '.')}}</td>
-                <td align="center" valign="top">${{number_format($det->suma[0], 0, ',', '.')}}</td>
+                <td align="center" valign="middle" rowspan="{{$qty_rows}}"><img src="{{ asset(stripcslashes($det->imagen))}}" style="max-width: 120px"></td>
+                <td align="center" >{{$det->cantidad[0]}}</td>
+                <td align="center" >${{number_format($det->precio[0], 0, ',', '.')}}</td>
+                <td align="center" >${{number_format($det->suma[0], 0, ',', '.')}}</td>
             </tr>
+            @for($x = 1; $x < $qty_rows; $x++)
+                <tr>
+                    <td align="center">{{$det->cantidad[$x]}}</td>
+                    <td align="center">${{number_format($det->precio[0], 0, ',', '.')}}</td>
+                    <td align="center">${{number_format($det->suma[0], 0, ',', '.')}}</td>
+                </tr>
+            @endfor
         @endforeach
 
     </table>
