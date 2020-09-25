@@ -467,3 +467,8 @@ textarea {
 .browse .panel-body {
     min-height: 400px;
 }
+
+.dropdown-menu.typeahead {
+    max-height: 200px;
+    overflow: auto;
+}

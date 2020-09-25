@@ -9,7 +9,7 @@
     function initTypeAhead() {
         $('.search').typeahead({
             minLength: 2,
-            items: 20,
+            items: 'all',
             source: function (query, process) {
                 return $.get("/admin/typeahead", {query: query}, function (data) {
                     return process(data);
