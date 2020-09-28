@@ -124,7 +124,7 @@
                                                                 <label class="custom-file-label text-left">Foto</label>
                                                             </div>
                                                             <input type="hidden" name="producto[0][imagen]" id="imagen" class="himagen"/>
-                                                            <img src="" class="imagen" style="width: 100%;"/>
+                                                            <img src="" class="imagen" />
                                                             <span class="delete-image"><i class="fas fa-trash-alt"></i></span>
                                                         </div>
                                                     </div>

@@ -357,6 +357,11 @@ select[name=dataTable_length] {
     overflow: hidden;
 }
 
+.custom-file .imagen {
+    max-width: 100%;
+    max-height: 120px;
+}
+
 .page-content .panel,
 .page-content .col-md-12,
 .voyager .card {

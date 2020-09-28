@@ -121,7 +121,7 @@
                     @if(!empty($det->color))Color: {{ $det->color }}<br>@endif
                     Impresión :{{ $det->imprenta }}<br>
                 </td>
-                <td align="center" valign="middle" rowspan="{{$qty_rows}}"><img src="{{ asset(stripcslashes($det->imagen))}}" style="max-width: 120px"></td>
+                <td align="center" valign="middle" rowspan="{{$qty_rows}}"><img src="{{ asset(stripcslashes($det->imagen))}}" style="max-width: 120px; max-height: 150px"></td>
                 <td align="center" >{{$det->cantidad[0]}}</td>
                 <td align="center" >${{number_format($det->precio[0], 0, ',', '.')}}</td>
                 <td align="center" >${{number_format($det->suma[0], 0, ',', '.')}}</td>
