@@ -40,25 +40,25 @@
 										<div class="col-lg-3">
 											<div class="form-group">
 												<label class="form-control-label" for="input-empresa">Empresa</label>
-												<input max="250" type="text" name="empresa" readonly="readonly" class="form-control form-control-alternative" placeholder="Empresa" value="{{$cliente->nombre}}" >
+												<input max="250" type="text" name="empresa" class="form-control form-control-alternative" placeholder="Empresa" value="{{$cliente->nombre}}" >
 											</div>
 										</div>
 										<div class="col-lg-3">
 											<div class="form-group">
 												<label class="form-control-label" for="input-username">RUT</label>
-												<input max="13" type="text" name="rut" readonly="readonly" class="form-control form-control-alternative" placeholder="22222222-2" value="{{$cliente->rut}}" oninput="checkRut(this)" >
+												<input max="13" type="text" name="rut" class="form-control form-control-alternative" placeholder="22222222-2" value="{{$cliente->rut}}" oninput="checkRut(this)" >
 											</div>
 										</div>
 										<div class="col-lg-3">
 											<div class="form-group">
 												<label class="form-control-label" for="input-username">Contacto</label>
-												<input max="250" type="text" name="nombre_cliente" readonly="readonly" class="form-control form-control-alternative" placeholder="Nombre Cliente" value="{{$cliente->contacto}}" >
+												<input max="250" type="text" name="nombre_cliente" class="form-control form-control-alternative" placeholder="Nombre Cliente" value="{{$cliente->contacto}}" >
 											</div>
 										</div>
 										<div class="col-lg-3">
 											<div class="form-group">
 												<label class="form-control-label" for="input-email">Email</label>
-												<input max="100" type="text" name="email" readonly="readonly" class="form-control form-control-alternative" value="{{$cliente->email}}" placeholder="ejemplo@empresa.cl" >
+												<input max="100" type="text" name="email" class="form-control form-control-alternative" value="{{$cliente->email}}" placeholder="ejemplo@empresa.cl" >
 											</div>
 										</div>
 										<div class="col-lg-3">
