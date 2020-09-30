@@ -1,6 +1,6 @@
 @extends('voyager::master')
 
-@section('page_title', __('voyager::generic.view').' '.$dataType->getTranslatedAttribute('display_name_singular'))
+@section('page_title', 'Profit - '.$dataType->getTranslatedAttribute('display_name_singular'))
 
 @section('page_header')
     <h1 class="page-title">

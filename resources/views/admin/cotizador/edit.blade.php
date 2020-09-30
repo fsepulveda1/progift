@@ -1,5 +1,7 @@
 @extends('admin.layout')
 
+@section('page_title', 'Pro-gift | Editar Cotización')
+
 @section('css')
     <link href="/assets_admin/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
 @endsection
