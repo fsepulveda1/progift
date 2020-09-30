@@ -67,7 +67,7 @@
     <table class="w-100" style="font-size: 10pt">
         <tr>
             <th width="30%" align="left" valign="top" style="line-height: .75rem">
-                Vendedor (a)<br>
+                Vendedor(a)<br>
                 {{ $user->name }}<br>
                 {{ $user->phone }}<br>
                 {{ $user->email }}<br>
