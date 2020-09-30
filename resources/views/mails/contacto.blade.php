@@ -1,7 +1,7 @@
 @extends('mails.layout')
 
 @section('content')
-    <h4 style="font-family: 'Roboto', sans-serif;font-size: 16pt; color: #393939;">Nuevo contacto</h4>
+    <h4 style="font-family: 'Roboto', sans-serif;font-size: 16pt;">Nuevo contacto</h4>
     <p style="font-family: 'Roboto', sans-serif;font-size: 12pt">
     <table border="0" cellpadding="0" cellspacing="0">
         <tr><th align="left">Empresa</th><td>{{ $contacto->nombre }}</td></tr>
