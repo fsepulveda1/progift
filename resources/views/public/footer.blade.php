@@ -42,22 +42,24 @@
                                 <div class="row">
 
                                     @foreach($products as $product)
-                                        @php($img = json_decode($product->products->imagen))
-                                        <div class="col-6 col-md-2">
-                                            <div class="product-details">
-                                                <figure>
-                                                    <a href="/producto/{{$product->products->slug}}">
-                                                        <img src="{{asset('storage/'.$img[0])}}">
-                                                    </a>
-                                                </figure>
-                                                <p class="product-title">
-                                                    <a href="/producto/{{$product->products->slug}}">
-                                                        {{$product->products->nombre}}<br>
-                                                        {{$product->products->sku}}
-                                                    </a>
-                                                </p>
-                                            </div><!-- End .product-details -->
-                                        </div><!-- End .col-sm-6 -->
+                                        @if($product->products)
+                                            @php($img = json_decode($product->products->imagen))
+                                            <div class="col-6 col-md-2">
+                                                <div class="product-details">
+                                                    <figure>
+                                                        <a href="/producto/{{$product->products->slug}}">
+                                                            <img src="{{asset('storage/'.$img[0])}}">
+                                                        </a>
+                                                    </figure>
+                                                    <p class="product-title">
+                                                        <a href="/producto/{{$product->products->slug}}">
+                                                            {{$product->products->nombre}}<br>
+                                                            {{$product->products->sku}}
+                                                        </a>
+                                                    </p>
+                                                </div><!-- End .product-details -->
+                                            </div><!-- End .col-sm-6 -->
+                                        @endif
                                     @endforeach
                                 </div><!-- End .row -->
                             </div><!-- End .widget -->
