@@ -251,16 +251,16 @@ class CartController extends Controller
                 $lastUser->flag = 0;
                 $lastUser->save();
                 $lastId = $lastUser->id;
-                $lastName = $lastUser->nombre;
+                $lastName = $lastUser->name;
             }
 
             $users = User::where([
                 ['ruleta',1],
                 ['id','<>',$lastId]
-            ])->orderBy('nombre','asc')->get();
+            ])->orderBy('name','asc')->get();
 
             foreach($users as $user) {
-                if($user->nombre > $lastName) {
+                if($user->name > $lastName) {
                     $newUser = $user;
                     break;
                 }
