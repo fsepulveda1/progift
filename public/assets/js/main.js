@@ -826,7 +826,7 @@
       return item.name+" - Cód: "+item.sku;
     },
     matcher: function (item) {
-      var it = item.name+" - Cód: "+item.sku;
+      var it = item.name+" "+item.sku;
       return ~it.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(this.query.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ""));
     },
     sorter: function (items) {
