@@ -20,7 +20,7 @@
                         &nbsp;{{ $det['sku'] }}
                     </td>
                     <td width="20%" align="center">
-                        <img src="{{ asset(stripcslashes($det['imagen'])) }}" height="100px" style="height: 100px;"/>
+                        <img src="{{ asset(stripcslashes($det['imagen'])) }}" height="100" style="height: 100px;"/>
                     </td>
                     <td width="20%" align="center">
                         {{ $det['color'] }}
