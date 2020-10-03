@@ -112,8 +112,6 @@ class CartController extends Controller
 
     public function cotiza(Request $request){
         $cartCollection = \Cart::getContent();
-        $IVA = \Cart::getTotalQuantity() * 0.19;
-        $neto = \Cart::getTotalQuantity() - $IVA;
 
         $this->validate($request, [
             'empresa' => 'required|max:100',
@@ -145,9 +143,9 @@ class CartController extends Controller
                 'sku' => $item->model->sku,
                 'imprenta' => $item->attributes->impresion,
                 'cantidad' => $item->quantity,
-                'precio' => $item->price,
-                'iva' => $item->price*0.19,
-                'suma' => $item->price*0.19,
+                'precio' => 0,
+                'iva' => 0,
+                'suma' => 0,
                 'descripcion' => $item->model->descripcion_larga,
                 'product_id' => $item->model->id
             ];
@@ -182,8 +180,8 @@ class CartController extends Controller
             'entrega' => 'web',
             'detalle' => $detalle,
             'descuento' => 0,
-            'neto' => $neto,
-            'iva' => $IVA,
+            'neto' => 0,
+            'iva' => 0,
             'total' => 0,
             'tipo' => 'Web',
             'activa_total' => false,
@@ -204,8 +202,8 @@ class CartController extends Controller
             'entrega' => 10,
             'detalle' => json_encode($detalle),
             'descuento' => 0,
-            'neto' => $neto,
-            'iva' => $IVA,
+            'neto' => 0,
+            'iva' => 0,
             'total' => \Cart::getTotalQuantity(),
             'client_id' => $client->id,
             'user_id' => $idUser,
