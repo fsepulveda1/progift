@@ -79,7 +79,7 @@
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-validez">Validez de la cotización</label>
-                                                <input max="100" type="text" name="validez" class="form-control form-control-alternative" placeholder="10 días" value="{{$cotizacion->validez}}" >
+                                                <input max="100" type="text" name="validez" class="form-control form-control-alternative" placeholder="10 días" value="{{$cotizacion->validez ?? '10 días'}}" >
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
@@ -145,20 +145,20 @@
                                                     <div class="col-lg-3 mb-lg-0">
                                                         <div class="form-group">
                                                             <label for="example-search-input" class="form-control-label">Cantidad</label>
-                                                            <input type="number" value="@if(is_array($d['cantidad'])){{$d['cantidad'][0]}}@else{{(int)$d['cantidad']}}@endif" name="producto[{{$cnt}}][cantidad][]" id="cantidad" class="form-control form-control-alternative cantidad" placeholder="0" >
+                                                            <input type="number" value="@if(is_array($d['cantidad'])){{$d['cantidad'][0]}}@else{{(int)$d['cantidad'] ?? 0}}@endif" name="producto[{{$cnt}}][cantidad][]" id="cantidad" class="form-control form-control-alternative cantidad" placeholder="0" >
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 mb-lg-0">
                                                         <div class="form-group">
                                                             <input type="hidden" id="precio_unitario" class="precio_unitario"/>
                                                             <label for="example-search-input" class="form-control-label">Valor Unitario</label>
-                                                            <input type="number" value="{{$d['precio'][0]}}" name="producto[{{$cnt}}][precio][]" id="precio" class="form-control form-control-alternative money precio" placeholder="0" >
+                                                            <input type="number" value="{{$d['precio'][0] ?? 0}}" name="producto[{{$cnt}}][precio][]" id="precio" class="form-control form-control-alternative money precio" placeholder="0" >
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 mb-lg-0">
                                                         <div class="form-group">
                                                             <label for="example-search-input" class="form-control-label">Total</label>
-                                                            <input type="number" value="{{$d['suma'][0]}}" name="producto[{{$cnt}}][suma][]" id="precio_suma" class="form-control form-control-alternative money precio_suma" placeholder="0"  readonly>
+                                                            <input type="number" value="{{$d['suma'][0] ?? 0}}" name="producto[{{$cnt}}][suma][]" id="precio_suma" class="form-control form-control-alternative money precio_suma" placeholder="0"  readonly>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 mb-lg-0">
