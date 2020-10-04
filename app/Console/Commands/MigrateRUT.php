@@ -32,7 +32,6 @@ class MigrateRUT extends Command
     public function __construct()
     {
         parent::__construct();
-        $this->importer_connection = DB::connection('importador');
     }
 
     /**
@@ -42,6 +41,7 @@ class MigrateRUT extends Command
      */
     public function handle()
     {
+        $this->importer_connection = DB::connection('importador');
         $rows = $this->importer_connection->select('select * from ruts_vendedores');
 
         foreach($rows as $row) {
