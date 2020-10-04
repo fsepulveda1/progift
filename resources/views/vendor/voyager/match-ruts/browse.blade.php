@@ -69,8 +69,8 @@
                                                 data-dropdown-auto-width="true"
                                         >
                                             <option value=""></option>
-                                            <option value="Web" @if($filters['procedencia']=='Web') selected @endif>Web</option>
-                                            <option value="importador" @if($filters['procedencia']=='importador') selected @endif>Importador</option>
+                                            <option value="WEB" @if($filters['procedencia']=='WEB') selected @endif>Web</option>
+                                            <option value="IMPORTADOR" @if($filters['procedencia']=='IMPORTADOR') selected @endif>Importador</option>
                                         </select>
                                         <input class="form-control custom-datepicker" type="text" name="fecha_desde" value="{{$filters['fecha_desde']}}" placeholder="Desde">
                                         <input class="form-control custom-datepicker" style="margin-right: 1rem" type="text" name="fecha_hasta" value="{{$filters['fecha_hasta']}}" placeholder="Hasta">

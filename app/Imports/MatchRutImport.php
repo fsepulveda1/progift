@@ -31,8 +31,9 @@ class MatchRutImport implements OnEachRow, WithValidation, SkipsOnFailure
         MatchRut::firstOrCreate([
             'rut'     => $row[0],
             'vendedor'    => $row[1],
-            'estado' => 1,
-            'procedencia' => 'importador'
+            'estado' => 1
+        ], [
+            'procedencia' => 'IMPORTADOR'
         ]);
     }
 
