@@ -127,13 +127,8 @@ class CartController extends Controller
             'cl_rut' => 'El RUT ingresado no es válido'
         ]);
 
-        $emailVendedor = $this->matchRut($request->rut);
+        $user = $this->matchRut($request->rut);
 
-        if(!$emailVendedor)
-            return;
-
-        $idUser = $this->getIdUser($emailVendedor);
-        $user = User::find($idUser);
         $detalle = [];
         foreach ($cartCollection as $item) {
             $detalle[] = [
@@ -206,7 +201,7 @@ class CartController extends Controller
             'iva' => 0,
             'total' => \Cart::getTotalQuantity(),
             'client_id' => $client->id,
-            'user_id' => $idUser,
+            'user_id' => $user->id,
             'estado' => 0,
             'tipo' => 'Web'
         ]);
@@ -278,12 +273,26 @@ class CartController extends Controller
                     "procedencia" => 'Web');
                 MatchRut::insertData($insertData);
 
-                return $newUser->email;
+                return $newUser;
             }
         }
         else{
-            return $result[0]->vendedor;
+            $email = $result[0]->vendedor;
+            $user = $this->getUserByMail($email);
+
+            if($user) {
+                return $user;
+            }
+            else {
+                $admin = User::where(['role_id'=>1])->first();
+                return $admin;
+            }
         }
+    }
+
+    public function getUserByMail($mail){
+        $user = User::where(['email' => $mail])->first();
+        return $user;
     }
 
     public function getIdUser($email){
