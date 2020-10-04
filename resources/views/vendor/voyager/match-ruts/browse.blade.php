@@ -315,9 +315,10 @@
                             </div>
                             <div class="pull-right">
                                 {{ $dataTypeContent->appends([
-                                    's' => $search->value,
-                                    'filter' => $search->filter,
-                                    'key' => $search->key,
+                                    'vendedor' => $filters['vendedor'],
+                                    'procedencia' => $filters['procedencia'],
+                                    'fecha_desde' => $filters['fecha_desde'],
+                                    'fecha_hasta' => $filters['fecha_hasta'],
                                     'order_by' => $orderBy,
                                     'sort_order' => $sortOrder,
                                     'showSoftDeleted' => $showSoftDeleted,
