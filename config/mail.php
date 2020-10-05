@@ -133,9 +133,4 @@ return [
 
     'log_channel' => env('MAIL_LOG_CHANNEL'),
 
-    'to' => [
-        'address' => 'francisco@bigbuda.cl',
-        'name' => 'Francisco Testing'
-    ],
-
 ];
