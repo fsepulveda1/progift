@@ -3,7 +3,7 @@
 <head>
     <title>Pro-gift | Cotización PDF</title>
     <style>
-        table, tr, td, th, tbody, thead, tfoot {
+        tr {
             page-break-inside: avoid !important;
         }
         @font-face {
