@@ -3,15 +3,10 @@
 <head>
     <title>Pro-gift | Cotización PDF</title>
     <style>
-        tr.page-break-avoid {
+        tbody.page-break-avoid {
             page-break-inside: avoid !important;
-            page-break-before: avoid !important;
         }
 
-        td.page-break-avoid {
-            page-break-inside: avoid !important;
-            page-break-before: avoid;
-        }
         @font-face {
             font-family: 'Roboto';
             src: url({{ asset('assets/fonts/Roboto/Roboto-Regular.ttf') }}) format("truetype");
@@ -127,15 +122,15 @@
             @php
                 $qty_rows = count($det->cantidad);
             @endphp
-            <tbody>
-            <tr class="page-break-avoid">
-                <td valign="top" rowspan="{{$qty_rows}}" class="page-break-avoid">
+            <tbody class="page-break-avoid">
+            <tr>
+                <td valign="top" rowspan="{{$qty_rows}}" >
                     {{ $det->nombre }}<br>
                     {!! $det->descripcion !!}<br>
                     @if(!empty($det->color))Color: {{ $det->color }}<br>@endif
                     Impresión :{{ $det->imprenta }}<br>
                 </td>
-                <td align="center" valign="middle" rowspan="{{$qty_rows}}" class="page-break-avoid">
+                <td align="center" valign="middle" rowspan="{{$qty_rows}}">
                     <img src="{{ asset(stripcslashes($det->imagen))}}" style="max-width: 120px; max-height: 150px">
                 </td>
                 <td align="center" >{{$det->cantidad[0]}}</td>
@@ -143,7 +138,7 @@
                 <td align="center" >${{number_format($det->suma[0], 0, ',', '.')}}</td>
             </tr>
             @for($x = 1; $x < $qty_rows; $x++)
-                <tr class="page-break-avoid">
+                <tr>
                     <td align="center">{{$det->cantidad[$x]}}</td>
                     <td align="center">${{number_format($det->precio[$x], 0, ',', '.')}}</td>
                     <td align="center">${{number_format($det->suma[$x], 0, ',', '.')}}</td>
