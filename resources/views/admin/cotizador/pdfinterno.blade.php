@@ -3,6 +3,9 @@
 <head>
     <title>Pro-gift | Cotización PDF</title>
     <style>
+        table, tr, td, th, tbody, thead, tfoot {
+            page-break-inside: avoid !important;
+        }
         @font-face {
             font-family: 'Roboto';
             src: url({{ asset('assets/fonts/Roboto/Roboto-Regular.ttf') }}) format("truetype");
