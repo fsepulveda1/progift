@@ -3,9 +3,11 @@
 <head>
     <title>Pro-gift | Cotización PDF</title>
     <style>
-        td.nobreak {
-            page-break-inside: avoid !important;
-        }
+        table { page-break-inside: auto }
+        tr { page-break-inside: avoid; page-break-after: auto }
+        /*td.nobreak {*/
+            /*page-break-inside: avoid !important;*/
+        /*}*/
         @font-face {
             font-family: 'Roboto';
             src: url({{ asset('assets/fonts/Roboto/Roboto-Regular.ttf') }}) format("truetype");
@@ -143,7 +145,7 @@
 
     </table>
     <table class="w-100" border="0" cellpadding="0" cellspacing="0">
-        <tr style="padding: 0; margin: 0">
+        <tr style="padding: 0; margin: 0" >
             <td align="left" valign="top" width="75%" style="padding-top:1rem;font-size: 10pt">
                 <div><strong>+ Los valores detallados no incluyen IVA</strong></div>
                 <div class="mt-1"><strong>Forma de pago:</strong> {{$data['forma_pago']}}</div>
