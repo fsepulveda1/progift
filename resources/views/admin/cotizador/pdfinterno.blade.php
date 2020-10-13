@@ -3,7 +3,7 @@
 <head>
     <title>Pro-gift | Cotización PDF</title>
     <style>
-        tbody.page-break-avoid {
+        .page-break-avoid {
             page-break-inside: avoid !important;
         }
 
@@ -117,12 +117,11 @@
             <th width="15%">TOTAL<br> (SIN IVA)</th>
         </tr>
         </thead>
-        <tbody class="page-break-avoid">
         @foreach (json_decode($data['detalle']) as $det)
             @php
                 $qty_rows = count($det->cantidad);
             @endphp
-
+            <tbody class="page-break-avoid">
             <tr>
                 <td valign="top" rowspan="{{$qty_rows}}" >
                     {{ $det->nombre }}<br>
@@ -144,8 +143,8 @@
                     <td align="center">${{number_format($det->suma[$x], 0, ',', '.')}}</td>
                 </tr>
             @endfor
+            </tbody>
         @endforeach
-        </tbody>
     </table>
     <table class="w-100" border="0" cellpadding="0" cellspacing="0">
         <tr style="padding: 0; margin: 0" >
