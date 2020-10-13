@@ -113,6 +113,7 @@
     </table>
 
     <table class="table w-100" border="1" cellpadding="0" cellspacing="0">
+        <thead>
         <tr>
             <th width="40%">DESCRIPCIÓN</th>
             <th width="25%">IMAGEN</th>
@@ -120,10 +121,13 @@
             <th width="10%">VALOR UNITARIO</th>
             <th width="15%">TOTAL<br> (SIN IVA)</th>
         </tr>
+        </thead>
+
         @foreach (json_decode($data['detalle']) as $det)
             @php
                 $qty_rows = count($det->cantidad);
             @endphp
+            <tbody>
             <tr class="page-break-avoid">
                 <td valign="top" rowspan="{{$qty_rows}}" class="page-break-avoid">
                     {{ $det->nombre }}<br>
@@ -145,8 +149,8 @@
                     <td align="center">${{number_format($det->suma[$x], 0, ',', '.')}}</td>
                 </tr>
             @endfor
+            </tbody>
         @endforeach
-
     </table>
     <table class="w-100" border="0" cellpadding="0" cellspacing="0">
         <tr style="padding: 0; margin: 0" >
