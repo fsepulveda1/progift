@@ -21,7 +21,7 @@
         }
 
         tbody, tbody td {
-            page-break-inside: avoid !important;
+            page-break-inside: avoid;
         }
 
         body {
