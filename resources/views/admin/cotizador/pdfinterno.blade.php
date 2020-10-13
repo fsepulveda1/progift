@@ -20,7 +20,7 @@
             font-family: 'Roboto', sans-serif;
         }
 
-        tbody, tbody td {
+        tbody, tbody td, tbody div {
             page-break-inside: avoid;
         }
 
@@ -122,13 +122,17 @@
             <tbody class="page-break-avoid">
             <tr>
                 <td valign="top" rowspan="{{$qty_rows}}" >
-                    {{ $det->nombre }}<br>
-                    {!! $det->descripcion !!}<br>
-                    @if(!empty($det->color))Color: {{ $det->color }}<br>@endif
-                    Impresión :{{ $det->imprenta }}<br>
+                    <div>
+                        {{ $det->nombre }}<br>
+                        {!! $det->descripcion !!}<br>
+                        @if(!empty($det->color))Color: {{ $det->color }}<br>@endif
+                        Impresión :{{ $det->imprenta }}<br>
+                    </div>
                 </td>
                 <td align="center" valign="middle" rowspan="{{$qty_rows}}">
-                    <img src="{{ asset(stripcslashes($det->imagen))}}" style="max-width: 120px; max-height: 150px">
+                    <div>
+                        <img src="{{ asset(stripcslashes($det->imagen))}}" style="max-width: 120px; max-height: 150px">
+                    </div>
                 </td>
                 <td align="center" >{{$det->cantidad[0]}}</td>
                 <td align="center" >${{number_format($det->precio[0], 0, ',', '.')}}</td>
