@@ -108,7 +108,6 @@
     </table>
 
     <table class="table w-100" border="1" cellpadding="0" cellspacing="0">
-        <thead>
         <tr>
             <th width="40%">DESCRIPCIÓN</th>
             <th width="25%">IMAGEN</th>
@@ -116,7 +115,6 @@
             <th width="10%">VALOR UNITARIO</th>
             <th width="15%">TOTAL<br> (SIN IVA)</th>
         </tr>
-        </thead>
         @foreach (json_decode($data['detalle']) as $det)
             @php
                 $qty_rows = count($det->cantidad);
