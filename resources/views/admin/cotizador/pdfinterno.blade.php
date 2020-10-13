@@ -20,7 +20,7 @@
             font-family: 'Roboto', sans-serif;
         }
 
-        tbody {
+        tbody, tbody td {
             page-break-inside: avoid !important;
         }
 
