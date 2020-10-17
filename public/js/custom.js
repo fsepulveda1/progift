@@ -89,4 +89,6 @@ $('.btn-show-comments').on('click', function (e) {
 
 });
 
-$('.custom-datepicker').datetimepicker({ format:'DD-MM-YYYY'});
+if($('.custom-datepicker').length) {
+    $('.custom-datepicker').datetimepicker({format: 'DD-MM-YYYY'});
+}
