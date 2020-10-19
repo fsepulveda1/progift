@@ -19,7 +19,7 @@
             margin: 0cm 0cm;
             font-family: 'Roboto', sans-serif;
         }
-
+        .no-break,
         tbody, tbody td, tbody div {
             page-break-inside: avoid;
         }
@@ -94,62 +94,64 @@
 </footer>
 <main style="padding: 0; margin: 0">
     <h5 style="text-align: center; margin-bottom: 1rem; margin-top: 0; font-size: 10pt">COTIZACIÓN Nº @if(isset($data['number'])){{$data['number']}}@else XXXXX @endif</h5>
-    <table class="w-100" style="margin: 1rem 0; font-size: 10pt">
-        <tr>
-            <th align="left" valign="top" style="font-weight: bold; line-height: .75rem">
-                {{ $client->contacto }}<br>
-                {{ $client->nombre }}<br>
-                Presente
-            </th>
-            <th align="right" valign="top">
-                {{ date('d/m/Y') }}
-            </th>
-        </tr>
-    </table>
-
-    <table class="table w-100" border="1" cellpadding="0" cellspacing="0">
-        <thead>
-        <tr>
-            <th width="40%">DESCRIPCIÓN</th>
-            <th width="25%">IMAGEN</th>
-            <th width="10%">CANTIDAD</th>
-            <th width="10%">VALOR UNITARIO</th>
-            <th width="15%">TOTAL<br> (SIN IVA)</th>
-        </tr>
-        </thead>
-        @foreach (json_decode($data['detalle']) as $det)
-            @php
-                $qty_rows = count($det->cantidad);
-            @endphp
-            <tbody class="page-break-avoid">
+    <div class="no-break">
+        <table class="w-100" style="margin: 1rem 0; font-size: 10pt">
             <tr>
-                <td valign="top" rowspan="{{$qty_rows}}" >
-                    <div>
-                        {{ $det->nombre }}<br>
-                        {!! $det->descripcion !!}<br>
-                        @if(!empty($det->color))Color: {{ $det->color }}<br>@endif
-                        Impresión :{{ $det->imprenta }}<br>
-                    </div>
-                </td>
-                <td align="center" valign="middle" rowspan="{{$qty_rows}}">
-                    <div>
-                        <img src="{{ asset(stripcslashes($det->imagen))}}" style="max-width: 120px; max-height: 150px">
-                    </div>
-                </td>
-                <td align="center" >{{$det->cantidad[0]}}</td>
-                <td align="center" >${{number_format($det->precio[0], 0, ',', '.')}}</td>
-                <td align="center" >${{number_format($det->suma[0], 0, ',', '.')}}</td>
+                <th align="left" valign="top" style="font-weight: bold; line-height: .75rem">
+                    {{ $client->contacto }}<br>
+                    {{ $client->nombre }}<br>
+                    Presente
+                </th>
+                <th align="right" valign="top">
+                    {{ date('d/m/Y') }}
+                </th>
             </tr>
-            @for($x = 1; $x < $qty_rows; $x++)
+        </table>
+
+        <table class="table w-100" border="1" cellpadding="0" cellspacing="0">
+            <thead>
+            <tr>
+                <th width="40%">DESCRIPCIÓN</th>
+                <th width="25%">IMAGEN</th>
+                <th width="10%">CANTIDAD</th>
+                <th width="10%">VALOR UNITARIO</th>
+                <th width="15%">TOTAL<br> (SIN IVA)</th>
+            </tr>
+            </thead>
+            @foreach (json_decode($data['detalle']) as $det)
+                @php
+                    $qty_rows = count($det->cantidad);
+                @endphp
+                <tbody class="page-break-avoid">
                 <tr>
-                    <td align="center">{{$det->cantidad[$x]}}</td>
-                    <td align="center">${{number_format($det->precio[$x], 0, ',', '.')}}</td>
-                    <td align="center">${{number_format($det->suma[$x], 0, ',', '.')}}</td>
+                    <td valign="top" rowspan="{{$qty_rows}}" >
+                        <div>
+                            {{ $det->nombre }}<br>
+                            {!! $det->descripcion !!}<br>
+                            @if(!empty($det->color))Color: {{ $det->color }}<br>@endif
+                            Impresión :{{ $det->imprenta }}<br>
+                        </div>
+                    </td>
+                    <td align="center" valign="middle" rowspan="{{$qty_rows}}">
+                        <div>
+                            <img src="{{ asset(stripcslashes($det->imagen))}}" style="max-width: 120px; max-height: 150px">
+                        </div>
+                    </td>
+                    <td align="center" >{{$det->cantidad[0]}}</td>
+                    <td align="center" >${{number_format($det->precio[0], 0, ',', '.')}}</td>
+                    <td align="center" >${{number_format($det->suma[0], 0, ',', '.')}}</td>
                 </tr>
-            @endfor
-            </tbody>
-        @endforeach
-    </table>
+                @for($x = 1; $x < $qty_rows; $x++)
+                    <tr>
+                        <td align="center">{{$det->cantidad[$x]}}</td>
+                        <td align="center">${{number_format($det->precio[$x], 0, ',', '.')}}</td>
+                        <td align="center">${{number_format($det->suma[$x], 0, ',', '.')}}</td>
+                    </tr>
+                @endfor
+                </tbody>
+            @endforeach
+        </table>
+    </div>
     <table class="w-100" border="0" cellpadding="0" cellspacing="0">
         <tr style="padding: 0; margin: 0" >
             <td align="left" valign="top" width="75%" style="padding-top:1rem;font-size: 10pt">
