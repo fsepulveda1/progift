@@ -93,8 +93,8 @@
     </table>
 </footer>
 <main style="padding: 0; margin: 0">
-    <h5 style="text-align: center; margin-bottom: 1rem; margin-top: 0; font-size: 10pt">COTIZACIÓN Nº @if(isset($data['number'])){{$data['number']}}@else XXXXX @endif</h5>
     <div class="no-break">
+        <h5 style="text-align: center; margin-bottom: 1rem; margin-top: 0; font-size: 10pt">COTIZACIÓN Nº @if(isset($data['number'])){{$data['number']}}@else XXXXX @endif</h5>
         <table class="w-100" style="margin: 1rem 0; font-size: 10pt">
             <tr>
                 <th align="left" valign="top" style="font-weight: bold; line-height: .75rem">
