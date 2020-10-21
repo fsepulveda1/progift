@@ -36,7 +36,6 @@ class EnviaCotizacion extends Mailable
         return $this->from($this->from['address'],$this->from['name'])
             ->replyTo($this->from['address'],$this->from['name'])
             ->subject('SOLICITUD DE COTIZACIÓN RECIBIDA - PRO-GIFT - 12 AÑOS DE ARTÍCULOS PUBLICITARIOS EN CHILE')
-            ->cc(Voyager::setting('admin.email_cotizaciones', ''))
             ->view('mails.envia_cotizacion');
     }
 }
