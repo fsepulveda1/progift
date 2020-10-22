@@ -77,7 +77,7 @@ class CotizadorController extends Controller
     }
 
     public function busca(Request $request) {
-        $result = DB::select("select id, nombre AS name, descripcion_larga as descripcion, precio, imagen, sku from products 
+        $result = DB::select("select id, nombre AS name, descripcion_larga as descripcion, precio, imagen, sku from products
                               where (nombre LIKE '%{$request->input('query')}%' OR sku LIKE '%{$request->input('query')}%')");
         foreach ($result as $key => $rs) {
             $colors = DB::select("select c.nombre from product_color pc inner join colors c on pc.color_id = c.id where pc.product_id = ".$rs->id);
@@ -321,9 +321,23 @@ class CotizadorController extends Controller
         /** @var PDF $pdf */
         $pdf = app('dompdf.wrapper');
         $pdf = $pdf->loadView('admin/cotizador.pdfinterno', ['data'=>$data,'client'=>$client,'user'=>$user]);
-        return $pdf->stream('archivo.pdf');
+
+        $name = $this->sanitizeNameForFilename($client->contacto);
+        $companyName = $this->sanitizeNameForFilename($client->nombre);
+        $filename = $this->sanitizeFilename($companyName.'_'.$name.'_'.date('d-m-Y'));
+
+        return $pdf->stream($filename.".pdf");
     }
 
+    private function sanitizeNameForFilename($name) {
+        $name = ucwords($name);
+        $name = str_replace(' ','',$name);
+        return $name;
+    }
+    private function sanitizeFilename($filename) {
+        $filename = trim(str_replace([' ','.'],['_',''],$filename));
+        return $filename;
+    }
 
     private function getPDFOutput($data,$client,$user) {
 

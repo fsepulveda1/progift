@@ -118,12 +118,13 @@
         </tr>
         </thead>
         @foreach (json_decode($data['detalle']) as $det)
+
             @php
-                $qty_rows = count($det->cantidad);
+                $qty_rows = is_array($det->cantidad) ? count($det->cantidad) : 0;
             @endphp
             <tbody class="page-break-avoid">
             <tr>
-                <td valign="top" rowspan="{{$qty_rows}}" >
+                <td valign="top" @if($qty_rows)rowspan="{{$qty_rows}}"@endif >
                     <div>
                         {{ $det->nombre }}<br>
                         {!! $det->descripcion !!}<br>
@@ -136,17 +137,19 @@
                         <img src="{{ asset(stripcslashes($det->imagen))}}" style="max-width: 120px; max-height: 150px">
                     </div>
                 </td>
-                <td align="center" >{{$det->cantidad[0]}}</td>
-                <td align="center" >${{number_format($det->precio[0], 0, ',', '.')}}</td>
-                <td align="center" >${{number_format($det->suma[0], 0, ',', '.')}}</td>
+                <td align="center" >@if(isset($det->cantidad[0])){{$det->cantidad[0]}}@endif</td>
+                <td align="center" >@if(isset($det->precio[0]))${{number_format($det->precio[0], 0, ',', '.')}}@endif</td>
+                <td align="center" >@if(isset($det->suma[0]))${{number_format($det->suma[0], 0, ',', '.')}}@endif</td>
             </tr>
-            @for($x = 1; $x < $qty_rows; $x++)
-                <tr>
-                    <td align="center">{{$det->cantidad[$x]}}</td>
-                    <td align="center">${{number_format($det->precio[$x], 0, ',', '.')}}</td>
-                    <td align="center">${{number_format($det->suma[$x], 0, ',', '.')}}</td>
-                </tr>
-            @endfor
+            @if($qty_rows)
+                @for($x = 1; $x < $qty_rows; $x++)
+                    <tr>
+                        <td align="center">{{$det->cantidad[$x]}}</td>
+                        <td align="center">${{number_format($det->precio[$x], 0, ',', '.')}}</td>
+                        <td align="center">${{number_format($det->suma[$x], 0, ',', '.')}}</td>
+                    </tr>
+                @endfor
+            @endif
             </tbody>
         @endforeach
     </table>
