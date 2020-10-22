@@ -109,8 +109,8 @@
     ga('send', 'pageview');
 
 </script>
+@yield('scripts')
 </body>
 </html>
-		
 
-        
+

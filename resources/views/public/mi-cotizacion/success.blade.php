@@ -25,3 +25,19 @@
         </div>
     </main>
 @endsection
+@section('scripts')
+    <!-- Event snippet for Solicitar cotización conversion page -->
+    <!-- Global site tag (gtag.js) - Google Ads: 527770446 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-527770446"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'AW-527770446');
+    </script>
+    <script>
+        gtag('event', 'conversion', {'send_to': 'AW-527770446/ryW5CNT3r-MBEM7G1PsB'});
+    </script>
+
+@endsection
