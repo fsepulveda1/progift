@@ -126,7 +126,7 @@
             <tr>
                 <td valign="top" @if($qty_rows)rowspan="{{$qty_rows}}"@endif >
                     <div>
-                        {{ $det->nombre }}<br>
+                        {{ $det->nombre }}@if(isset($det->sku)){{ " - Cód: ".$det->sku}}@endif<br>
                         {!! $det->descripcion !!}<br>
                         @if(!empty($det->color))Color: {{ $det->color }}<br>@endif
                         Impresión :{{ $det->imprenta }}<br>

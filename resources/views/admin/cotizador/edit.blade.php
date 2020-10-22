@@ -106,7 +106,7 @@
                                                         <div class="form-group mb-lg-0">
                                                             <label for="example-search-input" class="form-control-label">Producto</label>
                                                             <input type="hidden" name="producto[{{$cnt}}][id]" id="id"/>
-                                                            <input class="form-control form-control-alternative search" autocomplete="off" type="search" placeholder="Producto" id="nombre" name="producto[{{$cnt}}][nombre]" value="{{$d['nombre']}}" >
+                                                            <input class="form-control form-control-alternative search" autocomplete="off" type="search" placeholder="Producto" id="nombre" name="producto[{{$cnt}}][nombre]" value="{{$d['nombre']}}@if(isset($d['sku'])){{ " - Cód: ".$d['sku'] }}@endif" >
                                                         </div>
                                                         <div class="form-group mt-1">
                                                             <textarea name="producto[{{$cnt}}][descripcion]" id="descripcion" placeholder="Descripción" class="form-control form-control-alternative descripcion textarea richTextBox" rows="2">@if(isset($d['descripcion'])){!! strip_tags($d['descripcion']) !!}@endif</textarea>
