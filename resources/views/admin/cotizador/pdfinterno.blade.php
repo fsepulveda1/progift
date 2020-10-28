@@ -67,6 +67,9 @@
         }
 
         table {
+            page-break-after: avoid !important;
+        }
+        table tbody{
             page-break-after: auto !important;
         }
 
