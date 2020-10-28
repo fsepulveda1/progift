@@ -68,7 +68,7 @@
 
         table {
             page-break-inside: auto !important;
-            page-break-after: avoid;
+            page-break-after: auto !important;
         }
 
     </style>
