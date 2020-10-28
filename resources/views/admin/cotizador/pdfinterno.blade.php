@@ -134,7 +134,6 @@
                 $qty_rows = is_array($det->cantidad) ? count($det->cantidad) : 0;
             @endphp
             <tbody>
-            <div>
             <tr>
                 <td valign="top" @if($qty_rows)rowspan="{{$qty_rows}}"@endif >
                     <div>
@@ -162,7 +161,6 @@
                     </tr>
                 @endfor
             @endif
-            </div>
             </tbody>
         @endforeach
     </table>
