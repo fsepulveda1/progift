@@ -21,7 +21,7 @@
         }
 
         tbody td > div {
-            page-break-inside: avoid;
+            /*page-break-inside: avoid;*/
         }
 
         body {
