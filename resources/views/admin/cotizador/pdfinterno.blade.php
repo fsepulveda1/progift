@@ -25,7 +25,7 @@
         }
 
         body {
-            padding: 2.5cm .5cm 2.35cm;
+            padding: 1.5cm .5cm 1.75cm;
         }
 
         .table{
