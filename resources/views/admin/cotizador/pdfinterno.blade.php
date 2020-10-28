@@ -63,7 +63,10 @@
             background-color: #F5C524;
         }
 
-        table { page-break-inside:auto }
+        table {
+            page-break-inside: auto !important;
+            page-break-after: avoid;
+        }
         tr    { page-break-inside:avoid; page-break-after:auto }
         thead { display:table-header-group }
         tfoot { display:table-footer-group }
