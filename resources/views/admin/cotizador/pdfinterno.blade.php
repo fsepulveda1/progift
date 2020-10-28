@@ -50,8 +50,7 @@
             top: 0cm;
             left: 0cm;
             right: 0cm;
-            height: 1.5cm;
-            margin-bottom: 1cm;
+            height: 2.5cm;
             padding: .5cm .5cm .25cm;
         }
         footer {
@@ -61,7 +60,6 @@
             right: 0cm;
             height: 1.75cm;
             padding: .25cm .5cm;
-            margin-top: 1.4cm;
             background-color: #F5C524;
         }
     </style>
