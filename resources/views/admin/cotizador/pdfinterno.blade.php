@@ -21,7 +21,10 @@
         }
 
         tbody td > div {
-            page-break-inside: avoid;
+            page-break-inside: avoid !important;
+        }
+        tbody tr {
+            page-break-inside: avoid !important;
         }
 
         body {
@@ -67,9 +70,6 @@
             page-break-inside: auto !important;
             page-break-after: avoid;
         }
-        tr    { page-break-inside:avoid; page-break-after:auto }
-        thead { display:table-header-group }
-        tfoot { display:table-footer-group }
 
     </style>
 </head>
