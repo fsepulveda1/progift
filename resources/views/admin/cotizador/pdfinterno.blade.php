@@ -66,10 +66,6 @@
             background-color: #F5C524;
         }
 
-        table {
-            page-break-after: avoid;
-        }
-
     </style>
 </head>
 <body>
