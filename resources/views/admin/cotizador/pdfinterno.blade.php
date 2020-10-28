@@ -19,8 +19,7 @@
             margin: 0cm 0cm;
             font-family: 'Roboto', sans-serif;
         }
-        .no-break,
-        tbody, tbody td, tbody div {
+        tbody div {
             page-break-inside: avoid;
         }
 
