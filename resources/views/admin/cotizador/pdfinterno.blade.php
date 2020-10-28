@@ -25,7 +25,7 @@
         }
 
         body {
-            padding: 3cm .5cm 2.35cm;
+            padding: 2.5cm .5cm 2.35cm;
         }
 
         .table{
@@ -92,7 +92,7 @@
         </tr>
     </table>
 </footer>
-<main style="padding: 0; margin: 0; page-break-inside: avoid;  ">
+<main style="padding: 0; margin: 0">
     <h5 style="text-align: center; margin-bottom: 1rem; margin-top: 0; font-size: 10pt">COTIZACIÓN Nº @if(isset($data['number'])){{$data['number']}}@else XXXXX @endif</h5>
     <table class="w-100" style="margin: 1rem 0; font-size: 10pt">
         <tr>
