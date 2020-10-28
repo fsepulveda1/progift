@@ -19,7 +19,8 @@
             margin: 0cm 0cm;
             font-family: 'Roboto', sans-serif;
         }
-        tbody div {
+
+        tbody td > div {
             page-break-inside: avoid;
         }
 
@@ -121,7 +122,7 @@
             @php
                 $qty_rows = is_array($det->cantidad) ? count($det->cantidad) : 0;
             @endphp
-            <tbody class="page-break-avoid">
+            <tbody>
             <tr>
                 <td valign="top" @if($qty_rows)rowspan="{{$qty_rows}}"@endif >
                     <div>
