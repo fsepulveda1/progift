@@ -65,14 +65,6 @@
             padding: .25cm .5cm;
             background-color: #F5C524;
         }
-
-        table {
-            page-break-after: avoid !important;
-        }
-        table tbody{
-            page-break-after: auto !important;
-        }
-
     </style>
 </head>
 <body>
@@ -117,7 +109,7 @@
             </th>
         </tr>
     </table>
-
+    <table style='page-break-before:always'>
     <table class="table w-100" border="1" cellpadding="0" cellspacing="0">
         <thead>
         <tr>
@@ -163,6 +155,7 @@
             @endif
             </tbody>
         @endforeach
+    </table>
     </table>
     <table class="w-100" border="0" cellpadding="0" cellspacing="0">
         <tr style="padding: 0; margin: 0" >
