@@ -67,7 +67,6 @@
         }
 
         table {
-            page-break-inside: auto;
             page-break-after: avoid;
         }
 
