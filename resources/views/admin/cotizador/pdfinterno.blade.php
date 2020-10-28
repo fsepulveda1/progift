@@ -65,6 +65,13 @@
             padding: .25cm .5cm;
             background-color: #F5C524;
         }
+        .table {
+            page-break-after: avoid !important;
+        }
+
+        .table tbody {
+            page-break-after: auto !important;
+        }
     </style>
 </head>
 <body>
