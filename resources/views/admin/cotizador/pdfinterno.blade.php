@@ -23,7 +23,7 @@
         tbody td > div {
             page-break-inside: avoid !important;
         }
-        tbody tr {
+        tbody {
             page-break-inside: avoid !important;
         }
 
@@ -68,7 +68,7 @@
 
         table {
             page-break-inside: auto !important;
-            page-break-after: auto !important;
+            page-break-after: avoid;
         }
 
     </style>
