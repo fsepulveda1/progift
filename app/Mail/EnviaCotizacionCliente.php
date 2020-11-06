@@ -15,12 +15,15 @@ class EnviaCotizacionCliente extends Mailable
 
     public $cotizacion;
 
+    public $from;
+
     /**
      * Create a new message instance.
      *
      */
-    public function __construct($cotizacion)
+    public function __construct($cotizacion, $from)
     {
+        $this->from = $from;
         $this->cotizacion = $cotizacion;
     }
 
@@ -32,6 +35,7 @@ class EnviaCotizacionCliente extends Mailable
     public function build()
     {
         return $this->from(config('mail.from')['address'],config('mail.from')['name'])
+            ->replyTo($this->from($this->from['address'],$this->from['name']))
             ->subject('NUEVA COTIZACIÓN '.date('Y'))
             ->cc(Voyager::setting('admin.email_cotizaciones', ''))
             ->view('mails.envia_cotizacion_cliente');

@@ -213,7 +213,10 @@ class CartController extends Controller
 
         Mail::to($request->email)->send($message);
 
-        $messageCliente = new EnviaCotizacionCliente($data);
+        $from['address'] = $request->email;
+        $from['name'] = $request->contacto;
+
+        $messageCliente = new EnviaCotizacionCliente($data, $from);
         Mail::to($user->email)->send($messageCliente);
 
         \Cart::clear();
