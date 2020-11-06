@@ -35,7 +35,7 @@ class EnviaCotizacionCliente extends Mailable
     public function build()
     {
         return $this->from(config('mail.from')['address'],config('mail.from')['name'])
-            ->replyTo($this->from($this->from['address'],$this->from['name']))
+            ->replyTo($this->from['address'],$this->from['name'])
             ->subject('NUEVA COTIZACIÓN '.date('Y'))
             ->cc(Voyager::setting('admin.email_cotizaciones', ''))
             ->view('mails.envia_cotizacion_cliente');
