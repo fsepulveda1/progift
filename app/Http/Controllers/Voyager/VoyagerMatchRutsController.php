@@ -76,7 +76,7 @@ class VoyagerMatchRutsController extends VoyagerBaseController
             }
 
             if($filters['rut'])
-                $query->where('match_ruts.rut',$filters['rut']);
+                $query->where('match_ruts.rut',"%".$filters['rut']."%",'LIKE');
 
             if($filters['procedencia'])
                 $query->where('match_ruts.procedencia',$filters['procedencia']);
