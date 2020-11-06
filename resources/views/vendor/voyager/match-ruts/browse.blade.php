@@ -72,6 +72,7 @@
                                             <option value="WEB" @if($filters['procedencia']=='WEB') selected @endif>Web</option>
                                             <option value="IMPORTADOR" @if($filters['procedencia']=='IMPORTADOR') selected @endif>Importador</option>
                                         </select>
+                                        <input class="form-control" type="text" name="rut" value="{{$filters['rut']}}" placeholder="Rut">
                                         <input class="form-control custom-datepicker" type="text" name="fecha_desde" value="{{$filters['fecha_desde']}}" placeholder="Desde">
                                         <input class="form-control custom-datepicker" style="margin-right: 1rem" type="text" name="fecha_hasta" value="{{$filters['fecha_hasta']}}" placeholder="Hasta">
 

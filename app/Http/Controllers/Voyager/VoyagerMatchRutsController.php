@@ -42,6 +42,7 @@ class VoyagerMatchRutsController extends VoyagerBaseController
         $filters['procedencia'] = $request->get('procedencia');
         $filters['fecha_desde'] = $request->get('fecha_desde');
         $filters['fecha_hasta'] = $request->get('fecha_hasta');
+        $filters['rut'] = $request->get('rut');
 
         $getter = $dataType->server_side ? 'paginate' : 'get';
         $search = new stdClass();
@@ -74,14 +75,20 @@ class VoyagerMatchRutsController extends VoyagerBaseController
                 }
             }
 
+            if($filters['rut'])
+                $query->where('match_ruts.rut',$filters['rut']);
+
             if($filters['procedencia'])
                 $query->where('match_ruts.procedencia',$filters['procedencia']);
+
             if($filters['vendedor'])
                 $query->where('match_ruts.vendedor',$filters['vendedor']);
+
             if(!empty($filters['fecha_desde'])) {
                 $from = \DateTime::createFromFormat('d-m-Y',$filters['fecha_desde']);
                 $query->whereDate('match_ruts.created_at','>=', $from->format('Y-m-d'));
             }
+
             if(!empty($filters['fecha_hasta'])) {
                 $from = \DateTime::createFromFormat('d-m-Y',$filters['fecha_hasta']);
                 $query->whereDate('match_ruts.created_at','<=', $from->format('Y-m-d'));
