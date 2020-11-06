@@ -6,7 +6,7 @@
         <strong>Rut Empresa:</strong> {{$cotizacion['cliente']['rut']}}<br/>
         <strong>Contacto:</strong> {{$cotizacion['cliente']['contacto']}}<br/>
         <strong>E-Mail:</strong>
-        <a href="mailto: {{$cotizacion['cliente']['email']}}" style="color: #0066cc">{{$cotizacion['cliente']['email']}}</a><br/>
+        <a href="mailto:{{$cotizacion['cliente']['email']}}" style="color: #0066cc">{{$cotizacion['cliente']['email']}}</a><br/>
         <strong>Teléfono:</strong> {{$cotizacion['cliente']['telefono']}}<br/>
         <strong>Comentarios:</strong> {{$cotizacion['cliente']['comentarios']}}<br/>
     </p>
