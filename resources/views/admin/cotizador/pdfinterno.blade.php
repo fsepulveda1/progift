@@ -70,7 +70,7 @@
         }
 
         table tbody {
-            page-break-after: auto !important;
+            page-break-after: avoid !important;
         }
     </style>
 </head>
