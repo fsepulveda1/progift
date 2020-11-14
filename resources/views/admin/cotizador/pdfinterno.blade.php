@@ -142,7 +142,7 @@
                         Impresión :{{ $det->imprenta }}<br>
                     </div>
                 </td>
-                <td align="center" valign="middle" @if($qty_rows) rowspan="{{$qty_rows}}" @endi>
+                <td align="center" valign="middle" @if($qty_rows) rowspan="{{$qty_rows}}" @endif>
                     <div>
                         <img src="{{ asset(stripcslashes($det->imagen))}}" style="max-width: 120px; max-height: 150px">
                     </div>
