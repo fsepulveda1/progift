@@ -132,7 +132,7 @@
             @php
                 $qty_rows = is_array($det->cantidad) ? count($det->cantidad) : 0;
             @endphp
-            <tbody>
+            <tbody style="page-break-inside: avoid !important;">
             <tr>
                 <td valign="top" @if($qty_rows)rowspan="{{$qty_rows}}"@endif >
                     <div>
