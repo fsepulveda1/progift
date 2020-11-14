@@ -132,9 +132,9 @@
             @php
                 $qty_rows = is_array($det->cantidad) ? count($det->cantidad) : 0;
             @endphp
-            <tbody style="page-break-inside: avoid !important;">
+            <tbody style="page-break-inside: auto !important;">
             <tr>
-                <td valign="top" @if($qty_rows)rowspan="{{$qty_rows}}"@endif >
+                <td valign="top" @if($qty_rows) rowspan="{{$qty_rows}}" @endif >
                     <div>
                         {{ $det->nombre }}@if(isset($det->sku)){{ " - Cód: ".$det->sku}}@endif<br>
                         {!! $det->descripcion !!}<br>
@@ -142,7 +142,7 @@
                         Impresión :{{ $det->imprenta }}<br>
                     </div>
                 </td>
-                <td align="center" valign="middle" rowspan="{{$qty_rows}}">
+                <td align="center" valign="middle" @if($qty_rows) rowspan="{{$qty_rows}}" @endi>
                     <div>
                         <img src="{{ asset(stripcslashes($det->imagen))}}" style="max-width: 120px; max-height: 150px">
                     </div>
