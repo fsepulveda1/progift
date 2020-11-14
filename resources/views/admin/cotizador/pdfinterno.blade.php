@@ -116,7 +116,6 @@
             </th>
         </tr>
     </table>
-    <table style='page-break-inside: auto !important;'>
     <table class="table w-100" border="1" cellpadding="0" cellspacing="0">
         <thead>
         <tr>
@@ -162,7 +161,6 @@
             @endif
             </tbody>
         @endforeach
-    </table>
     </table>
     <table class="w-100" border="0" cellpadding="0" cellspacing="0">
         <tr style="padding: 0; margin: 0" >
