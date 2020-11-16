@@ -325,7 +325,7 @@ class CotizadorController extends Controller
         $footer = view()->make('admin.cotizador.pdf.footer')->with(['user'=>$user])->render();
 
         $pdf = PDF::loadView('admin.cotizador.pdf.content', ['data'=>$data,'client'=>$client,'user'=>$user])
-            ->setOption('margin-top', 30)
+            ->setOption('margin-top', 20)
             ->setOption('margin-bottom', 20)
             ->setOption('margin-left', 0)
             ->setOption('margin-right', 0)
@@ -346,7 +346,7 @@ class CotizadorController extends Controller
         $footer = view()->make('admin.cotizador.pdf.footer')->with(['user'=>$user])->render();
 
         $pdf = PDF::loadView('admin.cotizador.pdf.content', ['data'=>$data,'client'=>$client,'user'=>$user])
-            ->setOption('margin-top', 30)
+            ->setOption('margin-top', 20)
             ->setOption('margin-bottom', 20)
             ->setOption('margin-left', 0)
             ->setOption('margin-right', 0)
