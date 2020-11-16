@@ -7,10 +7,12 @@ use App\Exports\MatchRutExport;
 use App\Impresion;
 use App\Mail\EnviaCotizacionFinal;
 use App\MatchRut;
-use Barryvdh\DomPDF\PDF;
 use DB;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Response;
+use PDF;
 use Mail;
 use App\Category;
 use App\Product;
@@ -318,15 +320,42 @@ class CotizadorController extends Controller
      * @return \Illuminate\Http\Response
      */
     private function getPDF($data, $client,$user) {
-        /** @var PDF $pdf */
-        $pdf = app('dompdf.wrapper');
-        $pdf = $pdf->loadView('admin/cotizador.pdfinterno', ['data'=>$data,'client'=>$client,'user'=>$user]);
 
+        $header = view()->make('admin.cotizador.pdf.header')->render();
+        $footer = view()->make('admin.cotizador.pdf.footer')->with(['user'=>$user])->render();
+
+        $pdf = PDF::loadView('admin.cotizador.pdf.content', ['data'=>$data,'client'=>$client,'user'=>$user])
+            ->setOption('margin-top', 30)
+            ->setOption('margin-bottom', 20)
+            ->setOption('margin-left', 0)
+            ->setOption('margin-right', 0)
+            ->setOption('encoding', 'UTF-8')
+            ->setOption('footer-html',$footer)
+            ->setOption('header-html',$header)
+        ;
         $name = $this->sanitizeNameForFilename($client->contacto);
         $companyName = $this->sanitizeNameForFilename($client->nombre);
         $filename = $this->sanitizeFilename($companyName.'_'.$name.'_'.date('d-m-Y'));
 
         return $pdf->stream($filename.".pdf");
+    }
+
+    private function getPDFOutput($data,$client,$user) {
+
+        $header = view()->make('admin.cotizador.pdf.header')->render();
+        $footer = view()->make('admin.cotizador.pdf.footer')->with(['user'=>$user])->render();
+
+        $pdf = PDF::loadView('admin.cotizador.pdf.content', ['data'=>$data,'client'=>$client,'user'=>$user])
+            ->setOption('margin-top', 30)
+            ->setOption('margin-bottom', 20)
+            ->setOption('margin-left', 0)
+            ->setOption('margin-right', 0)
+            ->setOption('encoding', 'UTF-8')
+            ->setOption('footer-html',$footer)
+            ->setOption('header-html',$header)
+        ;
+
+        return $pdf->inline();
     }
 
     private function sanitizeNameForFilename($name) {
@@ -337,14 +366,6 @@ class CotizadorController extends Controller
     private function sanitizeFilename($filename) {
         $filename = trim(str_replace([' ','.'],['_',''],$filename));
         return $filename;
-    }
-
-    private function getPDFOutput($data,$client,$user) {
-
-        /** @var PDF $pdf */
-        $pdf = app('dompdf.wrapper');
-        $pdf = $pdf->loadView('admin/cotizador.pdfinterno', ['data'=>$data,'client'=>$client,'user'=>$user]);
-        return $pdf->output();
     }
 
     private function formatingArrayFromRequest(Request $request, $client, $user_id, $status = null) {
