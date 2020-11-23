@@ -35,7 +35,7 @@
                                                     if($count == 1){
                                                     $imageFirst = $image;
                                                     ?>
-                                                    <img width="100%" src="{{ asset('/storage/'.$image) }}" alt="Producto">
+                                                    <img width="100%" loading="lazy" data-src="{{ asset('/storage/'.$image) }}" alt="Producto" class="lazyload">
                                                     <?php
                                                     }
                                                     $count++;
