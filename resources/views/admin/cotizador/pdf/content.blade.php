@@ -190,7 +190,7 @@
                 @endif
 
                 @if($data['activa_total'])
-                    <table class="table w-100" border="1" cellpadding="0" cellspacing="0" style="margin-top: .5rem">
+                    <table class="table w-100" border="0" cellpadding="0" cellspacing="0" style="margin-top: .5rem">
                         <tr>
                             <th width="40%" align="right">NETO</th>
                             <td>${{ number_format($data['neto'], 0, ',', '.') }}</td>
