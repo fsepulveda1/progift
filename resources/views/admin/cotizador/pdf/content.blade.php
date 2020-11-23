@@ -66,6 +66,7 @@
         .table td:last-child {
             border-right: 1px #F5C524 solid;
         }
+        .table tr:first-child td,
         .table tr:first-child th {
             border-top: 1px #F5C524 solid;
         }
