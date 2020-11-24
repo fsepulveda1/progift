@@ -880,7 +880,6 @@
             img.src = img.dataset.src;
         });
     } else {
-        // Importamos dinámicamente la libreria `lazysizes`
         let script = document.createElement("script");
         script.async = true;
         script.src = "https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.0/lazysizes.min.js";
