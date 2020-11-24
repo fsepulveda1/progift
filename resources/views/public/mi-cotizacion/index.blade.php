@@ -112,19 +112,9 @@
                             <tfoot>
                             <tr>
                                 <td colspan="5" class="clearfix">
-                                    <div class="float-left">
+                                    <div class="float-right">
                                         <a href="{{ url('/') }}" class="btn btn-outline-secondary">COTIZAR MÁS PRODUCTOS</a>
                                     </div><!-- End .float-left -->
-                                    @if(count($cartCollection)>0)
-                                        <div class="float-right">
-                                            <form action="{{ route('cart.clear') }}" method="POST" style="margin-bottom: 0;display: contents;">
-                                                {{ csrf_field() }}
-                                                <button class="btn btn-outline-secondary btn-clear-cart">LIMPIAR CARRO</button>
-                                            </form>
-
-                                            <!--<a href="#" class="btn btn-outline-secondary btn-update-cart">ACTUALIZAR CARRO</a>-->
-                                        </div><!-- End .float-right -->
-                                    @endif
                                 </td>
                             </tr>
                             </tfoot>
