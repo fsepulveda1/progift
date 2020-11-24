@@ -606,7 +606,7 @@
                     buttondown_class: 'btn btn-outline',
                     buttonup_class: 'btn btn-outline',
                     initval: 1,
-                    min: 1,
+                    min: 100,
                     max: 1000000,
                 });
 
@@ -618,7 +618,7 @@
                     buttondown_class: 'btn btn-outline btn-down-icon',
                     buttonup_class: 'btn btn-outline btn-up-icon',
                     initval: 1,
-                    min: 1,
+                    min: 100,
                     max: 1000000
                 });
             }
