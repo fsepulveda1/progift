@@ -113,7 +113,7 @@
                             <tr>
                                 <td colspan="5" class="clearfix">
                                     <div class="float-right">
-                                        <a href="{{ url('/') }}" class="btn btn-outline-secondary">COTIZAR MÁS PRODUCTOS</a>
+                                        <a href="{{ url('/') }}" class="btn btn-outline-secondary">SUMAR MÁS PRODUCTOS</a>
                                     </div><!-- End .float-left -->
                                 </td>
                             </tr>
