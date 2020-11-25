@@ -7,6 +7,7 @@ use App\Exports\MatchRutExport;
 use App\Impresion;
 use App\Mail\EnviaCotizacionFinal;
 use App\MatchRut;
+use Barryvdh\Snappy\Facades\SnappyPdf;
 use DB;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\UploadedFile;
@@ -332,6 +333,7 @@ class CotizadorController extends Controller
             ->setOption('encoding', 'UTF-8')
             ->setOption('footer-html',$footer)
             ->setOption('header-html',$header)
+            ->setOption('page-size','Letter')
         ;
         $name = $this->sanitizeNameForFilename($client->contacto);
         $companyName = $this->sanitizeNameForFilename($client->nombre);
@@ -345,7 +347,7 @@ class CotizadorController extends Controller
         $header = view()->make('admin.cotizador.pdf.header')->render();
         $footer = view()->make('admin.cotizador.pdf.footer')->with(['user'=>$user])->render();
 
-        $pdf = PDF::loadView('admin.cotizador.pdf.content', ['data'=>$data,'client'=>$client,'user'=>$user])
+        $pdf = PDF::loadView('admin.cotizador.pdf.content', compact($data,$client,$user))
             ->setOption('margin-top', 20)
             ->setOption('margin-bottom', 20)
             ->setOption('margin-left', 0)
@@ -353,8 +355,8 @@ class CotizadorController extends Controller
             ->setOption('encoding', 'UTF-8')
             ->setOption('footer-html',$footer)
             ->setOption('header-html',$header)
+            ->setOption('page-size','Letter')
         ;
-
         return $pdf->inline();
     }
 
