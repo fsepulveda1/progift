@@ -220,8 +220,7 @@
     $('body').on('click', '.btn-agrega_producto', function() {
 
         var c = $('.pduct').length;
-        var i = "row_pduct_" + ($('.row-qty').length + 1);
-
+        var i = "row_pduct_" + (c + 1);
 
         var appendProduct = $('<div id="'+i+'" class="pduct"><div class="row">'+
             '<div class="col-lg-7">'+
