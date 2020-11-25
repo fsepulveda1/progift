@@ -195,7 +195,7 @@ class CartController extends Controller
         Cotizacione::create([
             'forma_pago' => 'A Convenir',
             'validez' => '10 días',
-            'entrega' => '10 días',
+            'entrega' => 'A Convenir',
             'detalle' => json_encode($detalle),
             'descuento' => 0,
             'neto' => 0,
