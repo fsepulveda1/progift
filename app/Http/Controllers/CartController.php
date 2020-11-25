@@ -168,11 +168,11 @@ class CartController extends Controller
 
         $data = [
             'nombre' => $request->contacto,
-            'validez' => 10,
+            'validez' => '10 días',
             'empresa' => $request->empresa,
-            'forma_pago' => '.',
+            'forma_pago' => 'A Convenir',
             'email' => $request->email,
-            'entrega' => 'web',
+            'entrega' => 'A Convenir',
             'detalle' => $detalle,
             'descuento' => 0,
             'neto' => 0,
