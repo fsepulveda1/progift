@@ -97,7 +97,7 @@ class CategoriesController extends Controller
 
         $products = Product::whereHas('categories', function ($query) use ($category) {
             $query->where('id', '=', $category->id);
-        })->orderBy('created_at','desc')->get();
+        })->orderBy('nombre','asc')->get();
         $lastPage = null;
 
         if ($request->ajax()) {
@@ -117,7 +117,7 @@ class CategoriesController extends Controller
      */
     public function showDestacados(Request $request)
     {
-        $products = Product::where('destacado',1)->orderBy('created_at','desc')->get();
+        $products = Product::where('destacado',1)->orderBy('nombre','asc')->get();
         $lastPage = null;
 
         if ($request->ajax()) {
