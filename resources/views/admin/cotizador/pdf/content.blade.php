@@ -109,7 +109,7 @@
                 <td valign="top">
                     <div>
                         {{ $det->nombre }}@if(isset($det->sku)){{ " - Cód: ".$det->sku}}@endif<br>
-                        {!! $det->descripcion !!}<br>
+                        {!! nl2br(e($det->descripcion)) !!}<br>
                         @if(!empty($det->color))Color: {{ $det->color }}<br>@endif
                         Impresión :{{ $det->imprenta }}<br>
                     </div>
