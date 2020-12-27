@@ -216,6 +216,7 @@
         $('#'+$(this).data('id')).remove();
         $('.'+$(this).data('id')).remove();
         ShowHideTotalsFields();
+        calculaTotales();
     });
     $('body').on('click', '.btn-agrega_producto', function() {
 
