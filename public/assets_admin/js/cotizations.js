@@ -345,6 +345,7 @@
             colorSelect.remove();
         }
 
+        calculaTotales();
 
     });
 
