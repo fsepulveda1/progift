@@ -1,4 +1,5 @@
-@extends('public.layout') @section('content')
+@extends('public.layout')
+@section('content')
 @section('title'){{ $product->nombre }} | @endsection
 
 <main class="main">
