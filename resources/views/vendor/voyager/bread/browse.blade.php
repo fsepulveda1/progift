@@ -24,6 +24,11 @@
                                         <span>Exportar</span>
                                     </a>
                                 @endif
+                                @if($dataType->model_name == 'App\Category')
+                                    <a href="{{ route('voyager.categories.order') }}" class="btn btn-success btn-sm btn-add-new">
+                                        <span>Orden</span>
+                                    </a>
+                                @endif
                                 @can('add', app($dataType->model_name))
                                     @if($dataType->model_name != "App\Cotizacione")
                                         <a href="{{ route('voyager.'.$dataType->slug.'.create') }}" class="btn btn-success btn-sm btn-add-new">
@@ -365,7 +370,7 @@
     @endif
     <script>
         $(document).ready(function () {
-                    @if (!$dataType->server_side)
+            @if (!$dataType->server_side)
             var table = $('#dataTable').DataTable({!! json_encode(
                     array_merge([
                         "order" => $orderColumn,
@@ -375,13 +380,13 @@
                     config('voyager.dashboard.data_tables', []))
                 , true) !!});
             @else
-                $('#search-input select').select2({
+            $('#search-input select').select2({
                 minimumResultsForSearch: Infinity
             });
             @endif
 
             @if ($isModelTranslatable)
-                $('.side-body').multilingual();
+            $('.side-body').multilingual();
             //Reinitialise the multilingual features when they change tab
             $('#dataTable').on('draw.dt', function(){
                 $('.side-body').data('multilingual').init();
@@ -400,16 +405,16 @@
         });
 
         @if($usesSoftDeletes)
-            @php
-                $params = [
-                    's' => $search->value,
-                    'filter' => $search->filter,
-                    'key' => $search->key,
-                    'order_by' => $orderBy,
-                    'sort_order' => $sortOrder,
-                ];
-            @endphp
-            $(function() {
+        @php
+            $params = [
+                's' => $search->value,
+                'filter' => $search->filter,
+                'key' => $search->key,
+                'order_by' => $orderBy,
+                'sort_order' => $sortOrder,
+            ];
+        @endphp
+        $(function() {
             $('#show_soft_deletes').change(function() {
                 if ($(this).prop('checked')) {
                     $('#dataTable').before('<a id="redir" href="{{ (route('voyager.'.$dataType->slug.'.index', array_merge($params, ['showSoftDeleted' => 1]), true)) }}"></a>');
