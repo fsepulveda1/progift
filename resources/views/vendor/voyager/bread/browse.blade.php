@@ -25,7 +25,7 @@
                                     </a>
                                 @endif
                                 @if($dataType->model_name == 'App\Category')
-                                    <a href="{{ route('voyager.categories.order') }}" class="btn btn-success btn-sm btn-add-new">
+                                    <a href="{{ route('voyager.categories.order') }}" class="btn btn-info btn-sm btn-add-new">
                                         <span>Orden</span>
                                     </a>
                                 @endif
