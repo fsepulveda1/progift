@@ -44,7 +44,7 @@ class VoyagerProductsController extends VoyagerBaseController
         $searchNames = [
             'products.nombre' => $search->value,
             'products.sku' => $search->value,
-            'categories.nombre' => $search->value,
+            //'categories.nombre' => $search->value,
         ];
 
         $orderBy = $request->get('order_by', $dataType->order_column);
