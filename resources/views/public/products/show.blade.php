@@ -22,7 +22,9 @@
                     <nav aria-label="breadcrumb" class="breadcrumb-nav">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/"><i class="icon-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="/categoria/{{$product->categories->first()->slug}}">{{ $product->categories->first()->nombre }}</a></li>
+                            @if($product->categories->first())
+                                <li class="breadcrumb-item"><a href="/categoria/{{$product->categories->first()->slug}}">{{ $product->categories->first()->nombre }}</a></li>
+                            @endif
                             <li class="breadcrumb-item active" aria-current="page">{{ $product->nombre }}</li>
                         </ol>
                     </nav>
