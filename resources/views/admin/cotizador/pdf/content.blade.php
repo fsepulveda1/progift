@@ -47,7 +47,7 @@
         .inside-table {
             height: 100%;
             max-height: 100%;
-            overflow: hidden;
+            overflow-x: visible !important;
             margin: 0;
         }
         .inside-table tr td {
