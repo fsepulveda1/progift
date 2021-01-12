@@ -238,6 +238,26 @@ class CotizadorController extends Controller
         return $this->getPDF($data,$cotizacion->client,$cotizacion->user);
     }
 
+    public function genera_test(Request $request) {
+        $cotizacion = Cotizacione::with('client','user')->where(['id'=>$request->get('id')])->first();
+
+        $data  = [
+            'number' => $request->get('id'),
+            'detalle' => $cotizacion->detalle,
+            'validez' => $cotizacion->validez,
+            'forma_pago' => $cotizacion->forma_pago,
+            'entrega' => $cotizacion->entrega,
+            'descuento' => $cotizacion->descuento,
+            'neto' => $cotizacion->neto,
+            'iva' => $cotizacion->iva,
+            'total' => $cotizacion->total,
+            'activa_total'=>$cotizacion->activa_total,
+            'activa_descuento'=>$cotizacion->activa_descuento,
+        ];
+
+        return $this->getPDFTest($data,$cotizacion->client,$cotizacion->user);
+    }
+
     public function generateOutputFromDB($cotizacion) {
 
 
@@ -314,6 +334,19 @@ class CotizadorController extends Controller
     private function updatingCotization($data,$id) {
         Cotizacione::where('id', $id)->update($data);
         return Cotizacione::find($id);
+    }
+
+    /**
+     * @param $data
+     * @return string
+     */
+    private function getPDFTest($data, $client,$user) {
+
+        $header = view()->make('admin.cotizador.pdf.header')->render();
+        $footer = view()->make('admin.cotizador.pdf.footer')->with(['user'=>$user])->render();
+        $content = view()->make('admin.cotizador.pdf.content')->with(['data'=>$data,'client'=>$client,'user'=>$user])->render();
+
+        return $header.$content.$footer;
     }
 
     /**
