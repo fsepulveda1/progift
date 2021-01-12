@@ -186,7 +186,7 @@
                 dots: true,
                 autoplay: true,
                 autoplayTimeout: 15000,
-                items: 4,
+                items: 1,
             };
 
             // Init all carousel
