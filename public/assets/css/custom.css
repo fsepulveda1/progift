@@ -38,6 +38,12 @@
     padding: 10px;
     font-size: 14px;
 }
+.typeahead.dropdown-menu li.active {
+    background-color: #f5c524;
+}
+.typeahead.dropdown-menu li.active a {
+    color: white;
+}
 
 .category-title {
     padding-bottom: 5px;
