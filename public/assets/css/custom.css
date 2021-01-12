@@ -38,6 +38,8 @@
     padding: 10px;
     font-size: 14px;
 }
+.typeahead.dropdown-menu li:hover a,
+.typeahead.dropdown-menu li.active a,
 .typeahead.dropdown-menu li:hover,
 .typeahead.dropdown-menu li.active {
     background-color: #f5c524;
