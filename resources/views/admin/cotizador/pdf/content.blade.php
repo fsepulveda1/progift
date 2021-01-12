@@ -49,6 +49,9 @@
             max-height: 100%;
             overflow: hidden;
         }
+        .inside-table tr td {
+            max-height: 100%;
+        }
         .inside-table tr:last-child td {
             border-bottom: 0;
         }
