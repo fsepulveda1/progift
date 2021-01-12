@@ -26,7 +26,7 @@
                                 <div class="product-intro owl-carousel owl-theme" data-toggle="owl" data-owl-options="{
                         'margin': 20,
                         'items': 2,
-                        'autoplayTimeout': 60000,
+                        'autoplayTimeout': 5000,
                         'responsive': {
                             '559': {
                                 'items': 3
