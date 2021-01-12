@@ -93,7 +93,7 @@ if($('.custom-datepicker').length) {
     $('.custom-datepicker').datetimepicker({format: 'DD-MM-YYYY'});
 }
 
-$('#owl-products-carousel').owl({
+$('#owl-products-carousel').owlCarousel({
     loop: true,
     responsiveClass: true,
     nav: false,
