@@ -45,8 +45,6 @@
             padding: 10px 7px;
         }
         .inside-table {
-            height: 100%;
-            max-height: 100%;
             margin: 0;
         }
         .inside-table tr td {
