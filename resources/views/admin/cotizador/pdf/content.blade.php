@@ -51,7 +51,6 @@
         }
         .inside-table tr td {
             max-height: 100%;
-            background-color: #ddd;
         }
         .inside-table tr:last-child td {
             border-bottom: 0;
