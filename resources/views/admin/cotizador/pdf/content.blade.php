@@ -111,7 +111,7 @@
             @php
                 $qty_rows = is_array($det->cantidad) ? count($det->cantidad) : 0;
             @endphp
-            <tr>
+            <tr style="padding: 0; margin: 0">
                 <td valign="top">
                     <div>
                         {{ $det->nombre }}@if(isset($det->sku)){{ " - Cód: ".$det->sku}}@endif<br>
