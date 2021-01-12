@@ -25,7 +25,6 @@
                                 <h2 class="carousel-title">ARTÍCULOS PUBLICITARIOS DESTACADOS</h2>
                                 <div class="product-intro owl-carousel owl-theme" data-toggle="owl" data-owl-options="{
                         'margin': 20,
-                        'items': 2,
                         'autoplayTimeout': 5000,
                         'responsive': {
                             '559': {
