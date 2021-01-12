@@ -122,7 +122,7 @@
                         <img src="{{ asset(stripcslashes($det->imagen))}}" style="max-width: 140px; max-height: 170px">
                     </div>
                 </td>
-                <td align="center" style="padding: 0;overflow: visible;">
+                <td valign="top" align="center" style="padding: 0;overflow: visible;">
                     @if($qty_rows)
                         <table class="w-100 inside-table" border="0" cellpadding="0" cellspacing="0">
                             @for($x = 0; $x <= $qty_rows; $x++)
@@ -137,7 +137,7 @@
                         </table>
                     @endif
                 </td>
-                <td align="center" style="padding: 0;overflow: visible;">
+                <td valign="top" align="center" style="padding: 0;overflow: visible;">
                     @if($qty_rows)
                         <table class="w-100 inside-table" border="0" cellpadding="0" cellspacing="0">
                             @for($x = 0; $x <= $qty_rows; $x++)
@@ -152,7 +152,7 @@
                         </table>
                     @endif
                 </td>
-                <td align="center" style="padding: 0;overflow: visible;">
+                <td valign="top" align="center" style="padding: 0;overflow: visible;">
                     @if($qty_rows)
                         <table class="w-100 inside-table" border="0" cellpadding="0" cellspacing="0">
                             @for($x = 0; $x <= $qty_rows; $x++)
