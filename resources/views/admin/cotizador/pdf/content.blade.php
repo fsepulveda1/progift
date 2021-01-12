@@ -47,6 +47,7 @@
         .inside-table {
             height: 100%;
             max-height: 100%;
+            overflow: hidden;
         }
         .inside-table tr:last-child td {
             border-bottom: 0;
