@@ -125,7 +125,7 @@
                             @for($x = 0; $x <= $qty_rows; $x++)
                                 @if(isset($det->cantidad[$x]))
                                     <tr>
-                                        <td align="center" style="border-top:none; border-left: 0; border-right: 0">
+                                        <td valign="middle" align="center" style="border-top:none; border-left: 0; border-right: 0">
                                             {{ $det->cantidad[$x] }}
                                         </td>
                                     </tr>
@@ -140,7 +140,7 @@
                             @for($x = 0; $x <= $qty_rows; $x++)
                                 @if(isset($det->precio[$x]))
                                     <tr>
-                                        <td align="center" style="border-top:none; border-left: 0; border-right: 0">
+                                        <td valign="middle" align="center" style="border-top:none; border-left: 0; border-right: 0">
                                             ${{number_format($det->precio[$x], 0, ',', '.')}}
                                         </td>
                                     </tr>
@@ -155,7 +155,7 @@
                             @for($x = 0; $x <= $qty_rows; $x++)
                                 @if(isset($det->suma[$x]))
                                     <tr>
-                                        <td align="center" style="border-top:none; border-left: 0; border-right: 0">
+                                        <td  valign="middle" align="center" style="border-top:none; border-left: 0; border-right: 0">
                                             ${{number_format($det->suma[$x], 0, ',', '.')}}
                                         </td>
                                     </tr>
