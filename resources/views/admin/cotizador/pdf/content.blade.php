@@ -46,6 +46,7 @@
         }
         .inside-table {
             margin: 0;
+            height: 100%;
         }
         .inside-table tr td {
             max-height: 100%;
