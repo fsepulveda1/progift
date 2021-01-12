@@ -53,9 +53,9 @@
         .inside-table tr td {
             max-height: 100%;
         }
-        .inside-table tr:last-child td {
+        /*.inside-table tr:last-child td {
             border-bottom: 0;
-        }
+        }*/
         .table td {
             font-weight: normal;
             font-size: 16px;
