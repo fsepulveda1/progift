@@ -23,18 +23,7 @@
 
                         <section class="featured-section">
                                 <h2 class="carousel-title">ARTÍCULOS PUBLICITARIOS DESTACADOS</h2>
-                                <div class="product-intro owl-carousel owl-theme" data-toggle="owl" data-owl-options="{
-                        'margin': 20,
-                        'autoplayTimeout': 5000,
-                        'responsive': {
-                            '559': {
-                                'items': 3
-                            },
-                            '975': {
-                                'items': 4
-                            }
-                        }
-                    }">
+                                <div class="product-intro owl-carousel owl-theme" id="owl-products-carousel">
                                     @foreach($products as $pro)
                                         @if($loop->odd)<div class="product-default">@endif
                                             <div class="product-details">

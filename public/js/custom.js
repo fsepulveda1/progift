@@ -92,3 +92,23 @@ $('.btn-show-comments').on('click', function (e) {
 if($('.custom-datepicker').length) {
     $('.custom-datepicker').datetimepicker({format: 'DD-MM-YYYY'});
 }
+
+$('#owl-products-carousel').owl({
+    loop: true,
+    responsiveClass: true,
+    nav: false,
+    navText: ['<i class="icon-left-open-big">', '<i class="icon-right-open-big">'],
+    dots: true,
+    autoplay: true,
+    items: 4,
+    margin: 20,
+    autoplayTimeout: 5000,
+    responsive: {
+        '559': {
+            'items': 3
+        },
+        '975': {
+            'items': 4
+        }
+    }
+})
