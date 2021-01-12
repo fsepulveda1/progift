@@ -49,6 +49,7 @@
             max-height: 100%;
             overflow: hidden;
             background-color: #f1f1f1;
+            margin: 0;
         }
         .inside-table tr td {
             max-height: 100%;
