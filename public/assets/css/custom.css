@@ -41,6 +41,7 @@
 .typeahead.dropdown-menu li.active {
     background-color: #f5c524;
 }
+.typeahead.dropdown-menu li.active strong,
 .typeahead.dropdown-menu li.active a {
     color: white;
 }
