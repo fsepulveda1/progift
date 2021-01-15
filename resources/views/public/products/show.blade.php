@@ -36,17 +36,19 @@
                                         <?php $images = json_decode($product->imagen); ?>
                                         <?php $imageFirst = json_decode($product->imagen); ?>
                                         <?php $count = 1; ?>
-                                        @foreach($images as $image)
-                                            <?php
-                                            if($count == 1){
-                                                $imageFirst=$image;
-                                            }
-                                            $count++;
-                                            ?>
-                                            <div class="product-item">
-                                                <img class="product-single-image" src="{{ asset('/storage/'.$image) }}" data-zoom-image="{{ asset('/storage/'.$image) }}" />
-                                            </div>
-                                        @endforeach
+                                        @if(is_array($images))
+                                            @foreach($images as $image)
+                                                <?php
+                                                if($count == 1){
+                                                    $imageFirst=$image;
+                                                }
+                                                $count++;
+                                                ?>
+                                                <div class="product-item">
+                                                    <img class="product-single-image" src="{{ asset('/storage/'.$image) }}" data-zoom-image="{{ asset('/storage/'.$image) }}" />
+                                                </div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                     <!-- End .product-single-carousel -->
                                     <span class="prod-full-screen">
