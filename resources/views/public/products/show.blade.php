@@ -57,11 +57,13 @@
                                 </div>
                                 <div class="prod-thumbnail row owl-dots" id='carousel-custom-dots'>
                                     <?php $images = json_decode($product->imagen); ?>
-                                    @foreach($images as $image)
-                                        <div class="col-3 owl-dot active">
-                                            <img src="{{ asset('/storage/'.$image) }}" />
-                                        </div>
-                                    @endforeach
+                                    @if(is_array($images))
+                                        @foreach($images as $image)
+                                            <div class="col-3 owl-dot active">
+                                                <img src="{{ asset('/storage/'.$image) }}" />
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                             <!-- End .product-single-gallery -->
