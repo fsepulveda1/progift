@@ -42,7 +42,7 @@
                                                         $count++;
                                                         ?>
                                                     @endforeach
-                                                @endforeach
+                                                @endif
                                             </a>
                                         </figure>
                                         <h2 class="product-title">
