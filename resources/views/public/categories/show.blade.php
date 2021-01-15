@@ -30,16 +30,18 @@
                                                 <?php $images = json_decode($pro->imagen); ?>
                                                 <?php $imageFirst = json_decode($pro->imagen); ?>
                                                 <?php $count = 1; ?>
-                                                @foreach($images as $image)
-                                                    <?php
-                                                    if($count == 1){
-                                                    $imageFirst = $image;
-                                                    ?>
-                                                    <img width="100%" data-src="{{ asset('/storage/'.$image) }}" alt="{{ $pro->nombre }}" loading="lazy" class="lazyload">
-                                                    <?php
-                                                    }
-                                                    $count++;
-                                                    ?>
+                                                @if(is_array($images))
+                                                    @foreach($images as $image)
+                                                        <?php
+                                                        if($count == 1){
+                                                        $imageFirst = $image;
+                                                        ?>
+                                                        <img width="100%" data-src="{{ asset('/storage/'.$image) }}" alt="{{ $pro->nombre }}" loading="lazy" class="lazyload">
+                                                        <?php
+                                                        }
+                                                        $count++;
+                                                        ?>
+                                                    @endforeach
                                                 @endforeach
                                             </a>
                                         </figure>
