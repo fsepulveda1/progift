@@ -62,6 +62,10 @@ class HomeController extends Controller
         $nameSearch  = $request->name;
         $codeSearch  = $request->code;
 
+        if(empty($nameSearch)) {
+            $nameSearch = $textSearch;
+        }
+
         $query = Product::with('colors', 'impresions', 'categories');
         $query->where('nombre', 'LIKE', "%{$textSearch}%");
         $query->orWhereHas('categories', function ($q) use ($nameSearch) {
