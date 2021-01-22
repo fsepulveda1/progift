@@ -819,7 +819,7 @@
         autoSelect: false,
         items: 20,
         source: function (query, process) {
-            return $.get("/public/typeahead", {query: query}, function (data) {
+            return $.get("/products/typeahead", {query: query}, function (data) {
                 return process(data);
             });
         },
