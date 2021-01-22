@@ -12,8 +12,25 @@ class ProductsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth',['except' => ['show']]);
+        $this->middleware('auth',['except' => ['show','search']]);
     }
+
+
+    public function search(Request $request) {
+        $search = $request->input('query');
+        $result = DB::select("select nombre AS name, descripcion_larga as descripcion, sku from products
+                              where (nombre LIKE '%{$search}%' OR sku LIKE '%{$search}%')");
+
+        array_unshift($result,[
+            'id'   => 'show_all',
+            'name' => $search,
+            'code' => ''
+        ]);
+
+        return response()->json($result);
+    }
+
+
     /**
      * Display a listing of the resource.
      *

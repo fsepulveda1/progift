@@ -633,9 +633,11 @@
                 e.preventDefault();
                 $(this).text('Cargando ...');
                 var searchText = $loadButton.data('search');
+                var searchName = $loadButton.data('name');
+                var searchCode = $loadButton.data('code');
                 var url = '?page=' + page;
                 if(searchText) {
-                    url = '?page='+page+'&q='+searchText;
+                    url = '?page='+page+'&q='+searchText+'&name='+searchName+'&code='+searchCode;
                 }
 
                 $.ajax({
@@ -817,12 +819,17 @@
         autoSelect: false,
         items: 20,
         source: function (query, process) {
-            return $.get("/admin/typeahead", {query: query}, function (data) {
+            return $.get("/public/typeahead", {query: query}, function (data) {
                 return process(data);
             });
         },
         displayText: function (item) {
-            return item.name+" - Cód: "+item.sku;
+            if(item.id == 'show_all') {
+               return '"'+item.name+'"'+' Mostrar todos';
+            }
+            else {
+                return item.name + " - Cód: " + item.sku;
+            }
         },
         matcher: function (item) {
             var it = item.name+" "+item.sku;
@@ -839,13 +846,14 @@
                 var code = item.sku;
                 var name = item.name;
 
-                if(code.toLowerCase() == this.query.toLowerCase()) {
+                if (code && code.toLowerCase() == this.query.toLowerCase()) {
                     exactMatch.push(item);
                 }
                 else if(name.toLowerCase() == this.query.toLowerCase()) {
                     exactMatch.push(item);
                 }
-                else if (!code.toLowerCase().indexOf(this.query.toLowerCase())) {
+
+                else if (code && !code.toLowerCase().indexOf(this.query.toLowerCase())) {
                     beginswith.push(item);
                 }
                 else if (!name.toLowerCase().indexOf(this.query.toLowerCase())) {
@@ -867,6 +875,7 @@
         },
         afterSelect: function (args) {
             $('#form-search').find('input[name="name"]').val(args.name);
+            $('#form-search').find('input[name="q"]').val(args.name);
             $('#form-search').find('input[name="code"]').val(args.sku);
             $('#form-search').submit();
         }

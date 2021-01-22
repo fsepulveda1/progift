@@ -62,11 +62,19 @@ class HomeController extends Controller
         $nameSearch  = $request->name;
         $codeSearch  = $request->code;
 
-        $products = Product::with('colors', 'impresions', 'categories')
-            ->where('nombre', 'LIKE', "%{$textSearch}%")
-            ->orWhere('nombre',$nameSearch)
-            ->orWhere('sku',$codeSearch)
-            ->paginate(16);
+        $query = Product::with('colors', 'impresions', 'categories');
+        $query->where('nombre', 'LIKE', "%{$textSearch}%");
+        $query->orWhereHas('categories', function ($q) use ($nameSearch) {
+            $q->where('nombre', 'like', '%'.$nameSearch.'%');
+        });
+
+        $query->orWhere('nombre',$nameSearch);
+
+        if(!empty($codeSearch)) {
+            $query->orWhere('sku', $codeSearch);
+        }
+
+        $products = $query->paginate(16);
         $lastPage = $products->lastPage();
 
         if ($request->ajax()) {
@@ -74,7 +82,7 @@ class HomeController extends Controller
             return response()->json(['html'=>$view,'lastPage'=>$lastPage]);
         }
 
-        return view('public.products.buscar', compact('products','lastPage','textSearch','textSearch'));
+        return view('public.products.buscar', compact('products','lastPage','textSearch','nameSearch','codeSearch'));
     }
 
 

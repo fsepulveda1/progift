@@ -47,6 +47,8 @@ Route::post('/update', 'CartController@update')->name('cart.update');
 Route::post('/remove', 'CartController@remove')->name('cart.remove');
 Route::post('/clear', 'CartController@clear')->name('cart.clear');
 Route::post('/cotiza', 'CartController@cotiza')->name('cart.cotiza');
+Route::get('/public/typeahead', 'ProductsController@search');
+
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
