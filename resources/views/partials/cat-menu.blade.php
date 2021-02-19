@@ -32,7 +32,7 @@
                                 <ul class="mb-0">
                                     @foreach($category->children as $child)
                                         <li>
-                                            <a class="pl-5" href="{{ $child->slug }}">
+                                            <a class="pl-5" href="/categoria/{{ $child->slug }}">
                                                 {{ $child->nombre }}
                                             </a>
                                         </li>
