@@ -29,4 +29,12 @@ class Category extends Model
             return true;
         });
     }
+
+    public function parent() {
+        return $this->belongsTo(Category::class,'parent_id')->withDefault();
+    }
+
+    public function children() {
+        return $this->hasMany(Category::class,'parent_id');
+    }
 }

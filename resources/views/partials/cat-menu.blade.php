@@ -6,10 +6,41 @@
             <ul>
                 <li><a href="/destacados">Destacados</a></li>
                 @php
-                    $categories = App\Category::where('estado',1)->orderBy('orden', 'ASC')->get();
+                    $categories = App\Category::where('estado',1)->where('parent_id',null)->orderBy('orden', 'ASC')->get();
                 @endphp
-                @foreach($categories as $cat)
-                    <li><a href="/categoria/{{$cat['slug']}}">{{ $cat->nombre }}</a></li>
+                @foreach($categories as $category)
+
+                    <li>
+                        @if(! count($category->children))
+                            <a href="/categoria/{{$category['slug']}}">
+                                {{ $category->nombre }}
+                            </a>
+                        @else
+                            <a class="justify-content-between" data-toggle="collapse" href="#submenu-{{ $category->id }}" role="button" aria-expanded="false" aria-controls="submenu-{{ $category->id }}">
+                                {{ $category->nombre }}
+                                <small class="fas fa-plus"></small>
+                            </a>
+                        @endif
+                        @if(count($category->children))
+                            @php($class_submenu = '')
+                            @foreach($category->children as $child)
+                                @if(Request::route('id') == $child->slug)
+                                    @php($class_submenu = 'show')
+                                @endif
+                            @endforeach
+                            <div class="collapse {{ $class_submenu }}" id="submenu-{{ $category->id }}">
+                                <ul class="mb-0">
+                                    @foreach($category->children as $child)
+                                        <li>
+                                            <a class="pl-5" href="{{ $child->slug }}">
+                                                {{ $child->nombre }}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                    </li>
                 @endforeach
             </ul>
         </div><!-- End .side-menu-body -->
