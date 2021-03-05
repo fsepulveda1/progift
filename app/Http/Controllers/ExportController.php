@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\ClientsExport;
 use App\Exports\MatchRutExport;
 use App\Exports\NewsletterExport;
+use App\Exports\UserClientEmailExporter;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -24,6 +25,11 @@ class ExportController extends Controller
         if($type == 'newsletter') {
             $filename = 'newsletter.xlsx';
             $exporter = new NewsletterExport();
+        }
+
+        if($type == 'client_email') {
+            $filename = 'email_clientes.xlsx';
+            $exporter = new UserClientEmailExporter();
         }
 
         return Excel::download($exporter, $filename);

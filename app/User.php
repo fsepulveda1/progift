@@ -36,4 +36,8 @@ class User extends \TCG\Voyager\Models\User
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function cotizaciones() {
+        return $this->hasMany(Cotizacione::class,'user_id');
+    }
 }
