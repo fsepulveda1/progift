@@ -17,10 +17,13 @@ class UserClientEmailExporter implements FromCollection, WithHeadings, WithMappi
      */
     public function collection()
     {
-         return DB::table('users')
+        return DB::table('users')
             ->join('cotizaciones','users.id','=','cotizaciones.user_id')
             ->join('clients','clients.id','=','cotizaciones.client_id')
-            ->select('users.name','clients.email')->distinct()->get();
+            ->select('users.name','clients.email')
+            ->orderBy('users.name','ASC')
+            ->distinct()
+            ->get();
     }
 
     /**
