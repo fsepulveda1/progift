@@ -105,3 +105,6 @@
 .side-custom-menu .side-menu-body li div.collapse ul li a{
     color: #F5C524;
 }
+.side-custom-menu .side-menu-body li div.collapse ul li a:hover {
+    color: #ffffff;
+}
