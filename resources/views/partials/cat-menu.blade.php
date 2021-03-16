@@ -16,19 +16,19 @@
                                 {{ $category->nombre }}
                             </a>
                         @else
-                            <a class="align-items-center" data-toggle="collapse" href="#submenu-{{ $category->id }}" role="button" aria-expanded="false" aria-controls="submenu-{{ $category->id }}">
+                            @php($class_submenu = '')
+                            @php($expand = 'false')
+                            @foreach($category->children as $child)
+                                @if(Request::route('id') == $child->slug)
+                                    @php($class_submenu = 'show')
+                                    @php($expand = 'true')
+                                @endif
+                            @endforeach
+                            <a class="align-items-center" data-toggle="collapse" href="#submenu-{{ $category->id }}" role="button" aria-expanded="{{$expand}}" aria-controls="submenu-{{ $category->id }}">
                                 <small class="fas fa-plus mr-3"></small>
                                 <small class="fas fa-minus mr-3"></small>
                                 {{ $category->nombre }}
                             </a>
-                        @endif
-                        @if(count($category->children))
-                            @php($class_submenu = '')
-                            @foreach($category->children as $child)
-                                @if(Request::route('id') == $child->slug)
-                                    @php($class_submenu = 'show')
-                                @endif
-                            @endforeach
                             <div class="collapse {{ $class_submenu }}" id="submenu-{{ $category->id }}">
                                 <ul class="mb-0">
                                     @foreach($category->children as $child)
