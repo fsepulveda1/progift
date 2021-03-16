@@ -852,7 +852,6 @@
                 else if(name.toLowerCase() == this.query.toLowerCase()) {
                     exactMatch.push(item);
                 }
-
                 else if (code && !code.toLowerCase().indexOf(this.query.toLowerCase())) {
                     beginswith.push(item);
                 }
@@ -878,9 +877,15 @@
             $('#form-search').find('input[name="q"]').val(args.name);
             $('#form-search').find('input[name="code"]').val(args.sku);
             $('#form-search').submit();
-        }
+        },
+        select: function () {
+            var val = this.value;
+            $('#form-search').find('input[name="name"]').val(val);
+            $('#form-search').find('input[name="q"]').val(val);
+            $('#form-search').find('input[name="code"]').val(val);
+            $('#form-search').submit();
+        },
     });
-
 
     if ('loading' in HTMLImageElement.prototype) {
         const images = document.querySelectorAll("img.lazyload");
