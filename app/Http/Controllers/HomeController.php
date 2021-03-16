@@ -71,15 +71,9 @@ class HomeController extends Controller
             $query->orWhere('sku', $codeSearch);
         }
 
-        $products = $query->paginate(16);
-        $lastPage = $products->lastPage();
+        $products = $query->get();
 
-        if ($request->ajax()) {
-            $view = view('public.products.data',compact('products'))->render();
-            return response()->json(['html'=>$view,'lastPage'=>$lastPage]);
-        }
-
-        return view('public.products.buscar', compact('products','lastPage','textSearch','nameSearch','codeSearch'));
+        return view('public.products.buscar', compact('products','textSearch','nameSearch','codeSearch'));
     }
 
 
