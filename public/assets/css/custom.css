@@ -90,17 +90,17 @@
 .side-custom-menu .side-menu-body a:hover .fas{
     color: #ffffff;
 }
-.side-custom-menu .side-menu-body a .fa-plus {
+.side-custom-menu .side-menu-body a[aria-expanded=true] .fa-plus {
     display: none;
 }
-.side-custom-menu .side-menu-body a .fa-minus {
+.side-custom-menu .side-menu-body a[aria-expanded=true] .fa-minus {
     display: inline-block;
 }
-.side-custom-menu .side-menu-body a.collapsed .fa-plus {
-    display: inline-block;
-}
-.side-custom-menu .side-menu-body a.collapsed .fa-minus {
+.side-custom-menu .side-menu-body a[aria-expanded=false] .fa-minus {
     display: none;
+}
+.side-custom-menu .side-menu-body a[aria-expanded=false] .fa-plus {
+    display: inline-block;
 }
 .side-custom-menu .side-menu-body li div.collapse ul li a{
     color: #F5C524;
