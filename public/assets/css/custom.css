@@ -81,4 +81,27 @@
         display: none;
     }
 }
+.side-custom-menu .side-menu-body a .fas {
+    color: #F5C524;
+}
 
+.side-custom-menu .side-menu-body a:active .fas,
+.side-custom-menu .side-menu-body a:focus .fas,
+.side-custom-menu .side-menu-body a:hover .fas{
+    color: #ffffff;
+}
+.side-custom-menu .side-menu-body a .fa-plus {
+    display: none;
+}
+.side-custom-menu .side-menu-body a .fa-minus {
+    display: inline-block;
+}
+.side-custom-menu .side-menu-body a.collapsed .fa-plus {
+    display: inline-block;
+}
+.side-custom-menu .side-menu-body a.collapsed .fa-minus {
+    display: none;
+}
+.side-custom-menu .side-menu-body li div.collapse ul li a{
+    color: #F5C524;
+}

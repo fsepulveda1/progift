@@ -16,9 +16,10 @@
                                 {{ $category->nombre }}
                             </a>
                         @else
-                            <a class="justify-content-between" data-toggle="collapse" href="#submenu-{{ $category->id }}" role="button" aria-expanded="false" aria-controls="submenu-{{ $category->id }}">
+                            <a class="align-items-center" data-toggle="collapse" href="#submenu-{{ $category->id }}" role="button" aria-expanded="false" aria-controls="submenu-{{ $category->id }}">
+                                <small class="fas fa-plus mr-3"></small>
+                                <small class="fas fa-minus mr-3"></small>
                                 {{ $category->nombre }}
-                                <small class="fas fa-plus"></small>
                             </a>
                         @endif
                         @if(count($category->children))
