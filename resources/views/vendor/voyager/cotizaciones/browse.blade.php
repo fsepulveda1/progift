@@ -126,7 +126,7 @@
                                 </thead>
                                 <tbody>
                                 @foreach($dataTypeContent as $data)
-                                    <tr>
+                                    <tr @if($data->tipo == 'Web') class="warning" @endif>
                                         @if($showCheckboxColumn)
                                             <td>
                                                 <input type="checkbox" name="row_id" id="checkbox_{{ $data->getKey() }}" value="{{ $data->getKey() }}">
