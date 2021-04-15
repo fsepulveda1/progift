@@ -9,7 +9,7 @@
                     <div class="col-lg-9">
                         <div class="home-banner mb-2">
                             <div class="video-container">
-                                <iframe class="video" src="https://www.youtube.com/embed/9AEXwm0x_50?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe class="video" src="https://www.youtube.com/embed/9AEXwm0x_50?autoplay=1&mute=1&rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                         </div><!-- End .home-slider -->
 
