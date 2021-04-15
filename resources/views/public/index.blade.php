@@ -7,58 +7,53 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-9">
-                        <div class="home-slider owl-carousel owl-carousel-lazy">
-                            <div class="home-slide">
-                                <div class="owl-lazy slide-bg" data-src="assets/images/slider/slide_1.jpg"></div>
-                                <div class="home-slide-content text-white">
-                                    <img src="assets/images/slider/12_anos.png">
-                                    <p>Liderando la venta de<br>
-                                        artículos publicitarios</p>
-                                </div><!-- End .home-slide-content -->
-                            </div><!-- End .home-slide -->
+                        <div class="home-banner mb-2">
+                            <div class="video-container">
+                                <iframe class="video" src="https://www.youtube.com/embed/9AEXwm0x_50?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
                         </div><!-- End .home-slider -->
 
                         <section class="about-us-section">"<b>Merchandising</b> es una de las estrategias del mercado que más incrementa la rentabilidad de una marca"<br>
                             Pro-Gift a través de sus 12 Años de experiencia ha dado un Servicio de excelencia y atención personalizada a más de 2.500 Clientes!! Les damos las gracias por seguir prefiriéndonos y confiar en nosotros.</section>
 
                         <section class="featured-section">
-                                <h2 class="carousel-title">ARTÍCULOS PUBLICITARIOS DESTACADOS</h2>
-                                <div class="product-intro owl-carousel owl-theme" id="owl-products-carousel">
-                                    @foreach($products as $pro)
-                                        @if($loop->odd)<div class="product-default">@endif
-                                            <div class="product-details">
-                                                <figure>
-                                                    <a href="/producto/{{$pro->slug}}">
-                                                        <?php $images = json_decode($pro->imagen); ?>
-                                                        <?php $count = 1; ?>
-                                                        @foreach($images as $image)
-                                                            <?php
-                                                            if($count == 1){
-                                                            ?>
-                                                            <img width="100%" src="{{ asset('/storage/'.$image) }}" alt="Producto">
-                                                            <?php
-                                                            }
-                                                            $count++;
-                                                            ?>
-                                                        @endforeach
-                                                    </a>
-                                                </figure>
-                                                <h2 class="product-title">
-                                                    <a href="/producto/{{$pro->slug}}">{{ $pro->nombre }}</a>
-                                                </h2>
-                                                <div class="price-box">
-                                                    <span class="product-price">{{ $pro->sku }}</span>
-                                                <!--<span class="product-price">${{ number_format($pro->precio, 0, ',', '.') }}</span>-->
-                                                </div><!-- End .price-box -->
-                                                <div class="product-action">
-                                                    <a class="btn-icon btn-add-cart add-cart" href="/producto/{{$pro->slug}}" class="tooltip-test" style="color: #fff;" title="add to cart">
-                                                        &nbsp;&nbsp; Cotizar
-                                                    </a>
-                                                </div>
-                                            </div><!-- End .product-details -->
-                                            @if($loop->even || $loop->last)</div>@endif
-                                    @endforeach
-                                </div><!-- End .owl-carousel -->
+                            <h2 class="carousel-title">ARTÍCULOS PUBLICITARIOS DESTACADOS</h2>
+                            <div class="product-intro owl-carousel owl-theme" id="owl-products-carousel">
+                                @foreach($products as $pro)
+                                    @if($loop->odd)<div class="product-default">@endif
+                                        <div class="product-details">
+                                            <figure>
+                                                <a href="/producto/{{$pro->slug}}">
+                                                    <?php $images = json_decode($pro->imagen); ?>
+                                                    <?php $count = 1; ?>
+                                                    @foreach($images as $image)
+                                                        <?php
+                                                        if($count == 1){
+                                                        ?>
+                                                        <img width="100%" src="{{ asset('/storage/'.$image) }}" alt="Producto">
+                                                        <?php
+                                                        }
+                                                        $count++;
+                                                        ?>
+                                                    @endforeach
+                                                </a>
+                                            </figure>
+                                            <h2 class="product-title">
+                                                <a href="/producto/{{$pro->slug}}">{{ $pro->nombre }}</a>
+                                            </h2>
+                                            <div class="price-box">
+                                                <span class="product-price">{{ $pro->sku }}</span>
+                                            <!--<span class="product-price">${{ number_format($pro->precio, 0, ',', '.') }}</span>-->
+                                            </div><!-- End .price-box -->
+                                            <div class="product-action">
+                                                <a class="btn-icon btn-add-cart add-cart" href="/producto/{{$pro->slug}}" class="tooltip-test" style="color: #fff;" title="add to cart">
+                                                    &nbsp;&nbsp; Cotizar
+                                                </a>
+                                            </div>
+                                        </div><!-- End .product-details -->
+                                        @if($loop->even || $loop->last)</div>@endif
+                                @endforeach
+                            </div><!-- End .owl-carousel -->
                         </section>
 
                         <div class="banners-group">
