@@ -26,16 +26,18 @@
                                                 <a href="/producto/{{$pro->slug}}">
                                                     <?php $images = json_decode($pro->imagen); ?>
                                                     <?php $count = 1; ?>
-                                                    @foreach($images as $image)
-                                                        <?php
-                                                        if($count == 1){
-                                                        ?>
-                                                        <img width="100%" src="{{ asset('/storage/'.$image) }}" alt="Producto">
-                                                        <?php
-                                                        }
-                                                        $count++;
-                                                        ?>
-                                                    @endforeach
+                                                    @if(count($images))
+                                                        @foreach($images as $image)
+                                                            <?php
+                                                            if($count == 1){
+                                                            ?>
+                                                            <img width="100%" src="{{ asset('/storage/'.$image) }}" alt="Producto">
+                                                            <?php
+                                                            }
+                                                            $count++;
+                                                            ?>
+                                                        @endforeach
+                                                    @endif
                                                 </a>
                                             </figure>
                                             <h2 class="product-title">
