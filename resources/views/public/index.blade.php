@@ -26,7 +26,7 @@
                                                 <a href="/producto/{{$pro->slug}}">
                                                     <?php $images = json_decode($pro->imagen); ?>
                                                     <?php $count = 1; ?>
-                                                    @if(count($images))
+                                                    @if(is_array($images))
                                                         @foreach($images as $image)
                                                             <?php
                                                             if($count == 1){
