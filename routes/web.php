@@ -62,7 +62,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/cotiza', 'CotizadorController@store')->middleware('admin.user')->name('admin.cotiza');
     Route::post('/genera', 'CotizadorController@genera')->middleware('admin.user')->name('admin.genera');
     Route::get('/genera', 'CotizadorController@generateFromDB')->middleware('admin.user')->name('admin.genera');
-    Route::get('/genera_test', 'CotizadorController@genera_test')->middleware('admin.user')->name('admin.genera_test');
+    Route::get('/genera_test',  'CotizadorController@genera_test')->middleware('admin.user')->name('admin.genera_test');
     Route::get('/pdf', 'CotizadorController@pdf')->middleware('admin.user')->name('admin.pdf');
     Route::post('/upload-image', 'CotizadorController@uploadImage')->middleware('admin.user')->name('admin.upload');
     Route::get('/comments/{client_id}', 'CotizadorController@showComments')->name('admin.show.comments');

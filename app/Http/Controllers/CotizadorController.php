@@ -233,6 +233,7 @@ class CotizadorController extends Controller
             'total' => $cotizacion->total,
             'activa_total'=>$cotizacion->activa_total,
             'activa_descuento'=>$cotizacion->activa_descuento,
+            'notas' => $cotizacion->notas
         ];
 
         return $this->getPDF($data,$cotizacion->client,$cotizacion->user);
@@ -253,6 +254,7 @@ class CotizadorController extends Controller
             'total' => $cotizacion->total,
             'activa_total'=>$cotizacion->activa_total,
             'activa_descuento'=>$cotizacion->activa_descuento,
+            'notas' => $cotizacion->notas ?? ''
         ];
 
         return $this->getPDFTest($data,$cotizacion->client,$cotizacion->user);
@@ -273,6 +275,7 @@ class CotizadorController extends Controller
             'total' => $cotizacion->total,
             'activa_total'=>$cotizacion->activa_total,
             'activa_descuento'=>$cotizacion->activa_descuento,
+            'notas' => $cotizacion->notas ?? ''
         ];
 
         return $this->getPDFOutput($data,$cotizacion->client,$cotizacion->user);

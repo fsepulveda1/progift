@@ -175,6 +175,9 @@
         <tr style="padding: 0; margin: 0" >
             <td align="left" valign="top" width="75%" style="padding-top:1rem;font-size: 17px; line-height: 24px">
                 <div><strong>+ Los valores detallados no incluyen IVA</strong></div>
+                @if(!empty($data['notas']))
+                    <div class="mt-1"><strong>Notas del vendedor:</strong> {{ $data['notas'] }}</div>
+                @endif
                 <div class="mt-1"><strong>Forma de pago:</strong> {{$data['forma_pago']}}</div>
                 <div><strong>Plazo de entrega:</strong> {{$data['entrega']}}</div>
                 <div><strong>Validéz de la cotización:</strong> {{$data['validez']}}</div>
