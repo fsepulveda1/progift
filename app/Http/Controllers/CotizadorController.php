@@ -299,11 +299,16 @@ class CotizadorController extends Controller
                 'nombre' => $request->empresa,
                 'rut' => $request->rut,
                 'contacto' => $request->nombre_cliente,
-                'telefono' => '',
+                'telefono' => $request->telefono ?? '',
                 'email' => $request->email,
                 'comentarios' => ''
             ]);
             return $client;
+        }
+        else {
+            $client->update([
+               'telefono' => $request->telefono
+            ]);
         }
         return $client;
     }
@@ -380,7 +385,7 @@ class CotizadorController extends Controller
         $header = view()->make('admin.cotizador.pdf.header')->render();
         $footer = view()->make('admin.cotizador.pdf.footer')->with(['user'=>$user])->render();
 
-        $pdf = PDF::loadView('admin.cotizador.pdf.content', compact($data,$client,$user))
+        $pdf = PDF::loadView('admin.cotizador.pdf.content', compact('data','client','user'))
             ->setOption('margin-top', 20)
             ->setOption('margin-bottom', 20)
             ->setOption('margin-left', 0)
@@ -404,10 +409,10 @@ class CotizadorController extends Controller
     }
 
     private function formatingArrayFromRequest(Request $request, $client, $user_id, $status = null) {
-
         $detalle = $this->getProductsArrayFromRequest($request);
 
         $values = [
+            'notas' => $request->notas ?? '',
             'validez' => $request->validez,
             'forma_pago' => $request->forma_pago,
             'entrega' => $request->plazo,
@@ -465,6 +470,7 @@ class CotizadorController extends Controller
             'validez'=>'required|max:100',
             'rut'=>'required|cl_rut',
             'empresa'=>'required|max:200',
+            'telefono' => 'nullable|max:12',
             'forma_pago'=>'required|max:100',
             'email'=>'required|email|max:100',
             'plazo'=>'required|max:100',
@@ -472,6 +478,7 @@ class CotizadorController extends Controller
             'neto' =>'',
             'iva' =>'',
             'total' =>'',
+            'notas' => 'nullable|max:1000'
         ];
 
         foreach($request->producto as $key=>$product) {

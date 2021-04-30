@@ -68,6 +68,12 @@
                                         </div>
                                         <div class="col-lg-3">
                                             <div class="form-group">
+                                                <label class="form-control-label" for="telefono">Teléfono</label>
+                                                <input max="100" type="text" id="telefono" name="telefono" class="form-control form-control-alternative" placeholder="" value="" >
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
                                                 <label class="form-control-label" for="input-pay">Forma de Pago</label>
                                                 <input max="100" type="text" name="forma_pago" class="form-control form-control-alternative" placeholder="A convenir" value="A convenir" >
                                             </div>
@@ -82,6 +88,12 @@
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-validez">Validez de la cotización</label>
                                                 <input max="250" type="text" name="validez" class="form-control form-control-alternative" placeholder="10 días" value="10 días" >
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label" style="color: #22a7f0" for="notas">Notas del vendedor</label>
+                                                <textarea style="border-color: #22a7f0" class="form-control form-control-alternative" name="notas" id="notas" cols="" rows="1"></textarea>
                                             </div>
                                         </div>
                                     </div>

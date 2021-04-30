@@ -65,6 +65,12 @@
                                         </div>
                                         <div class="col-lg-3">
                                             <div class="form-group">
+                                                <label class="form-control-label" for="telefono">Teléfono</label>
+                                                <input max="12" type="text" id="telefono" name="telefono" class="form-control form-control-alternative" placeholder="" value="{{ $cliente->telefono }}" >
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
                                                 <label class="form-control-label" for="input-pay">Forma de Pago</label>
                                                 <input max="100" type="text" name="forma_pago" class="form-control form-control-alternative" placeholder="A convenir" value="{{$cotizacion->forma_pago}}" >
                                             </div>
@@ -84,11 +90,16 @@
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="form-group">
-                                                <label class="form-control-label" style="color: #22a7f0" for="input-validez">Comentarios</label>
+                                                <label class="form-control-label" style="color: #22a7f0" for="input-validez">Comentarios del cliente</label>
                                                 <textarea style="border-color: #22a7f0" class="form-control form-control-alternative" readonly name="comentarios" id="comentarios" cols="" rows="1">{{ $cotizacion->client->comentarios }}</textarea>
                                             </div>
                                         </div>
-
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label" style="color: #22a7f0" for="notas">Notas del vendedor</label>
+                                                <textarea style="border-color: #22a7f0" class="form-control form-control-alternative" name="notas" id="notas" cols="" rows="1">{{ $cotizacion->notas ?? '' }}</textarea>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <hr class="my-4" />

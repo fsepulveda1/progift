@@ -35,7 +35,7 @@ class ShowCommentsAction extends AbstractAction
 
     public function shouldActionDisplayOnDataType()
     {
-        if($this->dataType->slug == 'cotizaciones' && !empty($this->data->client->comentarios)) {
+        if($this->dataType->slug == 'cotizaciones') {
             return true;
         }
         return false;
