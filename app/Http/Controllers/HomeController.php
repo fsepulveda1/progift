@@ -68,7 +68,7 @@ class HomeController extends Controller
         $query->orWhere('nombre',$nameSearch);
 
         if(!empty($codeSearch)) {
-            $query->orWhere('sku', $codeSearch);
+            $query->orWhere('sku','like', '%'.$codeSearch.'%');
         }
 
         $products = $query->get();
