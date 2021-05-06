@@ -29,6 +29,7 @@
 
             <div class="header-center">
                 <div class="header-search">
+                    <p class="header-text">12 Años liderando la venta de Artículos Publicitarios en Chile</p>
                     <a href="#" class="search-toggle" role="button"><i class="icon-magnifier"></i></a>
                     <form action="{{ route('home.buscar') }}" method="get" id="form-search">
                         {{ csrf_field() }}

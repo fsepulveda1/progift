@@ -2221,15 +2221,6 @@ a:focus {
 }
 
 @media screen and (min-width: 992px) {
-    .header-search::before {
-        content: "12 Años liderando la venta de Artículos Publicitarios en Chile";
-        font-size: 13px;
-        line-height: 16px;
-        color: #393939;
-        text-align: center;
-        display: block;
-        margin-bottom: 10px
-    }
     .footer-middle {
         padding-top: 40px;
         padding-bottom: 0
