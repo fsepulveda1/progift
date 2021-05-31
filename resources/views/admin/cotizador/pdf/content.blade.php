@@ -13,13 +13,6 @@
             padding: 0;
         }
 
-        tbody div {
-            page-break-inside: avoid !important;
-        }
-        tbody {
-            page-break-inside: avoid !important;
-        }
-
         html {
             font-size: 16px;
         }
