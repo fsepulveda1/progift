@@ -307,11 +307,13 @@
                                             <td>{{$data->user->email}}</td>
                                         @endif
                                         <td class="no-sort no-click bread-actions">
+                                            <div class="cotizaciones-actions">
                                             @foreach($actions as $action)
                                                 @if (!method_exists($action, 'massAction'))
                                                     @include('voyager::bread.partials.actions', ['action' => $action])
                                                 @endif
                                             @endforeach
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

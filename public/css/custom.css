@@ -477,3 +477,12 @@ textarea {
     max-height: 200px;
     overflow: auto;
 }
+
+.cotizaciones-actions {
+    width: 207px;
+}
+.cotizaciones-actions .btn-show-comments {
+    display: block;
+    clear: both;
+    float: unset !important;
+}
