@@ -97,7 +97,7 @@
                                         </th>
                                         @if($row->field == 'product_belongstomany_category_relationship')
                                             <th>
-                                                <a href="#">
+                                                <a href="javascript:void(0)">
                                                     {{ "Subcategoría" }}
                                                 </a>
                                             </th>
