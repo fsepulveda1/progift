@@ -368,7 +368,7 @@ class CotizadorController extends Controller
 
         $pdf = PDF::loadView('admin.cotizador.pdf.content', ['data'=>$data,'client'=>$client,'user'=>$user])
             ->setOption('margin-top', 20)
-            ->setOption('margin-bottom', 20)
+            ->setOption('margin-bottom', 22)
             ->setOption('margin-left', 0)
             ->setOption('margin-right', 0)
             ->setOption('encoding', 'UTF-8')
@@ -390,7 +390,7 @@ class CotizadorController extends Controller
 
         $pdf = PDF::loadView('admin.cotizador.pdf.content', compact('data','client','user'))
             ->setOption('margin-top', 20)
-            ->setOption('margin-bottom', 20)
+            ->setOption('margin-bottom', 22)
             ->setOption('margin-left', 0)
             ->setOption('margin-right', 0)
             ->setOption('encoding', 'UTF-8')

@@ -18,7 +18,7 @@
 
         footer {
             height: 2.1cm;
-            padding: .25cm .5cm;
+            padding: .25cm .5cm .45cm;
             background-color: #F5C524;
             font-family: 'Roboto', sans-serif;
             font-weight: bold;
