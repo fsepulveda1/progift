@@ -95,6 +95,13 @@
                                                 </a>
                                             @endif
                                         </th>
+                                        @if($row->field == 'product_belongstomany_category_relationship')
+                                            <th>
+                                                <a href="#">
+                                                    {{ "Subcategoría" }}
+                                                </a>
+                                            </th>
+                                        @endif
                                     @endforeach
                                     <th class="actions text-right">{{ __('voyager::generic.actions') }}</th>
                                 </tr>
@@ -114,7 +121,20 @@
                                                 }
                                             @endphp
                                             <td>
-                                                @if (isset($row->details->view))
+                                                @if($row->field == 'product_belongstomany_category_relationship')
+                                                    @php
+                                                        $cats = [];
+                                                        foreach($data->categories as $category) {
+                                                            if($category->parent_id) {
+                                                                $cats[] = $category->parent->nombre;
+                                                            }
+                                                            else {
+                                                                $cats[] = $category->nombre;
+                                                            }
+                                                        }
+                                                        echo implode(',',$cats);
+                                                    @endphp
+                                                @elseif (isset($row->details->view))
                                                     @include($row->details->view, ['row' => $row, 'dataType' => $dataType, 'dataTypeContent' => $dataTypeContent, 'content' => $data->{$row->field}, 'action' => 'browse', 'view' => 'browse', 'options' => $row->details])
                                                 @elseif($row->type == 'image')
                                                     <img src="@if( !filter_var($data->{$row->field}, FILTER_VALIDATE_URL)){{ Voyager::image( $data->{$row->field} ) }}@else{{ $data->{$row->field} }}@endif" style="width:100px">
@@ -272,6 +292,20 @@
                                                     <span>{{ $data->{$row->field} }}</span>
                                                 @endif
                                             </td>
+                                            @if($row->field == 'product_belongstomany_category_relationship')
+                                                <td>
+                                                    @php
+                                                        $cats = [];
+                                                        foreach($data->categories as $category) {
+                                                            if($category->parent_id) {
+                                                                $cats[] = $category->nombre;
+                                                            }
+                                                        }
+                                                        echo implode(',',$cats);
+                                                    @endphp
+                                                </td>
+                                            @endif
+
                                         @endforeach
                                         <td class="no-sort no-click bread-actions">
                                             @foreach($actions as $action)
@@ -345,7 +379,7 @@
     @endif
     <script>
         $(document).ready(function () {
-                    @if (!$dataType->server_side)
+            @if (!$dataType->server_side)
             var table = $('#dataTable').DataTable({!! json_encode(
                     array_merge([
                         "order" => $orderColumn,
@@ -355,13 +389,13 @@
                     config('voyager.dashboard.data_tables', []))
                 , true) !!});
             @else
-                $('#search-input select').select2({
+            $('#search-input select').select2({
                 minimumResultsForSearch: Infinity
             });
             @endif
 
             @if ($isModelTranslatable)
-                $('.side-body').multilingual();
+            $('.side-body').multilingual();
             //Reinitialise the multilingual features when they change tab
             $('#dataTable').on('draw.dt', function(){
                 $('.side-body').data('multilingual').init();
@@ -380,16 +414,16 @@
         });
 
         @if($usesSoftDeletes)
-            @php
-                $params = [
-                    's' => $search->value,
-                    'filter' => $search->filter,
-                    'key' => $search->key,
-                    'order_by' => $orderBy,
-                    'sort_order' => $sortOrder,
-                ];
-            @endphp
-            $(function() {
+        @php
+            $params = [
+                's' => $search->value,
+                'filter' => $search->filter,
+                'key' => $search->key,
+                'order_by' => $orderBy,
+                'sort_order' => $sortOrder,
+            ];
+        @endphp
+        $(function() {
             $('#show_soft_deletes').change(function() {
                 if ($(this).prop('checked')) {
                     $('#dataTable').before('<a id="redir" href="{{ (route('voyager.'.$dataType->slug.'.index', array_merge($params, ['showSoftDeleted' => 1]), true)) }}"></a>');
