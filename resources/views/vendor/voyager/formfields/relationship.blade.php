@@ -5,7 +5,6 @@
         @php $relationshipField = $row->field; @endphp
 
         @if($options->type == 'belongsTo')
-
             @if(isset($view) && ($view == 'browse' || $view == 'read'))
 
                 @php
@@ -23,7 +22,7 @@
             @else
 
                 <select
-                    class="form-control select2-ajax" name="{{ $options->column }}"
+                    class="form-control select2" name="{{ $options->column }}"
                     data-get-items-route="{{route('voyager.' . $dataType->slug.'.relation')}}"
                     data-get-items-field="{{$row->field}}"
                     @if(!is_null($dataTypeContent->getKey())) data-id="{{$dataTypeContent->getKey()}}" @endif
@@ -38,9 +37,28 @@
                         <option value="">{{__('voyager::generic.none')}}</option>
                     @endif
 
-                    @foreach($query as $relationshipData)
-                        <option value="{{ $relationshipData->{$options->key} }}" @if(old($options->column, $dataTypeContent->{$options->column}) == $relationshipData->{$options->key}) selected="selected" @endif>{{ $relationshipData->{$options->label} }}</option>
-                    @endforeach
+                    @if($row->field == "category_belongsto_category_relationship")
+                        @php $categories = app($options->model)->orderBy('nombre','ASC')->where('parent_id',null)->get() @endphp
+                        @foreach($categories as $category)
+                            <option value="{{ $category->{$options->key} }}" @if(old($options->column, $dataTypeContent->{$options->column}) == $category->{$options->key}) selected="selected" @endif>
+                                {{ $category->{$options->label} }}
+                            </option>
+                            @php $subCategories = \App\Category::orderBy('nombre','ASC')->where('parent_id',$category->id)->get() @endphp
+                            @if(count($subCategories))
+                                <optgroup label="Subcategorías de {{ $category->nombre }}">
+                                    @foreach($subCategories as $subcategory)
+                                        <option value="{{ $subcategory->{$options->key} }}" @if(old($options->column, $dataTypeContent->{$options->column}) == $subcategory->{$options->key}) selected="selected" @endif>
+                                            -- {{ $subcategory->{$options->label} }}
+                                        </option>
+                                    @endforeach
+                                </optgroup>
+                            @endif
+                        @endforeach
+                    @else
+                        @foreach($query as $relationshipData)
+                            <option value="{{ $relationshipData->{$options->key} }}" @if(old($options->column, $dataTypeContent->{$options->column}) == $relationshipData->{$options->key}) selected="selected" @endif>{{ $relationshipData->{$options->label} }}</option>
+                        @endforeach
+                    @endif
                 </select>
 
             @endif
@@ -117,7 +135,6 @@
             @endif
 
         @elseif($options->type == 'belongsToMany')
-
             @if(isset($view) && ($view == 'browse' || $view == 'read'))
 
                 @php
