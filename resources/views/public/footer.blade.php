@@ -76,8 +76,11 @@
             <p class="footer-copyright">&copy; 2020 Pro-Gift. Desarrollado por <a href="https://www.bigbuda.cl/" target="_blank">Agencia Digital Bigbuda</a></p> 
 
         </div>
- <div align="right"><a href="https://seoads.cl/posicionamiento/"  style="color:#ffffff;font-size:12px">Experto Google Ads</a></div>
+ <div align="right"><a href="https://seoads.cl/posicionamiento/"  style="color:#ffffff;font-size:12px">Publicidad Google Ads</a></div>
 <noscript><a href="https://lagencia.cl/"> Agencia de Marketing Digital</a> </noscript>
+<noscript><a href="https://www.kbles.cl/">Cable para iphone</a> </noscript>
+<noscript><a href="https://www.kbles.cl/">Cargador para iphone</a> </noscript>
+
 <!-- End .footer-bottom -->
     </div><!-- End .container -->
 
