@@ -27,20 +27,20 @@
                                     <div class="product-details">
                                         <figure>
                                             <a href="/producto/{{$pro->slug}}">
-                                                <?php $images = json_decode($pro->imagen); ?>
-                                                <?php $imageFirst = json_decode($pro->imagen); ?>
-                                                <?php $count = 1; ?>
-                                                @foreach($images as $image)
-                                                    <?php
-                                                    if($count == 1){
-                                                    $imageFirst = $image;
-                                                    ?>
-                                                    <img width="100%" data-src="{{ asset('/storage/'.$image) }}" alt="{{ $pro->nombre }}"  loading="lazy" class="lazyload">
-                                                    <?php
+                                                @php
+                                                    $image = null;
+                                                    $images = json_decode($pro->imagen);
+                                                    $main_img = $pro->imagen_principal;
+                                                    if($main_img !== null) {
+                                                        $image = $main_img;
                                                     }
-                                                    $count++;
-                                                    ?>
-                                                @endforeach
+                                                    else {
+                                                        $image = isset($images[0]) ? $images[0] : null;
+                                                    }
+                                                @endphp
+                                                @if($image)
+                                                    <img width="100%" data-src="{{ asset('/storage/'.$image) }}" alt="{{ $pro->nombre }}" loading="lazy" class="lazyload">
+                                                @endif
                                             </a>
                                         </figure>
                                         <h2 class="product-title">

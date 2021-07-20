@@ -33,19 +33,19 @@
                             <div class="product-single-gallery">
                                 <div class="product-slider-container product-item">
                                     <div class="product-single-carousel owl-carousel owl-theme">
-                                        <?php $images = json_decode($product->imagen); ?>
-                                        <?php $imageFirst = json_decode($product->imagen); ?>
-                                        <?php $count = 1; ?>
+                                        @php
+                                            $images = json_decode($product->imagen);
+                                            $main_img = $product->imagen_principal;
+                                        @endphp
+                                        @if($main_img)
+                                            <div class="product-item">
+                                                <img class="product-single-image" src="{{ asset('/storage/'.$main_img) }}" data-zoom-image="{{ asset('/storage/'.$main_img) }}" />
+                                            </div>
+                                        @endif
                                         @if(is_array($images))
-                                            @foreach($images as $image)
-                                                <?php
-                                                if($count == 1){
-                                                    $imageFirst=$image;
-                                                }
-                                                $count++;
-                                                ?>
+                                            @foreach($images as $img)
                                                 <div class="product-item">
-                                                    <img class="product-single-image" src="{{ asset('/storage/'.$image) }}" data-zoom-image="{{ asset('/storage/'.$image) }}" />
+                                                    <img class="product-single-image" src="{{ asset('/storage/'.$img) }}" data-zoom-image="{{ asset('/storage/'.$img) }}" />
                                                 </div>
                                             @endforeach
                                         @endif
@@ -56,11 +56,15 @@
                                     </span>
                                 </div>
                                 <div class="prod-thumbnail row owl-dots" id='carousel-custom-dots'>
-                                    <?php $images = json_decode($product->imagen); ?>
+                                    @if($main_img)
+                                        <div class="col-3 owl-dot active">
+                                            <img src="{{ asset('/storage/'.$main_img) }}" />
+                                        </div>
+                                    @endif
                                     @if(is_array($images))
-                                        @foreach($images as $image)
+                                        @foreach($images as $img)
                                             <div class="col-3 owl-dot active">
-                                                <img src="{{ asset('/storage/'.$image) }}" />
+                                                <img src="{{ asset('/storage/'.$img) }}" />
                                             </div>
                                         @endforeach
                                     @endif
@@ -149,20 +153,20 @@
                                 <div class="product-details" style="display: inline-flex;">
                                     <figure>
                                         <a href="/producto/{{$pro->slug}}">
-                                            <?php $images = json_decode($pro->imagen); ?>
-                                            <?php $imageFirst = json_decode($pro->imagen); ?>
-                                            <?php $count = 1; ?>
-                                            @foreach($images as $image)
-                                                <?php
-                                                if($count == 1){
-                                                $imageFirst = $image;
-                                                ?>
-                                                <img style="width: 200px;" src="{{ asset('/storage/'.$image) }}" alt="Producto">
-                                                <?php
+                                            @php
+                                                $image = null;
+                                                $images = json_decode($pro->imagen);
+                                                $main_img = $pro->imagen_principal;
+                                                if($main_img !== null) {
+                                                    $image = $main_img;
                                                 }
-                                                $count++;
-                                                ?>
-                                            @endforeach
+                                                else {
+                                                    $image = isset($images[0]) ? $images[0] : null;
+                                                }
+                                            @endphp
+                                            @if($image)
+                                                <img style="width: 200px;" src="{{ asset('/storage/'.$image) }}" alt="Producto">
+                                            @endif
                                         </a>
                                     </figure>
                                     <h2 class="product-title">
