@@ -44,11 +44,13 @@
                                     @foreach($products as $product)
                                         @if($product->products)
                                             @php($img = json_decode($product->products->imagen))
+                                            @php($main_img = json_decode($product->products->imagen_principal))
+                                            @php($image = $main_img !== null ? $main_img : $img[0])
                                             <div class="col-6 col-md-2">
                                                 <div class="product-details">
                                                     <figure>
                                                         <a href="/producto/{{$product->products->slug}}">
-                                                            <img src="{{asset('storage/'.$img[0])}}">
+                                                            <img src="{{asset('storage/'.$image)}}">
                                                         </a>
                                                     </figure>
                                                     <p class="product-title">
@@ -73,21 +75,21 @@
 
     <div class="container">
         <div class="footer-bottom">
-            <p class="footer-copyright">&copy; 2020 Pro-Gift. Desarrollado por <a href="https://www.bigbuda.cl/" target="_blank">Agencia Digital Bigbuda</a></p> 
+            <p class="footer-copyright">&copy; 2020 Pro-Gift. Desarrollado por <a href="https://www.bigbuda.cl/" target="_blank">Agencia Digital Bigbuda</a></p>
 
         </div>
- <div align="right"><a href="https://seoads.cl/posicionamiento/"  style="color:#ffffff;font-size:12px">Experto Google Ads</a></div>
-<noscript><a href="https://lagencia.cl/"> Agencia de Marketing Digital</a> </noscript>
-<!-- End .footer-bottom -->
+        <div align="right"><a href="https://seoads.cl/posicionamiento/"  style="color:#ffffff;font-size:12px">Experto Google Ads</a></div>
+        <noscript><a href="https://lagencia.cl/"> Agencia de Marketing Digital</a> </noscript>
+        <!-- End .footer-bottom -->
     </div><!-- End .container -->
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-586523-110"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-586523-110"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-  gtag('config', 'UA-586523-110');
-</script>
+        gtag('config', 'UA-586523-110');
+    </script>
 </footer><!-- End .footer -->
